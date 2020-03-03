@@ -11,8 +11,6 @@ const multer = require('multer');
 
 const { database } = require('./keys');
 
-const Culqi = require('culqi2');
-
 
 //Inicializaciones
 
@@ -48,7 +46,7 @@ app.use(multer({
 }).single('image'));
 
 app.use(session({
-	secret: 'carhelpmysqlsession',
+	secret: 'artelibremysqlsession',
 	resave: 'false',
 	saveUninitialized: 'false',
 	store: new MySqlStore(database)
