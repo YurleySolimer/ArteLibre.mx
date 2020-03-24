@@ -7,8 +7,6 @@ const session = require('express-session');
 const MySqlStore = require('express-mysql-session');
 const passport = require('passport');
 const multer = require('multer');
-
-
 const { database } = require('./keys');
 
 
@@ -51,6 +49,7 @@ app.use(session({
 	saveUninitialized: 'false',
 	store: new MySqlStore(database)
 }));
+
 app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extends: false}));
@@ -77,6 +76,9 @@ app.use(require('./routes/artelibre.js'));
 
 // Public
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bootstrapjs', express.static(__dirname + '/../node_modules/bootstrap/dist/js')); // redirect bootstrap JS
+app.use('/jquery', express.static(__dirname + '/../node_modules/jquery/dist')); // redirect JS jQuery
+app.use('/bootstrapcss', express.static(__dirname + '/../node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 
 //Inicializar Servidor
 

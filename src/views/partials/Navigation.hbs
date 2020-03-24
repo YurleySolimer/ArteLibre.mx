@@ -1,0 +1,63 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light shadow-lg p-3 bg-white navegacion-principal">
+    <div class="container contenedor-padre-nav">
+        <div class="navigation-container d-flex w-100 justify-content-between">
+            <div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div>
+                <a href="#" class="navbar-brand logo-responsive">ArteLibre</a>
+            </div>
+            <div class="outter-inicio-sesion">
+                {{!-- <a href="#" class="text-secondary inicio-responsive">Iniciar Sesión</a> --}}
+                    <span class="dropdown show" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="btn dropdown-toggle">
+                <span class="text-secondary inicio-name">Farid Aboud
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16.59 8.29501L12 12.875L7.41 8.29501L6 9.70501L12 15.705L18 9.70501L16.59 8.29501Z"
+                                    fill="#BDA008" fill-opacity="0.54" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: -60px;">
+                            {{> MenuClient}}
+                        </div>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <div class="col-3 text-center">
+                    <a class="navbar-brand logo-no-responsive" href="/">ArteLibre</a>
+                </div>
+                <div class="col-6">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-around">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Artistas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Obras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Colecciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Subastas</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-3 text-center">
+                    <a class="text-secondary inicio-no-responsive" href="#">Iniciar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
