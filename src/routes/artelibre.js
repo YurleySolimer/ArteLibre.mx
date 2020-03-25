@@ -34,7 +34,11 @@ router.get('/admin-estadisticas', (req, res) => {
 
 
   //-------------------VISTAS DEL ARTISTA---------------------//
-router.get('/artistas-coleccion', (req, res) => { 
+router.get('/nueva-obra', (req, res) => {
+    res.render('artist/nueva-obra')
+})
+
+  router.get('/artistas-coleccion', (req, res) => { 
     res.render('artistas/coleccion');
 });
 
@@ -85,6 +89,10 @@ router.get('/admin-estadisticas', (req, res) => {
 
 router.get('/obra', (req, res) => {
     res.render('client/obra');
+});
+
+router.get('/artista', (req, res) => {
+    res.render('client/artista');
 });
 
 router.get('/artistas', (req, res) => {
