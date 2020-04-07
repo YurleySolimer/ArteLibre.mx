@@ -7,12 +7,141 @@
     </div>
 
     <form action="" class="form">
+        <div class="row mb-3">
+            <div class="col-12">
+                <input type="file" multiple id="gallery-photo-add" style="display: none;">
+                <label for="gallery-photo-add" class="label-agregar-fotos">Agregar fotos</label>
+                <br>
+                <p class="text-muted">Para eliminar una foto haz click sobre ella</p>
+            </div>
+            <br>
+            <div id="gallery" class="gallery row">
+
+            </div>
+        </div>
         <div class="row">
-            
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="Nombre">Nombre</label>
+                    <input type="text" class="form-control" id="Nombre" aria-describedby="NombreHelp"
+                        placeholder="Escribe aquí el Nombre de la obra">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="Coleccion">Colección</label>
+                    <select type="text" class="form-control" id="Colección" aria-describedby="colecciónHelp">
+                        <option value="none">Ninguna</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="creacion">Creación</label>
+                    <input type="text" class="form-control" id="creacion" aria-describedby="creacionHelp"
+                        placeholder="Dónde se creó la obra">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="tecnica">Técnica</label>
+                    <input type="text" class="form-control" id="tecnica" aria-describedby="tecnicaHelp"
+                        placeholder="Técnica que se utilizó">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="estilo">Estilo</label>
+                    <input type="text" class="form-control" id="estilo" aria-describedby="estilo"
+                        placeholder="Estilo de la obra">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="row m-0 p-0">
+                    <div class="col-6 p-0 m-0">
+                        <div class="form-group">
+                            <label for="ancho">Ancho</label>
+                            <input type="text" class="form-control" id="ancho" aria-describedby="anchoHelp"
+                                placeholder="100cm">
+                        </div>
+                    </div>
+                    <div class="col-6 p-0 m-0">
+                        <div class="form-group ml-3">
+                            <label for="alto">Alto</label>
+                            <input type="text" class="form-control" id="alto" aria-describedby="altoHelp"
+                                placeholder="100cm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12-col-md-6">
+                <div class="form-group">
+                    <div class="form-check m-4">
+                        <input class="form-check-input" onchange='check()' type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck" id="label-check">
+                            
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-right">
+                <input type="submit" value="Guardar" class="guardar-obra">
+            </div>
         </div>
     </form>
 </section>
 
 {{> Footer }}
 
+
+<script>
+    $(document).ready(function () {
+        $(function () {
+            // Multiple images preview in browser
+            let k = 0
+            let imagesPreview = function (input, placeToInsertImagePreview) {
+
+                if (input.files) {
+                    let filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        let reader = new FileReader();
+                        reader.onload = function (event) {
+                            let divImage = 'div#' + k;
+                            let imageID = 'image' + k;
+                            $($.parseHTML('<div>')).attr('id', k).attr('class', 'col-4 col-md-3 col-lg-2 container-image-nueva').appendTo(placeToInsertImagePreview);
+                            $($.parseHTML('<img>')).attr('src', event.target.result).attr('id', imageID).attr('onClick', 'eliminar(this.id)').attr('class', 'imagen-galeria-input').appendTo(divImage);
+                            k++
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+
+            };
+
+            $('#gallery-photo-add').on('change', function () {
+                imagesPreview(this, 'div.gallery');
+            });
+        });
+    });
+
+    function eliminar(e) {
+        let node = document.getElementById(e);
+        let parent = document.getElementById(node.parentNode.id);
+
+        let gallery = document.getElementById('gallery');
+
+        gallery.removeChild(parent);
+    }
+
+    function check(){
+        let check = document.getElementById('gridCheck');
+
+        if (check.checked == true) {
+            document.querySelector('#label-check').innerText = 'Tu obra se subastará';
+        } else {
+            document.querySelector('#label-check').innerText = '¿Deseas subastar tu obra?';
+        }
+    }
+
+    check()
 </script>

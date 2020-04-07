@@ -1244,3 +1244,52 @@ h3 {
 /*-----------------------------------
     Nueva Obra
 -----------------------------------*/
+
+.label-agregar-fotos {
+    color: var(--gold);
+    font-size: 1em;
+    text-transform: uppercase;
+    padding: .5em 2em;
+    margin: 2em 0;
+    border-radius: 10px;
+    border: 2px solid var(--gold);
+    cursor: pointer;
+    transition: .4s ease;
+}
+
+.label-agregar-fotos:hover {
+    color: #E7C201;
+    border: 2px solid #E7C201;
+}
+
+.imagen-galeria-input {
+    max-width: 100%;
+    transition: .5s ease;
+}
+
+.imagen-galeria-input:hover {
+    content: 'X';
+    filter: grayscale(1);
+    cursor: pointer;
+}
+
+.guardar-obra {
+    margin-bottom: 30px;
+    background-color: var(--gold);
+    color: white;
+    padding: .5em 2em;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 2px 5px 10px #ddd;
+    transition: .5s ease;
+}
+
+.guardar-obra:hover {
+    background-color: var(--second-gold);
+}
+
+.form-control:focus {
+    border-color: var(--gold);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem #E7C20133;
+}
