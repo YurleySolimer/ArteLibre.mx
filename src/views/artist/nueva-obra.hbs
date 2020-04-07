@@ -84,6 +84,16 @@
                     </div>
                 </div>
             </div>
+            <div class="col-12-col-md-6">
+                <div class="form-group">
+                    <div class="form-check m-4">
+                        <input class="form-check-input" onchange='checkdos()' type="checkbox" id="gridCheck2">
+                        <label class="form-check-label" for="gridCheck2" id="label-check2">
+                            
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="col-12 text-right">
                 <input type="submit" value="Guardar" class="guardar-obra">
             </div>
@@ -144,4 +154,15 @@
     }
 
     check()
+    function checkdos(){
+        let check = document.getElementById('gridCheck2');
+
+        if (check.checked == true) {
+            document.querySelector('#label-check2').innerText = 'Se habilitó la venta de multiples copias';
+        } else {
+            document.querySelector('#label-check2').innerText = '¿Venderás varias copias?';
+        }
+    }
+
+    checkdos()
 </script>
