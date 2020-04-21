@@ -1293,3 +1293,87 @@ h3 {
     outline: 0;
     box-shadow: 0 0 0 0.2rem #E7C20133;
 }
+
+/*-----------------------------------
+    Registro
+-----------------------------------*/
+
+/*--------------Inicial------------*/
+
+.registro {
+    height: calc(100vh - 286.8px);
+    display: flex;
+}
+
+.registro-cliente {
+    display: flex;
+    background-image: url("/images/cliente.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    width: 100%;
+    height: 190px;
+    transition: .5s ease;
+}
+
+.registro-artista {
+    display: flex;
+    align-items: center;
+    background-image: url("/images/artista.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    width: 100%;
+    height: 190px;
+    transition: .5s ease;
+}
+
+.blur-artista, .blur-cliente {
+    position: absolute;
+    background: rgba(255, 255, 255, .1);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    border-radius: 10px;
+    transition: .3s ease;
+}
+
+.registro-cliente:hover, .registro-artista:hover {
+    cursor: pointer;
+}
+
+.registro-artista h1, .registro-cliente h1 {
+    color: white;
+    z-index: 4;
+}
+
+/*--------------Artista------------*/
+
+.foto-container {
+    width: 280px;
+    height: 350px;
+    overflow: hidden;
+    border: 2px solid var(--gold);
+    background-color: #fff;
+    transition: .5s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--gold);
+    z-index: 1;
+}
+
+.foto-container:hover {
+    cursor: pointer;
+    background-color: var(--gold);
+    color: white;
+}
+
+.img-perfil-registro {
+    position: relative; 
+    z-index: 2; 
+    top: -350px
+}

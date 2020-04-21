@@ -1,0 +1,46 @@
+{{> Navigation}}
+<div class="container">
+    <div class="registro">
+        <div class="row w-100 m-auto">
+            <div class="col-12 text-center">
+                <h1 class="gold">¿Cómo te definirias?</h1>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="text-center">
+                    <div class="m-3">
+                        <div class="registro-cliente text-center" onclick="window.location.href='registro-cliente'">
+                            <div class="blur-cliente"></div>
+                            <h1 class="m-auto">Cliente</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="text-center" onclick="window.location.href='registro-artista'">
+                    <div class="m-3">
+                        <div class="registro-artista text-center">
+                            <div class="blur-artista"></div>
+                            <h1 class="m-auto">Artista</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{> Footer}}
+
+<script>
+    $(document).ready(function () {
+        $(".registro-artista").hover(function() {
+            $('.blur-artista').css("backdrop-filter", "blur(4px)");
+        }, function() {
+            $('.blur-artista').css("backdrop-filter", "blur(0px)");
+        });
+        $(".registro-cliente").hover(function() {
+            $('.blur-cliente').css("backdrop-filter", "blur(4px)");
+        }, function() {
+            $('.blur-cliente').css("backdrop-filter", "blur(0px)");
+        });
+    });
+</script>

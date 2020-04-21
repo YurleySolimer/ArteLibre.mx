@@ -20,12 +20,18 @@ const upload = multer({
 
 
 
-  //-------------------VISTAS DEL ARTISTA---------------------//
+//-------------------ARTISTS VIEWS---------------------//
 
-  router.get('/nueva-obra', (req, res) => {
-      res.render('artist/nueva-obra');
-  });
+router.get('/nueva-obra', (req, res) => {
+  res.render('artist/nueva-obra');
+});
 
+router.get('/registro-artista', (req, res) => {
+  res.render('artist/registro');
+});
+
+
+<<<<<<< HEAD
   router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
 
 
@@ -72,32 +78,42 @@ const upload = multer({
     res.redirect('artista');
 });
 
+=======
+//-------------------CLIENTS VIEWS---------------------//
+>>>>>>> refs/remotes/origin/master
 
+router.get('/registro-cliente', (req, res) => {
+  res.render('client/registro');
+});
 
+<<<<<<< HEAD
   //-------------------VISTAS DEL CLIENTE---------------------//
 
 
+=======
+//-------------------GENERAL VIEWS---------------------//
+>>>>>>> refs/remotes/origin/master
 
 router.get('/obra', (req, res) => {
-    res.render('client/obra');
+  res.render('general/obra');
 });
 
 router.get('/artista', (req, res) => {
-    res.render('client/artista');
+  res.render('general/artista');
 });
 
 router.get('/artistas', (req, res) => {
-    res.render('client/artistas');
+  res.render('general/artistas');
 });
 
 router.get('/obras', (req, res) => {
-    res.render('client/obras');
+  res.render('general/obras');
 });
 
-/*
-  //-------------------VISTAS GENERALES---------------------//
-router.get('/admin-estadisticas', (req, res) => { 
-    res.render('admin/estadisticas');
-  }); */
+router.get('/registro', (req, res) => {
+  res.render('general/registro');
+});
+
+
 
 module.exports = router;
