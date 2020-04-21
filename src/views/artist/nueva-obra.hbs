@@ -6,10 +6,10 @@
         <h2>Nueva obra</h2>
     </div>
 
-    <form action="" class="form">
+    <form action="/nueva-obra" method="POST" enctype="multipart/form-data" class="form" >
         <div class="row mb-3">
             <div class="col-12">
-                <input type="file" multiple id="gallery-photo-add" style="display: none;">
+                <input type="file" name="photos" accept="image/gif, image/png, image/jpeg" multiple id="gallery-photo-add" style="display: none;">
                 <label for="gallery-photo-add" class="label-agregar-fotos">Agregar fotos</label>
                 <br>
                 <p class="text-muted">Para eliminar una foto haz click sobre ella</p>
@@ -23,14 +23,14 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="Nombre">Nombre</label>
-                    <input type="text" class="form-control" id="Nombre" aria-describedby="NombreHelp"
+                    <input type="text" class="form-control" id="Nombre" name="nombre" aria-describedby="NombreHelp"
                         placeholder="Escribe aquí el Nombre de la obra">
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="Coleccion">Colección</label>
-                    <select type="text" class="form-control" id="Colección" aria-describedby="colecciónHelp">
+                    <select type="text" class="form-control" id="Colección" name="coleccion" aria-describedby="colecciónHelp">
                         <option value="none">Ninguna</option>
                     </select>
                 </div>
@@ -38,21 +38,21 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="creacion">Creación</label>
-                    <input type="text" class="form-control" id="creacion" aria-describedby="creacionHelp"
+                    <input type="text" class="form-control" id="creacion" name="creacion" aria-describedby="creacionHelp"
                         placeholder="Dónde se creó la obra">
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="tecnica">Técnica</label>
-                    <input type="text" class="form-control" id="tecnica" aria-describedby="tecnicaHelp"
+                    <input type="text" class="form-control" id="tecnica" name="tecnica" aria-describedby="tecnicaHelp"
                         placeholder="Técnica que se utilizó">
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="estilo">Estilo</label>
-                    <input type="text" class="form-control" id="estilo" aria-describedby="estilo"
+                    <input type="text" class="form-control" id="estilo" name="estilo" aria-describedby="estilo"
                         placeholder="Estilo de la obra">
                 </div>
             </div>
@@ -61,14 +61,14 @@
                     <div class="col-6 p-0 m-0">
                         <div class="form-group">
                             <label for="ancho">Ancho</label>
-                            <input type="text" class="form-control" id="ancho" aria-describedby="anchoHelp"
+                            <input type="text" class="form-control" id="ancho" name="ancho" aria-describedby="anchoHelp"
                                 placeholder="100cm">
                         </div>
                     </div>
                     <div class="col-6 p-0 m-0">
                         <div class="form-group ml-3">
                             <label for="alto">Alto</label>
-                            <input type="text" class="form-control" id="alto" aria-describedby="altoHelp"
+                            <input type="text" class="form-control" id="alto" name="alto" aria-describedby="altoHelp"
                                 placeholder="100cm">
                         </div>
                     </div>
@@ -77,7 +77,7 @@
             <div class="col-12-col-md-6">
                 <div class="form-group">
                     <div class="form-check m-4">
-                        <input class="form-check-input" onchange='check()' type="checkbox" id="gridCheck">
+                        <input class="form-check-input" onchange='check()' name="subasta" type="checkbox" id="gridCheck">
                         <label class="form-check-label" for="gridCheck" id="label-check">
                             
                         </label>
@@ -87,7 +87,7 @@
             <div class="col-12-col-md-6">
                 <div class="form-group">
                     <div class="form-check m-4">
-                        <input class="form-check-input" onchange='checkdos()' type="checkbox" id="gridCheck2">
+                        <input class="form-check-input" onchange='checkdos()' name="copias" type="checkbox" id="gridCheck2">
                         <label class="form-check-label" for="gridCheck2" id="label-check2">
                             
                         </label>

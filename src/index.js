@@ -6,7 +6,6 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const MySqlStore = require('express-mysql-session');
 const passport = require('passport');
-const multer = require('multer');
 const { database } = require('./keys');
 
 
@@ -31,17 +30,7 @@ app.set('view engine', '.hbs');
 
 //Middlewares
 
-const storage = multer.diskStorage({
-	destination: path.join(__dirname, 'public/uploads'),
-	filename: (req, file, cb) => {
-		cb(null, file.originalname);
-	}
-});
 
-app.use(multer({
-	storage,
-	dest: path.join(__dirname, 'public/uploads')
-}).single('image'));
 
 app.use(session({
 	secret: 'artelibremysqlsession',
