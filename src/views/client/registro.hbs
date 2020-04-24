@@ -1,15 +1,122 @@
 {{> Navigation }}
+<div class="content h-100">
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-            Nombre Completo
-            Fecha de nacimiento
-            Ubicación
-            Correo
-            Teléfono
-            Contraseña
-        </div>
+<div class="container p-3" style="margin-top: 6em; margin-bottom: 2em; background: #fcfcfc; border-radius: 15px;">
+    <div class="m-5">
+        <h1 class="gold">Nuevo Cliente</h1>
     </div>
+    <form action="" class="form">
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="row m-3">
+                    <div class="col-12 col-lg-6  mb-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nombre" aria-describedby="nombre"
+                                placeholder="Nombre">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6  mb-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="apellido" aria-describedby="apellido"
+                                placeholder="Apellido">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6  mb-3">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="correo" aria-describedby="correo"
+                                placeholder="Correo electrónico">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6  mb-3">
+                        <div class="form-group">
+                            <input type="tel" class="form-control" id="telefono" aria-describedby="telefono"
+                                placeholder="Teléfono">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6  mb-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="pais" aria-describedby="pais"
+                                placeholder="País">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6  mb-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="region" aria-describedby="region"
+                                placeholder="Región">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6  mb-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="povincia" aria-describedby="provincia"
+                                placeholder="Provincia">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6  mb-3">
+                        <div class="form-group form-row">
+                            <div class="col-5 d-flex">
+                                <div class="m-auto">
+                            <label for="nacimiento" class="text-muted">Fecha de Nacimiento</label>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                            <input type="date" class="form-control" id="nacimiento" aria-describedby="fecha de nacimiento">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="direccion" aria-describedby="direccion"
+                                placeholder="Dirección">
+                        </div>
+                    </div>
+                    <div class="border-bottom mb-5 col-12"></div>
+                    <div class="col-12 col-lg-6  mb-3">
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="contraseña" aria-describedby="contraseña"
+                                placeholder="Contraseña">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6  mb-3">
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="confirmarContraseña" aria-describedby="confirmar contraseña"
+                                placeholder="Confirmar contraseña">
+                        </div>
+                    </div>
+                    <div class="col-12 text-right">
+                        <button class="btn-compra badge">Registrarme</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
+</div>
+
 {{> Footer }}
+
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $('#file-input').change(function (e) {
+                addImage(e);
+            });
+
+            function addImage(e) {
+                var file = e.target.files[0],
+                    imageType = /image.*/;
+
+                if (!file.type.match(imageType))
+                    return;
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var result = e.target.result;
+                    $('#imgSalida').attr("src", result);
+                }
+
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>

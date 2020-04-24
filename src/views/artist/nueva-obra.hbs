@@ -1,7 +1,7 @@
 {{> Navigation }}
 
 
-<section class="container">
+<section class="container" style="margin-top: 6em;">
     <div class="m-5">
         <h2>Nueva obra</h2>
     </div>
@@ -12,7 +12,7 @@
                 <input type="file" multiple id="gallery-photo-add" style="display: none;">
                 <label for="gallery-photo-add" class="label-agregar-fotos">Agregar fotos</label>
                 <br>
-                <p class="text-muted">Para eliminar una foto haz click sobre ella</p>
+                <small class="text-muted p-0 m-0">Para eliminar una foto haz click sobre ella</small>
             </div>
             <br>
             <div id="gallery" class="gallery row">
@@ -25,6 +25,20 @@
                     <label for="Nombre">Nombre</label>
                     <input type="text" class="form-control" id="Nombre" aria-describedby="NombreHelp"
                         placeholder="Escribe aquí el Nombre de la obra">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="precio">Precio</label>
+                    <input type="number" class="form-control" id="precio" aria-describedby="Precio"
+                        placeholder="Precio de la obra">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="descripción">Descripción</label>
+                    <textarea class="form-control" id="descripcion" aria-describedby="descripcion"
+                                placeholder="Describe la obra"></textarea>
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -119,7 +133,7 @@
                             let divImage = 'div#' + k;
                             let imageID = 'image' + k;
                             $($.parseHTML('<div>')).attr('id', k).attr('class', 'col-4 col-md-3 col-lg-2 container-image-nueva').appendTo(placeToInsertImagePreview);
-                            $($.parseHTML('<img>')).attr('src', event.target.result).attr('id', imageID).attr('onClick', 'eliminar(this.id)').attr('class', 'imagen-galeria-input').appendTo(divImage);
+                            $($.parseHTML('<img>')).attr('src', event.target.result).attr('id', imageID).attr('onClick', 'eliminar(this.id)').attr('class', 'imagen-galeria-input btn').appendTo(divImage);
                             k++
                         }
                         reader.readAsDataURL(input.files[i]);

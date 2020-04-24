@@ -136,6 +136,21 @@ h3 {
     color: var(--gold);
 }
 
+.inicio-sesion {
+    font-size: 1em;
+    border: 2px solid #BDA008;
+    color: #BDA008;
+    padding: 4px 8px;
+    border-radius: 0 5px 5px 0;
+    transition: .5s;
+}
+
+.inicio-sesion:hover {
+    border: 2px solid #BDA008bb;
+    color: #BDA008dd;
+    text-decoration: none;
+}
+
 @media screen and (min-width: 992px) {
     .contenedor-padre-nav {
         margin: auto;
@@ -266,10 +281,6 @@ h3 {
     margin: 0 30px;
 }
 
-.container-second-section {
-    display: none;
-}
-
 .imagen-obra-destacada {
     box-shadow: var(--paint-shadow);
     margin-bottom: 35px;
@@ -296,22 +307,14 @@ h3 {
     transition: .3s;
 }
 
-.index-second-section {
-    background-color: var(--bg-light);
-}
-
 .second-section-title {
     margin-top: 35px;
     font-weight: bold;
     font-size: 1.1em;
 }
 
-.carousel-image {
-    height: 100%;
-}
-
-.carousel-indicators li {
-    background-color: #E7C201;
+.carousel-index .owl-item {
+    height: 250px;
 }
 
 .imagen-artista-destacado {
@@ -509,24 +512,6 @@ h3 {
         margin-top: 60px;
     }
 
-    .carousel-inner {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        margin: auto;
-        height: 40vh;
-    }
-
-    #carouselExampleIndicators {
-        width: 70%;
-        height: 100%;
-        margin: auto;
-    }
-
-    .carousel-image {
-        height: 40vh;
-    }
-
     .barra-decorativa-index {
         height: 70px;
     }
@@ -592,11 +577,6 @@ h3 {
 
     .container-second-section {
         display: block;
-        background-color: var(--bg-light);
-    }
-
-    .index-second-section {
-        display: none;
     }
 
     .row-second-section-index {
@@ -756,6 +736,7 @@ h3 {
     Obra
 -----------------------------------*/
 
+
 .precio-obra {
     color: #b1b1b1;
     font-size: 1.5em;
@@ -810,8 +791,21 @@ h3 {
 }
 
 .obras-recomendadas {
-    background-color: var(--bg-light);
+    background-color: white;
+    border-top: 2px solid #BDA008;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 17vw;
+    object-fit: cover;
+}
+
+/*-----------------------------------
+    Colección
+-----------------------------------*/
+
+
 
 /*-----------------------------------
     Sidebar Filter
@@ -1298,10 +1292,11 @@ h3 {
     Registro
 -----------------------------------*/
 
+
 /*--------------Inicial------------*/
 
 .registro {
-    height: calc(100vh - 286.8px);
+    height: calc(100vh - 213.8px);
     display: flex;
 }
 
@@ -1376,4 +1371,48 @@ h3 {
     position: relative; 
     z-index: 2; 
     top: -350px
+}
+
+/*-----------------------------------
+    Inicio de sesión
+-----------------------------------*/
+
+.login-arriba {
+    background-color: #ddd;
+    position: relative;
+    width: 100%;
+    height: 50vh;
+}
+
+.card-inicio-sesion {
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    border-radius: 15px;
+    min-width: 320px;
+}
+
+.login-abajo {
+    width: 100%;
+    min-height: 50vh;
+    position: relative;
+    background-image: url(/images/artista.jpg);
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(1);
+}
+
+.boton-login {
+    background: #BDA008;
+    border-radius: 5px 0 0 5px;
+    color: white;
+    transition: .5s;
+}
+
+.boton-login:hover {
+    opacity: .7;
+    color: white;
+
 }

@@ -26,6 +26,14 @@ router.get('/registro-cliente', (req, res) => {
 
 //-------------------GENERAL VIEWS---------------------//
 
+router.get('/iniciar-sesion', (req, res) => {
+  res.render('auth/signin');
+});
+
+router.get('/coleccion', (req, res) => {
+  res.render('general/coleccion');
+});
+
 router.get('/obra', (req, res) => {
   res.render('general/obra');
 });
