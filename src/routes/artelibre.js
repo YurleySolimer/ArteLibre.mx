@@ -1,5 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const pool = require('../database');
+const multer = require('multer');
+const upload = multer({
+  dest: 'uploads/',
+  fileFilter(req, file, next) {
+    const isPhoto = file.mimetype.startsWith('image/');
+    if (isPhoto) {
+      next(null, true);
+    } else {
+      next({ message: "El tipo de archivo no es válido" }, false);
+    }
+  }
+});
 
 
 //-------------------VISTAS DEL ADMINISTRADOR---------------------//
@@ -18,13 +31,68 @@ router.get('/registro-artista', (req, res) => {
 });
 
 
+<<<<<<< HEAD
+  router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
+
+
+    //GUARDANDO DATOS DE LA OBRA//
+
+    const {nombre, coleccion, creacion, tecnica, estilo, ancho, alto, subasta, copias} = req.body;
+
+    const newObra = {
+      nombreObra : nombre,
+      coleccion,
+      lugarCreacion: creacion,
+      tecnica,
+      estilo,
+      ancho,
+      alto,
+    }
+
+
+  const obra = await pool.query('INSERT INTO obras set ?', [newObra]);
+
+  //GUARDANDO FOTOS DE LA OBRA//
+
+  console.log(req.files);
+
+  const fotos = req.files;
+
+  for (var i = 0; i<fotos.length; i++) {
+    const path = fotos[i].path;
+    const originalname = fotos[i].originalname;
+    const newFoto = {
+      fotoNombre: originalname,
+      fotoUbicacion: path,
+      obra_id: obra.insertId
+    }
+  
+    const foto = await pool.query('INSERT INTO fotosObras set ?', [newFoto]);
+    console.log(foto);
+  }
+ 
+  //const {path, originalname} = req.file;
+  
+
+
+    res.redirect('artista');
+});
+
+=======
 //-------------------CLIENTS VIEWS---------------------//
+>>>>>>> refs/remotes/origin/master
 
 router.get('/registro-cliente', (req, res) => {
   res.render('client/registro');
 });
 
+<<<<<<< HEAD
+  //-------------------VISTAS DEL CLIENTE---------------------//
+
+
+=======
 //-------------------GENERAL VIEWS---------------------//
+>>>>>>> refs/remotes/origin/master
 
 router.get('/iniciar-sesion', (req, res) => {
   res.render('auth/signin');

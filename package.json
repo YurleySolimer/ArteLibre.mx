@@ -1,7 +1,7 @@
 {
-  "name": "ArteLibre",
+  "name": "artelibre",
   "version": "1.0.0",
-  "description": "",
+  "description": "Marketplace dedicado a la compra y venta de arte online, con sistema de referidos y soporte para:",
   "main": "index.js",
   "scripts": {
     "start": "node src",
@@ -30,5 +30,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuFernandoMG/ArteLibre.mx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LuFernandoMG/ArteLibre.mx/issues"
+  },
+  "homepage": "https://github.com/LuFernandoMG/ArteLibre.mx#readme"
 }
