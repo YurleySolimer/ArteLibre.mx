@@ -66,6 +66,9 @@ h3 {
     background: #BDA008;
 }
 
+.inicial {
+    margin-top: 6.5em
+}
 
 /*-----------------------------------
     Navegación
@@ -185,7 +188,7 @@ h3 {
 
 .footer {
     background: var(--bg-dark);
-    padding: 1em;
+    padding: 2em 1em 1em 1em;
     border-top: 5px solid var(--gold);
 }
 
@@ -199,16 +202,16 @@ h3 {
 }
 
 .footer-one {
-    font-size: .5em;
-    line-height: 10px;
+    font-size: .9em;
+    line-height: 1em;
     text-align: justify;
     color: #ffffff;
 }
 
 .inner-footer-two-left {
     color: #FFFFFF;
-    font-size: .5em;
-    line-height: 10px;
+    font-size: .9em;
+    line-height: 1em;
     text-align: left;
     padding: 0;
     margin: 0;
@@ -216,8 +219,8 @@ h3 {
 
 .inner-footer-two-right {
     color: #FFFFFF;
-    font-size: .5em;
-    line-height: 10px;
+    font-size: .9em;
+    line-height: 1em;
     text-align: right;
     padding: 0;
     margin: 0;
@@ -225,15 +228,15 @@ h3 {
 }
 
 .copyright {
-    font-size: .8em;
-    line-height: 5px;
+    font-size: 1em;
+    line-height: .5em;
     font-weight: bold;
 }
 
 .design-credit {
     color: #ffffff;
     font-weight: bold;
-    font-size: .5em;
+    font-size: .8em;
 }
 
 .link-credits {
@@ -1415,4 +1418,38 @@ h3 {
     opacity: .7;
     color: white;
 
+}
+
+/*-----------------------------------
+    Colección
+-----------------------------------*/
+.item-coleccion-carrusel {
+    width: 100%;
+    margin: 55px auto;
+}
+.owl-carousel .carousel-coleccion.active.center {
+    transform: scale(1.2);
+    z-index: 999;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+.owl-carousel .carousel-coleccin.active.center .item {
+    box-shadow: 5px 0 10px #000000
+}
+
+.owl-carousel .owl-item {
+    transform: scale(.9);
+    transform: translateY(-40px);
+    opacity: .7;
+    transition: all .5s;
+}
+
+.owl-carousel .owl-item.activ.center .item {
+    border: 1px solid red;
+}
+
+.owl-stage-outer {
+    height: 400px;
 }

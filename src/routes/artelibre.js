@@ -31,7 +31,6 @@ router.get('/registro-artista', (req, res) => {
 });
 
 
-<<<<<<< HEAD
   router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
 
 
@@ -78,21 +77,16 @@ router.get('/registro-artista', (req, res) => {
     res.redirect('artista');
 });
 
-=======
-//-------------------CLIENTS VIEWS---------------------//
->>>>>>> refs/remotes/origin/master
 
 router.get('/registro-cliente', (req, res) => {
   res.render('client/registro');
 });
 
-<<<<<<< HEAD
   //-------------------VISTAS DEL CLIENTE---------------------//
 
-
-=======
-//-------------------GENERAL VIEWS---------------------//
->>>>>>> refs/remotes/origin/master
+router.get('/coleccion', (req, res) => {
+  res.render('general/coleccion');
+})
 
 router.get('/iniciar-sesion', (req, res) => {
   res.render('auth/signin');
