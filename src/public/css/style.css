@@ -1439,7 +1439,7 @@ h3 {
     box-shadow: 5px 0 10px #000000
 }
 
-.owl-carousel .owl-item {
+.owl-carousel .owl-item.carousel-coleccion {
     transform: scale(.9);
     transform: translateY(-40px);
     opacity: .7;
