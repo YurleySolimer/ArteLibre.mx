@@ -582,10 +582,6 @@ h3 {
         display: block;
     }
 
-    .row-second-section-index {
-        max-height: 400px;
-    }
-
     .barra-decorativa-index {
         margin-bottom: 1em;
     }
@@ -726,12 +722,6 @@ h3 {
 
     .container-coleccion-index {
         height: 50vh;
-    }
-}
-
-@media screen and (min-width: 1500px) {
-    .container-second-section {
-        max-width: 1400px;
     }
 }
 
