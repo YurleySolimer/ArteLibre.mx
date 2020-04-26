@@ -4,7 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const pool = require('../database');
 const helpers = require('./helpers');
 
-passport.use('local.signin', new LocalStrategy({
+passport.use('user.signin', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true
@@ -32,7 +32,7 @@ passport.use('local.signin', new LocalStrategy({
 
 //_______________________//
 
-passport.use('local.signup', new LocalStrategy({
+passport.use('user.signup', new LocalStrategy({
   usernameField: 'fullname',
   passwordField: 'password',
   passReqToCallback: true
