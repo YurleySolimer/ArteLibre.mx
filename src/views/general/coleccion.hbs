@@ -1,0 +1,60 @@
+{{> Navigation }}
+
+<div class="content inicial">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <h1>El Impresionismo de Monet</h1>
+            </div>
+            <div class="col-12">
+                <div class="carousel-wrapper-inner">
+                    <div class="owl-carousel owl-theme carousel-index">
+                        <a href="">
+                            <div class="item-coleccion-carrusel">
+                            <img class="item" src="./images/monet1.jpeg" style="max-width: 500px;" alt="Pintura">
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="item-coleccion-carrusel">
+                            <img class="item" src="./images/monet2.jpg" style="max-width: 500px;" alt="Pintura">
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="item-coleccion-carrusel">
+                            <img class="item" src="./images/monet3.jpg" style="max-width: 500px;" alt="Pintura">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> Footer }}
+
+
+<script>
+    $(document).ready(function () {
+        var divAWidth = $('#carousal-wrapper-outer').css('width');
+        $('#carousal-wrapper-inner').css('width', divAWidth);
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            autoplay: 3000,
+            nav: true,
+            items: 3,
+            center: true,
+            margin: 0,
+            responsive: {
+                500: {
+                    items: 1
+                },
+                800: {
+                    items: 3
+                }
+            }
+
+        });
+        $('.owl-item').addClass('carousel-coleccion');
+    });
+</script>

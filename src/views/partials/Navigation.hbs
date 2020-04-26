@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light shadow-lg p-3 bg-white navegacion-principal">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light shadow-sm p-3 bg-white navegacion-principal">
     <div class="container contenedor-padre-nav">
         <div class="navigation-container d-flex w-100 justify-content-between">
             <div>
@@ -11,23 +11,27 @@
                 <a href="#" class="navbar-brand logo-responsive">ArteLibre</a>
             </div>
             <div class="outter-inicio-sesion">
-                {{!-- <a href="#" class="text-secondary inicio-responsive">Iniciar Sesión</a> --}}
-                    <span class="dropdown show" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <a href="#" class="btn dropdown-toggle">
-                <span class="text-secondary inicio-name">Farid Aboud
+                {{!--   En caso de no haber iniciado sesión 
+
+                <a href="#" class="text-secondary inicio-responsive">Iniciar Sesión</a> --}}
+
+                {{!--   En caso de ya haber iniciado sesión   --}}
+                <span class="dropdown show" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="btn dropdown-toggle">
+                        <span class="text-secondary inicio-name">Farid Aboud
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M16.59 8.29501L12 12.875L7.41 8.29501L6 9.70501L12 15.705L18 9.70501L16.59 8.29501Z"
                                     fill="#BDA008" fill-opacity="0.54" />
                             </svg>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: -60px;">
-                            {{> MenuClient}}
-                        </div>
-                    </span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: -60px;">
+                        {{> MenuClient}}
+                    </div>
                 </span>
+                {{!--   Fin del menú del usuario   --}}
             </div>
         </div>
         <div class="row w-100">
@@ -55,7 +59,32 @@
                     </ul>
                 </div>
                 <div class="col-3 text-center">
-                    <a class="text-secondary inicio-no-responsive" href="#">Iniciar Sesión</a>
+                    {{!--    En caso de que no haya iniciado sesión    --}}
+
+                    <span class="d-flex justify-center">
+                    <button onclick="window.location.href='registro'" class="btn btn-sm boton-login">Registrarme</button>
+                    <a class="inicio-sesion inicio-no-responsive" href="iniciar-sesion">Iniciar Sesión</a>
+                    </span>
+
+                    {{!--    En caso de que haya iniciado sesión (Puedes ver el ejemplo en el responsive)   --}}
+
+                    {{!--
+                        <span class="dropdown show" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="btn dropdown-toggle">
+                <span class="text-secondary inicio-name">Farid Aboud
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16.59 8.29501L12 12.875L7.41 8.29501L6 9.70501L12 15.705L18 9.70501L16.59 8.29501Z"
+                                    fill="#BDA008" fill-opacity="0.54" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: -60px;">
+                            {{> MenuClient}}
+                        </div>
+                    </span>
+                    --}}
                 </div>
             </div>
         </div>
