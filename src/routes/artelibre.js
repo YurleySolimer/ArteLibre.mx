@@ -88,6 +88,10 @@ router.get('/coleccion', (req, res) => {
   res.render('general/coleccion');
 })
 
+router.get('/colecciones', (req, res) => {
+  res.render('general/colecciones');
+})
+
 router.get('/iniciar-sesion', (req, res) => {
   res.render('auth/signin');
 });
