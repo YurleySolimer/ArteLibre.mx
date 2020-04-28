@@ -26,12 +26,7 @@ router.get('/nueva-obra', (req, res) => {
   res.render('artist/nueva-obra');
 });
 
-router.get('/registro-artista', (req, res) => {
-  res.render('artist/registro');
-});
-
-
-  router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
+router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
 
 
     //GUARDANDO DATOS DE LA OBRA//
@@ -78,9 +73,6 @@ router.get('/registro-artista', (req, res) => {
 });
 
 
-router.get('/registro-cliente', (req, res) => {
-  res.render('client/registro');
-});
 
   //-------------------VISTAS DEL CLIENTE---------------------//
 
@@ -99,6 +91,7 @@ router.get('/iniciar-sesion', (req, res) => {
 router.get('/coleccion', (req, res) => {
   res.render('general/coleccion');
 });
+
 
 router.get('/obra', (req, res) => {
   res.render('general/obra');
