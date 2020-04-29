@@ -22,6 +22,14 @@ const upload = multer({
 
 //-------------------ARTISTS VIEWS---------------------//
 
+router.get('/mis-ventas', (req, res)=> {
+  res.render('artist/mis-ventas');
+});
+
+router.get('/mis-obras', (req, res)=> {
+  res.render('artist/mis-obras');
+});
+
 router.get('/nueva-obra', (req, res) => {
   res.render('artist/nueva-obra');
 });
@@ -76,13 +84,21 @@ router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
 
   //-------------------VISTAS DEL CLIENTE---------------------//
 
+router.get('/compras', (req, res) => {
+  res.render('general/compras');
+});
+
+router.get('/mis-pedidos', (req, res) => {
+  res.render('general/mis-pedidos');
+});
+
 router.get('/coleccion', (req, res) => {
   res.render('general/coleccion');
-})
+});
 
 router.get('/colecciones', (req, res) => {
   res.render('general/colecciones');
-})
+});
 
 router.get('/iniciar-sesion', (req, res) => {
   res.render('auth/signin');

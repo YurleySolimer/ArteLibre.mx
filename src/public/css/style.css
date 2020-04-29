@@ -1814,3 +1814,136 @@ html[xmlns] .slider-wrap {
 .flex-control-nav li a.flex-active {
     background-color: #BDA008;
 }
+
+
+/*-----------------------------------
+    Mis Ventas/Mis Pedidos
+-----------------------------------*/
+
+.mis-ventas .table thead tr th, 
+.mis-pedidos .table thead tr th 
+{
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-weight: lighter;
+}
+
+.mis-ventas .table tbody tr:hover,
+.mis-pedidos .table tbody tr:hover 
+{
+    background-color: #BDA00811;
+}
+
+.mis-ventas .table tbody td h2, .mis-ventas .table tbody td h3,
+.mis-pedidos .table tbody td h2, .mis-pedidos .table tbody td h3 {
+    font-size: 1em;
+}
+
+.table tbody tr:nth-of-type(2n) {
+    background-color: #f8f8f8;
+}
+
+.badge-pagado {
+    background-color: var(--bg-light);
+    text-transform: uppercase;
+    color: var(--gold);
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 4px 20px;
+    border: 2px solid var(--gold);
+}
+
+.badge-enviado {
+    background-color: var(--second-gold);
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 4px 20px;
+}
+
+.badge-recibido {
+    background-color: var(--gold);
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 4px 20px;
+}
+
+.badge-pendiente {
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+    color: #c2c2c2;
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 4px 15px;
+    border: 2px solid #c2c2c2;
+}
+
+/*-----------------------------------
+    Mis Obras
+-----------------------------------*/
+
+.titulo-mis-obras {
+    color: #000000;
+}
+
+.titulo-mis-obras:hover {
+    color: #BDA008;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.coleccion-mis-obras {
+    color: #7a7a7a;
+}
+
+.coleccion-mis-obras:hover {
+    color: #BDA008;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.accion-editar {
+    color: #7a7a7a;
+    font-weight: bold;
+}
+
+.accion-editar:hover {
+    color: #BDA008;
+    text-decoration: none;
+    transition: .5s;
+}
+
+/*-----------------------------------
+    Mis Obras
+-----------------------------------*/
+
+.artista-tabla {
+    color: #c0c0c0;
+}
+
+.artista-tabla:hover {
+    color: #BDA008;
+    text-decoration: none;
+}
+
+.badge-pagar {
+    background-color: var(--gold);
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 4px 20px;
+    border: none;
+}
+
+.badge-pagar:hover {
+    opacity: .8;
+}
