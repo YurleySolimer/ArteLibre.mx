@@ -781,6 +781,7 @@ h3 {
 
 .btn-compra:hover {
     background-color: #BDA008AA;
+    color: #FFFFFF;
 }
 
 .obras-recomendadas {
@@ -788,7 +789,7 @@ h3 {
     border-top: 2px solid #BDA008;
 }
 
-.card-img-top {
+.obra-recomendada.card-img-top {
     width: 100%;
     height: 17vw;
     object-fit: cover;
@@ -1318,7 +1319,8 @@ h3 {
     transition: .5s ease;
 }
 
-.blur-artista, .blur-cliente {
+.blur-artista,
+.blur-cliente {
     position: absolute;
     background: rgba(255, 255, 255, .1);
     width: 100%;
@@ -1330,11 +1332,13 @@ h3 {
     transition: .3s ease;
 }
 
-.registro-cliente:hover, .registro-artista:hover {
+.registro-cliente:hover,
+.registro-artista:hover {
     cursor: pointer;
 }
 
-.registro-artista h1, .registro-cliente h1 {
+.registro-artista h1,
+.registro-cliente h1 {
     color: white;
     z-index: 4;
 }
@@ -1361,8 +1365,8 @@ h3 {
 }
 
 .img-perfil-registro {
-    position: relative; 
-    z-index: 2; 
+    position: relative;
+    z-index: 2;
     top: -350px
 }
 
@@ -1397,32 +1401,55 @@ h3 {
     filter: grayscale(1);
 }
 
-.boton-login {
+.boton-signup {
     background: #BDA008;
     border-radius: 5px 0 0 5px;
     color: white;
     transition: .5s;
 }
 
-.boton-login:hover {
+.boton-signup:hover {
     opacity: .7;
     color: white;
+}
 
+.olvido-contraseña {
+    position: relative;
+    bottom: -35px;
+    justify-content: center;
+    font-size: .8em;
+    color: var(--gold);
+}
+
+.btn-recuperar {
+    color: #FFFFFF;
+    background: #BDA008;
+}
+
+.btn-recuperar:hover {
+    opacity: .8;
+    color: #FFFFFF;
 }
 
 /*-----------------------------------
     Colección
 -----------------------------------*/
+
 .item-coleccion-carrusel {
     width: 100%;
     margin: 55px auto;
 }
+
 .owl-carousel .carousel-coleccion.active.center {
     transform: scale(1.2);
     z-index: 999;
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
     opacity: 1;
+}
+
+.owl-carousel .carousel-coleccion.active.center figcaption {
+    display: inherit;
 }
 
 .owl-carousel .carousel-coleccin.active.center .item {
@@ -1432,14 +1459,491 @@ h3 {
 .owl-carousel .owl-item.carousel-coleccion {
     transform: scale(.9);
     transform: translateY(-40px);
-    opacity: .7;
+    opacity: .6;
     transition: all .5s;
 }
 
-.owl-carousel .owl-item.activ.center .item {
-    border: 1px solid red;
+.owl-carousel .owl-item.carousel-coleccion figcaption {
+    display: none;
 }
 
-.owl-stage-outer {
-    height: 400px;
+.carrusel-coleccion .owl-stage-outer {
+    height: 450px;
+}
+
+.carrusel-coleccion .owl-prev {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top: 40%;
+    margin-left: -20px !important;
+    display: block !important;
+    border: 0px solid black;
+}
+
+.carrusel-coleccion .owl-next {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top: 40%;
+    right: -25px;
+    display: block !important;
+    border: 0px solid black;
+}
+
+.carrusel-coleccion .owl-nav {
+    color: var(--gold);
+    transition: .5s ease;
+}
+
+.carrusel-coleccion .owl-nav button {
+    outline: none;
+}
+
+.carrusel-coleccion .owl-nav [class*=owl-]:hover {
+    transform: scale(1.5);
+    background-color: unset;
+    color: #e2d179;
+}
+
+.enlace-obra-coleccion {
+    color: var(--gold);
+}
+
+.enlace-obra-coleccion:hover {
+    color: #E7C201;
+    text-decoration: none;
+}
+
+.descripcion-coleccion {
+    column-count: 1;
+    column-gap: 2em;
+    text-align: justify;
+}
+
+@media screen and (min-width: 768px) {
+    .descripcion-coleccion {
+        column-count: 2;
+    }
+}
+
+@media screen and (min-width: 999px) {
+    .descripcion-coleccion {
+        column-count: 3;
+    }
+}
+
+
+/*-----------------------------------
+    Colección
+-----------------------------------*/
+
+#content {
+    position: relative;
+    overflow: hidden;
+    background-color: #FFF;
+}
+
+.content-wrap {
+    position: relative;
+    padding: 80px 0;
+}
+
+.postcontent {
+    width: 74%;
+    display: block;
+    position: relative;
+    margin-right: 4%;
+    margin-bottom: 50px;
+    float: left;
+}
+
+.nobottommargin {
+    margin-bottom: 0 !important;
+}
+
+
+#posts {
+    position: relative;
+}
+
+#posts .entry-content {
+    margin-top: 30px;
+}
+
+.entry {
+    position: relative;
+    margin: 0 0 50px;
+}
+
+.entry:after {
+    content: '';
+    position: relative;
+    height: 2px;
+    margin-top: 50px;
+    background-color: #F5F5F5;
+}
+
+.entry-image {
+    margin-bottom: 30px;
+}
+
+.entry-image,
+.entry-image>a,
+.entry-image .slide a,
+.entry-image img {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.fslider,
+.fslider .flexslider,
+.fslider .slider-wrap,
+.fslider .slide,
+.fslider .slide>a,
+.fslider .slide>img,
+.fslider .slide>a>img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.fslider {
+    min-height: 32px;
+}
+
+
+.fslider[data-animation="fade"][data-thumbs="true"] .flexslider,
+.fslider.testimonial[data-animation="fade"] .flexslider {
+    height: auto !important;
+}
+
+
+.fslider[data-thumbs="true"] .flex-prev,
+.fslider[data-thumbs="true"] .flex-next {
+    margin-top: -64px;
+}
+
+.flexslider a:active,
+.flexslider a:focus {
+    outline: none;
+    border: none;
+}
+
+
+.flexslider {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.flexslider .slider-wrap>.slide {
+    display: none;
+    -webkit-backface-visibility: hidden;
+}
+
+.flexslider .slider-wrap img {
+    width: 100%;
+    display: block;
+}
+
+.slider-wrap,
+.flex-control-nav,
+.flex-direction-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: none;
+}
+
+
+.slider-wrap:after {
+    content: "\0020";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+html[xmlns] .slider-wrap {
+    display: block;
+}
+
+* html .slider-wrap {
+    height: 1%;
+}
+
+
+.no-js .slider-wrap>.slide:first-child {
+    display: block;
+}
+
+.entry-image .slide a,
+.entry-image img {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+
+.entry-title h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.entry-title h2 a {
+    color: #333;
+}
+
+.entry-title h2 a:hover {
+    color: #BDA008;
+}
+
+.entry-meta {
+    margin: 10px -10px -15px 0;
+    list-style: none;
+}
+
+
+.entry-meta li {
+    float: left;
+    font-size: 13px;
+    line-height: 14px;
+    margin: 0 10px 15px 0;
+    color: #999;
+    font-style: italic;
+}
+
+.entry-meta li:before {
+    content: '/';
+    display: inline-block;
+    margin-right: 10px;
+    opacity: 0.5
+}
+
+.entry-meta li i {
+    position: relative;
+    top: 1px;
+    font-size: 14px;
+    margin-right: 3px;
+}
+
+.entry-meta li a {
+    color: #999;
+}
+
+.entry-meta li a:hover {
+    color: #BDA008;
+}
+
+.entry-meta li:first-child:before {
+    display: none;
+}
+
+.entry-meta li ins {
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.entry-content {
+    position: relative;
+}
+
+
+.more-link {
+    display: inline-block;
+    border-bottom: 1px solid #BDA008;
+    padding: 0 2px;
+    text-decoration: none;
+    color: #BDA008;
+}
+
+.more-link:hover {
+    color: #E7C201;
+    text-decoration: none;
+}
+
+.flex-viewport {
+    max-height: 2000px;
+    -webkit-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.flex-control-nav {
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    top: 14px;
+    right: 10px;
+    margin: 0;
+}
+
+.flex-control-nav li {
+    float: left;
+    display: block;
+    margin: 0 3px;
+    width: 10px;
+    height: 10px;
+}
+
+.flex-control-nav li a {
+    display: block;
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 10px !important;
+    height: 10px !important;
+    border: 1px solid #BDA008;
+    border-radius: 50%;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+}
+
+.flex-control-nav li:hover a,
+.flex-control-nav li a.flex-active {
+    background-color: #BDA008;
+}
+
+
+/*-----------------------------------
+    Mis Ventas/Mis Pedidos
+-----------------------------------*/
+
+.mis-ventas .table thead tr th, 
+.mis-pedidos .table thead tr th 
+{
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-weight: lighter;
+}
+
+.mis-ventas .table tbody tr:hover,
+.mis-pedidos .table tbody tr:hover 
+{
+    background-color: #BDA00811;
+}
+
+.mis-ventas .table tbody td h2, .mis-ventas .table tbody td h3,
+.mis-pedidos .table tbody td h2, .mis-pedidos .table tbody td h3 {
+    font-size: 1em;
+}
+
+.table tbody tr:nth-of-type(2n) {
+    background-color: #f8f8f8;
+}
+
+.badge-pagado {
+    background-color: var(--bg-light);
+    text-transform: uppercase;
+    color: var(--gold);
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 4px 20px;
+    border: 2px solid var(--gold);
+}
+
+.badge-enviado {
+    background-color: var(--second-gold);
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 4px 20px;
+}
+
+.badge-recibido {
+    background-color: var(--gold);
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 4px 20px;
+}
+
+.badge-pendiente {
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+    color: #c2c2c2;
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 4px 15px;
+    border: 2px solid #c2c2c2;
+}
+
+/*-----------------------------------
+    Mis Obras
+-----------------------------------*/
+
+.titulo-mis-obras {
+    color: #000000;
+}
+
+.titulo-mis-obras:hover {
+    color: #BDA008;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.coleccion-mis-obras {
+    color: #7a7a7a;
+}
+
+.coleccion-mis-obras:hover {
+    color: #BDA008;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.accion-editar {
+    color: #7a7a7a;
+    font-weight: bold;
+}
+
+.accion-editar:hover {
+    color: #BDA008;
+    text-decoration: none;
+    transition: .5s;
+}
+
+/*-----------------------------------
+    Mis Obras
+-----------------------------------*/
+
+.artista-tabla {
+    color: #c0c0c0;
+}
+
+.artista-tabla:hover {
+    color: #BDA008;
+    text-decoration: none;
+}
+
+.badge-pagar {
+    background-color: var(--gold);
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: bold;
+    padding: 4px 20px;
+    border: none;
+}
+
+.badge-pagar:hover {
+    opacity: .8;
 }
