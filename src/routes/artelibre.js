@@ -26,24 +26,18 @@ router.get('/mis-ventas', (req, res)=> {
   res.render('artist/mis-ventas');
 });
 
-<<<<<<< HEAD
 router.get('/registro-artista', (req, res) => {
   res.render('artist/registro');
-=======
+  
 router.get('/mis-obras', (req, res)=> {
   res.render('artist/mis-obras');
->>>>>>> 061d0c4977d1a052b482915383d20741064f2011
 });
 
 router.get('/nueva-obra', (req, res) => {
   res.render('artist/nueva-obra');
 });
 
-<<<<<<< HEAD
-  router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
-=======
 router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
->>>>>>> 061d0c4977d1a052b482915383d20741064f2011
 
 
     //GUARDANDO DATOS DE LA OBRA//
@@ -116,10 +110,6 @@ router.get('/iniciar-sesion', (req, res) => {
 router.get('/coleccion', (req, res) => {
   res.render('general/coleccion');
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> 061d0c4977d1a052b482915383d20741064f2011
 
 router.get('/obra', (req, res) => {
   res.render('general/obra');
