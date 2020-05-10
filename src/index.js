@@ -57,9 +57,9 @@ app.use((req, res, next) => {
 
 //Rutas
 
+app.use(require('./routes/artelibre.js'));
 app.use(require('./routes/index.js'));
 app.use(require('./routes/authentication.js'));
-app.use(require('./routes/artelibre.js'));
 
 
 

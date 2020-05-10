@@ -22,14 +22,15 @@ const upload = multer({
 
 //-------------------ARTISTS VIEWS---------------------//
 
-router.get('/mis-ventas', (req, res)=> {
+router.get('/mis-ventas', (req, res) => {
   res.render('artist/mis-ventas');
 });
 
 router.get('/registro-artista', (req, res) => {
   res.render('artist/registro');
-  
-router.get('/mis-obras', (req, res)=> {
+});
+
+router.get('/mis-obras', (req, res) => {
   res.render('artist/mis-obras');
 });
 
@@ -37,22 +38,22 @@ router.get('/nueva-obra', (req, res) => {
   res.render('artist/nueva-obra');
 });
 
-router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
+router.post('/nueva-obra', upload.array('photos'), async (req, res) => {
 
 
-    //GUARDANDO DATOS DE LA OBRA//
+  //GUARDANDO DATOS DE LA OBRA//
 
-    const {nombre, coleccion, creacion, tecnica, estilo, ancho, alto, subasta, copias} = req.body;
+  const { nombre, coleccion, creacion, tecnica, estilo, ancho, alto, subasta, copias } = req.body;
 
-    const newObra = {
-      nombreObra : nombre,
-      coleccion,
-      lugarCreacion: creacion,
-      tecnica,
-      estilo,
-      ancho,
-      alto,
-    }
+  const newObra = {
+    nombreObra: nombre,
+    coleccion,
+    lugarCreacion: creacion,
+    tecnica,
+    estilo,
+    ancho,
+    alto,
+  }
 
 
   const obra = await pool.query('INSERT INTO obras set ?', [newObra]);
@@ -63,7 +64,7 @@ router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
 
   const fotos = req.files;
 
-  for (var i = 0; i<fotos.length; i++) {
+  for (var i = 0; i < fotos.length; i++) {
     const path = fotos[i].path;
     const originalname = fotos[i].originalname;
     const newFoto = {
@@ -71,21 +72,21 @@ router.post('/nueva-obra',  upload.array('photos'), async (req, res) => {
       fotoUbicacion: path,
       obra_id: obra.insertId
     }
-  
+
     const foto = await pool.query('INSERT INTO fotosObras set ?', [newFoto]);
     console.log(foto);
   }
- 
+
   //const {path, originalname} = req.file;
-  
 
 
-    res.redirect('artista');
+
+  res.redirect('artista');
 });
 
 
 
-  //-------------------VISTAS DEL CLIENTE---------------------//
+//-------------------VISTAS DEL CLIENTE---------------------//
 
 router.get('/compras', (req, res) => {
   res.render('general/compras');
@@ -107,10 +108,6 @@ router.get('/iniciar-sesion', (req, res) => {
   res.render('auth/signin');
 });
 
-router.get('/coleccion', (req, res) => {
-  res.render('general/coleccion');
-});
-
 router.get('/obra', (req, res) => {
   res.render('general/obra');
 });
@@ -130,7 +127,5 @@ router.get('/obras', (req, res) => {
 router.get('/registro', (req, res) => {
   res.render('general/registro');
 });
-
-
 
 module.exports = router;
