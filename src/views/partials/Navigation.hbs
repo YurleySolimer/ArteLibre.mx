@@ -15,11 +15,11 @@
 
                 <a href="#" class="text-secondary inicio-responsive">Iniciar Sesión</a> --}}
 
-                {{!--   En caso de ya haber iniciado sesión   
+                {{#ifCond logueado true}}
                 <span class="dropdown show" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <a href="#" class="btn dropdown-toggle">
-                        <span class="text-secondary inicio-name">Farid Aboud
+                        <span class="text-secondary inicio-name">{{nombre.nombre}} {{nombre.apellido}}
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -28,10 +28,15 @@
                             </svg>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: -60px;">
-                        {{> MenuClient}}
+                        {{#ifCond artista true}}
+                            {{> MenuArtist}}
+                        {{/ifCond}}
+                        {{#ifCond artista true}}
+                             {{> MenuClient}}
+                        {{/ifCond}}
                     </div>
                 </span>
-                Fin del menú del usuario   --}}
+               {{/ifCond}}
             </div>
         </div>
         <div class="row w-100">
@@ -59,20 +64,22 @@
                     </ul>
                 </div>
                 <div class="col-3 text-center">
-                    {{!--    En caso de que no haya iniciado sesión    --}}
+                    {{#ifCond logueado false}}
 
                     <span class="d-flex justify-center">
                     <button onclick="window.location.href='registro'" class="btn btn-sm boton-signup">Registrarme</button>
                     <a class="inicio-sesion inicio-no-responsive" href="/iniciar-sesion">Iniciar Sesión</a>
                     </span>
+                    {{/ifCond}}
 
-                    {{!--    En caso de que haya iniciado sesión (Puedes ver el ejemplo en el responsive)   --}}
 
-                    {{!--
+                    {{#ifCond logueado true}}
+
+                    
                         <span class="dropdown show" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <a href="#" class="btn dropdown-toggle">
-                <span class="text-secondary inicio-name">Farid Aboud
+                <span class="text-secondary inicio-name">{{nombre.nombre}} {{nombre.apellido}}
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -81,10 +88,17 @@
                             </svg>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: -60px;">
-                            {{> MenuClient}}
-                        </div>
+                        {{#ifCond artista true}}
+                            {{> MenuArtist}}
+                        {{/ifCond}}
+                        {{#ifCond artista true}}
+                             {{> MenuClient}}
+                        {{/ifCond}}                        
+                    </div>
                     </span>
-                    --}}
+                    
+                {{/ifCond}}
+
                 </div>
             </div>
         </div>

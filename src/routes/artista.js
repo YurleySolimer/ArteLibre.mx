@@ -5,6 +5,9 @@ const pool = require('../database');
 const { isArtista} = require('../lib/auth');
 const { isLoggedIn } = require('../lib/auth');
 
+var artista = false;
+var logueado = false;
+
 const Handlebars = require('handlebars');
 
 Handlebars.registerHelper('año', function(date) {
@@ -12,13 +15,23 @@ Handlebars.registerHelper('año', function(date) {
   return año;
 });
 
+Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+	if(v1 === v2) {
+	  return options.fn(this);
+	}
+	return options.inverse(this);
+  });
+
+
 router.get('/mis-ventas', isLoggedIn, isArtista, async (req, res) => {
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
-  res.render('artist/mis-ventas', {nombre:nombre[0]});
+  const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+  artista = true;
+  logueado = true;
+  res.render('artist/mis-ventas', {nombre:nombre[0], artista, logueado});
 });
 
-router.get('/a-perfil', isLoggedIn, isArtista, async (req, res) => {
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
+router.get('/artist-perfil', isLoggedIn, isArtista, async (req, res) => {
+  const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   const user = await pool.query('SELECT * FROM usuarioArtista WHERE id =?', [req.user.id]);
   const obras = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =?', [req.user.id]);
   var ultima_obra = {
@@ -27,18 +40,24 @@ router.get('/a-perfil', isLoggedIn, isArtista, async (req, res) => {
   if (obras.length>0) {
     ultima_obra = obras[obras.length-1];
   }
-  res.render('artist/perfil', {nombre:nombre[0], user:user[0], obras, ultima_obra});
+  artista = true;
+  logueado = true;
+  res.render('artist/perfil', {nombre:nombre[0], user:user[0], obras, ultima_obra,  artista, logueado});
 });
 
 router.get('/mis-obras', isLoggedIn, isArtista, async (req, res)=> {
   const obras = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =?', [req.user.id]);
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
-  res.render('artist/mis-obras', {obras, nombre:nombre[0]});
+  const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+  artista = true;
+  logueado = true;
+  res.render('artist/mis-obras', {obras, nombre:nombre[0],  artista, logueado});
 });
 
 router.get('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
-  res.render('artist/nueva-obra', {nombre:nombre[0]});
+  const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+  artista = true;
+  logueado = true;
+  res.render('artist/nueva-obra', {nombre:nombre[0],  artista, logueado});
 });
 
 router.post('/nueva-obra',  isLoggedIn, isArtista, async (req, res) => {
@@ -77,62 +96,18 @@ router.post('/nueva-obra',  isLoggedIn, isArtista, async (req, res) => {
     }
 
     const foto = await pool.query('INSERT INTO fotosObras set ?', [newFoto]);
-  } 
-    res.redirect('a-obras');
-});
-
-router.get('nueva-coleccion', (req, res) => {
-  res.render('artist/nueva-coleccion');
-});
-
-router.get('/a-coleccion', isLoggedIn, isArtista, async(req, res) => {
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
-  res.render('artist/coleccion', {nombre:nombre[0]});
-});
-
-router.get('/a-colecciones', isLoggedIn, isArtista, async (req, res) => {
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
-  res.render('artist/colecciones', {nombre:nombre[0]});
-});
-
-router.get('/a-obra/:id', isLoggedIn, isArtista, async (req, res) => {
-  const obra = await pool.query('SELECT * FROM obraCompleta WHERE id =?', [req.params.id]);
-  const fotos = await pool.query('SELECT * FROM fotosObras WHERE obra_id=?', [req.params.id]);
-  const obras = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
-
-  var myArray = [];
-  for(var i=0;i<3;i++){
-    var numeroAleatorio = Math.ceil(Math.random()*obras.length);
-    var existe = false;
-    for (var j=0; j<myArray.length; j++) {
-      if (myArray[j] == obras[numeroAleatorio-1]) {
-          existe = true;
-      }
-    }
-    if (existe == false) {
-      myArray[i] = obras[numeroAleatorio-1];
-    }
   }
-  res.render('artist/obra', {obra:obra[0], fotos, myArray, nombre:nombre[0]});
+  artista = true;
+  logueado = true; 
+  res.redirect('obras');
 });
 
-
-router.get('/a-artista', isLoggedIn, isArtista, async(req, res) => {
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
-  res.render('artist/artista', {nombre:nombre[0]});
+router.get('nueva-coleccion', async (req, res) => {
+  const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+  artista = true;
+  logueado = true;
+  res.render('artist/nueva-coleccion',  {nombre:nombre[0], artista, logueado});
 });
 
-router.get('/a-artistas', isLoggedIn, isArtista, async (req, res) => {
-  const artistas = await pool.query('SELECT * FROM usuarioArtista');
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
-  res.render('artist/artistas', {artistas, nombre:nombre[0]});
-});
-
-router.get('/a-obras', isLoggedIn, isArtista, async (req, res) => {
-  const obras = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
-  res.render('artist/obras', {obras, nombre:nombre[0]});
-});
 
 module.exports = router;
