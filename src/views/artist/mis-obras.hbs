@@ -1,7 +1,87 @@
+<!-- Modal -->
+<div class="modal fade" id="datos-obra-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="">
+                            <img class="img-fluid" src="images/vangogh1.jpg" alt="girasoles">
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Nombre de la obra</h5>
+                                    <h4 class="">Los Girasoles #13</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Artista</h5>
+                                    <h4 class="">Vincent Van Gogh</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">ID</h5>
+                                    <h4 class="">AHSDKJHALKSD13413KJK</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Ubicación de la obra</h5>
+                                    <h4 class="">La Haya, Holanda</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Codigo de Seguimiento</h5>
+                                    <input type="text" name="" id="" class="form-control">
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Fecha de Arribo</h5>
+                                    <input type="date" name="" id="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Nombre del comprador</h5>
+                                    <h4 class="">Luis Fernando Méndez</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Ubicación del Comprador</h5>
+                                    <h4 class="">San Fermin, Tunez</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Currier</h5>
+                                    <h4 class="">DHL</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Dirección</h5>
+                                    <h4 class="">Edif 5, 450C Ruta Central</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Precio</h5>
+                                    <h4 class="">175.000 MXN</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5>Registrar Envio</h5>
+                                    <button type="submit" class="btn badge-recibido">Enviar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {{> Navigation }}
 <div class="container inicial">
     <div class="content">
-        <div class="titule m-5">
+        <div class="m-5">
             <h2>Mis Obras</h2>
         </div>
         <div class="section ventas">
@@ -20,7 +100,9 @@
                     <tbody>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -33,7 +115,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -46,7 +130,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -59,7 +145,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -72,7 +160,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -85,7 +175,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -98,7 +190,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -111,7 +205,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -124,7 +220,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -137,7 +235,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -150,7 +250,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -163,7 +265,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -176,7 +280,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -189,7 +295,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -202,7 +310,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -215,7 +325,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -228,7 +340,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -241,7 +355,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -254,7 +370,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -267,7 +385,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -280,7 +400,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -293,7 +415,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -306,7 +430,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -319,7 +445,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -332,7 +460,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>
@@ -345,7 +475,9 @@
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><a href="#" class="titulo-mis-obras"><h2 style="font-weight: bold;">Noche Estrellada</h2></a></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
                             <td>Post-Modernismo</td>

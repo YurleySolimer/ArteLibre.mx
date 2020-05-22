@@ -38,6 +38,10 @@ router.get('/nueva-obra', (req, res) => {
   res.render('artist/nueva-obra');
 });
 
+router.get('/nueva-coleccion', (req, res) => {
+  res.render('artist/nueva-coleccion');
+});
+
 router.post('/nueva-obra', upload.array('photos'), async (req, res) => {
 
 

@@ -1,0 +1,78 @@
+{{> Navigation }}
+
+<div class="container inicial">
+    <div class="content">
+        <div class="m-5">
+            <h2>Nueva Colección</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p class="text-muted">
+                    Con este formulario podrás definir una nueva colección, a partir de esto, cada vez que subas una
+                    nueva obra, tendrás la posiblidad de anexarla a esta colección.
+                </p>
+            </div>
+        </div>
+
+        {{!-- Inicio de formulario --}}
+        <form action="/nueva-coleccion" method="POST" enctype="multipart/form-data" class="form">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="Nombre">Nombre</label>
+                    <input type="text" class="form-control" id="Nombre" name="nombre" aria-describedby="NombreHelp"
+                        placeholder="Escribe aquí el nombre de la colección">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="Coleccion">Año</label>
+                    <input type="number" class="form-control" id="año" name="año" aria-describedby="año"
+                        placeholder="Año">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="descripción">Descripción</label>
+                    <textarea class="form-control" id="descripcion" aria-describedby="descripcion"
+                                placeholder="Describe la colección"></textarea>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="tecnica">Técnica</label>
+                    <input type="text" class="form-control" id="tecnica" aria-describedby="Técnica"
+                        placeholder="Técnica utilizada">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="estilo">Estilo</label>
+                    <input type="text" class="form-control" id="estilo" name="estilo" aria-describedby="estilo"
+                        placeholder="Estilo representado">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="ubicacion-pais">Ubicación (País)</label>
+                    <input type="text" class="form-control" id="ubicacion-pais" name="ubicacion-pais" aria-describedby="ubicacion-pais"
+                        placeholder="País">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="ubicacion-ciudad">Ubicación (Ciudad)</label>
+                    <input type="text" class="form-control" id="ubicacion-ciudad" name="ubicacion-ciudad" aria-describedby="ubicacion-ciudad"
+                        placeholder="Ciudad">
+                </div>
+            </div>
+            
+            <div class="col-12 text-right">
+                <input type="submit" value="Guardar" class="guardar-obra">
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{> Footer }}
