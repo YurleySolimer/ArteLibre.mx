@@ -7,10 +7,10 @@ const session = require('express-session');
 const MySqlStore = require('express-mysql-session');
 const passport = require('passport');
 const { database } = require('./keys');
+const multer = require('multer');
 
 
 //Inicializaciones
-
 
 const app = express();
 require('./lib/passport');
@@ -29,6 +29,21 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 //Middlewares
+
+//Middlewares
+
+const storage = multer.diskStorage({
+	destination: path.join(__dirname, 'public/uploads'),
+	filename: (req, file, cb) => {
+		cb(null, file.originalname);
+	}
+});
+
+app.use(multer({
+	storage,
+	dest: path.join(__dirname, 'public/uploads')
+}).array('image')
+); 
 
 
 
@@ -58,6 +73,8 @@ app.use((req, res, next) => {
 //Rutas
 
 app.use(require('./routes/artelibre.js'));
+app.use(require('./routes/artista.js'));
+app.use(require('./routes/clientes.js'));
 app.use(require('./routes/index.js'));
 app.use(require('./routes/authentication.js'));
 
@@ -65,9 +82,9 @@ app.use(require('./routes/authentication.js'));
 
 // Public
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/bootstrapjs', express.static(__dirname + '/../node_modules/bootstrap/dist/js')); // redirect bootstrap JS
-app.use('/jquery', express.static(__dirname + '/../node_modules/jquery/dist')); // redirect JS jQuery
-app.use('/bootstrapcss', express.static(__dirname + '/../node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
+app.use('/bootstrapjs', express.static(path.join(__dirname , '/../node_modules/bootstrap/dist/js'))); // redirect bootstrap JS
+app.use('/jquery', express.static(path.join(__dirname , '/../node_modules/jquery/dist'))); // redirect JS jQuery
+app.use('/bootstrapcss', express.static(path.join(__dirname , '/../node_modules/bootstrap/dist/css'))); // redirect CSS bootstrap
 
 //Inicializar Servidor
 

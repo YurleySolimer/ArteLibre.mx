@@ -1,12 +1,12 @@
-{{> Navigation }}
+{{> NavArtist }}
 <section class="container mt-5">
     <div class="row">
         <div class="col-12">
             <div class="text-center">
 
-                <h2>Lilah Steel</h2>
+                <h2>{{user.nombre}} {{user.apellido}}</h2>
                 <div class="container-perfil-image">
-                    <img class="img-perfil-artista" src="/images/artista4.jpg" alt="">
+                    <img class="img-perfil-artista" src="/./uploads/{{user.foto_nombre}}" alt="{{user.foto_nombre}}">
                 </div>
             </div>
         </div>
@@ -20,34 +20,30 @@
                             <p class="artista-caracteristica"><strong>Categorías</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">Fotografía -
-                                Escultura</p>
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">{{user.disciplina_principal}} 
+                                {{user.disciplina_sec}}</p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica"><strong>Inicio de Carrera</strong></p>
+                            <p class="artista-caracteristica"><strong>Ubicación</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">New
-                                Hampshire, 2014</p>
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">{{user.pais}}, {{user.region}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="text-left my-2 p-2">
                         <div>
-                            <p class="artista-caracteristica"><strong>Técnica Principal</strong></p>
+                            <p class="artista-caracteristica"><strong>Frase</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">Figura exenta
-                                -
-                                Retratos</p>
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">{{user.frase}}</p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica"><strong>Ubicación</strong></p>
+                            <p class="artista-caracteristica"><strong>Años de Experiencia</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">Colonia,
-                                Alemania</p>
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">{{user.años_experiencia}} años </p>
                         </div>
                     </div>
                 </div>
@@ -58,14 +54,13 @@
                         </div>
                         <div>
                             <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';"><a href="#"
-                                    class="coleccion-perfil-artista gold">El Nudo</a></p>
+                                    class="coleccion-perfil-artista gold">{{ultima_obra.nombreObra}}</a></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica"><strong>Estilos</strong></p>
+                            <p class="artista-caracteristica"><strong>Estilo</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">Abstracto,
-                                Cubismo, Blanco y negro</p>
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">{{ultima_obra.estilo}}</p>
                         </div>
                     </div>
                 </div>
@@ -84,13 +79,7 @@
         </div>
         <div class="col-12 biografia-artista">
             <p class="p-3">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas non quidem quae, consequatur veniam
-                nam reprehenderit cum beatae rem facere nulla provident culpa aliquid assumenda! Saepe non iure aliquam
-                est. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem ex itaque sunt mollitia,
-                laudantium omnis numquam voluptatum sint reprehenderit saepe rem. Veniam repellendus reiciendis rem
-                alias exercitationem. Officiis, modi atque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Enim deserunt dolorem totam, commodi, nulla, in molestiae quisquam dolorum molestias voluptatem
-                exercitationem laboriosam veniam fuga rem praesentium possimus quo cupiditate porro.
+                {{user.biografia}}
             </p>
         </div>
         <div class="col-12 text-right">
@@ -107,29 +96,12 @@
                 </h3>
             </div>
             <div>
+                {{#each colecciones}}
                 <a class="coleccion-perfil-artista" href="#">
-                    <p>La vie en Noir</p>
+                    <p>{{nombreColeccion}}</p>
                 </a>
                 <hr class="gray">
-                <a class="coleccion-perfil-artista" href="#">
-                    <p>Rostros de la Calle</p>
-                </a>
-                <hr class="gray">
-                <a class="coleccion-perfil-artista" href="#">
-                    <p>Metal Fluido</p>
-                </a>
-                <hr class="gray">
-                <a class="coleccion-perfil-artista" href="#">
-                    <p>Aborigen Moderno</p>
-                </a>
-                <hr class="gray">
-                <a class="coleccion-perfil-artista" href="#">
-                    <p>Espejos de Acero</p>
-                </a>
-                <hr class="gray">
-                <a class="coleccion-perfil-artista" href="#">
-                    <p>Juventud Clemente</p>
-                </a>
+                {{/each}}
             </div>
         </div>
         <div class="col-12 col-md-6">
@@ -138,7 +110,8 @@
                     Próximos eventos
                 </h3>
             </div>
-            <div class="card text-white proximo-evento-perfil" style="max-height: 130px;">
+            
+            {{!-- <div class="card text-white proximo-evento-perfil" style="max-height: 130px;">
                 <img src="/images/retrato4.png" style="" alt="" class="card-img img-proximo-evento">
                 <div class="card-img-overlay">
                     <h5 class="card-title">
@@ -159,97 +132,25 @@
                 </div>
             </div>
             <button class="text-right btn-compra badge-pill">Ver más</button>
-        </div>
+        </div> --}}
     </div>
 </section>
 <div class="timeline-container" id="timeline-1">
     <div class="timeline-header">
         <h2 class="timeline-header__title">Cronología Artistica</h2>
-        <h3 class="timeline-header__subtitle">Lilah Steel</h3>
+        <h3 class="timeline-header__subtitle">{{user.nombre}} {{user.apellido}}</h3>
     </div>
     <div class="timeline">
-        <div class="timeline-item" data-text="DISCRIMINADOS INOCENTES">
+        {{#each obras}}
+        <div class="timeline-item" data-text="{{nombreObra}}">
             <div class="timeline__content"><img class="timeline__img"
-                    src="/images/retrato1.jpg" />
-                <h2 class="timeline__content-title">2014</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illum voluptas aliquam veniam possimus non quisquam deserunt quas! Et mollitia dolorum totam praesentium nihil vel dicta. Corporis, reiciendis perspiciatis. Quod, modi.</p>
+                    src="/./uploads/{{fotoNombre}}" />
+                <h2 class="timeline__content-title">{{#año fecha_creacion}} {{fecha_creacion}} {{/año}}</h2>
+                <p class="timeline__content-desc"></p>
             </div>
         </div>
-        <div class="timeline-item" data-text="GRITO DE LAS CALLES">
-            <div class="timeline__content"><img class="timeline__img"
-                    src="/images/retrato2.jpg" />
-                <h2 class="timeline__content-title">2014</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse autem, sint debitis ducimus a quia nulla. Nulla nam facilis eligendi, quibusdam tenetur dolorem porro officiis. Ratione pariatur dolorum saepe ut.</p>
-            </div>
-        </div>
-        <div class="timeline-item" data-text="CLEMENCIA">
-            <div class="timeline__content"><img class="timeline__img" src="/images/retrato3.jpg" />
-                <h2 class="timeline__content-title">2014</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non enim autem natus accusantium maxime sint voluptatem iusto. Fuga iste harum dignissimos nihil provident reprehenderit qui consequatur illo at, iure modi.</p>
-            </div>
-        </div>
-        <div class="timeline-item" data-text="MIRADA DEL TIEMPO">
-            <div class="timeline__content"><img class="timeline__img"
-                    src="/images/retrato4.png" />
-                <h2 class="timeline__content-title">2015</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi fugiat consequuntur nostrum facilis asperiores, tempore ad, rerum error repellendus odio vitae laudantium ipsa molestiae blanditiis, ducimus obcaecati expedita. Numquam, labore!</p>
-            </div>
-        </div>
-        <div class="timeline-item" data-text="MUSAS">
-            <div class="timeline__content"><img class="timeline__img"
-                    src="/images/retrato5.jpg" />
-                <h2 class="timeline__content-title">2015</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati nesciunt sapiente facere aliquid vero beatae! Animi quia corrupti sed, distinctio hic voluptatem dolore aliquid non corporis suscipit quisquam dicta dolorum?</p>
-            </div>
-        </div>
-        <div class="timeline-item" data-text="MUSAS">
-            <div class="timeline__content"><img class="timeline__img"
-                    src="/images/retrato6.jpg" />
-                <h2 class="timeline__content-title">2016</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui expedita aliquid eligendi? Illo labore repudiandae error aut illum nesciunt deleniti, totam, est eum ratione qui eligendi sit? Facilis, consectetur voluptatibus!</p>
-            </div>
-        </div>
-        <div class="timeline-item" data-text="ABORIGEN MODERNO">
-            <div class="timeline__content"><img class="timeline__img"
-                    src="/images/statue1.png" />
-                <h2 class="timeline__content-title">2016</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum totam iste odio qui voluptas fugit repellat, in, ullam veritatis corrupti ex. Officia tempore non numquam veritatis mollitia iure similique voluptatum.</p>
-            </div>
-        </div>
-        <div class="timeline-item" data-text="EL NUDO">
-            <div class="timeline__content"><img class="timeline__img" src="/images/statue2.jpg" />
-                <h2 class="timeline__content-title">2017</h2>
-                <p class="timeline__content-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe ex accusantium rerum temporibus molestiae nulla doloribus eos iure impedit eligendi ducimus debitis quos blanditiis qui et illo a, iusto consectetur?</p>
-            </div>
-        </div>
-        <div class="timeline-item" data-text="ESPEJOS DE ACERO">
-            <div class="timeline__content"><img class="timeline__img"
-                    src="/images/statue3.jpg" />
-                <h2 class="timeline__content-title">2017</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit reprehenderit labore sapiente voluptas unde obcaecati esse magnam accusantium dolore? Repellat nam fugiat exercitationem repudiandae dolores dolor in ipsa vitae quidem.</p>
-            </div>
-        </div>
-        <div class="timeline-item" data-text="EL NUDO">
-            <div class="timeline__content"><img class="timeline__img"
-                    src="/images/statue4.png" />
-                <h2 class="timeline__content-title">2017</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur nemo esse corporis suscipit. Doloribus vel ea, dicta repellendus magni debitis maxime id inventore laborum asperiores odio perspiciatis earum quasi quia.</p>
-            </div>
-        </div>
-        <div class="timeline-item" data-text="PLUMAJE">
-            <div class="timeline__content"><img class="timeline__img"
-                    src="/images/statue5.jpg" />
-                <h2 class="timeline__content-title">2018</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi eius quasi in quam tempora dignissimos earum ducimus fugit obcaecati, saepe perspiciatis, illum nesciunt molestias laudantium animi! Fugiat nam quas placeat.</p>
-            </div>
-        </div>
-        <div class="timeline-item" data-text="CRONOSCOPIA">
-            <div class="timeline__content"><img class="timeline__img"
-                    src="/images/statue6.jpg" />
-                <h2 class="timeline__content-title">2019</h2>
-                <p class="timeline__content-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis repudiandae consectetur harum sint atque laudantium! Sed tempore necessitatibus impedit eos nesciunt, ratione dignissimos sit tenetur quia sunt odit quis inventore.</p>
-            </div>
-        </div>
+        {{/each}}
+       
     </div>
 </div>
 {{> Footer }}

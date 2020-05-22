@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+{{> NavArtist }}
+=======
 <!-- Modal -->
 <div class="modal fade" id="datos-obra-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
@@ -79,6 +82,7 @@
 
 
 {{> Navigation }}
+>>>>>>> 604a5dd3550f89e5b1d71a1304931fbdeefe983a
 <div class="container inicial">
     <div class="content">
         <div class="m-5">
@@ -98,17 +102,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each obras}}
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
+<<<<<<< HEAD
+                            <td><a href="obra/{{id}}" class="titulo-mis-obras"><h2 style="font-weight: bold;">{{nombreObra}}</h2></a></td>
+=======
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
                                     <h2 style="font-weight: bold;">Noche Estrellada</h2>
                                 </button></td>
+>>>>>>> 604a5dd3550f89e5b1d71a1304931fbdeefe983a
                             <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">Los Girasoles</a></td>
-                            <td>Post-Modernismo</td>
+                            <td><a href="#" class="coleccion-mis-obras">{{coleccion}}</a></td>
+                            <td>{{estilo}}</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
+                            <td class="text-muted">{{precio}} MXN</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+<<<<<<< HEAD
+                            <td class="gold">{{precio}} MXN</td>
+=======
                             <td class="gold">197.000 MXN</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td><a href="#" class="accion-editar">Editar</a></td>
@@ -485,9 +497,11 @@
                             <td class="text-muted">175.000 MXN</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
                             <td class="gold">197.000 MXN</td>
+>>>>>>> 604a5dd3550f89e5b1d71a1304931fbdeefe983a
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td><a href="#" class="accion-editar">Editar</a></td>
                         </tr>
+                        {{/each}}
                     </tbody>
                 </table>
             </div>

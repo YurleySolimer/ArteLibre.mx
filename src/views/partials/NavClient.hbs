@@ -11,15 +11,11 @@
                 <a href="#" class="navbar-brand logo-responsive">ArteLibre</a>
             </div>
             <div class="outter-inicio-sesion">
-                {{!--   En caso de no haber iniciado sesión 
-
-                <a href="#" class="text-secondary inicio-responsive">Iniciar Sesión</a> --}}
-
-                {{!--   En caso de ya haber iniciado sesión   
+                
                 <span class="dropdown show" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <a href="#" class="btn dropdown-toggle">
-                        <span class="text-secondary inicio-name">Farid Aboud
+                        <span class="text-secondary inicio-name">{{nombre.nombre}}
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -31,7 +27,6 @@
                         {{> MenuClient}}
                     </div>
                 </span>
-                Fin del menú del usuario   --}}
             </div>
         </div>
         <div class="row w-100">
@@ -42,13 +37,13 @@
                 <div class="col-6">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-around">
                         <li class="nav-item">
-                            <a class="nav-link" href="/artistas">Artistas</a>
+                            <a class="nav-link" href="/c-artistas">Artistas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/obras">Obras</a>
+                            <a class="nav-link" href="/c-obras">Obras</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/colecciones">Colecciones</a>
+                            <a class="nav-link" href="/c-colecciones">Colecciones</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Eventos</a>
@@ -59,14 +54,7 @@
                     </ul>
                 </div>
                 <div class="col-3 text-center">
-                    {{!--    En caso de que no haya iniciado sesión    --}}
-
-                    <span class="d-flex justify-center">
-                    <button onclick="window.location.href='registro'" class="btn btn-sm boton-signup">Registrarme</button>
-                    <a class="inicio-sesion inicio-no-responsive" href="/iniciar-sesion">Iniciar Sesión</a>
-                    </span>
-
-                    {{!--    En caso de que haya iniciado sesión (Puedes ver el ejemplo en el responsive)   --}}
+                   
 
                     {{!--
                         <span class="dropdown show" role="button" id="dropdownMenuLink" data-toggle="dropdown"

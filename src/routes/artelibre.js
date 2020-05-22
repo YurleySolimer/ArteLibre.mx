@@ -1,135 +1,58 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database');
-const multer = require('multer');
-const upload = multer({
-  dest: 'uploads/',
-  fileFilter(req, file, next) {
-    const isPhoto = file.mimetype.startsWith('image/');
-    if (isPhoto) {
-      next(null, true);
-    } else {
-      next({ message: "El tipo de archivo no es válido" }, false);
-    }
-  }
-});
 
-
-//-------------------VISTAS DEL ADMINISTRADOR---------------------//
-
-
-
-
-//-------------------ARTISTS VIEWS---------------------//
-
-router.get('/mis-ventas', (req, res) => {
-  res.render('artist/mis-ventas');
-});
-
-router.get('/registro-artista', (req, res) => {
-  res.render('artist/registro');
-});
-
-router.get('/mis-obras', (req, res) => {
-  res.render('artist/mis-obras');
-});
-
-router.get('/nueva-obra', (req, res) => {
-  res.render('artist/nueva-obra');
-});
-
-router.get('/nueva-coleccion', (req, res) => {
-  res.render('artist/nueva-coleccion');
-});
-
-router.post('/nueva-obra', upload.array('photos'), async (req, res) => {
-
-
-  //GUARDANDO DATOS DE LA OBRA//
-
-  const { nombre, coleccion, creacion, tecnica, estilo, ancho, alto, subasta, copias } = req.body;
-
-  const newObra = {
-    nombreObra: nombre,
-    coleccion,
-    lugarCreacion: creacion,
-    tecnica,
-    estilo,
-    ancho,
-    alto,
-  }
-
-
-  const obra = await pool.query('INSERT INTO obras set ?', [newObra]);
-
-  //GUARDANDO FOTOS DE LA OBRA//
-
-  console.log(req.files);
-
-  const fotos = req.files;
-
-  for (var i = 0; i < fotos.length; i++) {
-    const path = fotos[i].path;
-    const originalname = fotos[i].originalname;
-    const newFoto = {
-      fotoNombre: originalname,
-      fotoUbicacion: path,
-      obra_id: obra.insertId
-    }
-
-    const foto = await pool.query('INSERT INTO fotosObras set ?', [newFoto]);
-    console.log(foto);
-  }
-
-  //const {path, originalname} = req.file;
-
-
-
-  res.redirect('artista');
-});
-
-
-
-//-------------------VISTAS DEL CLIENTE---------------------//
-
-router.get('/compras', (req, res) => {
-  res.render('general/compras');
-});
-
-router.get('/mis-pedidos', (req, res) => {
-  res.render('general/mis-pedidos');
-});
+const { isLoggedIn } = require('../lib/auth');
 
 router.get('/coleccion', (req, res) => {
   res.render('general/coleccion');
+});
+
+router.get('/registro', (req, res) => {
+  res.render('general/registro');
 });
 
 router.get('/colecciones', (req, res) => {
   res.render('general/colecciones');
 });
 
-router.get('/iniciar-sesion', (req, res) => {
-  res.render('auth/signin');
+router.get('/obra/:id', async (req, res) => {
+  const obra = await pool.query('SELECT * FROM obraCompleta WHERE id =?', [req.params.id]);
+  const fotos = await pool.query('SELECT * FROM fotosObras WHERE obra_id=?', [req.params.id]);
+  const obras = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
+  console.log(obras.length)
+
+  var myArray = [];
+  for(var i=0;i<3;i++){
+    var numeroAleatorio = Math.ceil(Math.random()*obras.length);
+    var existe = false;
+    for (var j=0; j<myArray.length; j++) {
+      if (myArray[j] == obras[numeroAleatorio-1]) {
+          existe = true;
+      }
+    }
+    if (existe == false) {
+      myArray[i] = obras[numeroAleatorio-1];
+    }
+  }
+  res.render('general/obra', {obra:obra[0], fotos, myArray});
 });
 
-router.get('/obra', (req, res) => {
-  res.render('general/obra');
-});
 
 router.get('/artista', (req, res) => {
   res.render('general/artista');
 });
 
-router.get('/artistas', (req, res) => {
-  res.render('general/artistas');
+router.get('/artistas', async (req, res) => {
+  const artistas = await pool.query('SELECT * FROM usuarioArtista');
+  res.render('general/artistas', {artistas});
 });
 
-router.get('/obras', (req, res) => {
-  res.render('general/obras');
+router.get('/obras', async (req, res) => {
+  const obras = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
+  res.render('general/obras', {obras});
 });
 
-router.get('/registro', (req, res) => {
-  res.render('general/registro');
-});
+
 
 module.exports = router;

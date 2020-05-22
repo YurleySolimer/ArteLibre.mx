@@ -30,37 +30,114 @@ passport.use('user.signin', new LocalStrategy({
   }
 }));
 
-//_______________________//
+//___________REGISTRO USUARIO CLIENTE____________//
 
-passport.use('user.signup', new LocalStrategy({
+passport.use('signupCliente', new LocalStrategy({
   usernameField: 'fullname',
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, fullname, password, done) => {
+ 
+  const {email, apellido, telefono} = req.body;
+  //const {path, originalname} = req.files[0];
+  const noUser = await pool.query('SELECT * FROM users WHERE email =?', [email]);
 
-  const {email} = req.body;
+  if (noUser.length>0) {
+    return done(null, false, req.flash('message', 'Error, este email ya está registrado'));
+
+  } else {
 
   let newUser = {
-    fullname,
+    nombre: fullname,
     email, 
-    password
+    password,
+    apellido,
+    telefono,
+    tipo: 'Cliente'
   };
 
   newUser.password = await helpers.encryptPassword(password);
-  newUser.email = req.body.email;
-  console.log(fullname);
-  console.log(email);
-  console.log(password)
-  // Saving in the Database
   const result = await pool.query('INSERT INTO users SET ? ', newUser);
   newUser.id = result.insertId;
 
+    //-------------REGISTRO INFO DEL CLIENTE --------------//
+    const {pais, region, provincia, fecha_nacimiento, direccion} = req.body;
 
-
-
-
- return done(null, newUser);
+    let newCliente = {
+      pais,
+      region, 
+      provincia,
+      fecha_nacimiento,
+      direccion,
+      user_id: result.insertId
+    };
+  
+    const cliente = await pool.query('INSERT INTO clientes SET ? ', newCliente);
+    console.log(newUser);
+    console.log(newCliente);
+    return done(null, newUser);
+  }
 }));
+
+//___________REGISTRO USUARIO ARTISTA____________//
+
+passport.use('signupArtista', new LocalStrategy({
+  usernameField: 'fullname',
+  passwordField: 'password',
+  passReqToCallback: true
+}, async (req, fullname, password, done) => {
+  console.log('Hola');
+ 
+  const {email, apellido, telefono} = req.body;
+  const {path, originalname} = req.files[0];
+  const noUser2 = await pool.query('SELECT * FROM users WHERE email =?', [email]);
+
+  if (noUser2.length>0) {
+    return done(null, false, req.flash('message', 'Error, este email ya está registrado'));
+
+  } else {
+
+  let newUser = {
+    nombre: fullname,
+    email, 
+    password,
+    apellido,
+    telefono,
+    foto_ubicacion : path,
+		foto_nombre: originalname,
+    tipo: 'Artista'
+  };
+
+  newUser.password = await helpers.encryptPassword(password);
+  const result = await pool.query('INSERT INTO users SET ? ', newUser);
+  newUser.id = result.insertId;
+
+    //-------------REGISTRO INFO DEL ARTISTA --------------//
+    const {pais, region, provincia, años, direccion, disciplina_principal, disciplina_sec, frase, biografia} = req.body;
+
+    let newArtista = {
+      pais,
+      region, 
+      provincia,
+      años_experiencia: años,
+      direccion,
+      disciplina_principal,
+      disciplina_sec,
+      biografia,
+      frase,
+      user_id: result.insertId
+    };
+  
+    const artist = await pool.query('INSERT INTO artistas SET ? ', newArtista);
+    console.log(newUser);
+    console.log(newArtista); 
+    return done(null, newUser);
+  }
+}));
+ 
+ 
+
+
 
 passport.serializeUser((user, done) => {
 	done(null, user.id);

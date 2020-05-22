@@ -5,50 +5,50 @@
     <div class="m-5">
         <h1 class="gold">Nuevo Cliente</h1>
     </div>
-    <form action="" class="form">
+    <form action="registro-cliente" class="form" method="POST" enctype="multipart/form-data">
         <div class="row mb-5">
             <div class="col-12">
                 <div class="row m-3">
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="nombre" aria-describedby="nombre"
-                                placeholder="Nombre">
+                                placeholder="Nombre" name="fullname">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="apellido" aria-describedby="apellido"
-                                placeholder="Apellido">
+                                placeholder="Apellido" name="apellido">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="email" class="form-control" id="correo" aria-describedby="correo"
-                                placeholder="Correo electrónico">
+                                placeholder="Correo electrónico" name="email">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="tel" class="form-control" id="telefono" aria-describedby="telefono"
-                                placeholder="Teléfono">
+                                placeholder="Teléfono" name="telefono">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="pais" aria-describedby="pais"
-                                placeholder="País">
+                                placeholder="País" name="pais">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="region" aria-describedby="region"
-                                placeholder="Región">
+                                placeholder="Región" name="region">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="povincia" aria-describedby="provincia"
-                                placeholder="Provincia">
+                                placeholder="Provincia" name="provincia">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
@@ -59,21 +59,21 @@
                                 </div>
                             </div>
                             <div class="col-7">
-                            <input type="date" class="form-control" id="nacimiento" aria-describedby="fecha de nacimiento">
+                            <input type="date"  name="fecha_nacimiento" class="form-control" id="nacimiento" aria-describedby="fecha de nacimiento">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="direccion" aria-describedby="direccion"
-                                placeholder="Dirección">
+                                placeholder="Dirección" name="direccion">
                         </div>
                     </div>
                     <div class="border-bottom mb-5 col-12"></div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="password" class="form-control" id="contraseña" aria-describedby="contraseña"
-                                placeholder="Contraseña">
+                                placeholder="Contraseña" name="password">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-right">
-                        <button class="btn-compra badge">Registrarme</button>
+                        <button class="btn-compra badge" type="submit">Registrarme</button>
                     </div>
                 </div>
             </div>
