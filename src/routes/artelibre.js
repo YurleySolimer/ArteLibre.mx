@@ -16,6 +16,7 @@ router.get('/colecciones', (req, res) => {
   res.render('general/colecciones');
 });
 
+
 router.get('/obra/:id', async (req, res) => {
   const obra = await pool.query('SELECT * FROM obraCompleta WHERE id =?', [req.params.id]);
   const fotos = await pool.query('SELECT * FROM fotosObras WHERE obra_id=?', [req.params.id]);

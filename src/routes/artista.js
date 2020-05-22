@@ -81,6 +81,10 @@ router.post('/nueva-obra',  isLoggedIn, isArtista, async (req, res) => {
     res.redirect('a-obras');
 });
 
+router.get('nueva-coleccion', (req, res) => {
+  res.render('artist/nueva-coleccion');
+});
+
 router.get('/a-coleccion', isLoggedIn, isArtista, async(req, res) => {
   const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
   res.render('artist/coleccion', {nombre:nombre[0]});
