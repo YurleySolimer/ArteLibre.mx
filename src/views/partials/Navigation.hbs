@@ -27,12 +27,12 @@
                                     fill="#BDA008" fill-opacity="0.54" />
                             </svg>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: -60px;">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         {{#ifCond artista true}}
-                            {{> MenuArtist}}
+                            {{> MenuArtist }}
                         {{/ifCond}}
-                        {{#ifCond artista true}}
-                             {{> MenuClient}}
+                        {{#ifCond cliente true}}
+                             {{> MenuClient }}
                         {{/ifCond}}
                     </div>
                 </span>
@@ -87,11 +87,11 @@
                                     fill="#BDA008" fill-opacity="0.54" />
                             </svg>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: -60px;">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         {{#ifCond artista true}}
                             {{> MenuArtist}}
                         {{/ifCond}}
-                        {{#ifCond artista true}}
+                        {{#ifCond cliente true}}
                              {{> MenuClient}}
                         {{/ifCond}}                        
                     </div>

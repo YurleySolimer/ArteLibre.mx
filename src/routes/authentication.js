@@ -42,7 +42,7 @@ router.post('/iniciar-sesion', isNotLoggedIn, (req, res, next) => {
 
 router.get('/logout', isLoggedIn, (req,res) => {
 	req.logOut();
-	res.redirect('/signin');
+	res.redirect('/iniciar-sesion');
 });
 
 module.exports = router;
