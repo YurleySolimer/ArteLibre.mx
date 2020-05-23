@@ -102,7 +102,7 @@ router.post('/nueva-obra',  isLoggedIn, isArtista, async (req, res) => {
   res.redirect('obras');
 });
 
-router.get('nueva-coleccion', async (req, res) => {
+router.get('/nueva-coleccion', async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;

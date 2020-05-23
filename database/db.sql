@@ -13,7 +13,7 @@ CREATE TABLE users (
 	telefono VARCHAR(50),
     apellido VARCHAR(100) NOT NULL,
 	foto_nombre VARCHAR(100),
-	foto_ubicacion VARCHAR 
+	foto_ubicacion VARCHAR (200)
 
 );
 
@@ -65,10 +65,23 @@ CREATE TABLE obras (
     precio INT (50),
 	descripcion TEXT,
     artista_id INT (11) DEFAULT 0,
-	fecha_creacion timestamp DEFAULT current_timestamp;
+	fecha_creacion timestamp DEFAULT current_timestamp,
+	coleccion_id INT(11) DEFAULT 0,
 	CONSTRAINT fk_artista2 FOREIGN KEY  (artista_id) REFERENCES artistas(id)
 
 );
+
+CREATE TABLE colecciones (
+	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	nombreColeccion VARCHAR (250),
+	anio INT (11),
+	descripcion TEXT,
+	tecnica VARCHAR (250),
+	estilo VARCHAR (250),
+	ciudad VARCHAR (200),
+	pais VARCHAR (200)
+);
+
 
 CREATE TABLE fotosObras (
 	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
