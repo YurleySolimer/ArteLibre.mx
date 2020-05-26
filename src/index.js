@@ -85,6 +85,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bootstrapjs', express.static(path.join(__dirname , '/../node_modules/bootstrap/dist/js'))); // redirect bootstrap JS
 app.use('/jquery', express.static(path.join(__dirname , '/../node_modules/jquery/dist'))); // redirect JS jQuery
 app.use('/bootstrapcss', express.static(path.join(__dirname , '/../node_modules/bootstrap/dist/css'))); // redirect CSS bootstrap
+app.use('/fontawesome', express.static(path.join(__dirname , '/../node_modules/@fortawesome/fontawesome-free/css'))); // redirect CSS bootstrap
+app.use('/fontawesomejs', express.static(path.join(__dirname , '/../node_modules/@fortawesome/fontawesome-free/js'))); // redirect CSS bootstrap
 
 //Inicializar Servidor
 
