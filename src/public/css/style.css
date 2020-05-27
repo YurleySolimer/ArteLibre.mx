@@ -1005,6 +1005,7 @@ h3 {
     color: #BDA008;
     font-family: 'MontserratThin';
     transition: .5s ease;
+    font-weight: bold;
 }
 
 .coleccion-perfil-artista:hover {
