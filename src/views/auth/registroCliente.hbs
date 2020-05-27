@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="password" class="form-control m-0" placeholder="Contraseña"
-                                    name="contraseña" aria-label="Contraseña" aria-describedby="Contraseña" id="pwd"
+                                    name="password" aria-label="Contraseña" aria-describedby="Contraseña" id="pwd"
                                     minlength="8" required pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*"
                                     title="Debe contener al menos una mayúscula, una minúscula y un dígito">
                                 <div class="input-group-append">
@@ -114,7 +114,7 @@
 <script>
     $(document).ready(function () {
        //variables
-        let pass1 = $('[name=contraseña]');
+        let pass1 = $('[name=password]');
         let pass2 = $('[name=confirmarContraseña]');
         let confirmacion = "Perfecto, las contraseñas coinciden";
         let negacion = "No coinciden las contraseñas";

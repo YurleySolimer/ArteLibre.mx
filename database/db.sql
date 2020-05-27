@@ -48,7 +48,7 @@ CREATE VIEW usuarioArtista AS (
 		   u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion, u.id
 	FROM artistas a
 	JOIN users u 
-	WHERE u.id = a.user_id
+	ON u.id = a.user_id
 ); 
 
 CREATE TABLE obras (
