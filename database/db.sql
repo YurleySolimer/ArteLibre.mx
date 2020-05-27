@@ -125,3 +125,4 @@ CREATE TABLE ResetTokens (
   updatedAt datetime,
   used int(11) NOT NULL DEFAULT '0'
 );
+
