@@ -50,61 +50,61 @@
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="tel" class="form-control" id="telefono" aria-describedby="telefono"
-                                placeholder="Teléfono" name="telefono">
+                                placeholder="Teléfono" name="telefono" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="pais" aria-describedby="pais" placeholder="País"
-                                name="pais">
+                                name="pais" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="region" aria-describedby="region"
-                                placeholder="Región" name="region">
+                                placeholder="Región" name="region" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="povincia" aria-describedby="provincia"
-                                placeholder="Provincia" name="provincia">
+                                placeholder="Provincia" name="provincia" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="number" class="form-control" id="años" aria-describedby="años"
-                                placeholder="Años de actividad" name="años">
+                                placeholder="Años de actividad" name="años" required>
                         </div>
                     </div>
                     <div class="col-12 mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="direccion" aria-describedby="direccion"
-                                placeholder="Dirección" name="direccion">
+                                placeholder="Dirección" name="direccion" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="disciplina" aria-describedby="disciplina"
-                                placeholder="Disciplina principal" name="disciplina_principal">
+                                placeholder="Disciplina principal" name="disciplina_principal" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="disciplina2" aria-describedby="disciplina2"
-                                placeholder="Disciplina secundaria - Opcional" name="disciplina_sec">
+                                placeholder="Disciplina secundaria - Opcional" name="disciplina_sec" required>
                         </div>
                     </div>
                     <div class="col-12  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="estilo" aria-describedby="estilo"
-                                placeholder="Tu estilo en una frase" name="frase">
+                                placeholder="Tu estilo en una frase" name="frase" required>
                         </div>
                     </div>
                     <div class="col-12 mb-3">
                         <div class="form-group">
                             <textarea class="form-control" id="biografia" aria-describedby="biografia"
-                                placeholder="Biografía" name="briografia"></textarea>
+                                placeholder="Biografía" name="briografia" required></textarea>
                         </div>
                     </div>
                     <div class="border-bottom mb-5 col-12"></div>
@@ -112,7 +112,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="password" class="form-control m-0" placeholder="Contraseña"
-                                    name="contraseña" aria-label="Contraseña" aria-describedby="Contraseña" id="pwd"
+                                    name="password" aria-label="Contraseña" aria-describedby="Contraseña" id="pwd"
                                     minlength="8" required pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*"
                                     title="Debe contener al menos una mayúscula, una minúscula y un dígito">
                                 <div class="input-group-append">
@@ -149,7 +149,7 @@
 <script>
     $(document).ready(function () {
         //variables
-        let pass1 = $('[name=contraseña]');
+        let pass1 = $('[name=password]');
         let pass2 = $('[name=confirmarContraseña]');
         let confirmacion = "Perfecto, las contraseñas coinciden";
         let negacion = "No coinciden las contraseñas";
