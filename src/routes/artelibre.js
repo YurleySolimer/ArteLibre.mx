@@ -13,6 +13,9 @@ var nombre = {
   apellido : '',
 };
 var logueado = false;
+const Handlebars = require('handlebars');
+
+
 
 async function isArtist (req) {
   if (req.user) { 
@@ -47,10 +50,32 @@ async function isClient (req) {
 };
 
 
-router.get('/coleccion', async  (req, res) => {
+router.get('/coleccion/:id', async  (req, res) => {
+  const id = req.params.id;
   artista = await isArtist(req);
   cliente = await isClient(req);
-  res.render('general/coleccion', {artista, cliente, logueado, nombre:nombre[0]});
+  var obras = [];
+  const colecciones = await pool.query('SELECT * from coleccionArtista WHERE id =?', [id]);
+  if (colecciones.length > 0) {
+    obras = await pool.query('SELECT * FROM obraCompleta WHERE coleccion_id =?', [id]);
+  }
+
+  const obras2 = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
+
+  var myArray = [];
+  for(var i=0;i<3;i++){
+    var numeroAleatorio = Math.ceil(Math.random()*obras2.length);
+    var existe = false;
+    for (var j=0; j<myArray.length; j++) {
+      if (myArray[j] == obras[numeroAleatorio-1]) {
+          existe = true;
+      }
+    }
+    if (existe == false) {
+      myArray[i] = obras2[numeroAleatorio-1];
+    }
+  }  
+  res.render('general/coleccion', {colecciones, obras, myArray, artista, cliente, logueado, nombre:nombre[0]});
 });
 
 router.get('/registro',  async (req, res) => {
@@ -62,7 +87,9 @@ router.get('/registro',  async (req, res) => {
 router.get('/colecciones', async (req, res) => {
   artista = await isArtist(req);
   cliente = await isClient(req);
-  res.render('general/colecciones' , {artista, cliente, logueado, nombre:nombre[0]});
+  const colecciones = await pool.query('SELECT * from coleccionArtista');
+
+  res.render('general/colecciones' , {colecciones, artista,  cliente, logueado, nombre:nombre[0]});
 });
 
 router.get('/obra/:id', async (req, res) => {

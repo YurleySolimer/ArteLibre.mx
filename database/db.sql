@@ -62,6 +62,7 @@ CREATE TABLE obras (
 	alto INT (20),
 	subastar ENUM ('Si', 'No') DEFAULT 'No',
 	copias ENUM ('Si', 'No') DEFAULT 'No',
+	en_venta ENUM ('Si', 'No') DEFAULT 'No',
     precio INT (50),
 	descripcion TEXT,
     artista_id INT (11) DEFAULT 0,
@@ -79,9 +80,12 @@ CREATE TABLE colecciones (
 	tecnica VARCHAR (250),
 	estilo VARCHAR (250),
 	ciudad VARCHAR (200),
-	pais VARCHAR (200)
-);
+	pais VARCHAR (200),
+	artista_id INT (11),
+	fotoNombre VARCHAR (300) DEFAULT 'false',
+	CONSTRAINT fk_artista3 FOREIGN KEY  (artista_id) REFERENCES artistas(id)
 
+);
 
 CREATE TABLE fotosObras (
 	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -93,7 +97,7 @@ CREATE TABLE fotosObras (
 );
 
 CREATE VIEW obraCompleta AS
-SELECT o.id, o.nombreObra, o.coleccion, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
+SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
 		a.pais, a.region, a.provincia, a.años_experiencia, a.direccion, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
 		u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion,
 		f.fotoNombre, f.fotoUbicacion, f.principal
@@ -103,3 +107,21 @@ JOIN artistas a ON a.id = o.artista_id
 JOIN users u ON u.id = a.user_id
 ;
 
+CREATE VIEW coleccionArtista AS
+SELECT c.id, c.nombreColeccion, c.anio, c.estilo, c.tecnica, c.pais, c.ciudad, c.descripcion, c.fotoNombre,
+       u.nombre, u.apellido, a.id as artistaId
+FROM colecciones c
+JOIN artistas a ON a.id = c.artista_id
+JOIN users u ON u.id = a.user_id
+;
+
+
+CREATE TABLE ResetTokens (
+  id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  email varchar(255) DEFAULT NULL,
+  token varchar(255) DEFAULT NULL,
+  expiration datetime DEFAULT NULL,
+  createdAt datetime,
+  updatedAt datetime,
+  used int(11) NOT NULL DEFAULT '0'
+);

@@ -4,7 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const pool = require('../database');
 const helpers = require('./helpers');
 
-passport.use('user.signin', new LocalStrategy({
+passport.use('signinUser', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true
@@ -89,7 +89,13 @@ passport.use('signupArtista', new LocalStrategy({
   console.log('Hola');
  
   const {email, apellido, telefono} = req.body;
-  const {path, originalname} = req.files[0];
+  var path = '';
+  var originalname = '';
+
+  if(req.files[0]) {
+    path = req.files[0].path,
+    originalname = req.files[0].originalname
+  }
   const noUser2 = await pool.query('SELECT * FROM users WHERE email =?', [email]);
 
   if (noUser2.length>0) {

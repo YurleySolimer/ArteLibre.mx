@@ -9,7 +9,7 @@
     <form action="/nueva-obra" method="POST" enctype="multipart/form-data" class="form" >
         <div class="row mb-3">
             <div class="col-12">
-                <input type="file" name="image" accept="image/gif, image/png, image/jpeg" multiple id="gallery-photo-add" style="display: none;">
+                <input type="file" name="image" accept="image/gif, image/png, image/jpeg" multiple required id="gallery-photo-add" style="display: none;">
                 <label for="gallery-photo-add" class="label-agregar-fotos">Agregar fotos</label>
                 <br>
                 <small class="text-muted p-0 m-0">Para eliminar una foto haz click sobre ella</small>
@@ -24,28 +24,31 @@
                 <div class="form-group">
                     <label for="Nombre">Nombre</label>
                     <input type="text" class="form-control" id="Nombre" name="nombre" aria-describedby="NombreHelp"
-                        placeholder="Escribe aquí el Nombre de la obra">
+                        placeholder="Escribe aquí el Nombre de la obra" required>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="precio">Precio (MXN)</label>
                     <input type="number" class="form-control" id="precio" name="precio" aria-describedby="Precio"
-                        placeholder="Precio de la obra">
+                        placeholder="Precio de la obra" required>
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-group">
                     <label for="descripción">Descripción</label>
                     <textarea class="form-control" id="descripcion" name="descripcion" aria-describedby="descripcion"
-                                placeholder="Describe la obra"></textarea>
+                                placeholder="Describe la obra" required></textarea>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="Coleccion">Colección</label>
-                    <select type="text" class="form-control" id="Colección" name="coleccion" aria-describedby="colecciónHelp">
-                        <option value="none">Ninguna</option>
+                    <select type="text" class="form-control" id="Colección" name="coleccion" aria-describedby="colecciónHelp" required>
+                        <option value=0>Ninguna</option>
+                        {{#each colecciones}}
+                        <option value="{{id}}">{{nombreColeccion}}</option>
+                        {{/each}}
                     </select>
                 </div>
             </div>
@@ -53,28 +56,28 @@
                 <div class="form-group">
                     <label for="lcreacion">Lugar de Creación</label>
                     <input type="text" class="form-control" id="lcreacion" name="lcreacion" aria-describedby="creacionHelp"
-                        placeholder="Dónde se creó la obra">
+                        placeholder="Dónde se creó la obra" required>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="fcreacion">Fecha de Creación</label>
-                    <input type="text" class="form-control" id="fcreacion" name="fcreacion" aria-describedby="creacionHelp"
-                        placeholder="Dónde se creó la obra">
+                    <input type="date" class="form-control" id="fcreacion" name="fcreacion" aria-describedby="creacionHelp"
+                        placeholder="Cuándo se creó la obra" min="1990-01-01" required>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="tecnica">Técnica</label>
                     <input type="text" class="form-control" id="tecnica" name="tecnica" aria-describedby="tecnicaHelp"
-                        placeholder="Técnica que se utilizó">
+                        placeholder="Técnica que se utilizó" required>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="estilo">Estilo</label>
                     <input type="text" class="form-control" id="estilo" name="estilo" aria-describedby="estilo"
-                        placeholder="Estilo de la obra">
+                        placeholder="Estilo de la obra" required>
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -83,14 +86,14 @@
                         <div class="form-group">
                             <label for="ancho">Ancho</label>
                             <input type="text" class="form-control" id="ancho" name="ancho" aria-describedby="anchoHelp"
-                                placeholder="100cm">
+                                placeholder="100cm" required>
                         </div>
                     </div>
                     <div class="col-6 p-0 m-0">
                         <div class="form-group ml-3">
                             <label for="alto">Alto</label>
                             <input type="text" class="form-control" id="alto" name="alto" aria-describedby="altoHelp"
-                                placeholder="100cm">
+                                placeholder="100cm" required>
                         </div>
                     </div>
                 </div>

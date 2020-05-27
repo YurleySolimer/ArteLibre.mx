@@ -57,16 +57,27 @@ router.get('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
-  res.render('artist/nueva-obra', {nombre:nombre[0],  artista, logueado});
+  const artistainfo = ('SELECT id FROM artistas WHERE user_id =?', [req.user.id]);
+  console.log(artistainfo)
+  const colecciones = await pool.query('SELECT nombreColeccion, id from colecciones WHERE artista_id =?', [artistainfo[0]]);
+  res.render('artist/nueva-obra', {nombre:nombre[0], colecciones,  artista, logueado});
 });
 
 router.post('/nueva-obra',  isLoggedIn, isArtista, async (req, res) => {
     //GUARDANDO DATOS DE LA OBRA//
-    const {nombre, coleccion, creacion, tecnica, estilo, precio, ancho, alto, subasta, copias, descripcion} = req.body;
+    const {nombre, coleccion, creacion, tecnica, estilo, precio, ancho, alto, subasta, copias, descripcion,lcreacion, fcreacion} = req.body;
+    var nombreColeccion = 'N/A';
+  
+    if (coleccion > 0) { 
+      nombreColeccion = await pool.query('SELECT nombreColeccion FROM colecciones WHERE id =?', [coleccion]);
+      nombreColeccion = nombreColeccion[0];
+    }
     const newObra = {
       nombreObra : nombre,
-      coleccion,
-      lugarCreacion: creacion,
+      coleccion : nombre,
+      coleccion_id : coleccion,
+      lugarCreacion: lcreacion,
+      fecha_creacion : fcreacion,
       tecnica,
       estilo,
       ancho,
@@ -87,7 +98,7 @@ router.post('/nueva-obra',  isLoggedIn, isArtista, async (req, res) => {
       principal = true;
     }
     const path = fotos[i].path;
-    const originalname = fotos[i].originalname;
+    var originalname = fotos[i].originalname;
     const newFoto = {
       fotoNombre: originalname,
       fotoUbicacion: path,
@@ -99,14 +110,35 @@ router.post('/nueva-obra',  isLoggedIn, isArtista, async (req, res) => {
   }
   artista = true;
   logueado = true; 
+  const fotoColeccion = {
+    fotoNombre: originalname
+  }
+  await pool.query('UPDATE colecciones set? WHERE id=?', [fotoColeccion, coleccion])
   res.redirect('obras');
 });
 
-router.get('/nueva-coleccion', async (req, res) => {
+router.get('/nueva-coleccion', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
   res.render('artist/nueva-coleccion',  {nombre:nombre[0], artista, logueado});
+});
+
+router.post('/nueva-coleccion', async (req, res) => {
+  const {nombre, año, descripcion, estilo, tecnica, ubicacionPais, ubicacionCiudad} = req.body;
+  const artista_id = await pool.query('SELECT id FROM artistas WHERE user_id =?', [req.user.id]);
+  const newColeccion = {
+    nombreColeccion: nombre,
+    anio : año,
+    descripcion,
+    estilo,
+    tecnica,
+    pais : ubicacionPais,
+    ciudad : ubicacionCiudad,
+    artista_id : artista_id[0].id
+  }
+  await pool.query('INSERT into colecciones SET ?', [newColeccion]);
+  res.redirect('colecciones');
 });
 
 

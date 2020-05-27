@@ -1,0 +1,23 @@
+{{> Navigation }}
+{{> messages }}
+
+
+<div class="main">
+    <div class="section bg-light login-arriba"></div>
+    <div class="position-absolute card-inicio-sesion">
+        <div class="card p-4">
+            <div class="card-body">
+                <h4 class="card-title mb-5">Ingresa el código enviado a tu correo</h4>
+                <form action="/validacion-de-codigo" method="POST">
+                    <input type="text" name="token" id="" placeholder="Codigo de Validación" class="form-control my-2">
+                    <div class="text-right">
+                        <input type="submit" value="Continuar" class="btn btn-compra my-2">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="section login-abajo"></div>
+</div>
+
