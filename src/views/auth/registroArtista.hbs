@@ -6,7 +6,7 @@
     <div class="m-5">
         <h1 class="gold">Nuevo Artista</h1>
     </div>
-    <form action="registro-artista"  class="form" method="POST" enctype="multipart/form-data">
+    <form action="registro-artista" class="form" method="POST" enctype="multipart/form-data">
         <div class="row mb-5">
             <div class="col-12 col-lg-3 text-center">
                 <label for="file-input">
@@ -55,8 +55,8 @@
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="pais" aria-describedby="pais"
-                                placeholder="País" name="pais">
+                            <input type="text" class="form-control" id="pais" aria-describedby="pais" placeholder="País"
+                                name="pais">
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
@@ -110,18 +110,33 @@
                     <div class="border-bottom mb-5 col-12"></div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
-                            <input type="password" class="form-control" id="contraseña" aria-describedby="contraseña"
-                                placeholder="Contraseña" name="password" required>
+                            <div class="input-group">
+                                <input type="password" class="form-control m-0" placeholder="Contraseña"
+                                    name="contraseña" aria-label="Contraseña" aria-describedby="Contraseña" id="pwd"
+                                    minlength="8" required pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*"
+                                    title="Debe contener al menos una mayúscula, una minúscula y un dígito">
+                                <div class="input-group-append">
+                                    <div class="input-group-text" id="eye" style="cursor: pointer;"><i
+                                            class="fa fa-eye"></i></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
-                            <input type="password" class="form-control" id="confirmarContraseña" aria-describedby="confirmar contraseña"
-                                placeholder="Confirmar contraseña">
+                            <div class="input-group">
+                                <input type="password" class="form-control m-0" name="confirmarContraseña"
+                                    placeholder="Confirmar Contraseña" aria-label="Contraseña" minlength="8"
+                                    aria-describedby="Contraseña" id="pwdDos">
+                                <div class="input-group-append">
+                                    <div class="input-group-text" id="eyeDos" style="cursor: pointer;"><i
+                                            class="fa fa-eye"></i></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 text-right">
-                        <button class="btn-compra badge" type="submit" name='tipo' value="artista">Registrarme</button>
+                        <button class="btn-compra badge" type="submit" name='tipo' id="buttonSubmit" value="artista">Registrarme</button>
                     </div>
                 </div>
             </div>
@@ -133,6 +148,77 @@
 
 <script>
     $(document).ready(function () {
+        //variables
+        let pass1 = $('[name=contraseña]');
+        let pass2 = $('[name=confirmarContraseña]');
+        let confirmacion = "Perfecto, las contraseñas coinciden";
+        let negacion = "No coinciden las contraseñas";
+        let insuficiente = "La contraseña no es segura";
+        //configuro la expresión regular para evaluar
+        let reg = /(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*/
+        let vacio = "La contraseña no puede estar vacía";
+        //llamo al boton de envio para poder activarlo
+        let bsubmit = document.getElementById('buttonSubmit');
+        //span con instrucciones
+        let span1 = $('<small style="position: absolute;top: 40px;" class="text-muted">La contraseña debe tener al menos una mayuscula, una minuscula, un número y no ser menor de 8 caracteres.</small>').insertAfter(pass1);
+        //oculto por defecto el elemento span
+        let span = $('<small style="position: absolute;top: 40px;"></small>').insertAfter(pass2);
+        span.hide();
+        //función que comprueba las dos contraseñas
+        function coincidePassword() {
+            let valor1 = pass1.val();
+            let valor2 = pass2.val();
+            //muestro el span
+            span.show().removeClass();
+            //condiciones dentro de la función
+            if (valor1 != valor2) {
+                span.text(negacion).addClass('text-danger');
+            }
+            if (valor1.length == 0 || valor1 == "") {
+                span.text(vacio).addClass('text-danger');
+            }
+            if (reg.test(valor1) != true || reg.test(valor2) || valor1 < 8) {
+                span.text(insuficiente).addClass("text-danger")
+            }
+            if (valor1.length >= 8 && reg.test(valor1) == true && reg.test(valor2) == true && valor1 == valor2) {
+                span.text(confirmacion).removeClass("text-danger").addClass('text-success');
+                bsubmit.removeAttribute('disabled')
+            }
+        }
+        //ejecuto la función al soltar la tecla
+        pass1.keyup(function () {
+            coincidePassword();
+        });
+        pass2.keyup(function () {
+            coincidePassword();
+        });
+
+        let pwd = document.getElementById('pwd');
+        let eye = document.getElementById('eye');
+
+        eye.addEventListener('click', togglePass);
+
+        function togglePass() {
+
+            console.log('it works')
+
+            eye.classList.toggle('activePass');
+
+            (pwd.type == 'password') ? pwd.type = 'text' : pwd.type = 'password';
+        }
+
+        let pwdDos = document.getElementById('pwdDos');
+        let eyeDos = document.getElementById('eyeDos');
+
+        eyeDos.addEventListener('click', togglePassDos);
+
+        function togglePassDos() {
+
+            eyeDos.classList.toggle('activePass');
+
+            (pwdDos.type == 'password') ? pwdDos.type = 'text' : pwdDos.type = 'password';
+        }
+
         $(function () {
             $('#file-input').change(function (e) {
                 addImage(e);
