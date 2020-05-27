@@ -46,7 +46,7 @@ p {
 
 h3 {
     font-family: 'MontserratThin', sans-serif;
-    font-weight: thin;
+    font-weight: bold;
 }
 
 .gold {
@@ -911,8 +911,8 @@ h3 {
 
 .imagen-artistas {
     overflow: hidden;
-    height: 200px;
-    width: 140px;
+    height: 350px;
+    width: 280px;
     margin: auto;
 }
 
@@ -923,8 +923,8 @@ h3 {
 }
 
 .nombre-artistas {
-    font-size: .9rem;
-    margin: 0;
+    font-size: 1.1em;
+    margin: 6px;
 }
 
 .nombre-artistas a {
