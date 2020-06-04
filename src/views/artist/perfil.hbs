@@ -1,5 +1,5 @@
 {{> Navigation }}
-<section class="container mt-5">
+<section class="container inicial">
     <div class="row">
         <div class="col-12">
             <div class="text-center">
@@ -10,57 +10,54 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-1"></div>
-        <div class="col-12 col-md-1"></div>
-        <div class="col-12 col-md-10">
+        <div class="col-12">
             <div class="row text-center mt-3">
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-4 d-flex justify-content-center">
                     <div class="text-left my-2 p-2">
                         <div>
                             <p class="artista-caracteristica"><strong>Categorías</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">{{user.disciplina_principal}} 
-                                {{user.disciplina_sec}}</p>
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;">{{user.disciplina_principal}} - {{user.disciplina_sec}}</p>
                         </div>
                         <div>
                             <p class="artista-caracteristica"><strong>Ubicación</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">{{user.pais}}, {{user.region}}</p>
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;">{{user.pais}}, {{user.region}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-4 d-flex justify-content-center">
                     <div class="text-left my-2 p-2">
                         <div>
                             <p class="artista-caracteristica"><strong>Frase</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">{{user.frase}}</p>
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;">{{user.frase}}</p>
                         </div>
                         <div>
                             <p class="artista-caracteristica"><strong>Años de Experiencia</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">{{user.años_experiencia}} años </p>
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;">{{user.años_experiencia}} años </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-4 d-flex justify-content-center">
                     <div class="text-left my-2 p-2">
                         <div>
                             <p class="artista-caracteristica"><strong>Última obra</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';"><a href="#"
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;"><a href="#"
                                     class="coleccion-perfil-artista gold">{{ultima_obra.nombreObra}}</a></p>
                         </div>
                         <div>
                             <p class="artista-caracteristica"><strong>Estilo</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin';">{{ultima_obra.estilo}}</p>
+                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;">{{ultima_obra.estilo}}</p>
                         </div>
                     </div>
                 </div>

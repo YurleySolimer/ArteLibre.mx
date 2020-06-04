@@ -1,0 +1,119 @@
+<!-- Modal Recomendado-->
+<div class="modal fade" id="recomendarObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px;" role="document">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <div class="modal-title">Recomendar Obra</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que quieres poner esta obra como <strong>Recomendada?</strong>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary">Cerrar</button>
+                <button class="btn btn-compra">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Destacar-->
+<div class="modal fade" id="destacarObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px;" role="document">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <div class="modal-title">Destacar Obra</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="tituloRecomendado" class="input-label">Título</label>
+                            <input type="text" name="tituloRecomendado" id="tituloRecomendado" required
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        ¿Estás seguro de que quieres poner esta obra como<strong> Destacada?</strong>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal"
+                        aria-label="close">Cerrar</button>
+                    <button class="btn btn-compra" type="submit">Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Borrar-->
+<div class="modal fade" id="borrarObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px;" role="document">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <div class="modal-title">Borrar Obra</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que quieres <strong>Eliminar</strong> esta obra?
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-sm">Cerrar</button>
+                <button class="btn btn-danger btn-sm">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Ocultar-->
+<div class="modal fade" id="ocultarObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px;" role="document">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <div class="modal-title">Ocultar Obra</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que quieres <strong>Ocultar</strong> esta obra?
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-sm">Cerrar</button>
+                <button class="btn btn-danger btn-sm">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Fin del Modal --}}
+
+
+<div style="flex-direction: row-reverse;" class="d-flex space-between">
+    <button data-toggle="modal" data-target="#destacarObra" style="width: 40px; height: 40px;"
+        class="p-2 m-3 rounded-circle btn btn-lg btn-compra">
+        <i class="fas fa-star"></i>
+    </button>
+    <button data-toggle="modal" data-target="#recomendarObra" style="width: 40px; height: 40px;"
+        class="p-2 m-3 rounded-circle btn btn-lg btn-compra">
+        <i class="fas fa-home"></i>
+    </button>
+    <button data-toggle="modal" data-target="#borrarObra" style="width: 40px; height: 40px;"
+        class="p-2 m-3 rounded-circle btn btn-danger">
+        <i class="fas fa-trash"></i>
+    </button>
+    <button data-toggle="modal" data-target="#ocultarObra" style="width: 40px; height: 40px;"
+        class="p-2 m-3 rounded-circle btn btn-secondary">
+        <i class="fas fa-eye"></i>
+    </button>
+</div>

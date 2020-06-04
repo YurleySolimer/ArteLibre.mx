@@ -7,12 +7,16 @@
                     <div class="carousel-wrapper-inner">
                         <div class="owl-carousel owl-theme">
                             {{#each fotos}}
-                            <img class="item" src="/./uploads/{{fotoNombre}}" style="max-width: 500px;" alt="{{fotoNombre}}">
+                            <img class="item" src="/./uploads/{{fotoNombre}}" style="max-width: 500px;"
+                                alt="{{fotoNombre}}">
                             {{/each}}
                         </div>
                     </div>
                 </div>
+            <!-- Aquí se agregan las opciones según el tipo de usuario -->
+            {{> OptionsObraArtist }}
             </div>
+
         </div>
         <div class="col-12 col-lg-6 col-md-6">
             <h1 class="gold mb-4 mt-5">{{obra.nombreObra}}</h1>
@@ -27,7 +31,7 @@
                 <p>
                     {{obra.descripcion}}
                 </p>
-                
+
             </div>
             <div class="my-3">
                 <h2 class="elemento-obra obra-dato">Dimensiones</h2>
@@ -73,7 +77,7 @@
                     </div>
                 </div>
                 {{/each}}
-                               
+
             </div>
         </div>
     </div>

@@ -74,6 +74,7 @@ app.use((req, res, next) => {
 
 app.use(require('./routes/artelibre.js'));
 app.use(require('./routes/artista.js'));
+app.use(require('./routes/admin.js'));
 app.use(require('./routes/clientes.js'));
 app.use(require('./routes/index.js'));
 app.use(require('./routes/authentication.js'));
