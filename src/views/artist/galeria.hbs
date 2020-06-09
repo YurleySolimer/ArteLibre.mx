@@ -1,0 +1,172 @@
+<div style="height: 100vh;">
+    <div class="h-50">
+        <div class="container position-fixed m-auto">
+            <div class="section">
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        asdf
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <div class="carousel-wrapper-inner">
+                            <div class="owl-carousel owl-theme carousel-index carrusel-coleccion">
+                                <div class="item-coleccion-carrusel">
+                                    <a href="#">
+                                        <figure class="figure">
+                                            <img class="item figure-img img-fluid" src="/images/retrato2.jpg"
+                                                alt="Pintura">
+                                            <figcaption class="figure-caption gold">120.000 MXN</figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                                <div class="item-coleccion-carrusel">
+                                    <a href="#">
+                                        <figure class="figure">
+                                            <img class="item figure-img img-fluid" src="/images/retrato3.jpg"
+                                                alt="Pintura">
+                                            <figcaption class="figure-caption gold">120.000 MXN</figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                                <div class="item-coleccion-carrusel">
+                                    <a href="#">
+                                        <figure class="figure">
+                                            <img class="item figure-img img-fluid" src="/images/retrato4.png"
+                                                alt="Pintura">
+                                            <figcaption class="figure-caption gold">120.000 MXN</figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                                <div class="item-coleccion-carrusel">
+                                    <a href="#">
+                                        <figure class="figure">
+                                            <img class="item figure-img img-fluid" src="/images/retrato5.jpg"
+                                                alt="Pintura">
+                                            <figcaption class="figure-caption gold">120.000 MXN</figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="h-50 galeria-dos">
+        <div class="galeria-dos-inner">
+
+            <div class="galeria-item">
+                <img src="/images/statue1.png" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue2.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue3.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue4.png" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue5.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue6.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue7.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato3.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato4.png" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato5.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato6.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue4.png" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue5.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue6.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue7.jpg" alt="">
+            </div>
+        </div>
+        <div class="galeria-dos-inner">
+
+            <div class="galeria-item">
+                <img src="/images/retrato3.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato4.png" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato5.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato6.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue4.png" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue5.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue6.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/statue7.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato3.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato4.png" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato5.jpg" alt="">
+            </div>
+            <div class="galeria-item">
+                <img src="/images/retrato6.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        var divAWidth = $('#carousal-wrapper-outer').css('width');
+        $('#carousal-wrapper-inner').css('width', divAWidth);
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            autoplay: 3000,
+            items: 3,
+            nav: true,
+            center: true,
+            margin: 25,
+            responsive: {
+                500: {
+                    items: 1
+                },
+                800: {
+                    items: 3
+                }
+            }
+
+        });
+        $('.owl-item').addClass('carousel-coleccion');
+        $('.owl-next').html('<span aria-label="Next"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" class="svg-inline--fa fa-angle-right fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg></span>')
+        $('.owl-prev').html('<span aria-label="Previous"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" class="svg-inline--fa fa-angle-left fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg></span>')
+    });
+</script>

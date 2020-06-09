@@ -136,6 +136,21 @@ router.get('/obras',  async (req, res) => {
   res.render('general/obras', {obras, artista, cliente, logueado, nombre:nombre[0]});
 });
 
+router.get('/subasta', (req, res) => {
+  res.render('general/subasta');
+});
+
+router.get('/subastas', (req, res) => {
+  res.render('general/subastas');
+});
+
+router.get('/evento', (req, res) => {
+  res.render('general/evento');
+});
+
+router.get('/eventos', (req, res) => {
+  res.render('general/eventos');
+});
 
 
 module.exports = router;

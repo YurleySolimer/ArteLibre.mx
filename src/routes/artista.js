@@ -30,6 +30,10 @@ router.get('/mis-ventas', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/mis-ventas', {nombre:nombre[0], artista, logueado});
 });
 
+router.get('/artista/galeria', async (req, res) => {
+  res.render('artist/galeria');
+});
+
 router.get('/artist-perfil', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   const user = await pool.query('SELECT * FROM usuarioArtista WHERE id =?', [req.user.id]);

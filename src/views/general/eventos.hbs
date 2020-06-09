@@ -1,0 +1,96 @@
+{{> Navigation }}
+.
+<section class="container inicial">
+    <div class="timeline-container-eventos" id="timeline-1-eventos">
+        <div class="timeline-header-eventos text-left">
+            <h2 class="timeline-header__title-eventos">Eventos</h2>
+            <h3 class="timeline-header__subtitle-eventos">Proximos eventos de nuestros artistas</h3>
+        </div>
+        <div class="timeline-eventos">
+            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{{> Footer }}
+
+
+<script>
+    (function ($) {
+        $.fn.timeline = function () {
+            var selectors = {
+                id: $(this),
+                item: $(this).find(".timeline-item-eventos"),
+                activeClass: "timeline-item-eventos--active"
+            };
+            selectors.item.eq(0).addClass(selectors.activeClass);
+            selectors.id.css(
+                "background-color",
+                "white"
+            );
+            var itemLength = selectors.item.length;
+            $(window).scroll(function () {
+                var max, min;
+                var pos = $(this).scrollTop();
+                selectors.item.each(function (i) {
+                    console.log($(window).width())
+                    min = $(this).offset().top  - 700;
+                    max = $(this).height() + $(this).offset().top;
+                    var that = $(this);
+                    if (i == itemLength - 1 && pos > min + $(this).height() / 1.5) {
+                        selectors.item.removeClass(selectors.activeClass);
+                        selectors.id.css(
+                            "background-color",
+                            "white"
+                        );
+                        selectors.item.last().addClass(selectors.activeClass);
+                    } else if (pos <= max - 40 && pos >= min) {
+                        selectors.id.css(
+                            "background-color",
+                            "white"
+                        );
+                        selectors.item.removeClass(selectors.activeClass);
+                        $(this).addClass(selectors.activeClass);
+                    }
+                });
+            });
+        };
+    })(jQuery);
+    $("#timeline-1-eventos").timeline();
+</script>

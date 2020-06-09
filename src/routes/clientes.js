@@ -30,6 +30,10 @@ router.get('/compras', isLoggedIn, isCliente, async (req, res) => {
   res.render('client/compras', {nombre:nombre[0], cliente, logueado});
 });
 
+router.get('/perfil/cliente', (req, res) => {
+  res.render('client/perfil');
+});
+
 router.get('/mis-pedidos', isLoggedIn, isCliente, async (req, res) => {
   const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
   cliente = true;
