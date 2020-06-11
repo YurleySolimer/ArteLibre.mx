@@ -9,19 +9,16 @@
             <div class="col-12">
                 <div class="carousel-wrapper-inner">
                     <div class="owl-carousel owl-theme carousel-index carrusel-coleccion">
-                        <a href="/obra/{{id}}">
-                            <div class="item-coleccion-carrusel">
-                                {{#each obras}}
-                                <figure class="figure">
-                                    <img class="item figure-img img-fluid" src="./uploads/{{fotoNombre}}"
-                                        style="max-height: 280px; height: 100%; width: auto;" alt="Pintura">
+                        <div class="item-coleccion-carrusel" onclick="window.open('/obra/{{id}}', '_self')" ;>
+                            {{#each obras}}
+                            <figure class="figure">
+                                <img class="item .item-carrusel-subasta figure-img img-fluid"
+                                    src="./uploads/{{fotoNombre}}" alt="Pintura">
 
-                                    <figcaption class="figure-caption gold">{{precio}} MXN</figcaption>
-                                </figure>
-                                {{/each}}
-
-                            </div>
-                        </a>
+                                <figcaption class="figure-caption text-center gold">{{precio}} MXN</figcaption>
+                            </figure>
+                            {{/each}}
+                        </div>
                     </div>
                 </div>
 
@@ -35,7 +32,7 @@
                                 <h2 style="font-size: 1em;">Técnica</h2>
                                 <h3 style="font-size: 1em;" class="text-muted">{{colecciones.tecnica}}</h3>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="col-12">
@@ -82,7 +79,8 @@
 
                                 <div class="card">
                                     <a href="">
-                                        <img src="./uploads/{{fotoNombre}}" class="obra-recomendada card-img-top" alt="">
+                                        <img src="./uploads/{{fotoNombre}}" class="obra-recomendada card-img-top"
+                                            alt="">
                                     </a>
                                     <div class="card-body text-left">
                                         <h5 class="card-title">{{fotoNombre}}</h5>

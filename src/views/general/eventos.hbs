@@ -1,49 +1,64 @@
 {{> Navigation }}
 .
-<section class="container inicial">
+<section class="container">
     <div class="timeline-container-eventos" id="timeline-1-eventos">
         <div class="timeline-header-eventos text-left">
             <h2 class="timeline-header__title-eventos">Eventos</h2>
             <h3 class="timeline-header__subtitle-eventos">Proximos eventos de nuestros artistas</h3>
         </div>
-        <div class="timeline-eventos">
-            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
-                data-text-3="Museo del Prado" data-text-4="9:00am">
-                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
-                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
-                </div>
-            </div>
-            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
-                data-text-3="Museo del Prado" data-text-4="9:00am">
-                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
-                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
-                </div>
-            </div>
-            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
-                data-text-3="Museo del Prado" data-text-4="9:00am">
-                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
-                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
-                </div>
-            </div>
-            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
-                data-text-3="Museo del Prado" data-text-4="9:00am">
-                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
-                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
-                </div>
-            </div>
-            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
-                data-text-3="Museo del Prado" data-text-4="9:00am">
-                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
-                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
-                </div>
-            </div>
-            <div class="timeline-item-eventos" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
-                data-text-3="Museo del Prado" data-text-4="9:00am">
-                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
-                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
-                </div>
-            </div>
 
+        <!-- Explicación -->
+        <div class="timeline-eventos">
+        <!-- 
+            En estos elementos ".timeline-item-eventos" tienes 5 datos:
+            Primero dónde va el link, justo en el evento "onclick", se modifica en donde dice 'evento', esto funciona como un href, puedes ubicarlo como /evento/id,
+            Segundo atributo 'data-text-1' que define el nombre de la galería
+            Tercero atributo 'data-text-2' que define el título del evento
+            Cuarto atributo 'data-text-3' que define la ubicación del evento
+            Quinto atributo 'data-text-4' que define la hora del evento
+         -->
+            <div class="timeline-item-eventos" onclick="window.open('evento', '_self');" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" onclick="window.open('evento', '_self');" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" onclick="window.open('evento', '_self');" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" onclick="window.open('evento', '_self');" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" onclick="window.open('evento', '_self');" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" onclick="window.open('evento', '_self');" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
+            <div class="timeline-item-eventos" onclick="window.open('evento', '_self');" data-text-1="Galería Brunoise" data-text-2="Repensando a Van Gogh"
+                data-text-3="Museo del Prado" data-text-4="9:00am">
+                <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="images/vangogh1.jpg" />
+                        <h2 class="badge badge-pill timeline__content-title-eventos">10 - 03 - 2020</h2>
+                </div>
+            </div>
         </div>
     </div>
 </section>

@@ -270,7 +270,7 @@ h3 {
     .footer-social {
         margin: 30px;
     }
-     
+
     .footer-two,
     .footer-one {
         padding: 0 30px;
@@ -1442,6 +1442,9 @@ h3 {
 .item-coleccion-carrusel {
     width: 100%;
     margin: 55px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .owl-carousel .carousel-coleccion.active.center {
@@ -1824,22 +1827,22 @@ html[xmlns] .slider-wrap {
     Mis Ventas/Mis Pedidos
 -----------------------------------*/
 
-.mis-ventas .table thead tr th, 
-.mis-pedidos .table thead tr th 
-{
+.mis-ventas .table thead tr th,
+.mis-pedidos .table thead tr th {
     text-transform: uppercase;
     color: #FFFFFF;
     font-weight: lighter;
 }
 
 .mis-ventas .table tbody tr:hover,
-.mis-pedidos .table tbody tr:hover 
-{
+.mis-pedidos .table tbody tr:hover {
     background-color: #BDA00811;
 }
 
-.mis-ventas .table tbody td h2, .mis-ventas .table tbody td h3,
-.mis-pedidos .table tbody td h2, .mis-pedidos .table tbody td h3 {
+.mis-ventas .table tbody td h2,
+.mis-ventas .table tbody td h3,
+.mis-pedidos .table tbody td h2,
+.mis-pedidos .table tbody td h3 {
     font-size: 1em;
 }
 
@@ -1956,7 +1959,7 @@ html[xmlns] .slider-wrap {
 }
 
 @media screen and (min-width: 990px) {
-    .modal-dialog{
+    .modal-dialog {
         max-width: 80%;
     }
 }
@@ -1997,7 +2000,7 @@ html[xmlns] .slider-wrap {
 .evento-foto-dos {
     box-shadow: -5px 5px 15px #757575ab;
     left: 100px;
-    top: 50px; 
+    top: 50px;
     z-index: 3;
 }
 
@@ -2071,10 +2074,11 @@ html[xmlns] .slider-wrap {
     display: flex;
     position: relative;
     transform: translateY(-80px);
+    cursor: pointer;
 }
 
 .timeline-item-eventos:before {
-    content: attr(data-text-1) "\A" attr(data-text-2) "\A" attr(data-text-3) "\A" attr(data-text-4);
+    content: attr(data-text-1) "\A"attr(data-text-2) "\A"attr(data-text-3) "\A"attr(data-text-4);
     letter-spacing: 3px;
     white-space: pre;
     width: 100%;
@@ -2202,7 +2206,71 @@ html[xmlns] .slider-wrap {
 }
 
 /*-----------------------------------
-    Galeria
+    Subastas
+-----------------------------------*/
+
+.item-carrusel-subasta {
+    max-height: 280px;
+    width: auto !important;
+}
+
+.owl-nav .owl-next span, .owl-nav .owl-prev span {
+    font-size: 2.5em;
+}
+
+@media screen and (max-width: 998px) {
+    p.subastas-info {
+        column-count: 1;
+        column-gap: 30px;
+        text-align: justify;
+        margin: 45px 0;
+    }
+}
+
+@media screen and (min-width: 998px) {
+    p.subastas-info {
+        column-count: 3;
+        column-gap: 30px;
+        text-align: justify;
+        margin: 45px 0;
+    }
+}
+
+/*-----------------------------------
+    Subasta
+-----------------------------------*/
+.pujas {
+    border-bottom: 2px solid var(--gold);
+}
+.puja {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+span.puja-nombre {
+    font-weight: bold;
+    color: #333;
+}
+
+span.puja-monto {
+    font-weight: bold;
+    color: #6f6f6f;
+    letter-spacing: 1px;
+}
+
+@media screen and (min-width: 998px) {
+    .pujas .row .col-12:nth-child(2) {
+        border-right: 1px solid var(--gold);
+    }
+    .pujas .row .col-12:nth-child(3) {
+        border-left: 1px solid var(--gold);
+    }
+}
+
+
+/*-----------------------------------
+Galeria
 -----------------------------------*/
 
 .galeria-dos {
@@ -2222,5 +2290,3 @@ html[xmlns] .slider-wrap {
 .galeria-item img {
     height: 25vh;
 }
-
-
