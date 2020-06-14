@@ -34,6 +34,10 @@ router.get('/artista/galeria', async (req, res) => {
   res.render('artist/galeria');
 });
 
+router.get('/nuevo-evento', (req, res) => {
+  res.render('artist/nuevo-evento');
+});
+
 router.get('/artist-perfil', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   const user = await pool.query('SELECT * FROM usuarioArtista WHERE id =?', [req.user.id]);

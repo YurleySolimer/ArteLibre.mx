@@ -1,0 +1,243 @@
+{{> Navigation }}
+<section class="container inicial">
+    <div class="content">
+        <div class="row m-5 p-5">
+            <div class="col-12">
+                <h2 class="gold">Nuevo Evento</h2>
+            </div>
+        </div>
+        <form action="">
+            <div class="row">
+                <div class="col-12">
+                    <h4>Fotos del evento</h4>
+                    <p class="text-muted">
+                        Agregar las fotos que aparecerán para tu evento, la primera será la portada en el calendario y
+                        las
+                        demás aparecerán en la página del evento.
+                    </p>
+                </div>
+                <div class="col-12 col-lg-4 my-4">
+                    <div class="foto-evento">
+                        <label for="file-input-1">
+                            <div class="foto-container-evento">
+                                <div class="inner-container-evento">
+                                    <div class="m-auto">
+                                        <span class="m-auto">
+                                            <i class="fas fa-plus fa-5x"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <input name="image" id="file-input-1" type="file" style="display: none;" />
+                                <img id="imgSalida1" src="" class="img-evento-registro img-fluid" />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 my-4">
+                    <div class="foto-evento">
+                        <label for="file-input-2">
+                            <div class="foto-container-evento">
+                                <div class="inner-container-evento">
+                                    <div class="m-auto">
+                                        <span class="m-auto">
+                                            <i class="fas fa-plus fa-5x"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <input name="image" id="file-input-2" type="file" style="display: none;" />
+                                <img id="imgSalida2" src="" class="img-evento-registro img-fluid" />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 my-4">
+                    <div class="foto-evento">
+                        <label for="file-input-3">
+                            <div class="foto-container-evento">
+                                <div class="inner-container-evento">
+                                    <div class="m-auto">
+                                        <span class="m-auto">
+                                            <i class="fas fa-plus fa-5x"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <input name="image" id="file-input-3" type="file" style="display: none;" />
+                                <img id="imgSalida3" src="" class="img-evento-registro img-fluid" />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 my-4 text-right">
+                    <small class="text-muted">Puedes cambiar las imagenes volviendo a hacer click en ellas.</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="Nombre"
+                            placeholder="Nombre del evento" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="number" class="form-control" id="titulo" name="titulo" aria-describedby="titulo"
+                            placeholder="Título del evento" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="organizadores">Organizadores</label>
+                        <input type="number" class="form-control" id="organizadores" name="organizadores"
+                            aria-describedby="organizadores" placeholder="Organizadores del evento" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="hora">Hora de Apertura</label>
+                        <input type="time" class="form-control" id="hora" name="hora" aria-describedby="hora" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="inicio">Fecha de Inicio</label>
+                        <input type="date" class="form-control" id="inicio" name="inicio" aria-describedby="inicio"
+                            required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="fin">Fecha de Fin</label>
+                        <input type="date" class="form-control" id="fin" name="fin" aria-describedby="fin" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="local">Local</label>
+                        <input type="text" placeholder="Local dónde se realizará" class="form-control" id="local"
+                            name="local" aria-describedby="local" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección"
+                            aria-describedby="direccion" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <input type="text" placeholder="Ciudad" class="form-control" id="ciudad" name="ciudad"
+                            aria-describedby="local" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="pais">País</label>
+                        <input type="text" class="form-control" id="pais" name="pais" placeholder="País"
+                            aria-describedby="pais" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="piezas">Número de piezas</label>
+                        <input type="number" placeholder="# de Piezas" class="form-control" id="piezas" name="piezas"
+                            aria-describedby="piezas" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="estilo">Estilo</label>
+                        <input type="text" class="form-control" id="estilo" name="estilo" placeholder="Estilo"
+                            aria-describedby="estilo" required>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="descripción">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion"
+                            aria-describedby="descripcion" placeholder="Describe el evento" required></textarea>
+                    </div>
+                </div>
+                <div class="col-12 text-right">
+                    <input type="submit" value="Guardar" class="guardar-obra">
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{{> Footer }}
+
+<script>
+
+    $(document).ready(function () {
+        $(function () {
+            $('#file-input-1').change(function (e) {
+                addImage(e);
+            });
+
+            function addImage(e) {
+                var file = e.target.files[0],
+                    imageType = /image.*/;
+
+                if (!file.type.match(imageType))
+                    return;
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var result = e.target.result;
+                    $('#imgSalida1').attr("src", result);
+                }
+
+                reader.readAsDataURL(file);
+            }
+        });
+        $(function () {
+            $('#file-input-2').change(function (e) {
+                addImage(e);
+            });
+
+            function addImage(e) {
+                var file = e.target.files[0],
+                    imageType = /image.*/;
+
+                if (!file.type.match(imageType))
+                    return;
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var result = e.target.result;
+                    $('#imgSalida2').attr("src", result);
+                }
+
+                reader.readAsDataURL(file);
+            }
+        });
+        $(function () {
+            $('#file-input-3').change(function (e) {
+                addImage(e);
+            });
+
+            function addImage(e) {
+                var file = e.target.files[0],
+                    imageType = /image.*/;
+
+                if (!file.type.match(imageType))
+                    return;
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var result = e.target.result;
+                    $('#imgSalida3').attr("src", result);
+                }
+
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>

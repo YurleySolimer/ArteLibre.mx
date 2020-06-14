@@ -2206,6 +2206,52 @@ html[xmlns] .slider-wrap {
 }
 
 /*-----------------------------------
+    Nuevo Evento
+-----------------------------------*/
+
+    .foto-container-evento {
+        max-width: 280px;
+        height: auto;
+        min-height: 100px;
+        overflow: hidden;
+        background-color: #fff;
+        transition: .5s ease;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: var(--gold);
+        z-index: 1;
+    }
+
+    .foto-container-evento:hover {
+        color: var(--third-gold);
+        cursor: pointer;
+    }
+
+    .img-evento-registro {
+        z-index: 2;
+        position: relative;
+    }
+
+    .foto-evento {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .inner-container-evento {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .form-control {
+        font-size: 1em;
+    }
+    
+/*-----------------------------------
     Subastas
 -----------------------------------*/
 
