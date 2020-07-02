@@ -17,14 +17,35 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
   });
 
 
-router.get('/admin-artistas', (req, res) => {
+router.get('/admin/artistas', (req, res) => {
     res.render('admin/artistas');
 });
-router.get('/admin-obras', (req, res) => {
+router.get('/admin/obras', (req, res) => {
     res.render('admin/obras');
 });
-router.get('/admin-colecciones', (req, res) => {
+router.get('/admin/colecciones', (req, res) => {
     res.render('admin/colecciones');
+});
+router.get('/admin/dashboard', (req, res) => {
+    res.render('admin/dashboard');
+});
+router.get('/admin/tasas', (req, res) => {
+    res.render('admin/tasas');
+});
+router.get('/admin/rendimiento', (req, res) => {
+    res.render('admin/rendimiento');
+});
+router.get('/admin/subastas', (req, res) => {
+    res.render('admin/subastas');
+});
+router.get('/admin/clientes', (req, res) => {
+    res.render('admin/clientes');
+});
+router.get('/admin/eventos', (req, res) => {
+    res.render('admin/eventos');
+});
+router.get('/admin/ventas', (req, res) => {
+    res.render('admin/ventas');
 });
 
 module.exports = router;

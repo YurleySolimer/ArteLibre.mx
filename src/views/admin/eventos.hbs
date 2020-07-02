@@ -1,91 +1,10 @@
-<!-- Modal -->
-<div class="modal fade" id="datos-obra-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <div class="">
-                            <img class="img-fluid" src="images/vangogh1.jpg" alt="girasoles">
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-12 col-lg-6">
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Nombre de la obra</h5>
-                                    <h4 class="">Los Girasoles #13</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Artista</h5>
-                                    <h4 class="">Vincent Van Gogh</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">ID</h5>
-                                    <h4 class="">AHSDKJHALKSD13413KJK</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Ubicación de la obra</h5>
-                                    <h4 class="">La Haya, Holanda</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Codigo de Seguimiento</h5>
-                                    <input type="text" name="" id="" class="form-control">
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Fecha de Arribo</h5>
-                                    <input type="date" name="" id="" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Nombre del comprador</h5>
-                                    <h4 class="">Luis Fernando Méndez</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Ubicación del Comprador</h5>
-                                    <h4 class="">San Fermin, Tunez</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Currier</h5>
-                                    <h4 class="">DHL</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Dirección</h5>
-                                    <h4 class="">Edif 5, 450C Ruta Central</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Precio</h5>
-                                    <h4 class="">175.000 MXN</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5>Registrar Envio</h5>
-                                    <button type="submit" class="btn badge-recibido">Enviar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 {{> Navigation }}
-
 {{> adminSidebar }}
 
 <div class="container">
     <div class="content">
         <div class="m-5">
-            <h2>Obras</h2>
+            <h2>Colecciones</h2>
         </div>
         <div class="section ventas">
             <div class="w-100 text-left mx-auto mb-3 d-inline">
@@ -97,13 +16,12 @@
                     <thead style="background-color: #bda00899;">
                         <tr>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Ubicación</th>
                             <th scope="col">Artista</th>
-                            <th scope="col">Estado</th>
+                            <th scope="col">Ubicación</th>
+                            <th scope="col">Piezas</th>
                             <th scope="col">ID</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Cantidad</th>
+                            <th scope="col">Valor promedio</th>
+                            <th scope="col">Rendimiento</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -111,254 +29,257 @@
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Musas</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
+                            <td>12</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
+                        </tr>
+                        <tr class="ml-5">
+                            <!-- Enlace a la Obra, vista como el cliente -->
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                                    <h2 style="font-weight: bold;">Musas</h2>
+                                </button></td>
+                            <!-- Enlace a la colección de la obra -->
+                            <td>Lilah Steel</td>
+                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
+                            <td>12</td>
+                            <!-- Estilo y Precio definidos durante la creación de la obra -->
+                            <td class="text-muted">1AB3B14JK1</td>
+                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
+                            <td class="gold">75.900 MXN</td>
+                            <td class="gold">149.000 MXN</td>
+                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
+                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Contactar</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -368,5 +289,4 @@
 </div>
 
 {{> sidebarEnd }}
-
 {{> Footer }}

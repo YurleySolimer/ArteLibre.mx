@@ -2,13 +2,16 @@
     <div class="container contenedor-padre-nav">
         <div class="navigation-container d-flex w-100 justify-content-between">
             <div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                <button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
                     aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
             <div>
-                <a href="#" class="navbar-brand logo-responsive"><img src="images/logos/logotipo_n.png" style="max-width: 300px;" alt="ArteLibre"></a>
+                <a href="#" class="navbar-brand logo-responsive"><img src="/images/logos/logotipo_n.png" style="max-width: 150px;" alt="ArteLibre"></a>
             </div>
             <div class="outter-inicio-sesion">
                 {{!--   En caso de no haber iniciado sesión 
@@ -37,12 +40,14 @@
                     </div>
                 </span>
                {{/ifCond}}
+
+               {{> MenuAdminResponsive }}
             </div>
         </div>
         <div class="row w-100">
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <div class="col-3 text-center">
-                    <a class="navbar-brand logo-no-responsive" href="/"><img src="images/logos/logotipo_n.png" style="max-width: 200px;" alt="ArteLibre"></a>
+                    <a class="navbar-brand logo-no-responsive" href="/"><img src="/images/logos/logotipo_n.png" style="max-width: 200px;" alt="ArteLibre"></a>
                 </div>
                 <div class="col-6">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-around">

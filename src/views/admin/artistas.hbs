@@ -79,17 +79,32 @@
 
 
 {{> Navigation }}
-<div class="container inicial">
-    <div class="content">
-        <div class="m-5">
-            <h2>Artistas</h2>
-        </div>
-        <div class="section ventas">
-            <div class="w-100 text-left mx-auto mb-3 d-inline">
-                <input type="text" class="d-inline mr-5 w-25 form-control badge-pill filter-form form-control-sm" placeholder="Buscar" id="inlineFormCustomSelectPref">
-                <button type="submit" class="d-inline badge badge-pill btn-compra"><i class="fas fa-search"></i></button>
+
+{{> adminSidebar }}
+
+<div class="container-fluid">
+    <div class="content-admin">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="m-5">
+                    <h2>Artistas</h2>
+                </div>
             </div>
-            <div class="tabla mis-ventas">
+            <div class="col-lg-6 col-12">
+                    <div class="row filtro-lista h-100">
+                        <div class="col-10">
+                            <input type="text" class="d-inline form-control badge-pill filter-form form-control-sm"
+                                placeholder="Buscar" id="inlineFormCustomSelectPref">
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="d-inline badge badge-pill btn-compra"><i
+                                    class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="section listas">
+            <div class="tabla mis-ventas table-responsive">
                 <table class="table table-borderless my-5">
                     <thead style="background-color: #bda00899;">
                         <tr>
@@ -382,4 +397,7 @@
         </div>
     </div>
 </div>
+
+{{> sidebarEnd }}
+
 {{> Footer }}

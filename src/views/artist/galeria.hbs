@@ -1,172 +1,274 @@
-<div style="height: 100vh;">
-    <div class="h-50">
-        <div class="container position-fixed m-auto">
+<div class="galeria-container">
+    <div class="galeria-uno">
+        <div class="galeria-uno-inner">
             <div class="section">
+                <div class="volver-galeria">
+                    <button class="btn btn-compra badge badge-pill" style="padding: 10px 20px; font-size: 1.3em;">
+                        Volver
+                    </button>
+                </div>
                 <div class="row">
-                    <div class="col-md-4 col-12">
-                        asdf
-                    </div>
-                    <div class="col-md-8 col-12">
-                        <div class="carousel-wrapper-inner">
-                            <div class="owl-carousel owl-theme carousel-index carrusel-coleccion">
-                                <div class="item-coleccion-carrusel">
-                                    <a href="#">
-                                        <figure class="figure">
-                                            <img class="item figure-img img-fluid" src="/images/retrato2.jpg"
-                                                alt="Pintura">
-                                            <figcaption class="figure-caption gold">120.000 MXN</figcaption>
-                                        </figure>
-                                    </a>
+                    <div id="left-column" class="col-lg-6 col-12 active">
+                        <div class="galeria-artista">
+                            <div class="nombre-artista-galeria">
+                                <h1>Lilah Steel</h1>
+                            </div>
+                            <div class="artista-imagen-galeria">
+                                <img src="/images/artista4.jpg" alt="">
+                            </div>
+                            <div class="row artista-galeria-filtro mt-3">
+                                <div class="col">
+                                    <span class="titulo-filtro-galeria">Filtrar por tipo:</span>
                                 </div>
-                                <div class="item-coleccion-carrusel">
-                                    <a href="#">
-                                        <figure class="figure">
-                                            <img class="item figure-img img-fluid" src="/images/retrato3.jpg"
-                                                alt="Pintura">
-                                            <figcaption class="figure-caption gold">120.000 MXN</figcaption>
-                                        </figure>
-                                    </a>
+                                <div class="col">
+                                    <div class="">
+                                        <span class="galeria-filtro">Escultura</span><br>
+                                        <span class="galeria-filtro">Fotografía</span><br>
+                                        <span class="galeria-filtro">Todo</span>
+                                    </div>
                                 </div>
-                                <div class="item-coleccion-carrusel">
-                                    <a href="#">
-                                        <figure class="figure">
-                                            <img class="item figure-img img-fluid" src="/images/retrato4.png"
-                                                alt="Pintura">
-                                            <figcaption class="figure-caption gold">120.000 MXN</figcaption>
-                                        </figure>
-                                    </a>
-                                </div>
-                                <div class="item-coleccion-carrusel">
-                                    <a href="#">
-                                        <figure class="figure">
-                                            <img class="item figure-img img-fluid" src="/images/retrato5.jpg"
-                                                alt="Pintura">
-                                            <figcaption class="figure-caption gold">120.000 MXN</figcaption>
-                                        </figure>
-                                    </a>
+                            </div>
+                            <div class="despliegue-galeria-artista">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="my-2 mx-auto">
+                                        <div id="sort-galeria-down" class="gold">
+                                            <i class="fas fa-sort-up fa-3x"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div id="right-column" class="col-lg-6 col-12">
+                            <div class="despliegue-galeria-artista">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="my-2 mx-auto">
+                                        <div id="sort-galeria-up" class="gold">
+                                            <i class="fas fa-sort-down fa-3x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="galeria-seleccion-container">
+                                    <img src="" alt="" id="galeria-seleccion-img" data-enlace="/obra/{{id}}">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row galeria-info">
+                                    <div class="col text-center">
+                                        <span class="galeria-titulo">Técnica</span> <br>
+                                        <span id="galeria-seleccion-tecnica"></span>
+                                    </div>
+                                    <div class="col">
+                                        <span class="galeria-titulo">Tipo</span> <br>
+                                        <span id="galeria-seleccion-tipo"></span>
+                                    </div>
+                                    <div class="col">
+                                        <span class="galeria-titulo">Nombre</span> <br>
+                                        <span id="galeria-seleccion-nombre"></span>
+                                    </div>
+                                    <div class="col">
+                                        <span class="galeria-titulo">Año</span> <br>
+                                        <span id="galeria-seleccion-year"></span>
+                                    </div>
+                                    <div class="col">
+                                        <a id="galeria-seleccion-enlace" class="btn btn-compra badge badge-pill"
+                                            href="#">
+                                            <span class="galeria-enlace">Ver más</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <div class="h-50 galeria-dos">
+    <div id="galeria-dos" class="galeria-dos">
         <div class="galeria-dos-inner">
-
-            <div class="galeria-item">
-                <img src="/images/statue1.png" alt="">
-            </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 2" data-tipo="Tipo 2" data-tecnica="Tecnica 2"
+                data-year="Año 2" data-src="/images/statue2.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue2.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 3" data-tipo="Tipo 3" data-tecnica="Tecnica 3"
+                data-year="Año 3" data-src="/images/statue3.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue3.jpg" alt="">
             </div>
-            <div class="galeria-item">
-                <img src="/images/statue4.png" alt="">
-            </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 5" data-tipo="Tipo 5" data-tecnica="Tecnica 5"
+                data-year="Año 5" data-src="/images/statue5.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue5.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 6" data-tipo="Tipo 6" data-tecnica="Tecnica 6"
+                data-year="Año 6" data-src="/images/statue6.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue6.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 7" data-tipo="Tipo 7" data-tecnica="Tecnica 7"
+                data-year="Año 7" data-src="/images/statue7.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue7.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 8" data-tipo="Tipo 8" data-tecnica="Tecnica 8"
+                data-year="Año 8" data-src="/images/retrato3.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/retrato3.jpg" alt="">
             </div>
-            <div class="galeria-item">
-                <img src="/images/retrato4.png" alt="">
-            </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 10" data-tipo="Tipo 10" data-tecnica="Tecnica 10"
+                data-year="Año 10" data-src="/images/retrato5.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/retrato5.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 11" data-tipo="Tipo 11" data-tecnica="Tecnica 11"
+                data-year="Año 11" data-src="/images/retrato6.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/retrato6.jpg" alt="">
             </div>
-            <div class="galeria-item">
-                <img src="/images/statue4.png" alt="">
-            </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 13" data-tipo="Tipo 13" data-tecnica="Tecnica 13"
+                data-year="Año 13" data-src="/images/statue5.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue5.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 14" data-tipo="Tipo 14" data-tecnica="Tecnica 14"
+                data-year="Año 14" data-src="/images/statue6.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue6.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 15" data-tipo="Tipo 15" data-tecnica="Tecnica 15"
+                data-year="Año 15" data-src="/images/statue7.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue7.jpg" alt="">
             </div>
         </div>
         <div class="galeria-dos-inner">
-
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 16" data-tipo="Tipo 16" data-tecnica="Tecnica 16"
+                data-year="Año 16" data-src="/images/retrato3.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/retrato3.jpg" alt="">
             </div>
-            <div class="galeria-item">
-                <img src="/images/retrato4.png" alt="">
-            </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 18" data-tipo="Tipo 18" data-tecnica="Tecnica 18"
+                data-year="Año 18" data-src="/images/retrato5.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/retrato5.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 19" data-tipo="Tipo 19" data-tecnica="Tecnica 19"
+                data-year="Año 19" data-src="/images/retrato6.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/retrato6.jpg" alt="">
             </div>
-            <div class="galeria-item">
-                <img src="/images/statue4.png" alt="">
-            </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 21" data-tipo="Tipo 21" data-tecnica="Tecnica 21"
+                data-year="Año 21" data-src="/images/statue5.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue5.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 22" data-tipo="Tipo 22" data-tecnica="Tecnica 22"
+                data-year="Año 22" data-src="/images/statue6.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue6.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 23" data-tipo="Tipo 23" data-tecnica="Tecnica 23"
+                data-year="Año 23" data-src="/images/statue7.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/statue7.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 24" data-tipo="Tipo 24" data-tecnica="Tecnica 24"
+                data-year="Año 24" data-src="/images/retrato3.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/retrato3.jpg" alt="">
             </div>
-            <div class="galeria-item">
-                <img src="/images/retrato4.png" alt="">
-            </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 26" data-tipo="Tipo 26" data-tecnica="Tecnica 26"
+                data-year="Año 26" data-src="/images/retrato5.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/retrato5.jpg" alt="">
             </div>
-            <div class="galeria-item">
+            <div class="galeria-item" data-nombre="Retrato 27" data-tipo="Tipo 27" data-tecnica="Tecnica 27"
+                data-year="Año 27" data-src="/images/retrato6.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
                 <img src="/images/retrato6.jpg" alt="">
+            </div>
+            <div class="galeria-item" data-nombre="Retrato 28" data-tipo="Tipo 28" data-tecnica="Tecnica 28"
+                data-year="Año 28" data-src="/images/statue7.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
+                <img src="/images/statue7.jpg" alt="">
+            </div>
+            <div class="galeria-item" data-nombre="Retrato 28" data-tipo="Tipo 28" data-tecnica="Tecnica 28"
+                data-year="Año 29" data-src="/images/retrato3.jpg" data-enlace="/obra/{{id}}">
+                <div class="galeria-item-efecto">
+                    <div class="galeria-item-blur"></div>
+                    <i class="fas fa-eye fa-5x item-ojo"></i>
+                </div>
+                <img src="/images/retrato3.jpg" alt="">
             </div>
         </div>
     </div>
 </div>
-
-
-<script>
-    $(document).ready(function () {
-        var divAWidth = $('#carousal-wrapper-outer').css('width');
-        $('#carousal-wrapper-inner').css('width', divAWidth);
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            autoplay: 3000,
-            items: 3,
-            nav: true,
-            center: true,
-            margin: 25,
-            responsive: {
-                500: {
-                    items: 1
-                },
-                800: {
-                    items: 3
-                }
-            }
-
-        });
-        $('.owl-item').addClass('carousel-coleccion');
-        $('.owl-next').html('<span aria-label="Next"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" class="svg-inline--fa fa-angle-right fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg></span>')
-        $('.owl-prev').html('<span aria-label="Previous"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" class="svg-inline--fa fa-angle-left fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg></span>')
-    });
-</script>
+<script src="/js/galeria.js"></script>
