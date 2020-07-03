@@ -1,5 +1,5 @@
-<!-- Modal -->
-<div class="modal fade" id="datos-obra-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<!-- Modal Artista -->
+<div class="modal fade" id="datos-artista-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -12,67 +12,146 @@
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="">
-                            <img class="img-fluid" src="images/vangogh1.jpg" alt="girasoles">
+                            <img class="img-fluid" src="/images/artista4.jpg" alt="girasoles">
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="row">
                             <div class="col-12 col-lg-6">
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Nombre de la obra</h5>
-                                    <h4 class="">Los Girasoles #13</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Artista</h5>
-                                    <h4 class="">Vincent Van Gogh</h4>
+                                    <h4 class="gold">Lilah Steel</h4>
                                 </div>
                                 <div class="py-2 my-3">
                                     <h5 class="text-muted">ID</h5>
-                                    <h4 class="">AHSDKJHALKSD13413KJK</h4>
+                                    <h4 class="">AHSDKJHAD134</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Ubicación de la obra</h5>
+                                    <h5 class="text-muted">Tipo</h5>
+                                    <h4 class="">Fotografía</h4>
+                                    <h4 class="">Esculturaa</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Estilo</h5>
+                                    <h4 class="">Bustos</h4>
+                                    <h4 class="">Retratos</h4>
+                                </div>
+                                <div class="py-2 my-3">
+                                    <h5 class="text-muted">Ubicación</h5>
                                     <h4 class="">La Haya, Holanda</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Codigo de Seguimiento</h5>
-                                    <input type="text" name="" id="" class="form-control">
+                                    <h5 class="text-muted">Última obra</h5>
+                                    <h4 class="">El Grito</h4>
                                 </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Fecha de Arribo</h5>
-                                    <input type="date" name="" id="" class="form-control">
-                                </div>
+                                
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Nombre del comprador</h5>
-                                    <h4 class="">Luis Fernando Méndez</h4>
+                                    <h5 class="text-muted">Eventos</h5>
+                                    <h4 class="">12</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Ubicación del Comprador</h5>
-                                    <h4 class="">San Fermin, Tunez</h4>
+                                    <h5 class="text-muted">Colecciones</h5>
+                                    <h4 class="">4</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Currier</h5>
-                                    <h4 class="">DHL</h4>
+                                    <h5 class="text-muted">Obras</h5>
+                                    <h4 class="">43</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Dirección</h5>
-                                    <h4 class="">Edif 5, 450C Ruta Central</h4>
+                                    <h5 class="text-muted">Última venta</h5>
+                                    <h4 class="">04 - 25 - 2020</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Precio</h5>
+                                    <h5 class="text-muted">Rendimiento</h5>
                                     <h4 class="">175.000 MXN</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5>Registrar Envio</h5>
-                                    <button type="submit" class="btn badge-recibido">Enviar</button>
+                                    <a href="mailto:#" class="btn badge-recibido">Contactar</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Borrar -->
+<div class="modal fade" id="borrar-artista" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Borrar Artista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar a este artista? Esta acción es permanente, se perderan todos los
+                    datos que corresponden a este artista.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Eliminar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Suspender -->
+<div class="modal fade" id="suspender-artista" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Suspender Artista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas suspender a este artista? Esta acción durará un tiempo indefinido hasta
+                    que decidas revocar la suspensión.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-accion-admin">Suspender</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Destacar -->
+<div class="modal fade" id="destacar-artista" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Destacar Artista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas destacar a este artista? Esta acción lo llevará a mostrarse en la
+                        página de inicio.</p>
+                    <div class="form-group">
+                        <label for="text-descripcion">Escriba la información que acompañará la sección de "Artista
+                            Destacado" en el inicio:</label>
+                        <textarea name="text-descripcion" class="form-control" id="text-descripcion" cols="30"
+                            rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-accion-admin">Destacar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -91,16 +170,16 @@
                 </div>
             </div>
             <div class="col-lg-6 col-12">
-                    <div class="row filtro-lista h-100">
-                        <div class="col-10">
-                            <input type="text" class="d-inline form-control badge-pill filter-form form-control-sm"
-                                placeholder="Buscar" id="inlineFormCustomSelectPref">
-                        </div>
-                        <div class="col-2">
-                            <button type="submit" class="d-inline badge badge-pill btn-compra"><i
-                                    class="fas fa-search"></i></button>
-                        </div>
+                <div class="row filtro-lista h-100">
+                    <div class="col-10">
+                        <input type="text" class="d-inline form-control badge-pill filter-form form-control-sm"
+                            placeholder="Buscar" id="inlineFormCustomSelectPref">
                     </div>
+                    <div class="col-2">
+                        <button type="submit" class="d-inline badge badge-pill btn-compra"><i
+                                class="fas fa-search"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="section listas">
@@ -110,8 +189,8 @@
                         <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Ubicación</th>
-                            <th scope="col">Disciplina 1</th>
-                            <th scope="col">Disciplina 2</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Estilo</th>
                             <th scope="col">ID</th>
                             <th scope="col"># de Obras</th>
                             <th scope="col">Rendimiento</th>
@@ -121,7 +200,7 @@
                     <tbody>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                            <td><button data-toggle="modal" data-target="#datos-artista-modal" class="titulo-mis-obras">
                                     <h2 style="font-weight: bold;">Lilah Steel</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
@@ -134,11 +213,21 @@
                             <td class="gold">35</td>
                             <td class="gold">149.000 MXN</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
+                            <td>
+                                <div class="opciones-admin-list">
+                                    <button data-toggle="modal" data-target="#borrar-artista" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
+                                    <button data-toggle="modal" data-target="#suspender-artista" class="suspender"><i
+                                            class="fas fa-exclamation-triangle"></i></button>
+                                    <button data-toggle="modal" data-target="#destacar-artista" class="destacar"><i
+                                            class="far fa-star"></i></button>
+                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                            <td><button data-toggle="modal" data-target="#datos-artista-modal" class="titulo-mis-obras">
                                     <h2 style="font-weight: bold;">Lilah Steel</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
@@ -151,11 +240,21 @@
                             <td class="gold">35</td>
                             <td class="gold">149.000 MXN</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
+                            <td>
+                                <div class="opciones-admin-list">
+                                    <button data-toggle="modal" data-target="#borrar-artista" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
+                                    <button data-toggle="modal" data-target="#suspender-artista" class="suspender"><i
+                                            class="fas fa-exclamation-triangle"></i></button>
+                                    <button data-toggle="modal" data-target="#destacar-artista" class="destacar"><i
+                                            class="far fa-star"></i></button>
+                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                            <td><button data-toggle="modal" data-target="#datos-artista-modal" class="titulo-mis-obras">
                                     <h2 style="font-weight: bold;">Lilah Steel</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
@@ -168,11 +267,21 @@
                             <td class="gold">35</td>
                             <td class="gold">149.000 MXN</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
+                            <td>
+                                <div class="opciones-admin-list">
+                                    <button data-toggle="modal" data-target="#borrar-artista" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
+                                    <button data-toggle="modal" data-target="#suspender-artista" class="suspender"><i
+                                            class="fas fa-exclamation-triangle"></i></button>
+                                    <button data-toggle="modal" data-target="#destacar-artista" class="destacar"><i
+                                            class="far fa-star"></i></button>
+                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                            <td><button data-toggle="modal" data-target="#datos-artista-modal" class="titulo-mis-obras">
                                     <h2 style="font-weight: bold;">Lilah Steel</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
@@ -185,11 +294,21 @@
                             <td class="gold">35</td>
                             <td class="gold">149.000 MXN</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
+                            <td>
+                                <div class="opciones-admin-list">
+                                    <button data-toggle="modal" data-target="#borrar-artista" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
+                                    <button data-toggle="modal" data-target="#suspender-artista" class="suspender"><i
+                                            class="fas fa-exclamation-triangle"></i></button>
+                                    <button data-toggle="modal" data-target="#destacar-artista" class="destacar"><i
+                                            class="far fa-star"></i></button>
+                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                            <td><button data-toggle="modal" data-target="#datos-artista-modal" class="titulo-mis-obras">
                                     <h2 style="font-weight: bold;">Lilah Steel</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
@@ -202,11 +321,21 @@
                             <td class="gold">35</td>
                             <td class="gold">149.000 MXN</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
+                            <td>
+                                <div class="opciones-admin-list">
+                                    <button data-toggle="modal" data-target="#borrar-artista" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
+                                    <button data-toggle="modal" data-target="#suspender-artista" class="suspender"><i
+                                            class="fas fa-exclamation-triangle"></i></button>
+                                    <button data-toggle="modal" data-target="#destacar-artista" class="destacar"><i
+                                            class="far fa-star"></i></button>
+                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                            <td><button data-toggle="modal" data-target="#datos-artista-modal" class="titulo-mis-obras">
                                     <h2 style="font-weight: bold;">Lilah Steel</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
@@ -219,11 +348,21 @@
                             <td class="gold">35</td>
                             <td class="gold">149.000 MXN</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
+                            <td>
+                                <div class="opciones-admin-list">
+                                    <button data-toggle="modal" data-target="#borrar-artista" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
+                                    <button data-toggle="modal" data-target="#suspender-artista" class="suspender"><i
+                                            class="fas fa-exclamation-triangle"></i></button>
+                                    <button data-toggle="modal" data-target="#destacar-artista" class="destacar"><i
+                                            class="far fa-star"></i></button>
+                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
+                            <td><button data-toggle="modal" data-target="#datos-artista-modal" class="titulo-mis-obras">
                                     <h2 style="font-weight: bold;">Lilah Steel</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
@@ -236,160 +375,17 @@
                             <td class="gold">35</td>
                             <td class="gold">149.000 MXN</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Lilah Steel</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Pitura</td>
-                            <td>Escultura</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">35</td>
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Lilah Steel</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Pitura</td>
-                            <td>Escultura</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">35</td>
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Lilah Steel</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Pitura</td>
-                            <td>Escultura</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">35</td>
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Lilah Steel</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Pitura</td>
-                            <td>Escultura</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">35</td>
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Lilah Steel</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Pitura</td>
-                            <td>Escultura</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">35</td>
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Lilah Steel</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Pitura</td>
-                            <td>Escultura</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">35</td>
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Lilah Steel</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Pitura</td>
-                            <td>Escultura</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">35</td>
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Lilah Steel</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Pitura</td>
-                            <td>Escultura</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">35</td>
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Lilah Steel</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Pitura</td>
-                            <td>Escultura</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">35</td>
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Borrar/Sancionar/Contactar</a></td>
+                            <td>
+                                <div class="opciones-admin-list">
+                                    <button data-toggle="modal" data-target="#borrar-artista" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
+                                    <button data-toggle="modal" data-target="#suspender-artista" class="suspender"><i
+                                            class="fas fa-exclamation-triangle"></i></button>
+                                    <button data-toggle="modal" data-target="#destacar-artista" class="destacar"><i
+                                            class="far fa-star"></i></button>
+                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

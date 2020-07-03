@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- Modal Obra -->
 <div class="modal fade" id="datos-obra-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="">
-                            <img class="img-fluid" src="images/vangogh1.jpg" alt="girasoles">
+                            <img class="img-fluid" src="/images/vangogh1.jpg" alt="girasoles">
                         </div>
                     </div>
                     <div class="col-lg-7">
@@ -35,12 +35,8 @@
                                     <h4 class="">La Haya, Holanda</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Codigo de Seguimiento</h5>
-                                    <input type="text" name="" id="" class="form-control">
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Fecha de Arribo</h5>
-                                    <input type="date" name="" id="" class="form-control">
+                                    <h5 class="text-muted">Estado</h5>
+                                    <h4 class="">Vendida</h4>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
@@ -64,10 +60,6 @@
                                     <h5 class="text-muted">Precio</h5>
                                     <h4 class="">175.000 MXN</h4>
                                 </div>
-                                <div class="py-2 my-3">
-                                    <h5>Registrar Envio</h5>
-                                    <button type="submit" class="btn badge-recibido">Enviar</button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -77,21 +69,134 @@
     </div>
 </div>
 
+<!-- Modal Borrar -->
+<div class="modal fade" id="borrar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Borrar obra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar esta obra? Esta acción es permanente, se perderan todos los
+                    datos que corresponden a esta obra.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Eliminar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Ocultar -->
+<div class="modal fade" id="ocultar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ocultar Obra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas ocultar a este obra? Esta acción durará un tiempo indefinido hasta
+                    que decidas cambiar el estado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-accion-admin">Ocultar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Destacar -->
+<div class="modal fade" id="destacar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Destacar Obra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas destacar a este obra? Esta acción lo llevará a mostrarse en la
+                        página de inicio. Pueden existir hasta 10 obras destacadas</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-accion-admin">Destacar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Recomendar -->
+<div class="modal fade" id="recomendar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Recomendar obra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas recomendar esta obra? Esta acción lo llevará a mostrarse en la
+                        página de inicio.</p>
+                    <div class="form-group">
+                        <label for="text-descripcion">Escriba el título que acompañará la sección de "obra
+                            recomendada" en el inicio:</label>
+                        <input name="text-descripcion" type="text" class="form-control" id="text-descripcion" cols="30" rows="10" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-accion-admin">Recomendar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 {{> Navigation }}
 
 {{> adminSidebar }}
 
-<div class="container">
-    <div class="content">
-        <div class="m-5">
-            <h2>Obras</h2>
+<div class="container-fluid">
+    <div class="content-admin">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="m-5">
+                    <h2>Obras</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="row filtro-lista h-100">
+                    <div class="col-10">
+                        <input type="text" class="d-inline form-control badge-pill filter-form form-control-sm"
+                            placeholder="Buscar" id="inlineFormCustomSelectPref">
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="d-inline badge badge-pill btn-compra"><i
+                                class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="section ventas">
-            <div class="w-100 text-left mx-auto mb-3 d-inline">
-                <input type="text" class="d-inline mr-5 w-25 form-control badge-pill filter-form form-control-sm" placeholder="Buscar" id="inlineFormCustomSelectPref">
-                <button type="submit" class="d-inline badge badge-pill btn-compra"><i class="fas fa-search"></i></button>
-            </div>
             <div class="tabla mis-ventas">
                 <table class="table table-borderless my-5">
                     <thead style="background-color: #bda00899;">
@@ -102,263 +207,33 @@
                             <th scope="col">Estado</th>
                             <th scope="col">ID</th>
                             <th scope="col">Precio</th>
-                            <th scope="col">Fecha</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
                                     <h2 style="font-weight: bold;">Noche Estrellada</h2>
                                 </button></td>
-                            <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
                             <td>Vincent Van Gogh</td>
                             <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
                             <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">149.000 MXN</td>
-                            <td class="gold">21-05-2020</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">1</a></td>
-                            <td><a href="#" class="accion-editar">Borrar/Ocultar/Destacar/Recomendar</a></td>
+                            <td>
+                                <div class="opciones-admin-list">
+                                    <button data-toggle="modal" data-target="#borrar-obra" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
+                                    <button data-toggle="modal" data-target="#ocultar-obra" class="ocultar"><i
+                                            class="fas fa-eye-slash"></i></button>
+                                    <button data-toggle="modal" data-target="#destacar-obra" class="destacar"><i
+                                            class="far fa-thumbs-up"></i></button>
+                                    <button data-toggle="modal" data-target="#recomendar-obra" class="recomendar"><i
+                                            class="far fa-star"></i></button>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

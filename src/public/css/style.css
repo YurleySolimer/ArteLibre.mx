@@ -70,14 +70,18 @@ h3 {
     padding-top: 2.5em;
 }
 
+button.titulo-mis-obras:focus {
+    outline: none;
+}
+
 @media screen and (min-width: 992px) {
     body {
         font-size: 16px;
     }
-    
-    .inicial{
-        padding: 4em;
-    } 
+
+    .inicial {
+        padding: 4.5em;
+    }
 }
 
 /*-----------------------------------
@@ -370,7 +374,9 @@ h3 {
 }
 
 @media screen and (max-width: 768px) {
-    .footer-one, .copyright {
+
+    .footer-one,
+    .copyright {
         font-size: .8em;
     }
 
@@ -378,7 +384,8 @@ h3 {
         font-size: .6em;
     }
 
-    .inner-footer-two-left, .inner-footer-two-right {
+    .inner-footer-two-left,
+    .inner-footer-two-right {
         font-size: .8em;
         text-align: center;
     }
@@ -2527,7 +2534,7 @@ span.puja-monto {
     .pujas .row .col-12:nth-child(2) {
         border-right: 1px solid var(--gold);
     }
-    
+
     .pujas .row .col-12:nth-child(3) {
         border-left: 1px solid var(--gold);
     }
@@ -2771,6 +2778,94 @@ Administrador
 
 .filtro-lista .form-control {
     font-size: .7em;
+}
+
+.opciones-admin-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+button.suspender {
+    color: #e2c430;
+    font-size: 1.2em;
+}
+
+button.borrar,
+button.cancelar {
+    color: #d41818;
+    font-size: 1.2em;
+}
+
+button.destacar,
+button.recomendar {
+    color: #BDA008;
+    font-size: 1.2em;
+}
+
+button.ocultar,
+a.contactar,
+button.historial-cliente,
+button.publicar,
+button.editar,
+button.iniciar {
+    color: #3b3b3b;
+    font-size: 1.2em;
+}
+
+button.suspender,
+button.borrar,
+button.destacar,
+button.ocultar,
+button.recomendar,
+button.editar,
+button.cancelar,
+button.publicar,
+button.iniciar,
+button.historial-cliente,
+a.contactar {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    padding: 0 10px;
+    transition: .5s ease all;
+}
+
+button.suspender:hover,
+button.borrar:hover,
+button.destacar:hover,
+button.ocultar:hover,
+button.recomendar:hover,
+button.editar:hover,
+button.cancelar:hover,
+button.publicar:hover,
+button.iniciar:hover,
+button.historial-cliente:hover,
+a.contactar:hover {
+    opacity: .5;
+}
+
+button.suspender:focus,
+button.borrar:focus,
+button.destacar:focus,
+button.ocultar:focus,
+button.recomendar:focus,
+button.editar:focus,
+button.cancelar:focus,
+button.publicar:focus,
+button.iniciar:focus,
+button.historial-cliente:focus a.contactar:focus {
+    outline: none;
+}
+
+.btn-accion-admin {
+    background-color: #BDA008;
+    transition: .3s ease all;
+    color: white;
+}
+
+.btn-accion-admin:hover {
+    background-color: #917905b7;
+    color: white;
 }
 
 @media screen and (max-width: 768px) {
