@@ -25,57 +25,57 @@ for (i = 0; i < rutasAdmin.length; i++) {
 const toggleMenu = document.getElementById('toggle-admin-menu');
 const wrapperAdmin = document.getElementById('sidebar-wrapper-admin');
 
-toggleMenu.addEventListener('click', function() {
-    
+toggleMenu.addEventListener('click', function () {
+
     if (toggleMenu.classList) {
-        
+
         // Toggle de la clase en nevagadores modernos
 
         toggleMenu.classList.toggle('active');
         wrapperAdmin.classList.toggle('active');
 
-      } else {
-        
+    } else {
+
         // Para IE9
-        
+
         let classes = toggleMenu.className.split(" ");
         let i = classes.indexOf("active");
-      
+
         if (i >= 0) {
             classes.splice(i, 1);
         } else {
             classes.push("active");
             toggleMenu.className = classes.join(" ");
         }
-      }
+    }
 })
 
 // Definir variables para la animación del Toggle del menú
 
 const navbarToggler = document.getElementById('navbar-toggler');
 
-navbarToggler.addEventListener('click', function() {
+navbarToggler.addEventListener('click', function () {
 
     if (navbarToggler.classList) {
-        
+
         // Toggle de la clase en nevagadores modernos
 
         navbarToggler.classList.toggle('active');
 
-      } else {
-        
+    } else {
+
         // Para IE9
-        
+
         let classes = navbarToggler.className.split(" ");
         let i = classes.indexOf("active");
-      
+
         if (i >= 0) {
             classes.splice(i, 1);
         } else {
             classes.push("active");
             navbarToggler.className = classes.join(" ");
         }
-      }
+    }
 });
 
 //
@@ -88,39 +88,62 @@ navbarToggler.addEventListener('click', function() {
 //
 
 // Definir variables
+if (document.getElementById('sidebarCollapse') || document.getElementById('sidebar') != null) {
 
-const sidebar = document.getElementById('sidebarCollapse');
-const innerSidebar = document.getElementById('sidebar');
+    const sidebar = document.getElementById('sidebarCollapse');
+    const innerSidebar = document.getElementById('sidebar');
 
-// Definir función según el evento disparado
+    // Definir función según el evento disparado
 
-sidebar.addEventListener('click', function() {
-    
-    if (innerSidebar.classList) {
-        
-        // Toggle de la clase en nevagadores modernos
+    sidebar.addEventListener('click', function () {
 
-        innerSidebar.classList.toggle('active');
-      } else {
-        
-        // Para IE9
-        
-        let classes = innerSidebar.className.split(" ");
-        let i = classes.indexOf("active");
-      
-        if (i >= 0) {
-            classes.splice(i, 1);
+        if (innerSidebar.classList) {
+
+            // Toggle de la clase en nevagadores modernos
+
+            innerSidebar.classList.toggle('active');
         } else {
-            classes.push("active");
-            innerSidebar.className = classes.join(" ");
-        }
-      }
-});
 
+            // Para IE9
+
+            let classes = innerSidebar.className.split(" ");
+            let i = classes.indexOf("active");
+
+            if (i >= 0) {
+                classes.splice(i, 1);
+            } else {
+                classes.push("active");
+                innerSidebar.className = classes.join(" ");
+            }
+        }
+    });
+
+}
 
 
 //
 // Sidebar del Filtro END
+//
+
+
+
+//
+// Llenar selector de año de creación en Nueva Obra
+//
+
+const aCreacion = document.getElementById('fcreacion');
+const fecha = new Date();
+const yy = fecha.getFullYear();
+
+for (i = yy; i >= yy - 60; i--) {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.text = i;
+    aCreacion.add(opt);
+}
+
+//
+// Selector END
 //
 
 

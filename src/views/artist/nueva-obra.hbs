@@ -6,10 +6,11 @@
         <h2>Nueva obra</h2>
     </div>
 
-    <form action="/nueva-obra" method="POST" enctype="multipart/form-data" class="form" >
+    <form action="/nueva-obra" method="POST" enctype="multipart/form-data" class="form">
         <div class="row mb-3">
             <div class="col-12">
-                <input type="file" name="image" accept="image/gif, image/png, image/jpeg" multiple required id="gallery-photo-add" style="display: none;">
+                <input type="file" name="image" accept="image/gif, image/png, image/jpeg" multiple required
+                    id="gallery-photo-add" style="display: none;">
                 <label for="gallery-photo-add" class="label-agregar-fotos">Agregar fotos</label>
                 <br>
                 <small class="text-muted p-0 m-0">Para eliminar una foto haz click sobre ella</small>
@@ -38,13 +39,14 @@
                 <div class="form-group">
                     <label for="descripción">Descripción</label>
                     <textarea class="form-control" id="descripcion" name="descripcion" aria-describedby="descripcion"
-                                placeholder="Describe la obra" required></textarea>
+                        placeholder="Motivo de creación de la obra (Opcional)"></textarea>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="Coleccion">Colección</label>
-                    <select type="text" class="form-control" id="Colección" name="coleccion" aria-describedby="colecciónHelp" required>
+                    <select type="text" class="form-control" id="Colección" name="coleccion"
+                        aria-describedby="colecciónHelp" required>
                         <option value=0>Ninguna</option>
                         {{#each colecciones}}
                         <option value="{{id}}">{{nombreColeccion}}</option>
@@ -55,15 +57,17 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="lcreacion">Lugar de Creación</label>
-                    <input type="text" class="form-control" id="lcreacion" name="lcreacion" aria-describedby="creacionHelp"
-                        placeholder="Dónde se creó la obra" required>
+                    <input type="text" class="form-control" id="lcreacion" name="lcreacion"
+                        aria-describedby="creacionHelp" placeholder="País" required>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="form-group">
-                    <label for="fcreacion">Fecha de Creación</label>
-                    <input type="date" class="form-control" id="fcreacion" name="fcreacion" aria-describedby="creacionHelp"
-                        placeholder="Cuándo se creó la obra" min="1960-01-01" required>
+                    <label for="fcreacion">Año de Creación</label>
+                    <select type="date" class="form-control" id="fcreacion" name="fcreacion"
+                        aria-describedby="Año de creación">
+
+                    </select>
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -83,37 +87,61 @@
             <div class="col-12 col-md-6">
                 <div class="row m-0 p-0">
                     <div class="col-6 p-0 m-0">
-                        <div class="form-group">
-                            <label for="ancho">Ancho</label>
-                            <input type="number" class="form-control" id="ancho" name="ancho" aria-describedby="anchoHelp"
-                                placeholder="100cm" required>
-                        </div>
-                    </div>
-                    <div class="col-6 p-0 m-0">
                         <div class="form-group ml-3">
                             <label for="alto">Alto</label>
                             <input type="number" class="form-control" id="alto" name="alto" aria-describedby="altoHelp"
                                 placeholder="100cm" required>
                         </div>
                     </div>
+                    <div class="col-6 p-0 m-0">
+                        <div class="form-group">
+                            <label for="ancho">Ancho</label>
+                            <input type="number" class="form-control" id="ancho" name="ancho"
+                                aria-describedby="anchoHelp" placeholder="100cm" required>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-12-col-md-6">
+            <div class="col-6 col-md-3" id="check1">
                 <div class="form-group">
                     <div class="form-check m-4">
-                        <input class="form-check-input" onchange='check()' name="subasta" type="checkbox" id="gridCheck">
+                        <input class="form-check-input" onchange='check()' name="subasta" type="checkbox"
+                            id="gridCheck">
                         <label class="form-check-label" for="gridCheck" id="label-check">
-                            
+
                         </label>
                     </div>
                 </div>
             </div>
-            <div class="col-12-col-md-6">
+            <div class="col-6 col-md-3" id="check2">
                 <div class="form-group">
                     <div class="form-check m-4">
-                        <input class="form-check-input" onchange='checkdos()' name="copias" type="checkbox" id="gridCheck2">
+                        <input class="form-check-input" onchange='checkdos()' name="copias" type="checkbox"
+                            id="gridCheck2">
                         <label class="form-check-label" for="gridCheck2" id="label-check2">
-                            
+
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" id="check3"> 
+                <div class="form-group">
+                    <div class="form-check m-4">
+                        <input class="form-check-input" onchange='checktres()' name="copias" type="checkbox"
+                            id="gridCheck3">
+                        <label class="form-check-label" for="gridCheck3" id="label-check3">
+
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3" id="check4">
+                <div class="form-group">
+                    <div class="form-check m-4">
+                        <input class="form-check-input" onchange='checkcuatro()' name="copias" type="checkbox"
+                            id="gridCheck4">
+                        <label class="form-check-label" for="gridCheck4" id="label-check4">
+
                         </label>
                     </div>
                 </div>
@@ -126,7 +154,6 @@
 </section>
 
 {{> Footer }}
-
 
 <script>
     $(document).ready(function () {
@@ -167,7 +194,7 @@
         gallery.removeChild(parent);
     }
 
-    function check(){
+    function check() {
         let check = document.getElementById('gridCheck');
 
         if (check.checked == true) {
@@ -177,8 +204,7 @@
         }
     }
 
-    check()
-    function checkdos(){
+    function checkdos() {
         let check = document.getElementById('gridCheck2');
 
         if (check.checked == true) {
@@ -187,6 +213,37 @@
             document.querySelector('#label-check2').innerText = '¿Venderás varias copias?';
         }
     }
+    
+    function checktres() {
+        let check = document.getElementById('gridCheck3');
+        let check4 = document.getElementById('check4');
+        let check2 = document.getElementById('check2');
+        let check1 = document.getElementById('check1');
 
+        if (check.checked == true) {
+            document.querySelector('#label-check3').innerText = 'Ya se vendió el original de la obra';
+            check4.style.display = 'block';
+            check2.style.display = 'none';
+            check1.style.display = 'none';
+        } else {
+            document.querySelector('#label-check3').innerText = '¿El original de la obra ya se vendió?';
+            check2.style.display = 'block';
+            check1.style.display = 'block';
+            check4.style.display = 'none';
+        }
+    }
+    function checkcuatro() {
+        let check = document.getElementById('gridCheck4');
+
+        if (check.checked == true) {
+            document.querySelector('#label-check4').innerText = 'Se habilitó la venta para GICLEE';
+        } else {
+            document.querySelector('#label-check4').innerText = '¿Venderás GICLEE de esta obra?';
+        }
+    }
+
+    check()
     checkdos()
+    checktres()
+    checkcuatro()
 </script>

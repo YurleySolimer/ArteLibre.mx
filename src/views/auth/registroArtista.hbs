@@ -48,9 +48,9 @@
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
-                        <div class="form-group">
-                            <input type="tel" class="form-control" id="telefono" aria-describedby="telefono"
-                                placeholder="Teléfono" name="telefono" required>
+                        <div class="form-group pd-telephone-input">
+                            <input type="tel" class="form-control telefono" id="telefono" aria-describedby="telefono"
+                                name="telefono" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
@@ -61,14 +61,14 @@
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="region" aria-describedby="region"
-                                placeholder="Región" name="region" required>
+                            <input type="text" class="form-control" id="povincia" aria-describedby="provincia"
+                                placeholder="Ciudad (Provincia)" name="provincia" required>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-6  mb-3">
+                    <div class="col-12 mb-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="povincia" aria-describedby="provincia"
-                                placeholder="Provincia" name="provincia" required>
+                            <input type="text" class="form-control" id="direccion" aria-describedby="direccion"
+                                placeholder="Dirección (Facturación)" name="direccion" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
@@ -77,28 +77,32 @@
                                 placeholder="Años de actividad" name="años" required>
                         </div>
                     </div>
-                    <div class="col-12 mb-3">
+                    <div class="col-12 col-lg-6 mb-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="direccion" aria-describedby="direccion"
-                                placeholder="Dirección" name="direccion" required>
+                            <select name="tipo-principal" id="tipo" class="form-control">
+                                <option value="">Tipo (Principal)</option>
+                                <option value="pintura">Pintura</option>
+                                <option value="escultura">Escultura</option>
+                                <option value="fotografia" disabled>Fotografía</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="disciplina" aria-describedby="disciplina"
-                                placeholder="Disciplina principal" name="disciplina_principal" required>
+                            <input type="text" class="form-control" id="disciplina" aria-describedby="tecnica"
+                                placeholder="Estilo" name="disciplina_principal" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="disciplina2" aria-describedby="disciplina2"
-                                placeholder="Disciplina secundaria - Opcional" name="disciplina_sec" required>
+                            <input type="text" class="form-control" id="disciplina2" aria-describedby="tecnica"
+                                placeholder="Técnica (Principal)" name="disciplina_sec" required>
                         </div>
                     </div>
                     <div class="col-12  mb-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="estilo" aria-describedby="estilo"
-                                placeholder="Tu estilo en una frase" name="frase" required>
+                                placeholder="Tu estilo en una frase" name="frase">
                         </div>
                     </div>
                     <div class="col-12 mb-3">
@@ -111,9 +115,9 @@
                     <div class="col-12 col-lg-6  mb-3">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="password" class="form-control m-0" placeholder="Contraseña"
-                                    name="password" aria-label="Contraseña" aria-describedby="Contraseña" id="pwd"
-                                    minlength="8" required pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*"
+                                <input type="password" class="form-control m-0" placeholder="Contraseña" name="password"
+                                    aria-label="Contraseña" aria-describedby="Contraseña" id="pwd" minlength="8"
+                                    required pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*"
                                     title="Debe contener al menos una mayúscula, una minúscula y un dígito">
                                 <div class="input-group-append">
                                     <div class="input-group-text" id="eye" style="cursor: pointer;"><i
@@ -136,7 +140,8 @@
                         </div>
                     </div>
                     <div class="col-12 text-right">
-                        <button class="btn-compra badge" type="submit" name='tipo' id="buttonSubmit" value="artista">Registrarme</button>
+                        <button class="btn-compra badge" type="submit" name='tipo' id="buttonSubmit"
+                            value="artista">Registrarme</button>
                     </div>
                 </div>
             </div>
@@ -146,8 +151,27 @@
 
 {{> Footer }}
 
+<script src="/js/intlTelInput-jquery.min.js"></script>
 <script>
+
+
     $(document).ready(function () {
+
+        // Iniciar Lada para el input telefonico (Usa plugin IntlTelInput)
+        $('#telefono').intlTelInput({
+            preferredCountries: ['mx', 'us', 'co', 've'],
+            separateDialCode: true,
+            nationalMode: false,
+            initialCountry: 'auto',
+            geoIpLookup: function (success, failure) {
+                $.get("https://ipinfo.io", function () { }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    success(countryCode);
+                });
+            },
+            utilsScript: '/js/utils.js'
+        });
+
         //variables
         let pass1 = $('[name=password]');
         let pass2 = $('[name=confirmarContraseña]');
@@ -216,27 +240,25 @@
             (pwdDos.type == 'password') ? pwdDos.type = 'text' : pwdDos.type = 'password';
         }
 
-        $(function () {
-            $('#file-input').change(function (e) {
-                addImage(e);
-            });
-
-            function addImage(e) {
-                var file = e.target.files[0],
-                    imageType = /image.*/;
-
-                if (!file.type.match(imageType))
-                    return;
-
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    var result = e.target.result;
-                    $('#imgSalida').attr("src", result);
-                }
-
-                reader.readAsDataURL(file);
-            }
+        $('#file-input').change(function (e) {
+            addImage(e);
         });
+
+        function addImage(e) {
+            var file = e.target.files[0],
+                imageType = /image.*/;
+
+            if (!file.type.match(imageType))
+                return;
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var result = e.target.result;
+                $('#imgSalida').attr("src", result);
+            }
+
+            reader.readAsDataURL(file);
+        }
     });
 </script>

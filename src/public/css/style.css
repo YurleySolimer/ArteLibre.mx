@@ -1509,6 +1509,10 @@ button.titulo-mis-obras:focus {
     box-shadow: 0 0 0 0.2rem #E7C20133;
 }
 
+#check4 {
+    display: none;
+}
+
 /*-----------------------------------
     Registro
 -----------------------------------*/

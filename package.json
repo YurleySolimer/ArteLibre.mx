@@ -14,6 +14,7 @@
     "@fortawesome/fontawesome-free": "^5.13.0",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.5.0",
+    "cleave.js": "^1.6.0",
     "connect-flash": "^0.1.1",
     "core-util-is": "^1.0.2",
     "crypto": "^1.0.1",
