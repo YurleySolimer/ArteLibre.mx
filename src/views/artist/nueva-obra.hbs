@@ -31,8 +31,22 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="precio">Precio (MXN)</label>
-                    <input type="number" class="form-control" id="precio" name="precio" aria-describedby="Precio"
-                        placeholder="Precio de la obra" required>
+                    <div class="row">
+                        <div class="col px-1"><input type="number" name="precioArtista" id="precioA"
+                                aria-describedby="Lo que recibe el artista" placeholder="Recibiras" class="form-control"
+                                required></div>
+                        <div class="col px-1"><input type="number" name="precioArtelibre" id="precioB"
+                                aria-describedby="Lo que recibe ArteLibre" placeholder="ArteLibre" class="form-control"
+                                required></div>
+                        <div class="col px-1"><input type="number" name="precioComision" id="precioC"
+                                aria-describedby="Comisiones" placeholder="Comisiones" class="form-control" required>
+                        </div>
+                        <div class="col px-1"><input type="number" name="precioFinal" id="precioF"
+                                aria-describedby="Precio Final" placeholder="Público" class="form-control" required>
+                        </div>
+                    </div>
+                    <small class="text-muted">El precio final será el que el cliente ve en la plataforma y el que
+                        pagará</small>
                 </div>
             </div>
             <div class="col-12">
@@ -124,7 +138,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 col-md-3" id="check3"> 
+            <div class="col-6 col-md-3" id="check3">
                 <div class="form-group">
                     <div class="form-check m-4">
                         <input class="form-check-input" onchange='checktres()' name="copias" type="checkbox"
@@ -213,7 +227,7 @@
             document.querySelector('#label-check2').innerText = '¿Venderás varias copias?';
         }
     }
-    
+
     function checktres() {
         let check = document.getElementById('gridCheck3');
         let check4 = document.getElementById('check4');
@@ -246,4 +260,78 @@
     checkdos()
     checktres()
     checkcuatro()
+
+    // Funciona hasta 
+
+    const precioA = document.getElementById('precioA');
+    const precioB = document.getElementById('precioB');
+    const precioC = document.getElementById('precioC');
+    const precioF = document.getElementById('precioF');
+
+    precioA.addEventListener('keyup', function () {
+        let digitadoA = precioA.value;
+        
+        let pA = parseFloat(digitadoA);
+
+        let pB = ((pA / .85) * .15).toFixed(2);
+        let pC = (((pA / .85)*0.036) + 3).toFixed(2);
+        let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
+
+        precioB.setAttribute('value', pB);
+        precioC.setAttribute('value', pC);
+        precioF.setAttribute('value', pF);
+        precioB.value = pB;
+        precioC.value = pC;
+        precioF.value = pF;
+    });
+    precioB.addEventListener('keyup', function () {
+        let digitadoB = precioB.value;
+
+        let pB = parseFloat(digitadoB);
+
+        let pA = ((pB / .15) * .85 ).toFixed(2);
+        let pC = (((pB / .15)*0.036) + 3).toFixed(2);
+        let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
+
+        precioA.setAttribute('value', pA);
+        precioC.setAttribute('value', pC);
+        precioF.setAttribute('value', pF);
+        precioA.value = pA;
+        precioC.value = pC;
+        precioF.value = pF;
+    });
+    precioC.addEventListener('keyup', function () {
+        let digitadoC = precioC.value;
+
+        let pC = parseFloat(digitadoC)
+
+        let pA = (((pC - 3) / 0.036 ) * .85).toFixed(2);
+        let pB = (((pC - 3) / 0.036 ) * .15).toFixed(2);
+        let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
+
+        precioA.setAttribute('value', pA);
+        precioB.setAttribute('value', pB);
+        precioF.setAttribute('value', pF);
+        precioB.value = pB;
+        precioA.value = pA;
+        precioF.value = pF;
+    });
+    precioF.addEventListener('keyup', function () {
+        let digitadoF = precioF.value;
+
+        let pF = parseFloat(digitadoF);
+
+        let pA = (((pF - 3) / 1.036) * .85).toFixed(2);
+        let pB = (((pF - 3) / 1.036) * .15).toFixed(2);
+        let pC = ((((pF - 3) / 1.036) * .036) + 3).toFixed(2);
+
+        precioA.setAttribute('value', pA);
+        precioC.setAttribute('value', pC);
+        precioB.setAttribute('value', pB);
+        precioB.value = pB;
+        precioC.value = pC;
+        precioA.value = pA;
+    });
+
+
 </script>
