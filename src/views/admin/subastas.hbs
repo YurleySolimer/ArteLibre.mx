@@ -127,10 +127,41 @@
                 <div class="modal-body">
                     <p>¿Estás seguro de que deseas publicar esta obra? Esta acción lo llevará a mostrarse en la
                         sección de subastas.</p>
-                    <div class="form-group">
-                        <label for="text-descripcion">Escriba la información que desea que acompañe a la obra en la sección "Subastas" sustituyendo la descripción de la pieza en caso de tenerla. (OPCIONAL)</label>
-                        <textarea name="text-descripcion" class="form-control" id="text-descripcion" cols="30"
-                            rows="10"></textarea>
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="precio-base">Precio base</label>
+                                <!-- Valor dicho por el artista, como sugerencia en el placeholder-->
+                                <input name="precio-base" type="number" placeholder="75.000" class="form-control" id="precio-base" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="fecha-inicio">Fecha de inicio</label>
+                                <input name="fecha-inicio" type="date" class="form-control" id="fecha-inicio" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="hora-inicio">Hora de inicio</label>
+                                <input name="hora-inicio" type="time" class="form-control" id="hora-inicio" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="duracion">Duración</label>
+                                <input name="duracion" type="number" placeholder="Horas de duración" class="form-control" id="duracion" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="text-descripcion">Escriba la información que desea que acompañe a la obra en
+                                    la sección "Subastas" sustituyendo la descripción de la pieza en caso de tenerla.
+                                    (OPCIONAL)</label>
+                                <textarea name="text-descripcion" class="form-control" id="text-descripcion" cols="30"
+                                    rows="10"></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -210,7 +241,7 @@
                                 </div>
                             </td>
                         </tr>
-                       
+
                     </tbody>
                 </table>
             </div>
