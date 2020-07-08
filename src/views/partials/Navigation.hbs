@@ -2,8 +2,9 @@
     <div class="container contenedor-padre-nav">
         <div class="navigation-container d-flex w-100 justify-content-between">
             <div>
-                <button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-                    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -11,14 +12,19 @@
                 </button>
             </div>
             <div>
-                <a href="#" class="navbar-brand logo-responsive"><img src="/images/logos/logotipo_n.png" style="max-width: 150px;" alt="ArteLibre"></a>
+                <a href="#" class="navbar-brand logo-responsive"><img src="/images/logos/logotipo_n.png"
+                        style="max-width: 150px;" alt="ArteLibre"></a>
             </div>
+
+            {{#if logueado}}
+
+            {{#if dashboard}}
             <div class="outter-inicio-sesion">
-                {{!--   En caso de no haber iniciado sesión 
+                {{> ToggleDashboard }}
+            </div>
+            {{else}}
+            <div class="outter-inicio-sesion">
 
-                <a href="#" class="text-secondary inicio-responsive">Iniciar Sesión</a> --}}
-
-                {{#ifCond logueado true}}
                 <span class="dropdown show" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <a href="#" class="btn dropdown-toggle">
@@ -29,25 +35,33 @@
                                     d="M16.59 8.29501L12 12.875L7.41 8.29501L6 9.70501L12 15.705L18 9.70501L16.59 8.29501Z"
                                     fill="#BDA008" fill-opacity="0.54" />
                             </svg>
+                        </span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        {{#ifCond artista true}}
-                            {{> MenuArtist }}
-                        {{/ifCond}}
-                        {{#ifCond cliente true}}
-                             {{> MenuClient }}
-                        {{/ifCond}}
+                        {{#if artista}}
+                        {{> MenuArtist }}
+                        {{/if}}
+                        {{#if cliente}}
+                        {{> MenuClient }}
+                        {{/if}}
                     </div>
                 </span>
-               {{/ifCond}}
-
-               {{> MenuAdminResponsive }}
             </div>
+            {{/if}}
+
+            {{else}}
+            <div class="outter-inicio-sesion">
+                <a href="#" class="text-secondary inicio-responsive">Iniciar Sesión</a>
+            </div>
+
+            {{/if}}
+
         </div>
         <div class="row w-100">
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <div class="collapse navbar-collapse" id="navbarToggler">
                 <div class="col-3 text-center">
-                    <a class="navbar-brand logo-no-responsive" href="/"><img src="/images/logos/logotipo_n.png" style="max-width: 200px;" alt="ArteLibre"></a>
+                    <a class="navbar-brand logo-no-responsive" href="/"><img src="/images/logos/logotipo_n.png"
+                            style="max-width: 200px;" alt="ArteLibre"></a>
                 </div>
                 <div class="col-6">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-around">
@@ -69,40 +83,46 @@
                     </ul>
                 </div>
                 <div class="col-3 text-center">
-                    {{#ifCond logueado false}}
-
-                    <span class="d-flex justify-center">
-                    <button onclick="window.location.href='registro'" class="btn btn-sm boton-signup">Registrarme</button>
-                    <a class="inicio-sesion inicio-no-responsive" href="/iniciar-sesion">Iniciar Sesión</a>
-                    </span>
-                    {{/ifCond}}
 
 
-                    {{#ifCond logueado true}}
 
-                    
-                        <span class="dropdown show" >
-                        <a href="#" class="btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <span class="text-secondary inicio-name">{{nombre.nombre}} {{nombre.apellido}}
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M16.59 8.29501L12 12.875L7.41 8.29501L6 9.70501L12 15.705L18 9.70501L16.59 8.29501Z"
-                                    fill="#BDA008" fill-opacity="0.54" />
-                            </svg>
+                    {{#if logueado }}
+
+
+                    {{#if dashboard}}
+                    <span class="dropdown show">
+                        <a href="#" class="btn dropdown-toggle" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="text-secondary inicio-name">{{nombre.nombre}} {{nombre.apellido}}
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16.59 8.29501L12 12.875L7.41 8.29501L6 9.70501L12 15.705L18 9.70501L16.59 8.29501Z"
+                                        fill="#BDA008" fill-opacity="0.54" />
+                                </svg>
+                            </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        {{#ifCond artista true}}
+                            {{#ifCond artista true}}
                             {{> MenuArtist}}
-                        {{/ifCond}}
-                        {{#ifCond cliente true}}
-                             {{> MenuClient}}
-                        {{/ifCond}}                        
-                    </div>
+                            {{/ifCond}}
+                            {{#ifCond cliente true}}
+                            {{> MenuClient}}
+                            {{/ifCond}}
+                        </div>
                     </span>
-                    
-                {{/ifCond}}
+                    {{/if}}
+
+
+                    {{else}}
+
+                    <span class="d-flex justify-center">
+                        <button onclick="window.location.href='registro'"
+                            class="btn btn-sm boton-signup">Registrarme</button>
+                        <a class="inicio-sesion inicio-no-responsive" href="/iniciar-sesion">Iniciar Sesión</a>
+                    </span>
+
+                    {{/if}}
 
                 </div>
             </div>

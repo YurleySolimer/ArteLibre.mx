@@ -5,7 +5,7 @@ module.exports = {
         if (req.isAuthenticated()) {  //true si la sesión del usuario existe
             return next();
         }
-        return res.redirect('/signin');
+        return res.redirect('/iniciar-sesion');
     },
     async isCliente (req, res, next) {  
         var user = await  pool.query('SELECT * FROM users WHERE id =?', req.user.id);
