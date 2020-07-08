@@ -20,14 +20,6 @@ Handlebars.registerHelper('ifCond', function (v1, v2, options) {
 });
 
 //
-// Galeria
-// 
-
-router.get('/artista/galeria', async (req, res) => {
-  res.render('artist/galeria');
-});
-
-//
 // Dashboard
 //
 
