@@ -11,10 +11,10 @@
                     <div id="left-column" class="col-lg-6 col-12 active">
                         <div class="galeria-artista">
                             <div class="nombre-artista-galeria">
-                                <h1>Lilah Steel</h1>
+                                <h1>{{user.nombre}} {{user.apellido}}</h1>
                             </div>
                             <div class="artista-imagen-galeria">
-                                <img src="/images/artista4.jpg" alt="">
+                                <img src="/./uploads/{{user.foto_nombre}}" alt="{{user.foto_nombre}}">
                             </div>
                             <div class="row artista-galeria-filtro mt-3">
                                 <div class="col">
@@ -62,7 +62,7 @@
                                         <span id="galeria-seleccion-tecnica"></span>
                                     </div>
                                     <div class="col">
-                                        <span class="galeria-titulo">Tipo</span> <br>
+                                        <span class="galeria-titulo">Estilo</span> <br>
                                         <span id="galeria-seleccion-tipo"></span>
                                     </div>
                                     <div class="col">
@@ -90,184 +90,30 @@
     </div>
     <div id="galeria-dos" class="galeria-dos">
         <div class="galeria-dos-inner">
-            <div class="galeria-item" data-nombre="Retrato 2" data-tipo="Tipo 2" data-tecnica="Tecnica 2"
-                data-year="Año 2" data-src="/images/statue2.jpg" data-enlace="/obra/{{id}}">
+            {{#each obras1}}
+            <div class="galeria-item" data-nombre="{{nombre}}" data-tipo="{{estilo}}" data-tecnica="{{tecnica}}"
+                data-year="{{fecha_creacion}}" data-src="/./uploads/{{fotoNombre}}"  data-enlace="/obra/{{id}}">
                 <div class="galeria-item-efecto">
                     <div class="galeria-item-blur"></div>
                     <i class="fas fa-eye fa-5x item-ojo"></i>
                 </div>
-                <img src="/images/statue2.jpg" alt="">
+                <img  src="/./uploads/{{fotoNombre}}"  alt="">
             </div>
-            <div class="galeria-item" data-nombre="Retrato 3" data-tipo="Tipo 3" data-tecnica="Tecnica 3"
-                data-year="Año 3" data-src="/images/statue3.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue3.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 5" data-tipo="Tipo 5" data-tecnica="Tecnica 5"
-                data-year="Año 5" data-src="/images/statue5.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue5.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 6" data-tipo="Tipo 6" data-tecnica="Tecnica 6"
-                data-year="Año 6" data-src="/images/statue6.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue6.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 7" data-tipo="Tipo 7" data-tecnica="Tecnica 7"
-                data-year="Año 7" data-src="/images/statue7.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue7.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 8" data-tipo="Tipo 8" data-tecnica="Tecnica 8"
-                data-year="Año 8" data-src="/images/retrato3.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/retrato3.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 10" data-tipo="Tipo 10" data-tecnica="Tecnica 10"
-                data-year="Año 10" data-src="/images/retrato5.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/retrato5.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 11" data-tipo="Tipo 11" data-tecnica="Tecnica 11"
-                data-year="Año 11" data-src="/images/retrato6.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/retrato6.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 13" data-tipo="Tipo 13" data-tecnica="Tecnica 13"
-                data-year="Año 13" data-src="/images/statue5.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue5.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 14" data-tipo="Tipo 14" data-tecnica="Tecnica 14"
-                data-year="Año 14" data-src="/images/statue6.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue6.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 15" data-tipo="Tipo 15" data-tecnica="Tecnica 15"
-                data-year="Año 15" data-src="/images/statue7.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue7.jpg" alt="">
-            </div>
+            {{/each}}
+
         </div>
         <div class="galeria-dos-inner">
-            <div class="galeria-item" data-nombre="Retrato 16" data-tipo="Tipo 16" data-tecnica="Tecnica 16"
-                data-year="Año 16" data-src="/images/retrato3.jpg" data-enlace="/obra/{{id}}">
+            {{#each obras2}}
+            <div class="galeria-item" data-nombre="{{nombre}}" data-tipo="{{estilo}}" data-tecnica="{{tecnica}}"
+                data-year="{{fecha_creacion}}" data-src="/./uploads/{{fotoNombre}}"  data-enlace="/obra/{{id}}">
                 <div class="galeria-item-efecto">
                     <div class="galeria-item-blur"></div>
                     <i class="fas fa-eye fa-5x item-ojo"></i>
                 </div>
-                <img src="/images/retrato3.jpg" alt="">
+                <img src="/./uploads/{{fotoNombre}}"  alt="">
             </div>
-            <div class="galeria-item" data-nombre="Retrato 18" data-tipo="Tipo 18" data-tecnica="Tecnica 18"
-                data-year="Año 18" data-src="/images/retrato5.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/retrato5.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 19" data-tipo="Tipo 19" data-tecnica="Tecnica 19"
-                data-year="Año 19" data-src="/images/retrato6.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/retrato6.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 21" data-tipo="Tipo 21" data-tecnica="Tecnica 21"
-                data-year="Año 21" data-src="/images/statue5.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue5.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 22" data-tipo="Tipo 22" data-tecnica="Tecnica 22"
-                data-year="Año 22" data-src="/images/statue6.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue6.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 23" data-tipo="Tipo 23" data-tecnica="Tecnica 23"
-                data-year="Año 23" data-src="/images/statue7.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue7.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 24" data-tipo="Tipo 24" data-tecnica="Tecnica 24"
-                data-year="Año 24" data-src="/images/retrato3.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/retrato3.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 26" data-tipo="Tipo 26" data-tecnica="Tecnica 26"
-                data-year="Año 26" data-src="/images/retrato5.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/retrato5.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 27" data-tipo="Tipo 27" data-tecnica="Tecnica 27"
-                data-year="Año 27" data-src="/images/retrato6.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/retrato6.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 28" data-tipo="Tipo 28" data-tecnica="Tecnica 28"
-                data-year="Año 28" data-src="/images/statue7.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/statue7.jpg" alt="">
-            </div>
-            <div class="galeria-item" data-nombre="Retrato 28" data-tipo="Tipo 28" data-tecnica="Tecnica 28"
-                data-year="Año 29" data-src="/images/retrato3.jpg" data-enlace="/obra/{{id}}">
-                <div class="galeria-item-efecto">
-                    <div class="galeria-item-blur"></div>
-                    <i class="fas fa-eye fa-5x item-ojo"></i>
-                </div>
-                <img src="/images/retrato3.jpg" alt="">
-            </div>
+            {{/each}}
+
         </div>
     </div>
 </div>

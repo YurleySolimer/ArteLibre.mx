@@ -105,7 +105,7 @@
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">{{nombre}}</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">{{coleccion}}</a></td>
@@ -113,9 +113,9 @@
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
                             <td class="text-muted">{{precio}} MXN</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">197.000 MXN</td>
+                            <td class="gold">{{precio}} MXN </td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Editar</a></td>
+                            <td> {{> OptionsObraArtist2}}</td>
                         </tr>
                         {{/each}}
                     </tbody>
