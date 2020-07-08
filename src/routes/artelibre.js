@@ -156,20 +156,44 @@ router.get('/artista/:id/galeria', async (req, res) => {
 });
 
 router.get('/artistas', async (req, res) => {
-  const artistas = await pool.query('SELECT * FROM usuarioArtista');
+  var artistas = await pool.query('SELECT * FROM usuarioArtista');
   artista = await isArtist(req);
   cliente = await isClient(req);
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.params.id]);
+  if(req.query) { 
+
+    if (req.query.tecnicaArtistas || req.query.nombreArtistas) {
+
+      artistas = await pool.query('SELECT * FROM usuarioArtista WHERE nombre =? OR apellido =? OR disciplina_principal =? OR disciplina_sec =?', [req.query.nombreArtistas, req.query.nombreArtistas, req.query.tecnicaArtistas, req.query.tecnicaArtistas]);
+    }
+    if (req.query.tecnicaArtistas && req.query.nombreArtistas) {
+      artistas = await pool.query('SELECT * FROM usuarioArtista WHERE nombre =? OR apellido =? AND disciplina_principal =? OR disciplina_sec =?', [req.query.nombreArtistas, req.query.nombreArtistas, req.query.tecnicaArtistas, req.query.tecnicaArtistas]);
+    }
+  }
+
 
   res.render('general/artistas', {artistas, artista, logueado, nombre:nombre[0]});
 
 });
 
 router.get('/obras',  async (req, res) => {
-  const obras = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
+  var obras = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
   artista = await isArtist(req);
   cliente = await isClient(req);
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.params.id]);
+
+  if(req.query) { 
+
+    if (req.query.tecnicaPinturas || req.query.artistaPinturas) {
+
+      obras = await pool.query('SELECT * FROM obraCompleta WHERE nombre =? OR apellido =? OR tecnica =?', [req.query.artistaPinturas, req.query.artistaPinturas, req.query.tecnicaPinturas]);
+    }
+    if (req.query.tecnicaPinturas && req.query.artistaPinturas) {
+      obras = await pool.query('SELECT * FROM obraCompleta WHERE nombre =? OR apellido =? AND tecnica =?', [req.query.artistaPinturas, req.query.artistaPinturas, req.query.tecnicaPinturas]);
+    }
+  }
+
+
 
   res.render('general/obras', {obras, artista, cliente, logueado, nombre:nombre[0]});
 });
