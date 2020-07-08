@@ -1,16 +1,16 @@
 <!-- Modal Editar -->
 
-<div class="modal fade" id="editarObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="editarObra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" style="width: 90vw;" role="document">
         <div class="modal-content p-3">
             <div class="modal-header">
-                <div class="modal-title">Editar Obra </div>
+                <div class="modal-title">Editar Obra {{id}} </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/obra/editar/{{obra.id}}" method="POST" enctype="multipart/form-data" class="form">
+            <form action="/obra/editar/{{id}}" method="POST" enctype="multipart/form-data" class="form">
                 <div class="modal-body">
                     <div class="row">
                         <div class="row mb-3">
@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label for="Nombre">Nombre</label>
                                     <input type="text" class="form-control" id="Nombre" name="nombre"
-                                        aria-describedby="NombreHelp" placeholder="{{obra.nombre}}" value="{{obra.nombre}}"
+                                        aria-describedby="NombreHelp" placeholder="{{nombre}}" value="{{nombre}}"
                                         required>
                                 </div>
                             </div>
@@ -40,14 +40,14 @@
                                 <div class="form-group">
                                     <label for="precio">Precio (MXN)</label>
                                     <input type="number" class="form-control" id="precio" name="precio"
-                                        aria-describedby="Precio" placeholder="{{obra.precio}}" value="{{obra.precio}}" required>
+                                        aria-describedby="Precio" placeholder="{{precio}}" value="{{precio}}" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="descripción">Descripción</label>
                                     <textarea class="form-control" id="descripcion" name="descripcion"
-                                        aria-describedby="descripcion" placeholder="{{obra.descripcion}}" 
+                                        aria-describedby="descripcion" placeholder="{{descripcion}}" 
                                         required></textarea>
                                 </div>
                             </div>
@@ -67,29 +67,29 @@
                                 <div class="form-group">
                                     <label for="lcreacion">Lugar de Creación</label>
                                     <input type="text" class="form-control" id="lcreacion" name="lcreacion"
-                                        aria-describedby="creacionHelp" placeholder="{{obra.lugarCreacion}}" value="{{obra.lugarCreacion}}" required>
+                                        aria-describedby="creacionHelp" placeholder="{{lugarCreacion}}" value="{{lugarCreacion}}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="fcreacion">Fecha de Creación</label>
                                     <input type="date" class="form-control" id="fcreacion" name="fcreacion"
-                                        aria-describedby="creacionHelp" placeholder="{{obra.fecha_creacion}}" value="{{fecha_creacion}}"
-                                        min="1960-01-01" required>
+                                        aria-describedby="creacionHelp" placeholder="{{fecha_creacion}}"
+                                        min="1960-01-01" value="{{fecha_creacion}}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="tecnica">Técnica</label>
                                     <input type="text" class="form-control" id="tecnica" name="tecnica"
-                                        aria-describedby="tecnicaHelp" placeholder="{{obra.tecnica}}" value="{{obra.tecnica}}" required>
+                                        aria-describedby="tecnicaHelp" placeholder="{{tecnica}}" value="{{tecnica}}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="estilo">Estilo</label>
                                     <input type="text" class="form-control" id="estilo" name="estilo"
-                                        aria-describedby="estilo" placeholder="{{obra.estilo}}" value="{{obra.estilo}}" required>
+                                        aria-describedby="estilo" placeholder="{{estilo}}" value="{{estilo}}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -98,14 +98,14 @@
                                         <div class="form-group">
                                             <label for="ancho">Ancho</label>
                                             <input type="number" class="form-control" id="ancho" name="ancho"
-                                                aria-describedby="anchoHelp" placeholder="{{obra.ancho}}" value="{{obra.ancho}}" required>
+                                                aria-describedby="anchoHelp" placeholder="{{ancho}}" value="{{ancho}}" required>
                                         </div>
                                     </div>
                                     <div class="col-6 p-0 m-0">
                                         <div class="form-group ml-3">
                                             <label for="alto">Alto</label>
                                             <input type="number" class="form-control" id="alto" name="alto"
-                                                aria-describedby="altoHelp" placeholder="{{obra.alto}}" value="{{obra.alto}}" required>
+                                                aria-describedby="altoHelp" placeholder="{{alto}}" value="{{alto}}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12 text-right">
-                                <button class="guardar-obra" type="submit" name="id" value="{{obra.id}}"> Guardar </button>
+                                <button class="guardar-obra" type="submit" name="id" value="{{id}}"> Guardar </button>
                              </div>
                     </div>
                     </form>
@@ -194,7 +194,8 @@
 
 
 <div style="flex-direction: row-reverse;" class="d-flex space-between">
-    <button data-toggle="modal" data-target="#editarObra" style="width: 40px; height: 40px;"
+
+    <button data-toggle="modal" data-target="#editarObra{{id}}" style="width: 40px; height: 40px;"
         class="p-2 m-3 rounded-circle btn btn-lg btn-compra">
         <i class="fas fa-pen"></i>
     </button>

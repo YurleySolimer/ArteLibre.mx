@@ -4,10 +4,6 @@ const pool = require('../database');
 
 const Handlebars = require('handlebars');
 
-Handlebars.registerHelper('año', function(date) {
-  const año = date.getFullYear();  
-  return año;
-});
 
 Handlebars.registerHelper('ifCond', function(v1, v2, options) {
 	if(v1 === v2) {

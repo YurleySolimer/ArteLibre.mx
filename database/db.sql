@@ -126,3 +126,64 @@ CREATE TABLE ResetTokens (
   used int(11) NOT NULL DEFAULT '0'
 );
 
+
+
+
+
+
+
+
+-- THIS IS NEW
+
+ALTER TABLE obras 
+modify fecha_creacion year default '2020';
+
+
+CREATE TABLE eventos (
+	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(150),
+	titulo VARCHAR(250) DEFAULT 'N/A',
+	organizadores INT (11),
+	hora_inicio TIME DEFAULT '00:00',
+	fecha_inicio timestamp DEFAULT '2020-01-01',
+	fecha_fin timestamp DEFAULT '2020-12-31',
+	dir_local VARCHAR(50),
+	direccion VARCHAR(50),
+	ciudad VARCHAR(50),
+	pais VARCHAR(50),
+	piezas INT(11),
+	estilo VARCHAR (50),
+	descripcion TEXT,
+    artista_id INT (11) DEFAULT 0,
+	CONSTRAINT fk_artista4 FOREIGN KEY  (artista_id) REFERENCES artistas(id)
+);
+
+CREATE TABLE fotosEventos (
+	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	fotoNombre VARCHAR (300),
+	fotoUbicacion VARCHAR (300),
+    evento_id INT (11),
+	principal ENUM ('true', 'false') DEFAULT 'false',
+	CONSTRAINT fk_evento FOREIGN KEY  (evento_id) REFERENCES eventos(id)
+);
+
+CREATE VIEW eventoCompleto AS
+SELECT 	e.id, e.nombre, e.titulo, e.organizadores, e.hora_inicio, e.fecha_inicio, e.fecha_fin, e.dir_local, e.direccion, e.ciudad, e.pais, e.piezas, e.estilo, e.descripcion, e.artista_id,
+		a.pais as paisArtis, a.region, a.provincia, a.años_experiencia, a.direccion as dirArtist, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
+		u.email, u.telefono, u.nombre as nombreArtist, u.apellido, u.foto_nombre, u.foto_ubicacion, u.id AS userID,
+		f.fotoNombre, f.fotoUbicacion, f.principal
+FROM eventos e 
+JOIN fotosEventos f ON f.evento_id = e.id AND f.principal = 'True'
+JOIN artistas a ON a.id = e.artista_id
+JOIN users u ON u.id = a.user_id
+;
+
+CREATE TABLE subastasInfo (
+	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    obra_id INT (11) DEFAULT 0,
+	fecha_inicio timestamp DEFAULT '2020-01-01',
+	hora_inicio TIME DEFAULT '00:00',
+	hora_fin TIME DEFAULT '23:59',
+	precio_base INT DEFAULT 0,
+	CONSTRAINT fk_obra3 FOREIGN KEY  (obra_id) REFERENCES obras(id)
+);

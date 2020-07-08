@@ -14,7 +14,9 @@
                     </div>
                 </div>
             <!-- Aquí se agregan las opciones según el tipo de usuario -->
-            {{> OptionsObraArtist }}
+             {{#ifCond artista true}}
+                {{> OptionsObraArtist }}
+            {{/ifCond}}
             </div>
 
         </div>
@@ -59,7 +61,7 @@
     <div class="row py-3 text-center">
         <div class="col-12">
             <div class="text-left">
-                <h3>Te puede interear</h3>
+                <h3>Te puede interesar</h3>
             </div>
         </div>
         <div class="col-12">

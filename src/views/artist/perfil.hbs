@@ -80,7 +80,7 @@
             </p>
         </div>
         <div class="col-12 text-right">
-            <button class="btn-compra badge-pill">Galería</button>
+            <a href="/artista/{{user.id}}/galeria" class="btn-compra badge-pill">Galeria</a>
         </div>
     </div>
 </section>
@@ -142,7 +142,7 @@
         <div class="timeline-item" data-text="{{nombreObra}}">
             <div class="timeline__content"><img class="timeline__img"
                     src="/./uploads/{{fotoNombre}}" />
-                <h2 class="timeline__content-title">{{#año fecha_creacion}} {{fecha_creacion}} {{/año}}</h2>
+                <h2 class="timeline__content-title">{{fecha_creacion}}</h2>
                 <p class="timeline__content-desc"></p>
             </div>
         </div>
