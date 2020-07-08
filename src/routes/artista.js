@@ -23,7 +23,7 @@ Handlebars.registerHelper('ifCond', function (v1, v2, options) {
 // Dashboard
 //
 
-router.get('/artista/dashboard', isLoggedIn, isArtista, async (req, res) => {
+router.get('/dashboard', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
@@ -31,7 +31,7 @@ router.get('/artista/dashboard', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
-router.get('/artista/ventas', isLoggedIn, isArtista, async (req, res) => {
+router.get('/dashboard/ventas', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
@@ -39,7 +39,7 @@ router.get('/artista/ventas', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/mis-ventas', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
-router.get('/artista/eventos', isLoggedIn, isArtista, async (req, res) => {
+router.get('/dashboard/eventos', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
@@ -47,7 +47,7 @@ router.get('/artista/eventos', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
-router.get('/artista/subastas', isLoggedIn, isArtista, async (req, res) => {
+router.get('/dashboard/subastas', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
@@ -55,7 +55,7 @@ router.get('/artista/subastas', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
-router.get('/artista/colecciones', isLoggedIn, isArtista, async (req, res) => {
+router.get('/dashboard/colecciones', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
@@ -63,7 +63,7 @@ router.get('/artista/colecciones', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
-router.get('/artista/rendimiento', isLoggedIn, isArtista, async (req, res) => {
+router.get('/dashboard/rendimiento', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
@@ -71,7 +71,7 @@ router.get('/artista/rendimiento', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
-router.get('/artista/obras', isLoggedIn, isArtista, async (req, res) => {
+router.get('/dashboard/obras', isLoggedIn, isArtista, async (req, res) => {
   const obras = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =?', [req.user.id]);
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
@@ -84,7 +84,7 @@ router.get('/artista/obras', isLoggedIn, isArtista, async (req, res) => {
 // Dashboard nuevos elementos GET
 //
 
-router.get('/artista/nuevo-evento', isLoggedIn, isArtista, async (req, res) => {
+router.get('/dashboard/nuevo-evento', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
@@ -92,7 +92,7 @@ router.get('/artista/nuevo-evento', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/dashboard-nuevo-evento', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
-router.get('/artista/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
+router.get('/dashboard/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
@@ -103,7 +103,7 @@ router.get('/artista/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/dashboard-nueva-obra', { nombre: nombre[0], colecciones, artista, logueado, dashboard });
 });
 
-router.get('/artista/nueva-coleccion', isLoggedIn, isArtista, async (req, res) => {
+router.get('/dashboard/nueva-coleccion', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
