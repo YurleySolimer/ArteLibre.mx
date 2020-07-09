@@ -171,6 +171,13 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
 
   const obra = await pool.query('INSERT INTO obras set ?', [newObra]);
 
+  const artista_obras = await pool.query('SELECT * FROM obras WHERE artistas_id =?', [req.user.id]);
+  const numero_obras = {
+    numero_obras : artista_obras.length
+  }
+
+  await pool.query('UPDATE artistas SET? WHERE id =?', [req.user.id]);
+
   //GUARDANDO FOTOS DE LA OBRA//
 
   const fotos = req.files;
@@ -195,7 +202,7 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   const fotoColeccion = {
     fotoNombre: originalname
   }
-  await pool.query('UPDATE colecciones set? WHERE id=?', [fotoColeccion, coleccion])
+  await pool.query('UPDATE colecciones set? WHERE id=?', [fotoColeccion, coleccion]);
 
   if (dashboard) {
     res.redirect('/artista/dashboard')

@@ -1,3 +1,4 @@
+{{#each obras}}
 <!-- Modal Obra -->
 <div class="modal fade" id="datos-obra-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
@@ -93,7 +94,7 @@
 </div>
 
 <!-- Modal Ocultar -->
-<div class="modal fade" id="ocultar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="ocultar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -108,7 +109,7 @@
                     que decidas cambiar el estado.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-accion-admin">Ocultar</button>
+                <a href="/admin/obras/ocultar/{{id}}" type="button" class="btn btn-accion-admin">Ocultar</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
@@ -116,7 +117,7 @@
 </div>
 
 <!-- Modal Destacar -->
-<div class="modal fade" id="destacar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="destacar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -126,13 +127,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="">
+            <form action="/admin/obras/destacar" method="POST">
                 <div class="modal-body">
                     <p>¿Estás seguro de que deseas destacar a este obra? Esta acción lo llevará a mostrarse en la
                         página de inicio. Pueden existir hasta 10 obras destacadas</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-accion-admin">Destacar</button>
+                    <button type="submit" class="btn btn-accion-admin" name="id" value="{{id}}">Destacar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </form>
@@ -141,7 +142,7 @@
 </div>
 
 <!-- Modal Recomendar -->
-<div class="modal fade" id="recomendar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="recomendar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -151,24 +152,26 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="">
+            <form action="/admin/obras/recomendar" method="POST">>
                 <div class="modal-body">
                     <p>¿Estás seguro de que deseas recomendar esta obra? Esta acción lo llevará a mostrarse en la
                         página de inicio.</p>
                     <div class="form-group">
                         <label for="text-descripcion">Escriba el título que acompañará la sección de "obra
-                            recomendada" en el inicio:</label>
-                        <input name="text-descripcion" type="text" class="form-control" id="text-descripcion" cols="30" rows="10" />
+                            recomendada" en el inicio (Máximo 80 carácteres)</label>
+                        <input name="text" type="text" class="form-control" id="text-descripcion" cols="30" rows="10" />
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-accion-admin">Recomendar</button>
+                    <button type="submit" class="btn btn-accion-admin" name="id" value="{{id}}">Recomendar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+{{/each}}
 
 
 {{> Navigation }}
@@ -204,37 +207,43 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Ubicación</th>
                             <th scope="col">Artista</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">ID</th>
+                            <th scope="col">En venta</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each obras}}
                         <tr class="ml-5">
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">{{nombreObra}}</h2>
                                 </button></td>
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire</a></td>
-                            <td>Vincent Van Gogh</td>
-                            <td>Vendida</td>
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <td class="gold">149.000 MXN</td>
-                            <td><a href="#" class="accion-editar">1</a></td>
+                            <td><a href="#" class="coleccion-mis-obras">{{lugarCreacion}}</a></td>
+                            <td>{{nombre}} {{apellido}}</td>
+                            <td>{{en_venta}}</td>
+                            <td class="gold">{{precio}} MXN</td>
+                            <td><a href="#" class="accion-editar">{{cantidad}}</a></td>
                             <td>
                                 <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#borrar-obra" class="borrar"><i
+                                    <button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i
                                             class="fas fa-trash"></i></button>
-                                    <button data-toggle="modal" data-target="#ocultar-obra" class="ocultar"><i
+                                     {{#ifCond ocultar 'No'}}
+                                    <button data-toggle="modal" data-target="#ocultar-obra{{id}}" class="ocultar"><i
                                             class="fas fa-eye-slash"></i></button>
-                                    <button data-toggle="modal" data-target="#destacar-obra" class="destacar"><i
+                                    {{/ifCond}}
+                                    {{#ifCond destacar 'No'}}
+                                    <button data-toggle="modal" data-target="#destacar-obra{{id}}" class="destacar"><i
                                             class="far fa-thumbs-up"></i></button>
-                                    <button data-toggle="modal" data-target="#recomendar-obra" class="recomendar"><i
+                                    {{/ifCond}}
+                                    {{#ifCond recomendar 'No'}}
+                                    <button data-toggle="modal" data-target="#recomendar-obra{{id}}" class="recomendar"><i
                                             class="far fa-star"></i></button>
+                                    {{/ifCond}}
                                 </div>
                             </td>
                         </tr>
+                        {{/each}}
                     </tbody>
                 </table>
             </div>

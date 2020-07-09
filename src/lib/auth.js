@@ -22,6 +22,14 @@ module.exports = {
         return res.redirect('/');
     },
 
+    async isAdmin (req, res, next) {  
+        var user = await  pool.query('SELECT * FROM users WHERE id =?', req.user.id);
+        if (user[0].tipo == 'Admin') {  
+            return next();
+        }
+        return res.redirect('/');
+    },
+
     isNotLoggedIn (req, res, next) { 
         if (!req.isAuthenticated()) {  
             return next();

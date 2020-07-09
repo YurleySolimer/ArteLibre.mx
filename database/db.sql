@@ -187,3 +187,58 @@ CREATE TABLE subastasInfo (
 	precio_base INT DEFAULT 0,
 	CONSTRAINT fk_obra3 FOREIGN KEY  (obra_id) REFERENCES obras(id)
 );
+
+
+ALTER TABLE obras 
+add destacar ENUM ('Si', 'No') default 'No';
+
+ALTER TABLE obras 
+add recomendar ENUM ('Si', 'No') default 'No';
+
+ALTER TABLE obras 
+add titulo_recomendada VARCHAR(100) DEFAULT 'Obra Recomendada';
+
+ALTER TABLE obras 
+add cantidad INT default 1;
+
+ALTER TABLE artistas
+add destacar ENUM ('Si', 'No') default 'No';
+
+ALTER TABLE artistas
+add info_destacar TEXT;
+
+ALTER TABLE obras 
+add ocultar ENUM ('Si', 'No') default 'No';
+
+ALTER TABLE artistas
+add numero_obras INT DEFAULT 0;
+
+ALTER TABLE users 
+add inactivo ENUM ('Si', 'No') default 'No';
+
+drop view usuarioArtista;
+
+CREATE VIEW usuarioArtista AS ( 
+	SELECT a.pais, a.region, a.provincia, a.destacar, a.info_destacar, a.numero_obras, a.años_experiencia, a.direccion, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
+		   u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion, u.id
+	FROM artistas a
+	JOIN users u 
+	ON u.id = a.user_id
+); 
+
+
+drop view obraCompleta;
+
+CREATE VIEW obraCompleta AS
+SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
+		o.destacar, o.recomendar, o.cantidad, o.ocultar, o.titulo_recomendada,
+		a.pais, a.region, a.provincia, a.años_experiencia, a.direccion, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
+		u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion,
+		f.fotoNombre, f.fotoUbicacion, f.principal
+FROM obras o 
+JOIN fotosObras f ON f.obra_id = o.id AND f.principal = 'True'
+JOIN artistas a ON a.id = o.artista_id
+JOIN users u ON u.id = a.user_id
+;
+
+
