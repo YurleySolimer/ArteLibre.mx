@@ -111,6 +111,31 @@
                             {{/ifCond}}
                         </div>
                     </span>
+
+                    {{else}}
+
+                    <span class="dropdown show">
+                        <a href="#" class="btn dropdown-toggle" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="text-secondary inicio-name">{{nombre.nombre}} {{nombre.apellido}}
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16.59 8.29501L12 12.875L7.41 8.29501L6 9.70501L12 15.705L18 9.70501L16.59 8.29501Z"
+                                        fill="#BDA008" fill-opacity="0.54" />
+                                </svg>
+                            </span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            {{#ifCond artista true}}
+                            {{> MenuArtist}}
+                            {{/ifCond}}
+                            {{#ifCond cliente true}}
+                            {{> MenuClient}}
+                            {{/ifCond}}
+                        </div>
+                    </span>
+
                     {{/if}}
 
 
