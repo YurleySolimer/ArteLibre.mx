@@ -147,16 +147,17 @@ router.get('/nueva-coleccion', isLoggedIn, isArtista, async (req, res) => {
 
 router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   //GUARDANDO DATOS DE LA OBRA//
-  const { nombre, coleccion, creacion, tecnica, estilo, precio, ancho, alto, subasta, copias, descripcion, lcreacion, fcreacion } = req.body;
+  const { nombreObra, coleccion, creacion, tecnica, estilo, precio, ancho, alto, subasta, copias, descripcion, lcreacion, fcreacion } = req.body;
   var nombreColeccion = 'N/A';
 
   if (coleccion > 0) {
     nombreColeccion = await pool.query('SELECT nombreColeccion FROM colecciones WHERE id =?', [coleccion]);
     nombreColeccion = nombreColeccion[0];
   }
+  console.log(nombreObra, nombreColeccion)
   const newObra = {
-    nombreObra: nombre,
-    coleccion: nombre,
+    nombreObra: nombreObra,
+    coleccion: nombreColeccion.nombreColeccion,
     coleccion_id: coleccion,
     lugarCreacion: lcreacion,
     fecha_creacion: fcreacion,

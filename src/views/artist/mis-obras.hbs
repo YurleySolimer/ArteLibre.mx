@@ -1,3 +1,5 @@
+{{#each obras}}
+
 <!-- Modal Obra -->
 <div class="modal fade" id="editarObra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
@@ -28,7 +30,7 @@
                         <div class="form-group">
                             <label for="Nombre">Nombre</label>
                             <input type="text" class="form-control" id="Nombre" name="nombre"
-                                aria-describedby="NombreHelp" placeholder="{{nombre}}" value="{{nombre}}" required>
+                                aria-describedby="NombreHelp" placeholder="{{nombreObra}}" value="{{nombreObra}}" required>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -36,7 +38,7 @@
                             <label for="precio">Precio (MXN)</label>
                             <div class="row">
                                 <div class="col px-1"><input type="number" name="precioArtista" id="precioA"
-                                        aria-describedby="Lo que recibe el artista" placeholder="Recibiras"
+                                        aria-describedby="Lo que recibe el artista" placeholder="{{precio}}" value="{{precio}}"
                                         class="form-control" required></div>
                                 <div class="col px-1"><input type="number" name="precioArtelibre" id="precioB"
                                         aria-describedby="Lo que recibe ArteLibre" placeholder="ArteLibre"
@@ -46,7 +48,7 @@
                                         required>
                                 </div>
                                 <div class="col px-1"><input type="number" name="precioFinal" id="precioF"
-                                        aria-describedby="Precio Final" placeholder="{{nombre}}" value="{{nombre}}" class="form-control"
+                                        aria-describedby="Precio Final"  class="form-control"
                                         required>
                                 </div>
                             </div>
@@ -169,7 +171,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-right">
-                        <input type="submit" name="id" value="{{id}}" class="guardar-obra">
+                        <button class="guardar-obra" type="submit" name="id" value="{{id}}"> Guardar </button> 
                     </div>
                 </div>
             </form>
@@ -223,6 +225,8 @@
     </div>
 </div>
 
+{{/each}}
+
 
 {{> Navigation }}
 
@@ -267,7 +271,7 @@
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">{{nombre}}</h2>
+                                    <h2 style="font-weight: bold;">{{nombreObra}}</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
                             <td><a href="#" class="coleccion-mis-obras">{{coleccion}}</a></td>
@@ -279,9 +283,9 @@
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td>
                                 <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#borrar-obra" class="borrar"><i
+                                    <button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i
                                             class="fas fa-trash"></i></button>
-                                    <button data-toggle="modal" data-target="#ocultar-obra" class="ocultar"><i
+                                    <button data-toggle="modal" data-target="#ocultar-obra{{id}}" class="ocultar"><i
                                             class="fas fa-eye-slash"></i></button>
                                     <button data-toggle="modal" data-target="#editarObra{{id}}" class="editar"><i
                                             class="fas fa-pen"></i></button>
