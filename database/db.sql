@@ -246,3 +246,5 @@ JOIN users u ON u.id = a.user_id
 
 ALTER TABLE colecciones
 add destacar ENUM ('Si', 'No') default 'No';
+
+

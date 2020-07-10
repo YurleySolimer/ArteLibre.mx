@@ -77,6 +77,7 @@ router.get('/dashboard/obras', isLoggedIn, isArtista, async (req, res) => {
   artista = true;
   logueado = true;
   dashboard = true;
+  console.log(obras)
   res.render('artist/mis-obras', { obras, nombre: nombre[0], artista, logueado, dashboard });
 });
 
@@ -147,7 +148,7 @@ router.get('/nueva-coleccion', isLoggedIn, isArtista, async (req, res) => {
 
 router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   //GUARDANDO DATOS DE LA OBRA//
-  const { nombreObra, coleccion, creacion, tecnica, estilo, precio, ancho, alto, subasta, copias, descripcion, lcreacion, fcreacion } = req.body;
+  const { nombreObra, coleccion, creacion, tecnica, estilo, precioFinal, ancho, alto, subasta, copias, descripcion, lcreacion, fcreacion } = req.body;
   var nombreColeccion = 'N/A';
 
   if (coleccion > 0) {
@@ -165,7 +166,7 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
     estilo,
     ancho,
     alto,
-    precio,
+    precio : precioFinal,
     descripcion,
     artista_id: req.user.id
   }

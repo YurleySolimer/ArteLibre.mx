@@ -14,7 +14,7 @@
             <form action="/obra/editar/{{id}}" method="POST" enctype="multipart/form-data" class="form">
                 <div class="row mb-3">
                     <div class="col-12">
-                        <input type="file" name="image" accept="image/gif, image/png, image/jpeg" multiple required
+                        <input type="file" name="image" accept="image/gif, image/png, image/jpeg" multiple
                             id="gallery-photo-add" style="display: none;">
                         <label for="gallery-photo-add" class="label-agregar-fotos">Agregar fotos</label>
                         <br>
@@ -40,6 +40,7 @@
                                 <div class="col px-1"><input type="number" name="precioArtista" id="precioA"
                                         aria-describedby="Lo que recibe el artista" placeholder="{{precio}}" value="{{precio}}"
                                         class="form-control" required></div>
+                                
                                 <div class="col px-1"><input type="number" name="precioArtelibre" id="precioB"
                                         aria-describedby="Lo que recibe ArteLibre" placeholder="ArteLibre"
                                         class="form-control" required></div>
@@ -51,6 +52,7 @@
                                         aria-describedby="Precio Final"  class="form-control"
                                         required>
                                 </div>
+                                
                             </div>
                             <small class="text-muted">El precio final será el que el cliente ve en la plataforma y el
                                 que
