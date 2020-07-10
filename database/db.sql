@@ -242,3 +242,7 @@ JOIN users u ON u.id = a.user_id
 ;
 
 
+-- THIS IS NEW II xd
+
+ALTER TABLE colecciones
+add destacar ENUM ('Si', 'No') default 'No';

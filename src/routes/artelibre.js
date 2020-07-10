@@ -207,7 +207,7 @@ router.get('/artistas', async (req, res) => {
 });
 
 router.get('/obras',  async (req, res) => {
-  var obras = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
+  var obras = await pool.query('SELECT * FROM obraCompleta WHERE principal =? AND ocultar =?', ['True', 'No']);
   artista = await isArtist(req);
   cliente = await isClient(req);
   admin = await isAdmin(req);

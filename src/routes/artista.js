@@ -171,12 +171,12 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
 
   const obra = await pool.query('INSERT INTO obras set ?', [newObra]);
 
-  const artista_obras = await pool.query('SELECT * FROM obras WHERE artistas_id =?', [req.user.id]);
+  const artista_obras = await pool.query('SELECT * FROM obras WHERE artista_id =?', [req.user.id]);
   const numero_obras = {
     numero_obras : artista_obras.length
   }
 
-  await pool.query('UPDATE artistas SET? WHERE id =?', [req.user.id]);
+  await pool.query('UPDATE artistas SET? WHERE id =?', [numero_obras, req.user.id]);
 
   //GUARDANDO FOTOS DE LA OBRA//
 
@@ -207,13 +207,12 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   if (dashboard) {
     res.redirect('/artista/dashboard')
   } else {
-    res.redirect('/obras');
+    res.redirect('/dashboard/obras');
   };
 });
 
 router.post('/nueva-coleccion', isLoggedIn, isArtista, async (req, res) => {
   const { nombre, año, descripcion, estilo, tecnica, ubicacionPais, ubicacionCiudad } = req.body;
-  const artista_id = await pool.query('SELECT id FROM artistas WHERE user_id =?', [req.user.id]);
   const newColeccion = {
     nombreColeccion: nombre,
     anio: año,
@@ -222,14 +221,14 @@ router.post('/nueva-coleccion', isLoggedIn, isArtista, async (req, res) => {
     tecnica,
     pais: ubicacionPais,
     ciudad: ubicacionCiudad,
-    artista_id: artista_id[0].id
+    artista_id: req.user.id
   }
   await pool.query('INSERT into colecciones SET ?', [newColeccion]);
 
   if(dashboard) {
-    res.redirect('/artista/dashboard')
+    res.redirect('/artista/dashboard-nueva-obra')
   } else {
-    res.redirect('colecciones');
+    res.redirect('nueva-obra');
   };
 });
 
