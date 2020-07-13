@@ -44,7 +44,7 @@ router.get('/dashboard/eventos', isLoggedIn, isArtista, async (req, res) => {
   artista = true;
   logueado = true;
   dashboard = true;
-  res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard });
+  res.render('artist/mis-eventos', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
 router.get('/dashboard/subastas', isLoggedIn, isArtista, async (req, res) => {
@@ -52,7 +52,7 @@ router.get('/dashboard/subastas', isLoggedIn, isArtista, async (req, res) => {
   artista = true;
   logueado = true;
   dashboard = true;
-  res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard });
+  res.render('artist/mis-subastas', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
 router.get('/dashboard/colecciones', isLoggedIn, isArtista, async (req, res) => {
@@ -60,7 +60,7 @@ router.get('/dashboard/colecciones', isLoggedIn, isArtista, async (req, res) => 
   artista = true;
   logueado = true;
   dashboard = true;
-  res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard });
+  res.render('artist/mis-colecciones', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
 router.get('/dashboard/rendimiento', isLoggedIn, isArtista, async (req, res) => {
@@ -68,7 +68,7 @@ router.get('/dashboard/rendimiento', isLoggedIn, isArtista, async (req, res) => 
   artista = true;
   logueado = true;
   dashboard = true;
-  res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard });
+  res.render('artist/mi-rendimiento', { nombre: nombre[0], artista, logueado, dashboard });
 });
 
 router.get('/dashboard/obras', isLoggedIn, isArtista, async (req, res) => {
@@ -116,7 +116,8 @@ router.get('/dashboard/nueva-coleccion', isLoggedIn, isArtista, async (req, res)
 // Nuevos elementos por fuera del dashboard GET
 //
 
-router.get('/nuevo-evento', isLoggedIn, isArtista, (req, res) => {
+router.get('/nuevo-evento', isLoggedIn, isArtista, async (req, res) => {
+  const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
   dashboard = false;

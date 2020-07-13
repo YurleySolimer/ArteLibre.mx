@@ -1,91 +1,224 @@
-<!-- Modal -->
-<div class="modal fade" id="datos-obra-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<!-- Modal Editar -->
+<div class="modal fade" id="editarObra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" style="width: 90vw;" role="document">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <div class="modal-title">Editar Evento {{id}} </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/obra/editar/{{id}}" method="POST" enctype="multipart/form-data" class="form">
+                <div class="row">
+                <div class="col-12">
+                    <h4>Fotos del evento</h4>
+                    <p class="text-muted">
+                        Agregar las fotos que aparecerán para tu evento, la primera será la portada en el calendario y
+                        las demás aparecerán en la página del evento.
+                    </p>
+                </div>
+                <div class="col-12 col-lg-4 my-4">
+                    <div class="foto-evento">
+                        <label for="file-input-1">
+                            <div class="foto-container-evento">
+                                <div class="inner-container-evento">
+                                    <div class="m-auto">
+                                        <span class="m-auto">
+                                            <i class="fas fa-plus fa-5x"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <input name="image" id="file-input-1" type="file" style="display: none;" required />
+                                <img id="imgSalida1" src="" class="img-evento-registro img-fluid" />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 my-4">
+                    <div class="foto-evento">
+                        <label for="file-input-2">
+                            <div class="foto-container-evento">
+                                <div class="inner-container-evento">
+                                    <div class="m-auto">
+                                        <span class="m-auto">
+                                            <i class="fas fa-plus fa-5x"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <input name="image" id="file-input-2" type="file" style="display: none;" />
+                                <img id="imgSalida2" src=""  class="img-evento-registro img-fluid" />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 my-4">
+                    <div class="foto-evento">
+                        <label for="file-input-3">
+                            <div class="foto-container-evento">
+                                <div class="inner-container-evento">
+                                    <div class="m-auto">
+                                        <span class="m-auto">
+                                            <i class="fas fa-plus fa-5x"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <input name="image" id="file-input-3" type="file" style="display: none;" />
+                                <img id="imgSalida3" src="" class="img-evento-registro img-fluid" />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 my-4 text-right">
+                    <small class="text-muted">Puedes cambiar las imagenes volviendo a hacer click en ellas.</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="Nombre"
+                            placeholder="Nombre del evento" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" aria-describedby="titulo"
+                            placeholder="Título del evento" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="organizadores">Organizadores</label>
+                        <input type="text" class="form-control" id="organizadores" name="organizadores"
+                            aria-describedby="organizadores" placeholder="Organizadores del evento" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="hora">Hora de Apertura</label>
+                        <input type="time" class="form-control" id="hora" name="hora" aria-describedby="hora" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="inicio">Fecha de Inicio</label>
+                        <input type="date" class="form-control" id="inicio" name="inicio" aria-describedby="inicio"
+                            required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="fin">Fecha de Fin</label>
+                        <input type="date" class="form-control" id="fin" name="fin" aria-describedby="fin" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="local">Local</label>
+                        <input type="text" placeholder="Local dónde se realizará" class="form-control" id="local"
+                            name="local" aria-describedby="local" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección"
+                            aria-describedby="direccion" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <input type="text" placeholder="Ciudad" class="form-control" id="ciudad" name="ciudad"
+                            aria-describedby="local" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="pais">País</label>
+                        <input type="text" class="form-control" id="pais" name="pais" placeholder="País"
+                            aria-describedby="pais" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="piezas">Número de piezas</label>
+                        <input type="number" placeholder="# de Piezas" class="form-control" id="piezas" name="piezas"
+                            aria-describedby="piezas" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="estilo">Estilo</label>
+                        <input type="text" class="form-control" id="estilo" name="estilo" placeholder="Estilo"
+                            aria-describedby="estilo" required>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="descripción">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion"
+                            aria-describedby="descripcion" placeholder="Describe el evento" required></textarea>
+                    </div>
+                </div>
+                <div class="col-12 text-right">
+                    <button type="submit" class="guardar-obra">  Guardar </button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Borrar -->
+<div class="modal fade" id="borrar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <h5 class="modal-title">Borrar evento</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <div class="">
-                            <img class="img-fluid" src="images/vangogh1.jpg" alt="girasoles">
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-12 col-lg-6">
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Nombre de la obra</h5>
-                                    <h4 class="">Los Girasoles #13</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Artista</h5>
-                                    <h4 class="">Vincent Van Gogh</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">ID</h5>
-                                    <h4 class="">AHSDKJHALKSD13413KJK</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Ubicación de la obra</h5>
-                                    <h4 class="">La Haya, Holanda</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Codigo de Seguimiento</h5>
-                                    <input type="text" name="" id="" class="form-control">
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Fecha de Arribo</h5>
-                                    <input type="date" name="" id="" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Nombre del comprador</h5>
-                                    <h4 class="">Luis Fernando Méndez</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Ubicación del Comprador</h5>
-                                    <h4 class="">San Fermin, Tunez</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Currier</h5>
-                                    <h4 class="">DHL</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Dirección</h5>
-                                    <h4 class="">Edif 5, 450C Ruta Central</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5 class="text-muted">Precio</h5>
-                                    <h4 class="">175.000 MXN</h4>
-                                </div>
-                                <div class="py-2 my-3">
-                                    <h5>Registrar Envio</h5>
-                                    <button type="submit" class="btn badge-recibido">Enviar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <p>¿Estás seguro de que deseas eliminar este evento? Esta acción es permanente, se perderan todos los
+                    datos que corresponden a este evento.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Eliminar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
 
-
 {{> Navigation }}
 
 {{> artistSidebar }}
 
-<div class="container">
-    <div class="content">
-        <div class="m-5">
-            <h2>Mis Obras</h2>
+<div class="container-fluid">
+    <div class="content-admin">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="m-5">
+                    <h2>Mis Eventos</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="row filtro-lista h-100">
+                    <div class="col-10">
+                        <input type="text" class="d-inline form-control badge-pill filter-form form-control-sm"
+                            placeholder="Buscar" id="inlineFormCustomSelectPref">
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="d-inline badge badge-pill btn-compra"><i
+                                class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="section ventas">
             <div class="tabla mis-ventas">
@@ -93,31 +226,41 @@
                     <thead style="background-color: #bda00899;">
                         <tr>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Colección</th>
-                            <th scope="col">Estilo</th>
-                            <th scope="col">P. Definido</th>
-                            <th scope="col">P. Sugerido</th>
+                            <th scope="col">Artista</th>
+                            <th scope="col">Ubicación</th>
+                            <th scope="col">Piezas</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Horario</th>
+                            <th scope="col">Dirección</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each obras}}
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">Nombre</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">{{coleccion}}</a></td>
-                            <td>{{estilo}}</td>
+                            <td><a href="/artista/{{id}}" class="coleccion-mis-obras">Artista</a></td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">{{precio}} MXN</td>
+                            <td class="text-muted">Ciudad</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">197.000 MXN</td>
+                            <td class="gold">#</td>
+                            <td class="gold">Fecha</td>
+                            <td class="gold">Inicio - Fin</td>
+                            <td class="gold">Dirección</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Editar</a></td>
+                            <td>
+                                <div class="opciones-admin-list">
+                                    <button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
+                                    <button data-toggle="modal" data-target="#editarObra{{id}}" class="editar"><i
+                                            class="fas fa-pen"></i></button>
+
+                                </div>
+                            </td>
                         </tr>
-                        {{/each}}
                     </tbody>
                 </table>
             </div>
@@ -128,3 +271,174 @@
 {{> sidebarEnd}}
 
 {{> Footer }}
+
+<script>
+    $(document).ready(function () {
+        $(function () {
+            // Multiple images preview in browser
+            let k = 0
+            let imagesPreview = function (input, placeToInsertImagePreview) {
+
+                if (input.files) {
+                    let filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        let reader = new FileReader();
+                        reader.onload = function (event) {
+                            let divImage = 'div#' + k;
+                            let imageID = 'image' + k;
+                            $($.parseHTML('<div>')).attr('id', k).attr('class', 'col-4 col-md-3 col-lg-2 container-image-nueva').appendTo(placeToInsertImagePreview);
+                            $($.parseHTML('<img>')).attr('src', event.target.result).attr('id', imageID).attr('onClick', 'eliminar(this.id)').attr('class', 'imagen-galeria-input btn').appendTo(divImage);
+                            k++
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+
+            };
+
+            $('#gallery-photo-add').on('change', function () {
+                imagesPreview(this, 'div.gallery');
+            });
+        });
+    });
+
+    function eliminar(e) {
+        let node = document.getElementById(e);
+        let parent = document.getElementById(node.parentNode.id);
+
+        let gallery = document.getElementById('gallery');
+
+        gallery.removeChild(parent);
+    }
+
+    function check() {
+        let check = document.getElementById('gridCheck');
+
+        if (check.checked == true) {
+            document.querySelector('#label-check').innerText = 'Tu obra se subastará';
+        } else {
+            document.querySelector('#label-check').innerText = '¿Deseas subastar tu obra?';
+        }
+    }
+
+    function checkdos() {
+        let check = document.getElementById('gridCheck2');
+
+        if (check.checked == true) {
+            document.querySelector('#label-check2').innerText = 'Se habilitó la venta de multiples copias';
+        } else {
+            document.querySelector('#label-check2').innerText = '¿Venderás varias copias?';
+        }
+    }
+
+    function checktres() {
+        let check = document.getElementById('gridCheck3');
+        let check4 = document.getElementById('check4');
+        let check2 = document.getElementById('check2');
+        let check1 = document.getElementById('check1');
+
+        if (check.checked == true) {
+            document.querySelector('#label-check3').innerText = 'Ya se vendió el original de la obra';
+            check4.style.display = 'block';
+            check2.style.display = 'none';
+            check1.style.display = 'none';
+        } else {
+            document.querySelector('#label-check3').innerText = '¿El original de la obra ya se vendió?';
+            check2.style.display = 'block';
+            check1.style.display = 'block';
+            check4.style.display = 'none';
+        }
+    }
+
+    function checkcuatro() {
+        let check = document.getElementById('gridCheck4');
+
+        if (check.checked == true) {
+            document.querySelector('#label-check4').innerText = 'Se habilitó la venta para GICLEE';
+        } else {
+            document.querySelector('#label-check4').innerText = '¿Venderás GICLEE de esta obra?';
+        }
+    }
+
+    check()
+    checkdos()
+    checktres()
+    checkcuatro()
+
+    // Funciona <3
+
+    const precioA = document.getElementById('precioA');
+    const precioB = document.getElementById('precioB');
+    const precioC = document.getElementById('precioC');
+    const precioF = document.getElementById('precioF');
+
+    precioA.addEventListener('keyup', function () {
+        let digitadoA = precioA.value;
+
+        let pA = parseFloat(digitadoA);
+
+        let pB = ((pA / .85) * .15).toFixed(2);
+        let pC = (((pA / .85) * 0.036) + 3).toFixed(2);
+        let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
+
+        precioB.setAttribute('value', pB);
+        precioC.setAttribute('value', pC);
+        precioF.setAttribute('value', pF);
+        precioB.value = pB;
+        precioC.value = pC;
+        precioF.value = pF;
+    });
+
+    precioB.addEventListener('keyup', function () {
+        let digitadoB = precioB.value;
+
+        let pB = parseFloat(digitadoB);
+
+        let pA = ((pB / .15) * .85).toFixed(2);
+        let pC = (((pB / .15) * 0.036) + 3).toFixed(2);
+        let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
+
+        precioA.setAttribute('value', pA);
+        precioC.setAttribute('value', pC);
+        precioF.setAttribute('value', pF);
+        precioA.value = pA;
+        precioC.value = pC;
+        precioF.value = pF;
+    });
+
+    precioC.addEventListener('keyup', function () {
+        let digitadoC = precioC.value;
+
+        let pC = parseFloat(digitadoC)
+
+        let pA = (((pC - 3) / 0.036) * .85).toFixed(2);
+        let pB = (((pC - 3) / 0.036) * .15).toFixed(2);
+        let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
+
+        precioA.setAttribute('value', pA);
+        precioB.setAttribute('value', pB);
+        precioF.setAttribute('value', pF);
+        precioB.value = pB;
+        precioA.value = pA;
+        precioF.value = pF;
+    });
+
+    precioF.addEventListener('keyup', function () {
+        let digitadoF = precioF.value;
+
+        let pF = parseFloat(digitadoF);
+
+        let pA = (((pF - 3) / 1.036) * .85).toFixed(2);
+        let pB = (((pF - 3) / 1.036) * .15).toFixed(2);
+        let pC = ((((pF - 3) / 1.036) * .036) + 3).toFixed(2);
+
+        precioA.setAttribute('value', pA);
+        precioC.setAttribute('value', pC);
+        precioB.setAttribute('value', pB);
+        precioB.value = pB;
+        precioC.value = pC;
+        precioA.value = pA;
+    });
+
+
+</script>
