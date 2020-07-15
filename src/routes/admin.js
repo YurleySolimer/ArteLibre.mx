@@ -8,6 +8,13 @@ const passport = require('passport');
 
 const Handlebars = require('handlebars');
 
+Handlebars.registerHelper('fecha', function(date) {
+  const dia = date.getDate();
+  const mes = date.getMonth()+1;
+  const año = date.getFullYear();	  
+  return `${dia} - ${mes} - ${año}`;
+});
+
 const { isArtista } = require('../lib/auth');
 const { isLoggedIn } = require('../lib/auth');
 
@@ -117,8 +124,10 @@ router.get('/admin/subastas', isLoggedIn, (req, res) => {
 router.get('/admin/clientes', isLoggedIn, (req, res) => {
     res.render('admin/clientes');
 });
-router.get('/admin/eventos', isLoggedIn, (req, res) => {
-    res.render('admin/eventos');
+router.get('/admin/eventos', isLoggedIn, async (req, res) => {
+    const eventos = await pool.query('SELECT * FROM eventoCompleto');
+
+    res.render('admin/eventos', {eventos});
 });
 router.get('/admin/ventas', isLoggedIn, (req, res) => {
     res.render('admin/ventas');
