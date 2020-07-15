@@ -30,7 +30,8 @@
                         <div class="form-group">
                             <label for="Nombre">Nombre</label>
                             <input type="text" class="form-control" id="Nombre" name="nombre"
-                                aria-describedby="NombreHelp" placeholder="{{nombreObra}}" value="{{nombreObra}}" required>
+                                aria-describedby="NombreHelp" placeholder="{{nombreObra}}" value="{{nombreObra}}"
+                                required>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -38,9 +39,8 @@
                             <label for="precio">Precio (MXN)</label>
                             <div class="row">
                                 <div class="col px-1"><input type="number" name="precioArtista" id="precioA"
-                                        aria-describedby="Lo que recibe el artista" placeholder="{{precio}}" value="{{precio}}"
-                                        class="form-control" required></div>
-                                
+                                        aria-describedby="Lo que recibe el artista" placeholder="Recibiras" class="form-control" required></div>
+
                                 <div class="col px-1"><input type="number" name="precioArtelibre" id="precioB"
                                         aria-describedby="Lo que recibe ArteLibre" placeholder="ArteLibre"
                                         class="form-control" required></div>
@@ -49,10 +49,10 @@
                                         required>
                                 </div>
                                 <div class="col px-1"><input type="number" name="precioFinal" id="precioF"
-                                        aria-describedby="Precio Final"  class="form-control"
-                                        required>
+                                        aria-describedby="Precio Final" class="form-control" placeholder="{{precio}}"
+                                        value="{{precio}}" required>
                                 </div>
-                                
+
                             </div>
                             <small class="text-muted">El precio final será el que el cliente ve en la plataforma y el
                                 que
@@ -63,8 +63,7 @@
                         <div class="form-group">
                             <label for="descripción">Descripción</label>
                             <textarea class="form-control" id="descripcion" name="descripcion"
-                                aria-describedby="descripcion"
-                                 placeholder="{{descripcion}}"></textarea>
+                                aria-describedby="descripcion" placeholder="{{descripcion}}"></textarea>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -83,15 +82,15 @@
                         <div class="form-group">
                             <label for="lcreacion">Lugar de Creación</label>
                             <input type="text" class="form-control" id="lcreacion" name="lcreacion"
-                                aria-describedby="creacionHelp"placeholder="{{lugarCreacion}}"
-                                        value="{{lugarCreacion}}" required>
+                                aria-describedby="creacionHelp" placeholder="{{lugarCreacion}}"
+                                value="{{lugarCreacion}}" required>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="fcreacion">Año de Creación</label>
-                            <select class="form-control" id="fcreacion" placeholder="{{fecha_creacion}}" name="fcreacion"
-                                aria-describedby="Año de creación">
+                            <select class="form-control" id="fcreacion" placeholder="{{fecha_creacion}}"
+                                name="fcreacion" aria-describedby="Año de creación">
 
                             </select>
                         </div>
@@ -100,7 +99,7 @@
                         <div class="form-group">
                             <label for="tecnica">Técnica</label>
                             <input type="text" class="form-control" id="tecnica" name="tecnica"
-                                aria-describedby="tecnicaHelp"  placeholder="{{tecnica}}" value="{{tecnica}}" required>
+                                aria-describedby="tecnicaHelp" placeholder="{{tecnica}}" value="{{tecnica}}" required>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
@@ -173,7 +172,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-right">
-                        <button class="guardar-obra" type="submit" name="id" value="{{id}}"> Guardar </button> 
+                        <button class="guardar-obra" type="submit" name="id" value="{{id}}"> Guardar </button>
                     </div>
                 </div>
             </form>
@@ -205,7 +204,7 @@
 </div>
 
 <!-- Modal Ocultar -->
-<div class="modal fade" id="ocultar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="ocultar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -221,6 +220,75 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-accion-admin">Ocultar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Quitar Ocultar -->
+<div class="modal fade" id="quitar-ocultar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mostrar Obra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas volver a mostrar esta obra? Esta acción durará un tiempo indefinido hasta
+                    que decidas cambiar el estado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-accion-admin">Mostrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Galeria -->
+<div class="modal fade" id="galeria-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Llevar Obra a Galeria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    ¿Estás de acuerdo con mostrar tu obra en tu galeria personal? De ser así, presiona "Aceptar".
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-accion-admin">Aceptar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Quitar Galeria -->
+<div class="modal fade" id="quitar-galeria-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Quitar de Galeria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás de acuerdo con quitar esta obra de tu galeria? De ser así, presiona "Quitar".</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Quitar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
@@ -285,10 +353,22 @@
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td>
                                 <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i
-                                            class="fas fa-trash"></i></button>
+                                    {{#ifCond galeria 'Si'}}
+                                    <button data-toggle="modal" data-target="#galeria-obra{{id}}" class="recomendar"><i
+                                            class="fas fa-images"></i></button>
+                                    {{else}}
+                                    <button data-toggle="modal" data-target="#quitar-galeria-obra{{id}}" class="borrar"><i
+                                            class="fas fa-times-circle"></i></button>
+                                    {{/ifCond}}
+                                    {{#ifCond ocultar 'Si'}}
                                     <button data-toggle="modal" data-target="#ocultar-obra{{id}}" class="ocultar"><i
                                             class="fas fa-eye-slash"></i></button>
+                                    {{else}}
+                                    <button data-toggle="modal" data-target="#quitar-ocultar-obra{{id}}" class="ocultar"><i
+                                            class="fas fa-eye"></i></button>
+                                    {{/ifCond}}
+                                    <button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
                                     <button data-toggle="modal" data-target="#editarObra{{id}}" class="editar"><i
                                             class="fas fa-pen"></i></button>
 
@@ -365,7 +445,7 @@
             document.querySelector('#label-check2').innerText = '¿Venderás varias copias?';
         }
     }
-    
+
     function checktres() {
         let check = document.getElementById('gridCheck3');
         let check4 = document.getElementById('check4');
@@ -384,7 +464,7 @@
             check4.style.display = 'none';
         }
     }
-    
+
     function checkcuatro() {
         let check = document.getElementById('gridCheck4');
 
@@ -409,11 +489,11 @@
 
     precioA.addEventListener('keyup', function () {
         let digitadoA = precioA.value;
-        
+
         let pA = parseFloat(digitadoA);
 
         let pB = ((pA / .85) * .15).toFixed(2);
-        let pC = (((pA / .85)*0.036) + 3).toFixed(2);
+        let pC = (((pA / .85) * 0.036) + 3).toFixed(2);
         let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
 
         precioB.setAttribute('value', pB);
@@ -423,14 +503,14 @@
         precioC.value = pC;
         precioF.value = pF;
     });
-   
+
     precioB.addEventListener('keyup', function () {
         let digitadoB = precioB.value;
 
         let pB = parseFloat(digitadoB);
 
-        let pA = ((pB / .15) * .85 ).toFixed(2);
-        let pC = (((pB / .15)*0.036) + 3).toFixed(2);
+        let pA = ((pB / .15) * .85).toFixed(2);
+        let pC = (((pB / .15) * 0.036) + 3).toFixed(2);
         let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
 
         precioA.setAttribute('value', pA);
@@ -440,14 +520,14 @@
         precioC.value = pC;
         precioF.value = pF;
     });
-   
+
     precioC.addEventListener('keyup', function () {
         let digitadoC = precioC.value;
 
         let pC = parseFloat(digitadoC)
 
-        let pA = (((pC - 3) / 0.036 ) * .85).toFixed(2);
-        let pB = (((pC - 3) / 0.036 ) * .15).toFixed(2);
+        let pA = (((pC - 3) / 0.036) * .85).toFixed(2);
+        let pB = (((pC - 3) / 0.036) * .15).toFixed(2);
         let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
 
         precioA.setAttribute('value', pA);
@@ -457,7 +537,7 @@
         precioA.value = pA;
         precioF.value = pF;
     });
-   
+
     precioF.addEventListener('keyup', function () {
         let digitadoF = precioF.value;
 

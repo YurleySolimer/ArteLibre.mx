@@ -99,15 +99,15 @@
                 </div>
             </div>
             <div class="col-12 col-md-6">
-                <div class="row m-0 p-0">
-                    <div class="col-6 p-0 m-0">
-                        <div class="form-group ml-3">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
                             <label for="alto">Alto</label>
                             <input type="number" class="form-control" id="alto" name="alto" aria-describedby="altoHelp"
                                 placeholder="100cm" required>
                         </div>
                     </div>
-                    <div class="col-6 p-0 m-0">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="ancho">Ancho</label>
                             <input type="number" class="form-control" id="ancho" name="ancho"
@@ -250,9 +250,9 @@
         let check = document.getElementById('gridCheck4');
 
         if (check.checked == true) {
-            document.querySelector('#label-check4').innerText = 'Se habilitó la venta para GICLEE';
+            document.querySelector('#label-check4').innerText = 'Se habilitó la venta para giclée';
         } else {
-            document.querySelector('#label-check4').innerText = '¿Venderás GICLEE de esta obra?';
+            document.querySelector('#label-check4').innerText = '¿Venderás giclée de esta obra?';
         }
     }
 

@@ -1,11 +1,12 @@
 {{> Navigation }}
 
-<section class="container inicial">
+<section class="container inicial mt-5">
     <div class="content">
         <div class="row mb-5">
             <div class="col-12 col-lg-8">
                 <h1>{{evento.nombre}}</h1>
-                <h4 class="gold">{{evento.dir_local}} {{evento.direccion}} {{evento.ciudad}}</h4>
+                <h5 class="gold">{{evento.dir_local}} </h5>
+                <p class="text-muted">{{evento.direccion}} - {{evento.ciudad}}</p>
             </div>
             <div class="col-12 col-lg-4">
                 <div class="row">
@@ -14,7 +15,8 @@
                         <small class="font-weight-bold m-0">Fecha de fin </small>
                     </div>
                     <div class="col-6">
-                        <small class="gold m-0">{{#fecha evento.fecha_inicio}}{{evento.fecha_inicio}} {{/fecha}}</small> <br>
+                        <small class="gold m-0">{{#fecha evento.fecha_inicio}}{{evento.fecha_inicio}} {{/fecha}}</small>
+                        <br>
                         <small class="gold m-0">{{#fecha evento.fecha_fin}}{{evento.fecha_fin}} {{/fecha}}</small>
                     </div>
                 </div>
@@ -32,7 +34,7 @@
                             </a>
                         </div>
                         {{/each}}
-                        
+
                     </div>
                 </div>
             </div>
@@ -42,7 +44,7 @@
                 <p class="text-muted">
                     {{evento.descripcion}}
                 </p>
-                
+
                 <h5 class="font-weight-bold">Número de obras</h5>
                 <p class="text-muted">{{evento.piezas}} Piezas</p>
                 <h5 class="font-weight-bold">Estilo</h5>

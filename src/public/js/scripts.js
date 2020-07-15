@@ -25,19 +25,21 @@ for (i = 0; i < rutasAdmin.length; i++) {
 const toggleMenu = document.getElementById('toggle-admin-menu');
 const wrapperAdmin = document.getElementById('sidebar-wrapper-admin');
 
-toggleMenu.addEventListener('click', function () {
+if(toggleMenu != undefined) {
 
-    if (toggleMenu.classList) {
+    toggleMenu.addEventListener('click', function () {
 
-        // Toggle de la clase en nevagadores modernos
+        if (toggleMenu.classList) {
+            
+            // Toggle de la clase en nevagadores modernos
 
-        toggleMenu.classList.toggle('active');
+            toggleMenu.classList.toggle('active');
         wrapperAdmin.classList.toggle('active');
-
+        
     } else {
 
         // Para IE9
-
+        
         let classes = toggleMenu.className.split(" ");
         let i = classes.indexOf("active");
 
@@ -48,7 +50,8 @@ toggleMenu.addEventListener('click', function () {
             toggleMenu.className = classes.join(" ");
         }
     }
-})
+});
+}
 
 // Definir variables para la animación del Toggle del menú
 
@@ -135,13 +138,16 @@ const aCreacion = document.getElementById('fcreacion');
 const fecha = new Date();
 const yy = fecha.getFullYear();
 
-for (i = yy; i >= yy - 60; i--) {
-    const opt = document.createElement('option');
-    opt.value = i;
-    opt.text = i;
-    aCreacion.add(opt);
-}
+if (aCreacion != undefined) {
 
+    for (i = yy; i >= yy - 60; i--) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.text = i;
+        aCreacion.add(opt);
+    }
+}
+    
 //
 // Selector END
 //
