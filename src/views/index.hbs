@@ -14,7 +14,7 @@
             </div>
             <div class="col-12 col-lg-6 mb-5">
                 <a href="#" class="hero-title">
-                    <h1>{{obra_destacada.nombreObra}}</h1>
+                    <h1>{{obra_destacada.titulo_recomendada}}</h1>
                 </a>
             </div>
         </div>
@@ -98,20 +98,15 @@
             <div class="row index-fifth-section text-center">
                 <figure class="coleccion-destacada">
                     <figcaption class="figure-caption caption-coleccion-destacada">Colección destacada</figcaption>
-                    <h1 class="titulo-coleccion-destacada">El Impresionismo de Monet</h1>
+                    <h1 class="titulo-coleccion-destacada">{{coleccion_destacada.nombreColeccion}}</h1>
                     <div class="container-coleccion-index">
+                        {{#each obras_coleccion}}
                         <div class="image-coleccion-destacada coleccion-index-1">
-                            <img src="./images/monet3.jpg" alt="coleccion destacada"
+                            <img src="./uploads/{{fotoNombre}}" alt="Pintura"
                                 class="figure-img img-fluid imagen-obra-destacada">
                         </div>
-                        <div class="image-coleccion-destacada coleccion-index-2">
-                            <img src="./images/monet2.jpg" alt="coleccion destacada"
-                                class="figure-img img-fluid imagen-obra-destacada">
-                        </div>
-                        <div class="image-coleccion-destacada coleccion-index-3">
-                            <img src="./images/monet1.jpeg" alt="coleccion destacada"
-                                class="figure-img img-fluid imagen-obra-destacada">
-                        </div>
+                        {{/each}}
+                        
                     </div>
                     <a class="coleccion-title" href="#">
                         <span class="badge badge-pill badge-ver-coleccion-index my-3">Ver Colección</span>

@@ -107,14 +107,6 @@ JOIN artistas a ON a.id = o.artista_id
 JOIN users u ON u.id = a.user_id
 ;
 
-CREATE VIEW coleccionArtista AS
-SELECT c.id, c.nombreColeccion, c.anio, c.estilo, c.tecnica, c.pais, c.ciudad, c.descripcion, c.fotoNombre,
-       u.nombre, u.apellido, a.id as artistaId
-FROM colecciones c
-JOIN artistas a ON a.id = c.artista_id
-JOIN users u ON u.id = a.user_id
-;
-
 
 CREATE TABLE ResetTokens (
   id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -247,4 +239,23 @@ JOIN users u ON u.id = a.user_id
 ALTER TABLE colecciones
 add destacar ENUM ('Si', 'No') default 'No';
 
+ALTER TABLE colecciones
+add ocultar ENUM ('Si', 'No') default 'No';
 
+ALTER TABLE colecciones
+add piezas INT DEFAULT 0;
+
+ALTER TABLE colecciones
+add precioPromedio INT DEFAULT 0;
+
+INSERT INTO users (email, password, tipo, nombre, apellido) VALUES('noreply@artelibre.mx', '$2a$10$l75FU.VAJA9nDGtVUSTSFuNVkLc.2EN9G8gLxmr32DYwVsnoWz93i', 'Admin', 'ArteLibre', 'Admin');
+
+drop view coleccionArtista;
+
+CREATE VIEW coleccionArtista AS
+SELECT c.id, c.nombreColeccion, c.anio, c.estilo, c.tecnica, c.pais, c.ciudad, c.descripcion, c.fotoNombre, c.destacar, c.ocultar, c.piezas, c.precioPromedio,
+       u.nombre, u.apellido, a.id as artistaId
+FROM colecciones c
+JOIN artistas a ON a.id = c.artista_id
+JOIN users u ON u.id = a.user_id
+;

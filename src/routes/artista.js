@@ -155,7 +155,6 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
     nombreColeccion = await pool.query('SELECT nombreColeccion FROM colecciones WHERE id =?', [coleccion]);
     nombreColeccion = nombreColeccion[0];
   }
-  console.log(nombreObra, nombreColeccion)
   const newObra = {
     nombreObra: nombreObra,
     coleccion: nombreColeccion.nombreColeccion,
@@ -201,10 +200,25 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   }
   artista = true;
   logueado = true;
-  const fotoColeccion = {
-    fotoNombre: originalname
+
+  const todoColeccicones = await pool.query('SELECT * from colecciones WHERE id =?', [coleccion])
+  if (todoColeccicones) { 
+    var precioPromedio = todoColeccicones[0].precioPromedio + precioFinal;
+    const colecicon_obras = await pool.query('SELECT * FROM obras WHERE coleccion_id =?', [coleccion]);
+    var piezas = 0;
+    if (colecicon_obras) {
+      piezas = colecicon_obras.length;
+    }
+    else {
+      piezas + 1;
+    }
+    const NewColeccion = {
+      fotoNombre: originalname,
+      precioPromedio,
+      piezas
+    }
+  await pool.query('UPDATE colecciones set? WHERE id=?', [NewColeccion, coleccion]);
   }
-  await pool.query('UPDATE colecciones set? WHERE id=?', [fotoColeccion, coleccion]);
 
   if (dashboard) {
     res.redirect('/artista/dashboard')

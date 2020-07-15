@@ -6,6 +6,8 @@ const { isLoggedIn } = require('../lib/auth');
 const { isCliente} = require('../lib/auth');
 const { isArtista} = require('../lib/auth');
 
+//noreply@artelibre.mx < n0N0.r37ly!#
+
 var artista = false;
 var cliente = false;
 var admin = false;

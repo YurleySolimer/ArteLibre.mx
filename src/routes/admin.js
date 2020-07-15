@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database');
+const helpers = require('../lib/helpers');
+
+const passport = require('passport');
+
 
 const Handlebars = require('handlebars');
 
@@ -74,9 +78,29 @@ router.post('/admin/obras/recomendar', isLoggedIn, async (req, res) => {
 
 
 
-router.get('/admin/colecciones', isLoggedIn, (req, res) => {
-    res.render('admin/colecciones');
+router.get('/admin/colecciones', isLoggedIn, async (req, res) => {
+    const colecciones = await pool.query('SELECT * from coleccionArtista');
+    res.render('admin/colecciones', {colecciones});
 });
+
+router.post('/admin/colecciones/destacar', isLoggedIn, async (req, res) => {
+    const {id} = req.body;
+    const destacar = {
+        destacar : 'Si',
+    }
+    await pool.query('UPDATE colecciones set? WHERE id=?', [destacar, id]);
+    res.redirect('/admin/colecciones');
+}); 
+
+router.get('/admin/colecciones/ocultar/:id', isLoggedIn, async (req, res) => {
+    const ocultar = {
+        ocultar : 'Si',
+    }
+    await pool.query('UPDATE colecciones set? WHERE id=?', [ocultar, req.params.id]);    
+res.redirect('/admin/colecciones');
+});
+
+
 router.get('/admin/dashboard', isLoggedIn, (req, res) => {
     res.render('admin/dashboard');
 });
