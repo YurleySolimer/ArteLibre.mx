@@ -19,8 +19,9 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
   });
 
 router.get('/admin/artistas', isLoggedIn, async (req, res) => {
-    var artistas = await pool.query('SELECT * FROM usuarioArtista');
-    res.render('admin/artistas', {artistas});
+    var artistasCompletos = await pool.query('SELECT * FROM usuarioArtista');
+    
+    res.render('admin/artistas', {artistasCompletos});
 });
 
 router.post('/admin/artistas/destacar', isLoggedIn, async (req, res) => {

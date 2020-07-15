@@ -242,6 +242,13 @@ router.post('/nueva-coleccion', isLoggedIn, isArtista, async (req, res) => {
   }
   await pool.query('INSERT into colecciones SET ?', [newColeccion]);
 
+  const artista_colecciones = await pool.query('SELECT * FROM colecciones WHERE artista_id =?', [req.user.id]);
+  const numero_colecciones = {
+    numero_colecciones : artista_colecciones.length
+  }
+
+  await pool.query('UPDATE artistas SET? WHERE id =?', [numero_colecciones, req.user.id]);
+
   if(dashboard) {
     res.redirect('/artista/dashboard-nueva-obra')
   } else {
@@ -269,7 +276,13 @@ router.post('/nuevo-evento', isLoggedIn, isArtista, async (req,res) => {
     artista_id: req.user.id
   }
 
-  const evento = await pool.query('INSERT INTO eventos SET?', [newEvento] )
+  const evento = await pool.query('INSERT INTO eventos SET?', [newEvento] );
+  const artista_eventos = await pool.query('SELECT * FROM eventos WHERE artista_id =?', [req.user.id]);
+  const numero_eventos = {
+    numero_eventos : artista_eventos.length
+  }
+
+  await pool.query('UPDATE artistas SET? WHERE id =?', [numero_eventos, req.user.id]);
 
    for (var i = 0 ; i<req.files.length; i ++) {
      var principal = 'false';
