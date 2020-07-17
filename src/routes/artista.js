@@ -203,7 +203,7 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   logueado = true;
 
   const todoColeccicones = await pool.query('SELECT * from colecciones WHERE id =?', [coleccion])
-  if (todoColeccicones) { 
+  if (todoColeccicones.length > 0 ) { 
     var precioPromedio = todoColeccicones[0].precioPromedio + precioFinal;
     const colecicon_obras = await pool.query('SELECT * FROM obras WHERE coleccion_id =?', [coleccion]);
     var piezas = 0;
@@ -304,7 +304,7 @@ router.post('/nuevo-evento', isLoggedIn, isArtista, async (req,res) => {
     if(dashboard) {
       res.redirect('/artista/dashboard')
     } else {
-      res.redirect('eventos')
+      res.redirect('/dashboard/eventos')
     };
 });
 

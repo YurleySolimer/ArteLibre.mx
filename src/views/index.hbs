@@ -2,22 +2,24 @@
 
 <div class="container" style="margin-top: 5em;">
     <div class="section index-first-section text-center">
+        {{#each obra_destacada}}
         <div class="row">
             <div class="col-12 col-lg-6">
                 <figure class="figure contenedor-hero">
                     <figcaption class="figure-caption caption-obra-destacada">Obra recomendada</figcaption>
                     <a href="#">
-                        <img src="/./uploads/{{obra_destacada.fotoNombre}}" alt="obra recomendada"
+                        <img src="/./uploads/{{fotoNombre}}" alt="obra recomendada"
                             class="figure-img img-fluid imagen-obra-destacada">
                     </a>
                 </figure>
             </div>
             <div class="col-12 col-lg-6 mb-5">
                 <a href="#" class="hero-title">
-                    <h1>{{obra_destacada.titulo_recomendada}}</h1>
+                    <h1>{{titulo_recomendada}}</h1>
                 </a>
             </div>
         </div>
+        {{/each}}
     </div>
     <div class="section container-second-section">
         <div class="row row-second-section-index text-center">
@@ -40,33 +42,38 @@
         </div>
     </div>
     <div class="section">
+        {{#each artista_destacado}}
         <div class="row index-third-section text-center">
             <div class="col-12 my-3">
                 <figure class="figure contenedor-artista-index">
                     <figcaption class="figure-caption caption-artista-destacado">Artista destacado</figcaption>
                     <a href="#">
-                        <img src="/./uploads/{{artista_destacado.foto_nombre}}" alt="Artista destacada"
+                        <img src="/./uploads/{{foto_nombre}}" alt="Artista destacada"
                             class="figure-img img-fluid imagen-artista-destacado">
                     </a>
                 </figure>
                 <a class="artista-title-index" href="#">
-                    <h2><b>{{artista_destacado.nombre}} {{artista_destacado.apellido}}</b></h2>
+                    <h2><b>{{nombre}} {{apellido}}</b></h2>
                 </a>
             </div>
             <div class="col-12 artist-paragraph-index-container">
                 <p class="artist-paragraph-index">
-                    {{artista_destacado.biografia}}
+                    {{biografia}}
                 </p>
-                <img src="/./uploads/{{obra1_artista.fotoNombre}}" class="imagen-descripcion imagen-descripcion-1" alt="">
+                {{#each obra1_artista}}
+                <img src="/./uploads/{{fotoNombre}}" class="imagen-descripcion imagen-descripcion-1" alt="">
+                {{/each}}
                 <p class="artist-paragraph-index">
-                    {{artista_destacado.info_destacar}}
+                    {{info_destacar}}
                 </p>
                 </p>
-                <img src="/./uploads/{{obra2_artista.fotoNombre}}" class="imagen-descripcion imagen-descripcion-2" alt="">
-
-
+                {{#each obra2_artista}}
+                <img src="/./uploads/{{fotoNombre}}" class="imagen-descripcion imagen-descripcion-2" alt="">
+                {{/each}}
             </div>
+        {{/each}}
         </div>
+
         <div class="section">
             <div class="row index-fourth-section text-center">
                 <div class="col-12 text-left">

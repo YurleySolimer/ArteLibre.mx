@@ -1,5 +1,6 @@
 --alter user 'root'@'localhost' identified with mysql_native_password by 'CaramitiE.23'
 
+
 drop database database_artelibre;
 CREATE DATABASE database_artelibre;
 use database_artelibre;
@@ -71,6 +72,7 @@ CREATE TABLE obras (
 	CONSTRAINT fk_artista2 FOREIGN KEY  (artista_id) REFERENCES artistas(id)
 
 );
+
 
 CREATE TABLE colecciones (
 	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -229,7 +231,7 @@ SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreac
 		f.fotoNombre, f.fotoUbicacion, f.principal
 FROM obras o 
 JOIN fotosObras f ON f.obra_id = o.id AND f.principal = 'True'
-JOIN artistas a ON a.id = o.artista_id
+JOIN artistas a ON a. = o.artista_id
 JOIN users u ON u.id = a.user_id
 ;
 
@@ -250,13 +252,11 @@ add precioPromedio INT DEFAULT 0;
 
 INSERT INTO users (email, password, tipo, nombre, apellido) VALUES('noreply@artelibre.mx', '$2a$10$l75FU.VAJA9nDGtVUSTSFuNVkLc.2EN9G8gLxmr32DYwVsnoWz93i', 'Admin', 'ArteLibre', 'Admin');
 
-drop view coleccionArtista;
-
 CREATE VIEW coleccionArtista AS
 SELECT c.id, c.nombreColeccion, c.anio, c.estilo, c.tecnica, c.pais, c.ciudad, c.descripcion, c.fotoNombre, c.destacar, c.ocultar, c.piezas, c.precioPromedio,
        u.nombre, u.apellido, a.id as artistaId
 FROM colecciones c
-JOIN artistas a ON a.id = c.artista_id
+JOIN artistas a ON a.user_id = c.artista_id
 JOIN users u ON u.id = a.user_id
 ;
 
@@ -269,10 +269,47 @@ add numero_eventos INT DEFAULT 0;
 drop view usuarioArtista;
 
 CREATE VIEW usuarioArtista AS ( 
-	SELECT a.pais, a.region, a.provincia, a.destacar, a.info_destacar, a.numero_obras, a.años_experiencia, a.direccion, 
+	SELECT a.pais, a.region, a.provincia, a.destacar, a.info_destacar, a.numero_obras, a.años_experiencia, a.direccion, a.id as idArtist,
 		   a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase, a.numero_eventos, a.numero_colecciones,
-		   u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion, u.id
+		   u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion, u.id, u.inactivo
 	FROM artistas a
 	JOIN users u 
 	ON u.id = a.user_id
 ); 
+
+ALTER TABLE obras
+ DROP FOREIGN KEY fk_artista2;
+
+ALTER TABLE colecciones
+ DROP FOREIGN KEY fk_artista3;
+
+ALTER TABLE eventos
+ DROP FOREIGN KEY fk_artista4;
+
+drop view obraCompleta;
+
+CREATE VIEW obraCompleta AS
+SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
+		o.destacar, o.recomendar, o.cantidad, o.ocultar, o.titulo_recomendada,
+		a.pais, a.region, a.provincia, a.años_experiencia, a.direccion, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
+		u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion,
+		f.fotoNombre, f.fotoUbicacion, f.principal
+FROM obras o 
+JOIN fotosObras f ON f.obra_id = o.id AND f.principal = 'True'
+JOIN artistas a ON a.user_id = o.artista_id
+JOIN users u ON u.id = a.user_id
+;
+
+
+drop VIEW eventoCompleto;
+
+CREATE VIEW eventoCompleto AS
+SELECT 	e.id, e.nombre, e.titulo, e.organizadores, e.hora_inicio, e.fecha_inicio, e.fecha_fin, e.dir_local, e.direccion, e.ciudad, e.pais, e.piezas, e.estilo, e.descripcion, e.artista_id,
+		a.pais as paisArtis, a.region, a.provincia, a.años_experiencia, a.direccion as dirArtist, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
+		u.email, u.telefono, u.nombre as nombreArtist, u.apellido, u.foto_nombre, u.foto_ubicacion, u.id AS userID,
+		f.fotoNombre, f.fotoUbicacion, f.principal
+FROM eventos e 
+JOIN fotosEventos f ON f.evento_id = e.id AND f.principal = 'True'
+JOIN artistas a ON a.user_id = e.artista_id
+JOIN users u ON u.id = a.user_id
+;
