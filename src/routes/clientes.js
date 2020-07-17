@@ -19,18 +19,21 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
   });
 
 
-router.get('/compras', isLoggedIn, isCliente, async (req, res) => {
+router.get('/cliente/compras', isLoggedIn, isCliente, async (req, res) => {
   const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
   cliente = true;
   logueado = true;
   res.render('client/compras', {nombre:nombre[0], cliente, logueado});
 });
 
-router.get('/perfil/cliente', (req, res) => {
-  res.render('client/perfil');
+router.get('/cliente/perfil', isLoggedIn, isCliente, async (req, res) => {
+  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
+  cliente: true;
+  logueado: true;
+  res.render('client/perfil', {nombre:nombre[0], cliente, logueado});
 });
 
-router.get('/mis-pedidos', isLoggedIn, isCliente, async (req, res) => {
+router.get('/cliente/historial', isLoggedIn, isCliente, async (req, res) => {
   const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
   cliente = true;
   logueado = true;
