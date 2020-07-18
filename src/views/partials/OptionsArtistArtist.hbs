@@ -1,0 +1,157 @@
+<!-- Modal Perfil -->
+<div class="modal fade" id="editar-perfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" style="width: 90vw;" role="document">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <div class="modal-title">Editar Perfil </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="registro-artista" class="form" method="POST" enctype="multipart/form-data">
+                <div class="row mb-5">
+                    <div class="col-12 col-lg-3 text-center">
+                        <label for="file-input">
+                            <div class="foto-container">
+                                <div class="w-100 h-100 d-flex">
+                                    <div class="m-auto">
+                                        <span class="m-auto">
+                                            Agregar foto
+                                        </span>
+                                    </div>
+                                </div>
+                                <input name="image" id="file-input" type="file" style="display: none;" />
+                                <img id="imgSalida" src="" class="img-perfil-registro img-fluid" />
+                            </div>
+                        </label>
+                        <div>
+                            <small class="text-muted mb-0 pb-0">Dimensiones minimas: 280 ancho x 350 alto</small> <br>
+                            <small class="text-muted mb-0 pb-0">Para cambiarla haz click de nuevo</small>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-9">
+                        <div class="row m-3">
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="nombre" aria-describedby="nombre"
+                                        placeholder="Nombre" name="fullname" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="apellido" aria-describedby="apellid"
+                                        placeholder="Apellido" name="apellido" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="correo" aria-describedby="correo"
+                                        placeholder="Correo electrónico" name="email" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group pd-telephone-input">
+                                    <input type="tel" class="form-control telefono" id="telefono"
+                                        aria-describedby="telefono" name="telefono" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="pais" aria-describedby="pais"
+                                        placeholder="País" name="pais" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="povincia" aria-describedby="provincia"
+                                        placeholder="Ciudad (Provincia)" name="provincia" required>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="direccion" aria-describedby="direccion"
+                                        placeholder="Dirección (Facturación)" name="direccion" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="años" aria-describedby="años"
+                                        placeholder="Años de actividad" name="años" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 mb-3">
+                                <div class="form-group">
+                                    <select name="tipo-principal" id="tipo" class="form-control">
+                                        <option value="">Tipo (Principal)</option>
+                                        <option value="pintura">Pintura</option>
+                                        <option value="escultura">Escultura</option>
+                                        <option value="fotografia" disabled>Fotografía</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="disciplina" aria-describedby="tecnica"
+                                        placeholder="Estilo" name="disciplina_principal" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="disciplina2" aria-describedby="tecnica"
+                                        placeholder="Técnica (Principal)" name="disciplina_sec" required>
+                                </div>
+                            </div>
+                            <div class="col-12  mb-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="estilo" aria-describedby="estilo"
+                                        placeholder="Tu estilo en una frase" name="frase">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="biografia" aria-describedby="biografia"
+                                        placeholder="Biografía" name="briografia" required></textarea>
+                                </div>
+                            </div>
+                            <div class="border-bottom mb-5 col-12"></div>
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control m-0" placeholder="Contraseña"
+                                            name="password" aria-label="Contraseña" aria-describedby="Contraseña"
+                                            id="pwd" minlength="8" required
+                                            pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*"
+                                            title="Debe contener al menos una mayúscula, una minúscula y un dígito">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text" id="eye" style="cursor: pointer;"><i
+                                                    class="fa fa-eye"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6  mb-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control m-0" name="confirmarContraseña"
+                                            placeholder="Confirmar Contraseña" aria-label="Contraseña" minlength="8"
+                                            aria-describedby="Contraseña" id="pwdDos">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text" id="eyeDos" style="cursor: pointer;"><i
+                                                    class="fa fa-eye"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-right">
+                                <button class="btn-compra badge" type="submit" name='tipo' id="buttonSubmit"
+                                    value="artista">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<button data-toggle="modal" data-target="#editar-perfil" class="recomendar"><i class="fas fa-pen"></i></button>

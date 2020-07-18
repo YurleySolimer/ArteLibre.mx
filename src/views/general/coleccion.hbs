@@ -21,7 +21,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="col-12 m-3">
                 <div class="row">
@@ -56,7 +55,15 @@
             </div>
             <div class="col-12">
                 <div class="text-center">
+                    {{#ifCond artista true}}
+                    {{>OptionsColeccionArtist}}
+                    {{else}}
                     <button class="btn btn-compra badge badge-pill">Comprar Colección</button>
+                    {{/ifCond}}
+                    {{#ifCond admin true}}
+                    {{>OptionsColeccionAdmin}}
+                    {{/ifCond}}
+                    
                 </div>
             </div>
             <div class="col-12 m-3">
@@ -79,8 +86,7 @@
 
                                 <div class="card">
                                     <a href="">
-                                        <img src="/uploads/{{fotoNombre}}" class="obra-recomendada card-img-top"
-                                            alt="">
+                                        <img src="/uploads/{{fotoNombre}}" class="obra-recomendada card-img-top" alt="">
                                     </a>
                                     <div class="card-body text-left">
                                         <h5 class="card-title">{{fotoNombre}}</h5>

@@ -1,0 +1,150 @@
+<!-- Modal Editar Colección -->
+<div class="modal fade" id="editarObra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" style="width: 90vw;" role="document">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <div class="modal-title">Editar Colección {{id}} </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/obra/editar/{{id}}" method="POST" enctype="multipart/form-data" class="form">
+               <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="Nombre">Nombre</label>
+                        <input type="text" class="form-control" id="Nombre" name="nombre" aria-describedby="NombreHelp"
+                            placeholder="Escribe aquí el nombre de la colección">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="fcreacion">Año de Creación</label>
+                        <select class="form-control" id="fcreacion" name="año" aria-describedby="Año de creación">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="descripción">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion"
+                            aria-describedby="descripcion" placeholder="Describe la colección"></textarea>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="tecnica">Técnica</label>
+                        <input type="text" class="form-control" name="tecnica" id="tecnica" aria-describedby="Técnica"
+                            placeholder="Técnica utilizada">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="estilo">Estilo</label>
+                        <input type="text" class="form-control" id="estilo" name="estilo" aria-describedby="estilo"
+                            placeholder="Estilo representado">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="ubicacion-pais">Ubicación (País)</label>
+                        <input type="text" class="form-control" id="ubicacion-pais" name="ubicacionPais"
+                            aria-describedby="ubicacion-pais" placeholder="País">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="ubicacion-ciudad">Ubicación (Ciudad)</label>
+                        <input type="text" class="form-control" id="ubicacion-ciudad" name="ubicacionCiudad"
+                            aria-describedby="ubicacion-ciudad" placeholder="Ciudad">
+                    </div>
+                </div>
+
+                <div class="col-12 text-right">
+                    <input type="submit" value="Guardar" class="guardar-obra">
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Borrar -->
+<div class="modal fade" id="borrar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Borrar colección</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar esta colección? Esta acción es permanente, se perderan todos los
+                    datos que corresponden a esta colección.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Eliminar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Ocultar -->
+<div class="modal fade" id="ocultar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ocultar Colección</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas ocultar esta colección? Esta acción durará un tiempo indefinido hasta
+                    que decidas cambiar el estado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-accion-admin">Ocultar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Quitar Ocultar -->
+<div class="modal fade" id="quitar-ocultar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mostrar Colección</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas volver a mostrar esta colección? Esta acción durará un tiempo indefinido hasta
+                    que decidas cambiar el estado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-accion-admin">Mostrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fin de los Modales --> 
+
+{{#ifCond ocultar 'Si'}}
+<button data-toggle="modal" data-target="#ocultar-obra{{id}}" class="ocultar"><i class="fas fa-eye-slash"></i></button>
+{{else}}
+<button data-toggle="modal" data-target="#quitar-ocultar-obra{{id}}" class="ocultar"><i class="fas fa-eye"></i></button>
+{{/ifCond}}
+<button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i class="fas fa-trash"></i></button>
+<button data-toggle="modal" data-target="#editarObra{{id}}" class="editar"><i class="fas fa-pen"></i></button>

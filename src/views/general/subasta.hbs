@@ -29,6 +29,9 @@
             <p class="elemento-obra obra-coleccion">Tiempo Restante: <strong>11:14:52</strong></p>
             <p class="elemento-obra obra-coleccion">Colección: <a href="#">Los Girasoles</a></p>
             <p class="elemento-obra obra-artista"><a href="#">Vincent Van Gogh</a></p>
+            {{#ifCond admin true}}
+            {{> OptionsSubastaAdmin}}
+            {{/ifCond}}
             <div class="mt-1 mb-5">
                 <button class="badge badge-pill btn-compra">PUJAR</button>
             </div>

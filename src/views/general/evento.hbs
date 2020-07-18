@@ -29,7 +29,7 @@
                         {{#each fotos}}
                         <div class="img-container-evento">
                             <a href="/./uploads/{{fotoNombre}}">
-                                <img class="img-fluid position-absolute evento-foto-uno evento-fotos"
+                                <img class="img-fluid my-3 evento-fotos"
                                     src="/./uploads/{{fotoNombre}}" alt="">
                             </a>
                         </div>
@@ -40,7 +40,16 @@
             </div>
             <div class="col-12 col-lg-6">
                 <h2 class="gold">{{evento.titulo}}</h2>
-                <br>
+                {{#ifCond artista true}} <!-- Convertir todos estos options con un condicional de "creador" -->
+                <div class="my-3">
+                {{>OptionsEventoArtist}}
+                </div>
+                {{/ifCond}}
+                {{#ifCond admin true}} <!-- Convertir todos estos options con un condicional de "creador" -->
+                <div class="my-3">
+                {{>OptionsEventoAdmin}}
+                </div>
+                {{/ifCond}}
                 <p class="text-muted">
                     {{evento.descripcion}}
                 </p>

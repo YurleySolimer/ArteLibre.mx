@@ -1,0 +1,148 @@
+<!-- Modal Borrar -->
+<div class="modal fade" id="borrar-artista{{idArtist}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Borrar Artista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar a este artista? Esta acción es permanente, se perderan todos los
+                    datos que corresponden a este artista.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/admin/artistas/borrar/{{idArtist}}" type="button" class="btn btn-danger">Eliminar </a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Quitar Suspender -->
+<div class="modal fade" id="quitar-suspender-artista{{idArtist}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Remover la suspensión al Artista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas quitar la suspensión a este artista? Esta acción durará un tiempo
+                    indefinido hasta
+                    que decidas volver a aplicar la suspensión.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/admin/artistas/suspender/{{idArtist}}" type="button" class="btn btn-danger">Aceptar</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Suspender -->
+<div class="modal fade" id="suspender-artista{{idArtist}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Suspender Artista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas suspender a este artista? Esta acción durará un tiempo indefinido hasta
+                    que decidas revocar la suspensión.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/admin/artistas/suspender/{{idArtist}}" type="button" class="btn btn-danger">Suspender </a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Quitar Destacar -->
+<div class="modal fade" id="quitar-destacar-artista{{idArtist}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Remover Artista del Inicio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/admin/artistas/destacar" method="POST">
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas quitar el "destacar" a este artista? Esta acción lo llevará a dejar
+                        de mostrarse en la
+                        página de inicio.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-accion-admin" value="{{idArtist}}" name="id">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Destacar -->
+<div class="modal fade" id="destacar-artista{{idArtist}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Destacar Artista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/admin/artistas/destacar" method="POST">
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas destacar a este artista? Esta acción lo llevará a mostrarse en la
+                        página de inicio.</p>
+                    <div class="form-group">
+                        <label for="text-descripcion">Escriba la información que acompañará la sección de "Artista
+                            Destacado" en el inicio:</label>
+                        <textarea name="text" class="form-control" id="text-descripcion" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-accion-admin" value="{{idArtist}}" name="id">Destacar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL END -->
+
+<button data-toggle="modal" data-target="#borrar-artista{{idArtist}}" class="borrar"><i
+        class="fas fa-trash"></i></button>
+{{#ifCond inactivo 'No'}}
+<button data-toggle="modal" data-target="#suspender-artista{{idArtist}}" class="suspender"><i
+        class="fas fa-exclamation-triangle"></i></button>
+{{/ifCond}}
+{{#ifCond inactivo 'Si'}}
+<button data-toggle="modal" data-target="#quitar-suspender-artista{{idArtist}}" class="suspender"><i
+        class="fas fa-play"></i></button>
+{{/ifCond}}
+{{#ifCond destacar 'No'}}
+<button data-toggle="modal" data-target="#destacar-artista{{idArtist}}" class="destacar"><i
+        class="far fa-star"></i></button>
+{{/ifCond}}
+{{#ifCond destacar 'Si'}}
+<button data-toggle="modal" data-target="#quitar-destacar-artista{{idArtist}}" class="destacar"><i
+        class="fas fa-star"></i></button>
+{{/ifCond}}
+
+<a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>

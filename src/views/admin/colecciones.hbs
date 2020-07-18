@@ -62,19 +62,19 @@
 </div>
 
 <!-- Modal Destacar -->
-<div class="modal fade" id="destacar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
+<div class="modal fade" id="destacar-coleccion{{id}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Destacar Obra</h5>
+                <h5 class="modal-title">Destacar coleccion</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="/admin/colecciones/destacar" method="POST">
                 <div class="modal-body">
-                    <p>¿Estás seguro de que deseas destacar a este obra? Esta acción lo llevará a mostrarse en la
+                    <p>¿Estás seguro de que deseas destacar a este colección? Esta acción lo llevará a mostrarse en la
                         página de inicio. Pueden existir hasta 10 obras destacadas</p>
                 </div>
                 <div class="modal-footer">
@@ -86,20 +86,47 @@
     </div>
 </div>
 
+<!-- Modal quitar Destacar -->
+<div class="modal fade" id="quitar-destacar-coleccion{{id}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dejar de destacar Colección</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/admin/coleccion/destacar" method="POST">
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas quitar el "destacar" a esta colección? Esta acción lo llevará a dejar
+                        de
+                        aparecer en la
+                        página de inicio.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-accion-admin" name="id" value="{{id}}">Quitar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Modal Borrar -->
-<div class="modal fade" id="borrar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="borrar-coleccion{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Borrar obra</h5>
+                <h5 class="modal-title">Borrar coleccion</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>¿Estás seguro de que deseas eliminar esta obra? Esta acción es permanente, se perderan todos los
-                    datos que corresponden a esta obra.</p>
+                <p>¿Estás seguro de que deseas eliminar esta coleccion? Esta acción es permanente, se perderan todos los
+                    datos que corresponden a esta coleccion.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger">Eliminar</button>
@@ -111,18 +138,18 @@
 
 
 <!-- Modal Ocultar -->
-<div class="modal fade" id="ocultar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="ocultar-coleccion{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Ocultar Obra</h5>
+                <h5 class="modal-title">Ocultar colección</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>¿Estás seguro de que deseas ocultar a este obra? Esta acción durará un tiempo indefinido hasta
+                <p>¿Estás seguro de que deseas ocultar a este colección? Esta acción durará un tiempo indefinido hasta
                     que decidas cambiar el estado.</p>
             </div>
             <div class="modal-footer">
@@ -132,6 +159,30 @@
         </div>
     </div>
 </div>
+
+<!-- Modal quitar Ocultar -->
+<div class="modal fade" id="quitar-ocultar-coleccion{{id}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mostrar coleccion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas mostrar esta coleccion? Esta acción durará un tiempo indefinido hasta
+                    que decidas cambiar el estado.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/admin/coleccion/ocultar/{{id}}" type="button" class="btn btn-accion-admin">Mostrar</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {{/each}}
 
@@ -177,29 +228,36 @@
                     <tbody>
                         {{#each colecciones}}
                         <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal{{id}}" class="titulo-mis-obras">
+                            <!-- Enlace a la coleccion, vista como el cliente -->
+                            <td><button data-toggle="modal" data-target="#datos-coleccion-modal{{id}}"
+                                    class="titulo-mis-coleccions">
                                     <h2 style="font-weight: bold;">{{nombreColeccion}}</h2>
                                 </button></td>
-                            <!-- Enlace a la colección de la obra -->
+                            <!-- Enlace a la colección de la coleccion -->
                             <td>{{nombre}} {{apellido}}</td>
                             <td><a href="#" class="coleccion-mis-obras">{{ciudad}} {{pais}}</a></td>
                             <td> {{piezas}} </td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
                             <td class="gold"> {{precioPromedio}} MXN</td>
                             <td class="gold">- MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
+                            <!-- Acción de editar esta coleccion, redirige a "Editar coleccion" -->
                             <td>
                                 <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i
+                                    <button data-toggle="modal" data-target="#borrar-coleccion{{id}}" class="borrar"><i
                                             class="fas fa-trash"></i></button>
                                     {{#ifCond ocultar 'No'}}
-                                    <button data-toggle="modal" data-target="#ocultar-obra{{id}}" class="ocultar"><i
-                                            class="fas fa-eye-slash"></i></button>
+                                    <button data-toggle="modal" data-target="#ocultar-coleccion{{id}}"
+                                        class="ocultar"><i class="fas fa-eye-slash"></i></button>
+                                    {{else}}
+                                    <button data-toggle="modal" data-target="#quitar-ocultar-coleccion{{id}}"
+                                        class="ocultar"><i class="fas fa-eye"></i></button>
                                     {{/ifCond}}
                                     {{#ifCond destacar 'No'}}
-                                    <button data-toggle="modal" data-target="#destacar-obra{{id}}" class="destacar"><i
-                                            class="far fa-thumbs-up"></i></button>
+                                    <button data-toggle="modal" data-target="#destacar-coleccion{{id}}"
+                                        class="destacar"><i class="far fa-thumbs-up"></i></button>
+                                    {{else}}
+                                    <button data-toggle="modal" data-target="#quitar-destacar-coleccion{{id}}"
+                                        class="destacar"><i class="fas fa-thumbs-up"></i></button>
                                     {{/ifCond}}
                                 </div>
                             </td>

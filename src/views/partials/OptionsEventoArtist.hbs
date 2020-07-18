@@ -1,0 +1,200 @@
+<!-- Modal Editar -->
+<div class="modal fade" id="editarObra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" style="width: 90vw;" role="document">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <div class="modal-title">Editar Evento {{id}} </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/obra/editar/{{id}}" method="POST" enctype="multipart/form-data" class="form">
+                <div class="row">
+                <div class="col-12">
+                    <h4>Fotos del evento</h4>
+                    <p class="text-muted">
+                        Agregar las fotos que aparecerán para tu evento, la primera será la portada en el calendario y
+                        las demás aparecerán en la página del evento.
+                    </p>
+                </div>
+                <div class="col-12 col-lg-4 my-4">
+                    <div class="foto-evento">
+                        <label for="file-input-1">
+                            <div class="foto-container-evento">
+                                <div class="inner-container-evento">
+                                    <div class="m-auto">
+                                        <span class="m-auto">
+                                            <i class="fas fa-plus fa-5x"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <input name="image" id="file-input-1" type="file" style="display: none;" required />
+                                <img id="imgSalida1" src="" class="img-evento-registro img-fluid" />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 my-4">
+                    <div class="foto-evento">
+                        <label for="file-input-2">
+                            <div class="foto-container-evento">
+                                <div class="inner-container-evento">
+                                    <div class="m-auto">
+                                        <span class="m-auto">
+                                            <i class="fas fa-plus fa-5x"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <input name="image" id="file-input-2" type="file" style="display: none;" />
+                                <img id="imgSalida2" src=""  class="img-evento-registro img-fluid" />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 my-4">
+                    <div class="foto-evento">
+                        <label for="file-input-3">
+                            <div class="foto-container-evento">
+                                <div class="inner-container-evento">
+                                    <div class="m-auto">
+                                        <span class="m-auto">
+                                            <i class="fas fa-plus fa-5x"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <input name="image" id="file-input-3" type="file" style="display: none;" />
+                                <img id="imgSalida3" src="" class="img-evento-registro img-fluid" />
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12 my-4 text-right">
+                    <small class="text-muted">Puedes cambiar las imagenes volviendo a hacer click en ellas.</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="Nombre"
+                            placeholder="Nombre del evento" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" aria-describedby="titulo"
+                            placeholder="Título del evento" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="organizadores">Organizadores</label>
+                        <input type="text" class="form-control" id="organizadores" name="organizadores"
+                            aria-describedby="organizadores" placeholder="Organizadores del evento" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="hora">Hora de Apertura</label>
+                        <input type="time" class="form-control" id="hora" name="hora" aria-describedby="hora" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="inicio">Fecha de Inicio</label>
+                        <input type="date" class="form-control" id="inicio" name="inicio" aria-describedby="inicio"
+                            required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="fin">Fecha de Fin</label>
+                        <input type="date" class="form-control" id="fin" name="fin" aria-describedby="fin" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="local">Local</label>
+                        <input type="text" placeholder="Local dónde se realizará" class="form-control" id="local"
+                            name="local" aria-describedby="local" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección"
+                            aria-describedby="direccion" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <input type="text" placeholder="Ciudad" class="form-control" id="ciudad" name="ciudad"
+                            aria-describedby="local" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="pais">País</label>
+                        <input type="text" class="form-control" id="pais" name="pais" placeholder="País"
+                            aria-describedby="pais" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="piezas">Número de piezas</label>
+                        <input type="number" placeholder="# de Piezas" class="form-control" id="piezas" name="piezas"
+                            aria-describedby="piezas" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="estilo">Estilo</label>
+                        <input type="text" class="form-control" id="estilo" name="estilo" placeholder="Estilo"
+                            aria-describedby="estilo" required>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="descripción">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion"
+                            aria-describedby="descripcion" placeholder="Describe el evento" required></textarea>
+                    </div>
+                </div>
+                <div class="col-12 text-right">
+                    <button type="submit" class="guardar-obra">  Guardar </button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Borrar -->
+<div class="modal fade" id="borrar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Borrar evento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este evento? Esta acción es permanente, se perderan todos los
+                    datos que corresponden a este evento.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Eliminar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i class="fas fa-trash"></i></button>
+<button data-toggle="modal" data-target="#editarObra{{id}}" class="editar"><i class="fas fa-pen"></i></button>

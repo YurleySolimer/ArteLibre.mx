@@ -4,9 +4,14 @@
         <div class="col-12">
             <div class="text-center">
 
-                <h2>{{user.nombre}} {{user.apellido}}</h2>
+                <div class="d-flex justify-content-center align-items-center">
+                    <h2 class="my-5">{{user.nombre}} {{user.apellido}}</h2> {{#ifCond admin true}}{{>OptionsArtistAdmin}}{{/ifCond}}
+                </div>
                 <div class="container-perfil-image">
-                    <img class="img-perfil-artista" src="/./uploads/{{user.foto_nombre}}" alt="{{user.foto_nombre}}">
+                    <div class="perfil-image-inner">
+                        <img class="img-perfil-artista" src="/./uploads/{{user.foto_nombre}}"
+                            alt="{{user.foto_nombre}}">
+                    </div>
                 </div>
             </div>
         </div>
@@ -18,13 +23,17 @@
                             <p class="artista-caracteristica"><strong>Categorías</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;">{{user.disciplina_principal}} - {{user.disciplina_sec}}</p>
+                            <p class="artista-caracteristica-valor"
+                                style="font-family: 'MontserratThin'; font-weight: bold;">{{user.disciplina_principal}}
+                                - {{user.disciplina_sec}}</p>
                         </div>
                         <div>
                             <p class="artista-caracteristica"><strong>Ubicación</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;">{{user.pais}}, {{user.region}}</p>
+                            <p class="artista-caracteristica-valor"
+                                style="font-family: 'MontserratThin'; font-weight: bold;">{{user.pais}}, {{user.region}}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -34,13 +43,16 @@
                             <p class="artista-caracteristica"><strong>Frase</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;">{{user.frase}}</p>
+                            <p class="artista-caracteristica-valor"
+                                style="font-family: 'MontserratThin'; font-weight: bold;">{{user.frase}}</p>
                         </div>
                         <div>
                             <p class="artista-caracteristica"><strong>Años de Experiencia</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;">{{user.años_experiencia}} años </p>
+                            <p class="artista-caracteristica-valor"
+                                style="font-family: 'MontserratThin'; font-weight: bold;">{{user.años_experiencia}} años
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -50,14 +62,16 @@
                             <p class="artista-caracteristica"><strong>Última obra</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;"><a href="#"
+                            <p class="artista-caracteristica-valor"
+                                style="font-family: 'MontserratThin'; font-weight: bold;"><a href="#"
                                     class="coleccion-perfil-artista gold">{{ultima_obra.nombreObra}}</a></p>
                         </div>
                         <div>
                             <p class="artista-caracteristica"><strong>Estilo</strong></p>
                         </div>
                         <div>
-                            <p class="artista-caracteristica-valor" style="font-family: 'MontserratThin'; font-weight: bold;">{{ultima_obra.estilo}}</p>
+                            <p class="artista-caracteristica-valor"
+                                style="font-family: 'MontserratThin'; font-weight: bold;">{{ultima_obra.estilo}}</p>
                         </div>
                     </div>
                 </div>
@@ -107,7 +121,7 @@
                     Próximos eventos
                 </h3>
             </div>
-            
+
             {{!-- <div class="card text-white proximo-evento-perfil" style="max-height: 130px;">
                 <img src="/images/retrato4.png" style="" alt="" class="card-img img-proximo-evento">
                 <div class="card-img-overlay">
@@ -130,7 +144,7 @@
             </div>
             <button class="text-right btn-compra badge-pill">Ver más</button>
         </div> --}}
-    </div>
+        </div>
 </section>
 <div class="timeline-container" id="timeline-1">
     <div class="timeline-header">
@@ -140,14 +154,13 @@
     <div class="timeline">
         {{#each obras}}
         <div class="timeline-item" data-text="{{nombreObra}}">
-            <div class="timeline__content"><img class="timeline__img"
-                    src="/./uploads/{{fotoNombre}}" />
+            <div class="timeline__content"><img class="timeline__img" src="/./uploads/{{fotoNombre}}" />
                 <h2 class="timeline__content-title">{{fecha_creacion}}</h2>
                 <p class="timeline__content-desc"></p>
             </div>
         </div>
         {{/each}}
-       
+
     </div>
 </div>
 {{> Footer }}

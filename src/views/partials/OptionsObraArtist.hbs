@@ -1,273 +1,320 @@
-<!-- Modal Editar -->
-
-<div class="modal fade" id="editarObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<!-- Modal Obra -->
+<div class="modal fade" id="editarObra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" style="width: 90vw;" role="document">
         <div class="modal-content p-3">
             <div class="modal-header">
-                <div class="modal-title">Editar Obra </div>
+                <div class="modal-title">Editar Obra {{id}} </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/obra/editar/{{obra.id}}" method="POST" enctype="multipart/form-data" class="form">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <input type="file" name="image" accept="image/gif, image/png, image/jpeg" multiple
-                                    required id="gallery-photo-add" style="display: none;">
-                                <label for="gallery-photo-add" class="label-agregar-fotos">Agregar fotos</label>
-                                <br>
-                                <small class="text-muted p-0 m-0">Para eliminar una foto haz click sobre
-                                    ella</small>
-                            </div>
-                            <br>
-                            <div id="gallery" class="gallery row">
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="Nombre">Nombre</label>
-                                    <input type="text" class="form-control" id="Nombre" name="nombre"
-                                        aria-describedby="NombreHelp" placeholder="{{obra.nombre}}" value="{{obra.nombre}}"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="precio">Precio (MXN)</label>
-                                    <input type="number" class="form-control" id="precio" name="precio"
-                                        aria-describedby="Precio" placeholder="{{obra.precio}}" value="{{obra.precio}}" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="descripción">Descripción</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion"
-                                        aria-describedby="descripcion" placeholder="{{obra.descripcion}}" 
-                                        required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="Coleccion">Colección</label>
-                                    <select type="text" class="form-control" id="Colección" name="coleccion"
-                                        aria-describedby="colecciónHelp" required>
-                                        <option value=0>Ninguna</option>
-                                        {{#each colecciones}}
-                                        <option value="{{id}}">{{nombreColeccion}}</option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="lcreacion">Lugar de Creación</label>
-                                    <input type="text" class="form-control" id="lcreacion" name="lcreacion"
-                                        aria-describedby="creacionHelp" placeholder="{{obra.lugarCreacion}}" value="{{obra.lugarCreacion}}" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="fcreacion">Fecha de Creación</label>
-                                    <input type="date" class="form-control" id="fcreacion" name="fcreacion"
-                                        aria-describedby="creacionHelp" placeholder="{{obra.fecha_creacion}}" value="{{fecha_creacion}}"
-                                        min="1960-01-01" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="tecnica">Técnica</label>
-                                    <input type="text" class="form-control" id="tecnica" name="tecnica"
-                                        aria-describedby="tecnicaHelp" placeholder="{{obra.tecnica}}" value="{{obra.tecnica}}" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="estilo">Estilo</label>
-                                    <input type="text" class="form-control" id="estilo" name="estilo"
-                                        aria-describedby="estilo" placeholder="{{obra.estilo}}" value="{{obra.estilo}}" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="row m-0 p-0">
-                                    <div class="col-6 p-0 m-0">
-                                        <div class="form-group">
-                                            <label for="ancho">Ancho</label>
-                                            <input type="number" class="form-control" id="ancho" name="ancho"
-                                                aria-describedby="anchoHelp" placeholder="{{obra.ancho}}" value="{{obra.ancho}}" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 p-0 m-0">
-                                        <div class="form-group ml-3">
-                                            <label for="alto">Alto</label>
-                                            <input type="number" class="form-control" id="alto" name="alto"
-                                                aria-describedby="altoHelp" placeholder="{{obra.alto}}" value="{{obra.alto}}" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12-col-md-6">
-                                <div class="form-group">
-                                    <div class="form-check m-4">
-                                        <input class="form-check-input" onchange='check()' name="subasta"
-                                            type="checkbox" id="gridCheck">
-                                        <label class="form-check-label" for="gridCheck" id="label-check">
-
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12-col-md-6">
-                                <div class="form-group">
-                                    <div class="form-check m-4">
-                                        <input class="form-check-input" onchange='checkdos()' name="copias"
-                                            type="checkbox" id="gridCheck2">
-                                        <label class="form-check-label" for="gridCheck2" id="label-check2">
-
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 text-right">
-                                <button class="guardar-obra" type="submit" name="id" value="{{obra.id}}"> Guardar </button>
-                             </div>
+            <form action="/obra/editar/{{id}}" method="POST" enctype="multipart/form-data" class="form">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <input type="file" name="image" accept="image/gif, image/png, image/jpeg" multiple
+                            id="gallery-photo-add" style="display: none;">
+                        <label for="gallery-photo-add" class="label-agregar-fotos">Agregar fotos</label>
+                        <br>
+                        <small class="text-muted p-0 m-0">Para eliminar una foto haz click sobre ella</small>
                     </div>
-                    </form>
+                    <br>
+                    <div id="gallery" class="gallery row">
 
                     </div>
                 </div>
-               
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="Nombre">Nombre</label>
+                            <input type="text" class="form-control" id="Nombre" name="nombre"
+                                aria-describedby="NombreHelp" placeholder="{{nombreObra}}" value="{{nombreObra}}"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="precio">Precio (MXN)</label>
+                            <div class="row">
+                                <div class="col px-1"><input type="number" name="precioArtista" id="precioA"
+                                        aria-describedby="Lo que recibe el artista" placeholder="Recibiras"
+                                        class="form-control" required></div>
+
+                                <div class="col px-1"><input type="number" name="precioArtelibre" id="precioB"
+                                        aria-describedby="Lo que recibe ArteLibre" placeholder="ArteLibre"
+                                        class="form-control" required></div>
+                                <div class="col px-1"><input type="number" name="precioComision" id="precioC"
+                                        aria-describedby="Comisiones" placeholder="Comisiones" class="form-control"
+                                        required>
+                                </div>
+                                <div class="col px-1"><input type="number" name="precioFinal" id="precioF"
+                                        aria-describedby="Precio Final" class="form-control" placeholder="{{precio}}"
+                                        value="{{precio}}" required>
+                                </div>
+
+                            </div>
+                            <small class="text-muted">El precio final será el que el cliente ve en la plataforma y el
+                                que
+                                pagará</small>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="descripción">Descripción</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion"
+                                aria-describedby="descripcion" placeholder="{{descripcion}}"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="Coleccion">Colección</label>
+                            <select type="text" class="form-control" id="Colección" name="coleccion"
+                                aria-describedby="colecciónHelp" required>
+                                <option value=0>Ninguna</option>
+                                {{#each colecciones}}
+                                <option value="{{id}}">{{nombreColeccion}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="lcreacion">Lugar de Creación</label>
+                            <input type="text" class="form-control" id="lcreacion" name="lcreacion"
+                                aria-describedby="creacionHelp" placeholder="{{lugarCreacion}}"
+                                value="{{lugarCreacion}}" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="fcreacion">Año de Creación</label>
+                            <select class="form-control" id="fcreacion" placeholder="{{fecha_creacion}}"
+                                name="fcreacion" aria-describedby="Año de creación">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="tecnica">Técnica</label>
+                            <input type="text" class="form-control" id="tecnica" name="tecnica"
+                                aria-describedby="tecnicaHelp" placeholder="{{tecnica}}" value="{{tecnica}}" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="estilo">Estilo</label>
+                            <input type="text" class="form-control" id="estilo" name="estilo" aria-describedby="estilo"
+                                placeholder="{{estilo}}" value="{{estilo}}" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="row m-0 p-0">
+                            <div class="col-6 p-0 m-0">
+                                <div class="form-group ml-3">
+                                    <label for="alto">Alto</label>
+                                    <input type="number" class="form-control" id="alto" name="alto"
+                                        aria-describedby="altoHelp" placeholder="{{alto}}" value="{{alto}}" required>
+                                </div>
+                            </div>
+                            <div class="col-6 p-0 m-0">
+                                <div class="form-group">
+                                    <label for="ancho">Ancho</label>
+                                    <input type="number" class="form-control" id="ancho" name="ancho"
+                                        aria-describedby="anchoHelp" placeholder="{{ancho}}" value="{{ancho}}" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3" id="check1">
+                        <div class="form-group">
+                            <div class="form-check m-4">
+                                <input class="form-check-input" onchange='check()' name="subasta" type="checkbox"
+                                    id="gridCheck">
+                                <label class="form-check-label" for="gridCheck" id="label-check">
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3" id="check2">
+                        <div class="form-group">
+                            <div class="form-check m-4">
+                                <input class="form-check-input" onchange='checkdos()' name="copias" type="checkbox"
+                                    id="gridCheck2">
+                                <label class="form-check-label" for="gridCheck2" id="label-check2">
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3" id="check3">
+                        <div class="form-group">
+                            <div class="form-check m-4">
+                                <input class="form-check-input" onchange='checktres()' name="copias" type="checkbox"
+                                    id="gridCheck3">
+                                <label class="form-check-label" for="gridCheck3" id="label-check3">
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3" id="check4">
+                        <div class="form-group">
+                            <div class="form-check m-4">
+                                <input class="form-check-input" onchange='checkcuatro()' name="copias" type="checkbox"
+                                    id="gridCheck4">
+                                <label class="form-check-label" for="gridCheck4" id="label-check4">
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 text-right">
+                        <button class="guardar-obra" type="submit" name="id" value="{{id}}"> Guardar </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<!-- Modal Borrar-->
-<div class="modal fade" id="borrarObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<!-- Modal Borrar -->
+<div class="modal fade" id="borrar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
-    <div class="modal-dialog" style="width: 400px;" role="document">
-        <div class="modal-content p-3">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title">Borrar Obra</div>
+                <h5 class="modal-title">Borrar obra</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                ¿Estás seguro de que quieres <strong>Eliminar</strong> esta obra?
+                <p>¿Estás seguro de que deseas eliminar esta obra? Esta acción es permanente, se perderan todos los
+                    datos que corresponden a esta obra.</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary btn-sm">Cerrar</button>
-                <button class="btn btn-danger btn-sm">Aceptar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal Ocultar-->
-<div class="modal fade" id="ocultarObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
-    <div class="modal-dialog" style="width: 400px;" role="document">
-        <div class="modal-content p-3">
-            <div class="modal-header">
-                <div class="modal-title">Ocultar Obra</div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ¿Estás seguro de que quieres <strong>Ocultar</strong> esta obra?
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary btn-sm">Cerrar</button>
-                <button class="btn btn-danger btn-sm">Aceptar</button>
+                <button type="button" class="btn btn-danger">Eliminar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
 
-{{!-- Fin del Modal --}}
+<!-- Modal Ocultar -->
+<div class="modal fade" id="ocultar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ocultar Obra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas ocultar a este obra? Esta acción durará un tiempo indefinido hasta
+                    que decidas cambiar el estado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-accion-admin">Ocultar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Quitar Ocultar -->
+<div class="modal fade" id="quitar-ocultar-obra{{id}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mostrar Obra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas volver a mostrar esta obra? Esta acción durará un tiempo indefinido hasta
+                    que decidas cambiar el estado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-accion-admin">Mostrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Galeria -->
+<div class="modal fade" id="galeria-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Llevar Obra a Galeria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    ¿Estás de acuerdo con mostrar tu obra en tu galeria personal? De ser así, presiona "Aceptar".
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-accion-admin">Aceptar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Quitar Galeria -->
+<div class="modal fade" id="quitar-galeria-obra{{id}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Quitar de Galeria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás de acuerdo con quitar esta obra de tu galeria? De ser así, presiona "Quitar".</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Quitar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fin del Modal -->
 
 
 <div style="flex-direction: row-reverse;" class="d-flex space-between">
-    <button data-toggle="modal" data-target="#editarObra" style="width: 40px; height: 40px;"
-        class="p-2 m-3 rounded-circle btn btn-lg btn-compra">
-        <i class="fas fa-pen"></i>
-    </button>
-    <button data-toggle="modal" data-target="#borrarObra" style="width: 40px; height: 40px;"
-        class="p-2 m-3 rounded-circle btn btn-danger">
-        <i class="fas fa-trash"></i>
-    </button>
-    <button data-toggle="modal" data-target="#ocultarObra" style="width: 40px; height: 40px;"
-        class="p-2 m-3 rounded-circle btn btn-secondary">
-        <i class="fas fa-eye"></i>
-    </button>
+    {{#ifCond galeria 'Si'}}
+    <button data-toggle="modal" data-target="#galeria-obra{{id}}" class="recomendar"><i
+            class="fas fa-images"></i></button>
+    {{else}}
+    <button data-toggle="modal" data-target="#quitar-galeria-obra{{id}}" class="borrar"><i
+            class="fas fa-times-circle"></i></button>
+    {{/ifCond}}
+    {{#ifCond ocultar 'Si'}}
+    <button data-toggle="modal" data-target="#ocultar-obra{{id}}" class="ocultar"><i
+            class="fas fa-eye-slash"></i></button>
+    {{else}}
+    <button data-toggle="modal" data-target="#quitar-ocultar-obra{{id}}" class="ocultar"><i
+            class="fas fa-eye"></i></button>
+    {{/ifCond}}
+    <button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i class="fas fa-trash"></i></button>
+    <button data-toggle="modal" data-target="#editarObra{{id}}" class="editar"><i class="fas fa-pen"></i></button>
 </div>
 
 
-<script>
-    $(document).ready(function () {
-        $(function () {
-            // Multiple images preview in browser
-            let k = 0
-            let imagesPreview = function (input, placeToInsertImagePreview) {
-
-                if (input.files) {
-                    let filesAmount = input.files.length;
-                    for (i = 0; i < filesAmount; i++) {
-                        let reader = new FileReader();
-                        reader.onload = function (event) {
-                            let divImage = 'div#' + k;
-                            let imageID = 'image' + k;
-                            $($.parseHTML('<div>')).attr('id', k).attr('class', 'col-4 col-md-3 col-lg-2 container-image-nueva').appendTo(placeToInsertImagePreview);
-                            $($.parseHTML('<img>')).attr('src', event.target.result).attr('id', imageID).attr('onClick', 'eliminar(this.id)').attr('class', 'imagen-galeria-input btn').appendTo(divImage);
-                            k++
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-
-            };
-
-            $('#gallery-photo-add').on('change', function () {
-                imagesPreview(this, 'div.gallery');
-            });
-        });
-    });
-
-    function eliminar(e) {
-        let node = document.getElementById(e);
-        let parent = document.getElementById(node.parentNode.id);
-
-        let gallery = document.getElementById('gallery');
-
-        gallery.removeChild(parent);
-    }
-
-    function check() {
-        let check = document.getElementById('gridCheck');
-
-        if (check.checked == true) {
-            document.querySelector('#label-check').innerText = 'Tu obra se subastará';
-        } else {
-            document.querySelector('#label-check').innerText = '¿Deseas subastar tu obra?';
-        }
-    }
-
-    check()
-    function checkdos() {
-        let check = document.getElementById('gridCheck2');
-
-        if (check.checked == true) {
-            document.querySelector('#label-check2').innerText = 'Se habilitó la venta de multiples copias';
-        } else {
-            document.querySelector('#label-check2').innerText = '¿Venderás varias copias?';
-        }
-    }
-
-    checkdos()
-</script>
+<script src="/js/obras.js"></script>

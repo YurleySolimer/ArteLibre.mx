@@ -1,0 +1,116 @@
+<!-- Modal Borrar -->
+<div class="modal fade" id="borrar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Borrar obra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar esta obra? Esta acción es permanente, se perderan todos los
+                    datos que corresponden a esta obra.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Eliminar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal cancelar -->
+<div class="modal fade" id="cancelar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cancelar obra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas cancelar esta obra? Esta acción durará un tiempo indefinido hasta
+                    que decidas volver a publicar la subasta.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal publicar -->
+<div class="modal fade" id="publicar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Publicar obra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas publicar esta obra? Esta acción lo llevará a mostrarse en la
+                        sección de subastas.</p>
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="precio-base">Precio base</label>
+                                <!-- Valor dicho por el artista, como sugerencia en el placeholder-->
+                                <input name="precio-base" type="number" placeholder="75.000" class="form-control" id="precio-base" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="fecha-inicio">Fecha de inicio</label>
+                                <input name="fecha-inicio" type="date" class="form-control" id="fecha-inicio" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="hora-inicio">Hora de inicio</label>
+                                <input name="hora-inicio" type="time" class="form-control" id="hora-inicio" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="form-group">
+                                <label for="duracion">Duración</label>
+                                <input name="duracion" type="number" placeholder="Horas de duración" class="form-control" id="duracion" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="text-descripcion">Escriba la información que desea que acompañe a la obra en
+                                    la sección "Subastas" sustituyendo la descripción de la pieza en caso de tenerla.
+                                    (OPCIONAL)</label>
+                                <textarea name="text-descripcion" class="form-control" id="text-descripcion" cols="30"
+                                    rows="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-accion-admin">Publicar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL END -->
+
+
+<button data-toggle="modal" data-target="#borrar-obra" class="borrar"><i
+                                            class="fas fa-trash"></i></button>
+                                    <button data-toggle="modal" data-target="#publicar-obra" class="publicar"><i
+                                            class="fas fa-upload"></i></button>
+                                    <button data-toggle="modal" data-target="#cancelar-obra" class="cancelar"><i
+                                            class="far fa-times-circle"></i></button>

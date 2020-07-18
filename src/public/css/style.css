@@ -1174,6 +1174,12 @@ button.titulo-mis-obras:focus {
     margin: auto;
 }
 
+.imagen-artistas-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .image-src-artistas {
     height: 100%;
     width: auto;
@@ -1293,15 +1299,26 @@ button.titulo-mis-obras:focus {
 }
 
 .container-perfil-image {
-    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 15px;
+
+}
+
+.perfil-image-inner {
+    max-width: 296px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 15px #c3c3c3;
 }
 
 .img-perfil-artista {
     width: auto;
     height: 100%;
-    max-width: 374.8px;
-    box-shadow: 0 10px 25px #b1b1b1;
+    filter: grayscale(1);
 }
 
 @media screen and (min-width: 768px) {

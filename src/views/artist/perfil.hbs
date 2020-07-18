@@ -1,12 +1,15 @@
 {{> Navigation }}
-<section class="container inicial">
+<section class="container inicial mt-3">
     <div class="row">
         <div class="col-12">
             <div class="text-center">
-
-                <h2>{{user.nombre}} {{user.apellido}}</h2>
+                <div class="d-flex justify-content-center align-items-center">
+                <h2 class="my-5">{{user.nombre}} {{user.apellido}}</h2>  {{>OptionsArtistAdmin}}
+                </div>
                 <div class="container-perfil-image">
+                    <div class="perfil-image-inner">
                     <img class="img-perfil-artista" src="/./uploads/{{user.foto_nombre}}" alt="{{user.foto_nombre}}">
+                    </div>
                 </div>
             </div>
         </div>
