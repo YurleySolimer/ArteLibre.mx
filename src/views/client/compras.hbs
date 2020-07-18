@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="">
-                            <img class="img-fluid" src="images/vangogh1.jpg" alt="girasoles">
+                            <img class="img-fluid" src="/images/vangogh1.jpg" alt="girasoles">
                         </div>
                     </div>
                     <div class="col-lg-7">
@@ -27,33 +27,29 @@
                                     <h4 class="">Vincent Van Gogh</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">ID</h5>
-                                    <h4 class="">AHSDKJHALKSD13413KJK</h4>
-                                </div>
-                                <div class="py-2 my-3">
                                     <h5 class="text-muted">Ubicación de la obra</h5>
                                     <h4 class="">La Haya, Holanda</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Codigo de Seguimiento</h5>
-                                    <input type="text" name="" id="" class="form-control">
+                                    <h5 class="text-muted">Tipo</h5>
+                                    <h4 class="">Pintura</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Fecha de Arribo</h5>
-                                    <input type="date" name="" id="" class="form-control">
+                                    <h5 class="text-muted">Estilo</h5>
+                                    <h4 class="">Moderno</h4>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Nombre del comprador</h5>
-                                    <h4 class="">Luis Fernando Méndez</h4>
+                                    <h5 class="text-muted">Estado</h5>
+                                    <h4 class="">POR PAGAR</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Ubicación del Comprador</h5>
-                                    <h4 class="">San Fermin, Tunez</h4>
+                                    <h5 class="text-muted">Medidas</h5>
+                                    <h4 class="">103 x 43 cm</h4>
                                 </div>
                                 <div class="py-2 my-3">
-                                    <h5 class="text-muted">Currier</h5>
+                                    <h5 class="text-muted">Currier recomendado</h5>
                                     <h4 class="">DHL</h4>
                                 </div>
                                 <div class="py-2 my-3">
@@ -64,9 +60,11 @@
                                     <h5 class="text-muted">Precio</h5>
                                     <h4 class="">175.000 MXN</h4>
                                 </div>
-                                <div class="py-2 my-3">
-                                    <h5>Registrar Envio</h5>
-                                    <button type="submit" class="btn badge-recibido">Enviar</button>
+                            </div>
+                            <div class="col-12">
+                                <div class="py-2 my-2">
+                                    <h5 class="text-muter">Descripción</h5>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus omnis delectus laudantium facere amet quas neque aliquid tempore earum quam repellat, nobis pariatur, animi laboriosam dignissimos aliquam quaerat provident commodi dolorem. Voluptatum adipisci autem quibusdam esse minima quam qui aut dolor inventore voluptatibus fugiat, sed dolorem beatae dignissimos distinctio ullam deleniti animi dicta obcaecati voluptates eos! Necessitatibus enim earum ab dolor sed accusantium illum inventore non tenetur voluptatum aliquam dicta totam modi, fugit corporis error reiciendis commodi recusandae facere labore, dolores tempora voluptas obcaecati velit? Esse, autem. Ullam, illum. Eum voluptas quae eius porro possimus assumenda voluptates omnis libero quisquam voluptatibus placeat excepturi, aperiam ipsa, iusto tempora ea consequatur dolorum sunt maiores, nam corporis alias repellat laboriosam quaerat. Quis, quaerat.
                                 </div>
                             </div>
                         </div>
@@ -82,8 +80,8 @@
 {{> Navigation }}
 
 
-<div class="container inicial">
-    <div class="content">
+<div class="container-fluid inicial">
+    <div class="content-admin">
         <div class="title m-5">
             <h2>Mis Compras</h2>
         </div>
@@ -93,163 +91,23 @@
                     <thead style="background-color: #bda00899;">
                         <tr>
                             <th scope="col">Obra</th>
+                            <th scope="col">Colección</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Ubicación</th>
-                            <th scope="col">Estimado</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Pagar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
+                            <!-- Detalles de la obra y del artista -->
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2><b>Noche Estrellada</b></h2></button><span class="artista-tabla"><h3>Vincent Van Gogh</h3></span></td>
+                            <!-- Colección de la obra -->
+                            <td>La noche de la carcel</td>
                             <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
                             <td>3</td>
                             <!-- Ubicación de la obra -->
                             <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
-                            <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
-                            <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
-                            <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
-                            <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
-                            <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
-                            <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
-                            <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
-                            <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
-                            <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
-                            <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2>Noche Estrellada</h2></button><a href="#" class="artista-tabla"><h3>Vincent Van Gogh</h3></a></td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio (Esto es tentativo, quisiera hablar contigo sobre como definirlo) -->
-                            <td>2 Semanas</td>
                             <!-- Precio de la obra -->
                             <td class="text-muted">175.000 MXN</td>
                             <!-- Botón para pagar esta obra exclusivamente -->

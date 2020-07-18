@@ -32,17 +32,23 @@
                 <div class="form-group">
                     <label for="precio">Precio (MXN)</label>
                     <div class="row">
-                        <div class="col px-1"><input type="number" name="precioArtista" id="precioA"
-                                aria-describedby="Lo que recibe el artista" placeholder="Recibiras" class="form-control"
-                                required></div>
-                        <div class="col px-1"><input type="number" name="precioArtelibre" id="precioB"
-                                aria-describedby="Lo que recibe ArteLibre" placeholder="ArteLibre" class="form-control"
-                                required></div>
-                        <div class="col px-1"><input type="number" name="precioComision" id="precioC"
-                                aria-describedby="Comisiones" placeholder="Comisiones" class="form-control" required>
+                        <div class="col pr-1"><input type="number" name="precioArtista" id="precioA"
+                                aria-describedby="Lo que recibe el artista" class="form-control"
+                                required>
+                            <small><b>Recibiras</b></small>
                         </div>
-                        <div class="col px-1"><input type="number" name="precioFinal" id="precioF"
-                                aria-describedby="Precio Final" placeholder="Público" class="form-control" required>
+                        <div class="col px-1"><input type="number" name="precioArtelibre" id="precioB"
+                                aria-describedby="Lo que recibe ArteLibre" class="form-control"
+                                required>
+                            <small><b>Artelibre</b></small>
+                        </div>
+                        <div class="col px-1"><input type="number" name="precioComision" id="precioC"
+                                aria-describedby="Comisiones" class="form-control" required>
+                            <small><b>Comisiones</b></small>
+                        </div>
+                        <div class="col pl-1"><input type="number" name="precioFinal" id="precioF"
+                                aria-describedby="Precio Final" class="form-control" required>
+                            <small><b>Final</b></small>
                         </div>
                     </div>
                     <small class="text-muted">El precio final será el que el cliente ve en la plataforma y el que
@@ -78,8 +84,7 @@
             <div class="col-12 col-md-6">
                 <div class="form-group">
                     <label for="fcreacion">Año de Creación</label>
-                    <select class="form-control" id="fcreacion" name="fcreacion"
-                        aria-describedby="Año de creación">
+                    <select class="form-control" id="fcreacion" name="fcreacion" aria-describedby="Año de creación">
 
                     </select>
                 </div>
@@ -270,11 +275,11 @@
 
     precioA.addEventListener('keyup', function () {
         let digitadoA = precioA.value;
-        
+
         let pA = parseFloat(digitadoA);
 
         let pB = ((pA / .85) * .15).toFixed(2);
-        let pC = (((pA / .85)*0.036) + 3).toFixed(2);
+        let pC = (((pA / .85) * 0.036) + 3).toFixed(2);
         let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
 
         precioB.setAttribute('value', pB);
@@ -289,8 +294,8 @@
 
         let pB = parseFloat(digitadoB);
 
-        let pA = ((pB / .15) * .85 ).toFixed(2);
-        let pC = (((pB / .15)*0.036) + 3).toFixed(2);
+        let pA = ((pB / .15) * .85).toFixed(2);
+        let pC = (((pB / .15) * 0.036) + 3).toFixed(2);
         let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
 
         precioA.setAttribute('value', pA);
@@ -305,8 +310,8 @@
 
         let pC = parseFloat(digitadoC)
 
-        let pA = (((pC - 3) / 0.036 ) * .85).toFixed(2);
-        let pB = (((pC - 3) / 0.036 ) * .15).toFixed(2);
+        let pA = (((pC - 3) / 0.036) * .85).toFixed(2);
+        let pB = (((pC - 3) / 0.036) * .15).toFixed(2);
         let pF = (parseFloat(pA) + parseFloat(pB) + parseFloat(pC)).toFixed(2);
 
         precioA.setAttribute('value', pA);

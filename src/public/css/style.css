@@ -88,6 +88,14 @@ button.titulo-mis-obras:focus {
     Navegación
 -----------------------------------*/
 
+.counter-carrito {
+    background: var(--gold);
+    margin: 0 10px;
+    padding: 0px 5px;
+    border-radius: 5px;
+    color: white;
+}
+
 .contenedor-padre-nav {
     margin: 0;
     min-width: 100%;
@@ -115,6 +123,17 @@ button.titulo-mis-obras:focus {
 
 .outter-inicio-sesion {
     display: flex;
+}
+
+.registro-link {
+    color: #BDA008;
+    text-decoration: none;
+    transition: .5s ease;
+}
+
+.registro-link:hover {
+    color: #BDA008bb;
+    text-decoration: none;
 }
 
 #navbar-toggler {
@@ -908,6 +927,20 @@ button.titulo-mis-obras:focus {
 .btn-compra:hover {
     background-color: #BDA008AA;
     color: #FFFFFF;
+}
+
+.btn-recibido {
+    font-size: 1.3em;
+    padding: 10px 5px;
+    background: var(--gold);
+    color: white;
+    margin: 0 0 20px 0;
+    transition: .4s ease;
+}
+
+.btn-recibido:hover {
+    background: #BDA008BB;
+    color: white;
 }
 
 .obras-recomendadas {
