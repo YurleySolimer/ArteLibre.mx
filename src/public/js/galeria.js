@@ -16,7 +16,7 @@
 
     $('#galeria-dos .galeria-item').hover(function () {
         $(this).children('.galeria-item-efecto').toggleClass('hovered');
-    })
+    });
 
 
     down.on('click', function() {

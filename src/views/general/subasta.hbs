@@ -21,8 +21,7 @@
             <h1 class="gold mb-4 mt-5">Jarrón con Doce Girasoles</h1>
             <small class="text-muted">Última oferta hace: X</small>
             <p class="precio-obra">Puja actual:
-                <strong>
-                    124.500 MXN
+                <strong id="precio">
                 </strong>
             </p>
 
@@ -33,7 +32,10 @@
             {{> OptionsSubastaAdmin}}
             {{/ifCond}}
             <div class="mt-1 mb-5">
-                <button class="badge badge-pill btn-compra">PUJAR</button>
+                <form action="#">
+                    <input type="hidden" id="precio-pujado" name="precio-pujado">
+                    <button onclick="pujar()" type="submit" class="badge badge-pill btn-compra">PUJAR</button>
+                </form>
             </div>
             <div class="my-5">
                 <p>
@@ -185,8 +187,29 @@
             loop: true,
             margin: 25,
             items: 1
-
         })
-
     });
+
+    // Definimos el precio con lo obtenido en la base de datos
+    let $precio = 12341
+
+    // Formateamos el precio para que tenga mejor aspecto
+    function precioFormateado(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // Seleccionamos e incrustamos el precio formateado en donde corresponde
+    let precio = document.getElementById('precio')
+    precio.innerText = `${precioFormateado($precio)} MXN`
+
+    // Aumentamos el precio directamente con la función para identificar al usuario que aumentó mientras se envia la inforamción del formulario
+    function pujar() {
+        let puja = $precio + 50
+        precio.innerText = `${precioFormateado(puja)} MXN`
+
+        // Seleccionamos el input donde irá el precio pujado
+        let pujado = document.getElementById('precio-pujado')
+        // Fijamos el valor de la puja hecha
+        pujado.value = puja
+    }
 </script>
