@@ -313,3 +313,31 @@ JOIN fotosEventos f ON f.evento_id = e.id AND f.principal = 'True'
 JOIN artistas a ON a.user_id = e.artista_id
 JOIN users u ON u.id = a.user_id
 ;
+
+
+--HEY THERE THIS IS NEW, YES, AGAIN xd
+
+ALTER TABLE subastasInfo
+add duracion INT DEFAULT 1;
+
+ALTER TABLE subastasInfo
+add descripcion TEXT;
+
+ALTER TABLE subastasInfo
+add estadoSubasta ENUM ('En espera', 'Publicada', 'En Proceso', 'Cancelada', 'Finalizada') 
+DEFAULT 'En espera';
+
+CREATE VIEW obraSubasta AS
+SELECT o.id as obraId, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
+		o.destacar, o.recomendar, o.cantidad, o.ocultar, o.titulo_recomendada,
+		a.pais, a.region, a.provincia, a.años_experiencia, a.direccion, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
+		u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion,
+		f.fotoNombre, f.fotoUbicacion, f.principal,
+		s.fecha_inicio, s.hora_inicio, s.hora_fin, s.precio_base, s.duracion, s.estadoSubasta, s.id, s.descripcion as subastaDescripcion
+FROM obras o 
+JOIN fotosObras f ON f.obra_id = o.id AND f.principal = 'True'
+JOIN subastasInfo s ON s.obra_id = o.id AND o.subastar = 'Si'
+JOIN artistas a ON a.user_id = o.artista_id
+JOIN users u ON u.id = a.user_id
+;
+

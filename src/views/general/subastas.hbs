@@ -4,9 +4,11 @@
     <div class="content">
         <div class="row">
             <div class="col-12">
-                <h2>Subastas</h2>
+                <h2>Subastas del Momento</h2>
             </div>
         </div>
+        {{#each obras}}
+        {{#ifCond estadoSubasta "En Proceso"}}
         <div class="row">
             <div class="col-12">
                 <div class="carousel-wrapper-inner">
@@ -140,100 +142,30 @@
                 </div>
             </div>
         </div>
+
+        {{/ifCond}}
+        {{/each}}
         <div class="row">
             <div class="col-12">
-                <h3 class="m-5">Proximamente</h3>
+                <h3 class="m-5">Próximamente</h3>
             </div>
             <div class="col-12">
                 <div class="card-columns card-columns-obras">
+                    {{#each obras}}
+                    {{#ifCond estadoSubasta "Publicada"}}
                     <div class="card">
-                        <img class="card-img-top img-fluid" src="./images/monet1.jpeg" alt="imagen">
+                        <img class="card-img-top img-fluid"  src="./uploads/{{fotoNombre}}" alt="imagen">
                         <div class="card-block obras-card-block">
-                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt.</p>
+                            <h4 class="card-title obra-coleccion">{{nombreObra}} {{coleccion}}</h4>
+                            <p class="card-text">{{descripcion}}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
-                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
+                            <li class="list-group-item"><small class="text-muted gold">Fecha: {{#fecha fecha_inicio}}{{fecha_inicio}}{{/fecha}}</small></li>
+                            <li class="list-group-item"><small class="text-muted">Inicial: {{precio_base}} MXN </small></li>
                         </ul>
                     </div>
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="./images/monet2.jpg" alt="imagen">
-                        <div class="card-block obras-card-block">
-                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
-                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="./images/monet3.jpg" alt="imagen">
-                        <div class="card-block obras-card-block">
-                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
-                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="./images/vangogh1.jpg" alt="imagen">
-                        <div class="card-block obras-card-block">
-                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
-                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="./images/vangogh2.jpg" alt="imagen">
-                        <div class="card-block obras-card-block">
-                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
-                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="./images/vangogh3.jpg" alt="imagen">
-                        <div class="card-block obras-card-block">
-                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
-                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="./images/boguereau1.jpg" alt="imagen">
-                        <div class="card-block obras-card-block">
-                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
-                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top img-fluid" src="./images/boguereau1.jpg" alt="imagen">
-                        <div class="card-block obras-card-block">
-                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, deserunt.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
-                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
-                        </ul>
-                    </div>
+                    {{/ifCond}}
+                    {{/each}}
                 </div>
             </div>
         </div>

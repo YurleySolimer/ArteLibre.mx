@@ -23,6 +23,9 @@ Handlebars.registerHelper('ifCond', function (v1, v2, options) {
 // Dashboard
 //
 
+
+
+
 router.get('/dashboard', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
@@ -64,11 +67,14 @@ router.get('/dashboard/colecciones', isLoggedIn, isArtista, async (req, res) => 
 });
 
 router.get('/dashboard/rendimiento', isLoggedIn, isArtista, async (req, res) => {
-  const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+  const nombre = await pool.query('SELECT nombre, apellido, email FROM users WHERE id =?', [req.user.id]);
   artista = true;
   logueado = true;
   dashboard = true;
-  res.render('artist/mi-rendimiento', { nombre: nombre[0], artista, logueado, dashboard });
+  const email = nombre[0].email;
+  const url = req.url;
+  console.log(url)
+  res.render('artist/mi-rendimiento', { nombre: nombre[0], artista, logueado, email, url, dashboard });
 });
 
 router.get('/dashboard/obras', isLoggedIn, isArtista, async (req, res) => {
@@ -151,6 +157,11 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   //GUARDANDO DATOS DE LA OBRA//
   const { nombreObra, coleccion, creacion, tecnica, estilo, precioFinal, ancho, alto, subasta, copias, descripcion, lcreacion, fcreacion } = req.body;
   var nombreColeccion = 'N/A';
+  var subastar = 'No';
+
+  if (subasta == 'on') {
+    subastar = 'Si';
+  }
 
   if (coleccion > 0) {
     nombreColeccion = await pool.query('SELECT nombreColeccion FROM colecciones WHERE id =?', [coleccion]);
@@ -166,12 +177,23 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
     estilo,
     ancho,
     alto,
+    subastar,
     precio : precioFinal,
     descripcion,
     artista_id: req.user.id
   }
 
   const obra = await pool.query('INSERT INTO obras set ?', [newObra]);
+
+  if (subastar == 'Si') {
+    const newSubasta = {
+      obra_id: obra.insertId
+    }
+
+    await pool.query('INSERT INTO subastasInfo set ?', [newSubasta]);
+  }
+
+
 
   const artista_obras = await pool.query('SELECT * FROM obras WHERE artista_id =?', [req.user.id]);
   const numero_obras = {

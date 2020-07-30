@@ -9,6 +9,9 @@ const passport = require('passport');
 const { database } = require('./keys');
 const multer = require('multer');
 
+const bodyParser = require("body-parser");
+const stripe = require("stripe")(process.env.sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4);
+
 
 //Inicializaciones
 
@@ -46,13 +49,45 @@ app.use(multer({
 ); 
 
 
-
 app.use(session({
 	secret: 'artelibremysqlsession',
 	resave: 'false',
 	saveUninitialized: 'false',
 	store: new MySqlStore(database)
 }));
+
+app.get("/connect/oauth", async (req, res) => {
+	const { code, state } = req.query;
+  
+	// Send the authorization code to Stripe's API.
+	stripe.oauth.token({
+	  grant_type: 'authorization_code',
+	  code
+	}).then(
+	  (response) => {
+		var connected_account_id = response.stripe_user_id;
+		saveAccountId(connected_account_id);
+  
+		// Render some HTML or redirect to a different page.
+		return res.status(200).json({success: true});
+	  },
+	  (err) => {
+		if (err.type === 'StripeInvalidGrantError') {
+		  return res.status(400).json({error: 'Invalid authorization code: ' + code});
+		} else {
+		  return res.status(500).json({error: 'An unknown error occurred.'});
+		}
+	  }
+	);
+  });
+  
+   
+  const saveAccountId = (id) => {
+	// Save the connected account ID from the response to your database.
+	console.log('Connected account ID: ' + id);
+  }
+
+  
 
 app.use(flash());
 app.use(morgan('dev'));

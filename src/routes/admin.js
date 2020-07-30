@@ -118,9 +118,28 @@ router.get('/admin/tasas', isLoggedIn, (req, res) => {
 router.get('/admin/rendimiento', isLoggedIn, (req, res) => {
     res.render('admin/rendimiento');
 });
-router.get('/admin/subastas', isLoggedIn, (req, res) => {
-    res.render('admin/subastas');
+router.get('/admin/subastas', isLoggedIn, async (req, res) => {
+    var obras = await pool.query('SELECT * FROM obraSubasta');
+    res.render('admin/subastas', {obras});
 });
+
+router.post('/admin/subastas/publicar', isLoggedIn, async (req, res) => {
+    const {precioBase, horaInicio, fechaInicio, descripcion, duracion, id} = req.body;
+    const newSubasta = {
+        fecha_inicio: fechaInicio,
+        hora_inicio: horaInicio,
+        duracion,
+        precio_base: precioBase,
+        descripcion,
+        estadoSubasta: 'Publicada'
+    }
+
+    await pool.query('UPDATE subastasInfo set? WHERE id =?', [newSubasta, id]);
+
+    res.redirect('/admin/subastas');
+});
+
+
 router.get('/admin/clientes', isLoggedIn, (req, res) => {
     res.render('admin/clientes');
 });
