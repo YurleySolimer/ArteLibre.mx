@@ -1,6 +1,6 @@
 {{> Navigation }}
 
-<section class="container inicial">
+<section class="container inicial mt-5">
     <div class="content">
         <div class="row">
             <div class="col-12">
@@ -12,34 +12,28 @@
         <div class="row">
             <div class="col-12">
                 <div class="carousel-wrapper-inner">
-                    <div class="owl-carousel owl-theme carousel-index carrusel-coleccion">
-                        <div class="item-coleccion-carrusel" onclick="window.open('/subasta', '_self');">
+                    <div id="node-carrusel-subasta" class="owl-carousel owl-theme carousel-index carrusel-coleccion">
+                        <div class="item-coleccion-carrusel" data-creacion="creacion" data-ubicacion="ubicacion"
+                            data-precio="precio" data-tiempo="tiempo" data-medidas="medidas" data-tecnica="tecnica"
+                            data-link="link">
                             <figure class="figure">
                                 <img class="item item-carrusel-subasta figure-img img-fluid" src="./images/monet3.jpg"
-                                    alt="Pintura">
+                                    alt="Pintura" />
                             </figure>
                         </div>
-                        <div class="item-coleccion-carrusel" onclick="window.open('/subasta', '_self');">
+                        <div class="item-coleccion-carrusel" data-creacion="creacion2" data-ubicacion="ubicacion2"
+                            data-precio="precio2" data-tiempo="tiempo2" data-medidas="medidas2" data-tecnica="tecnica2"
+                            data-link="link2">
                             <figure class="figure">
                                 <img class="item item-carrusel-subasta figure-img img-fluid" src="./images/vangogh1.jpg"
                                     alt="Pintura">
                             </figure>
                         </div>
-                        <div class="item-coleccion-carrusel" onclick="window.open('/subasta', '_self');">
+                        <div class="item-coleccion-carrusel" data-creacion="creacion3" data-ubicacion="ubicacion3"
+                            data-precio="precio3" data-tiempo="tiempo3" data-medidas="medidas3" data-tecnica="tecnica3"
+                            data-link="link3">
                             <figure class="figure">
-                                <img class="item item-carrusel-subasta figure-img img-fluid" src="./images/monet2.jpg"
-                                    alt="Pintura">
-                            </figure>
-                        </div>
-                        <div class="item-coleccion-carrusel" onclick="window.open('/subasta', '_self');">
-                            <figure class="figure">
-                                <img class="item item-carrusel-subasta figure-img img-fluid" src="./images/vangogh2.jpg"
-                                    alt="Pintura">
-                            </figure>
-                        </div>
-                        <div class="item-coleccion-carrusel" onclick="window.open('/subasta', '_self');">
-                            <figure class="figure">
-                                <img class="item item-carrusel-subasta figure-img img-fluid" src="./images/vangogh3.jpg"
+                                <img class="item item-carrusel-subasta figure-img img-fluid" src="./images/vangogh1.jpg"
                                     alt="Pintura">
                             </figure>
                         </div>
@@ -54,15 +48,15 @@
                                 <p class="artista-caracteristica"><strong>Dimensiones</strong></p>
                             </div>
                             <div>
-                                <p class="artista-caracteristica-valor"
-                                    style="font-family: 'MontserratThin'; font-weight: bold;">94 x 101 cm</p>
+                                <p id="medidas-subasta" class="artista-caracteristica-valor"
+                                    style="font-family: 'MontserratThin'; font-weight: bold;"></p>
                             </div>
                             <div>
                                 <p class="artista-caracteristica"><strong>Creación</strong></p>
                             </div>
                             <div>
-                                <p class="artista-caracteristica-valor"
-                                    style="font-family: 'MontserratThin'; font-weight: bold;">Francia, 1888</p>
+                                <p id="creacion-subasta" class="artista-caracteristica-valor"
+                                    style="font-family: 'MontserratThin'; font-weight: bold;"></p>
                             </div>
                         </div>
                     </div>
@@ -72,16 +66,15 @@
                                 <p class="artista-caracteristica"><strong>Técnica</strong></p>
                             </div>
                             <div>
-                                <p class="artista-caracteristica-valor"
-                                    style="font-family: 'MontserratThin'; font-weight: bold;">Oleo sobre tela</p>
+                                <p id="tecnica-subasta" class="artista-caracteristica-valor"
+                                    style="font-family: 'MontserratThin'; font-weight: bold;"></p>
                             </div>
                             <div>
                                 <p class="artista-caracteristica"><strong>Ubicación</strong></p>
                             </div>
                             <div>
-                                <p class="artista-caracteristica-valor"
-                                    style="font-family: 'MontserratThin'; font-weight: bold;">Colonia,
-                                    Alemania</p>
+                                <p id="ubicacion-subasta" class="artista-caracteristica-valor"
+                                    style="font-family: 'MontserratThin'; font-weight: bold;"></p>
                             </div>
                         </div>
                     </div>
@@ -91,21 +84,22 @@
                                 <p class="artista-caracteristica"><strong>Tiempo Restante</strong></p>
                             </div>
                             <div>
-                                <p class="artista-caracteristica-valor"
-                                    style="font-family: 'MontserratThin'; font-weight: bold;">12:35:29</p>
+                                <p id="tiempo-subasta" class="artista-caracteristica-valor"
+                                    style="font-family: 'MontserratThin'; font-weight: bold;"></p>
                             </div>
                             <div>
                                 <p class="artista-caracteristica"><strong>Última Puja</strong></p>
                             </div>
                             <div>
-                                <p class="artista-caracteristica-valor"
-                                    style="font-family: 'MontserratThin'; font-weight: bold;">194.000 MXN</p>
+                                <p id="precio-subasta" class="artista-caracteristica-valor"
+                                    style="font-family: 'MontserratThin'; font-weight: bold;"></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-compra py-1 px-5 m-3 rounded-pill ">PUJAR</button>
+                            <a id="link-subasta" href="" class="btn btn-compra py-1 px-5 m-3 rounded-pill ">Ir a la
+                                subasta</a>
                         </div>
                     </div>
                 </div>
@@ -154,10 +148,102 @@
                     {{#each obras}}
                     {{#ifCond estadoSubasta "Publicada"}}
                     <div class="card">
+<<<<<<< HEAD
                         <img class="card-img-top img-fluid"  src="./uploads/{{fotoNombre}}" alt="imagen">
                         <div class="card-block obras-card-block">
                             <h4 class="card-title obra-coleccion">{{nombreObra}} {{coleccion}}</h4>
                             <p class="card-text">{{descripcion}}</p>
+=======
+                        <img class="card-img-top img-fluid" src="./images/monet1.jpeg" alt="imagen">
+                        <div class="card-block obras-card-block">
+                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
+                                deserunt.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
+                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="./images/monet2.jpg" alt="imagen">
+                        <div class="card-block obras-card-block">
+                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
+                                deserunt.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
+                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="./images/monet3.jpg" alt="imagen">
+                        <div class="card-block obras-card-block">
+                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
+                                deserunt.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
+                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="./images/vangogh1.jpg" alt="imagen">
+                        <div class="card-block obras-card-block">
+                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
+                                deserunt.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
+                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="./images/vangogh2.jpg" alt="imagen">
+                        <div class="card-block obras-card-block">
+                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
+                                deserunt.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
+                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="./images/vangogh3.jpg" alt="imagen">
+                        <div class="card-block obras-card-block">
+                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
+                                deserunt.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
+                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="./images/boguereau1.jpg" alt="imagen">
+                        <div class="card-block obras-card-block">
+                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
+                                deserunt.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><small class="text-muted gold">Fecha: 25/06/2020</small></li>
+                            <li class="list-group-item"><small class="text-muted">Inicial: 50.000 MXN </small></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="./images/boguereau1.jpg" alt="imagen">
+                        <div class="card-block obras-card-block">
+                            <h4 class="card-title obra-coleccion">Monet Obra</h4>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
+                                deserunt.</p>
+>>>>>>> 7a7736dbc8094a7003437c8e0c89dbcc71411d64
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><small class="text-muted gold">Fecha: {{#fecha fecha_inicio}}{{fecha_inicio}}{{/fecha}}</small></li>
@@ -181,7 +267,7 @@
         $('#carousal-wrapper-inner').css('width', divAWidth);
         $('.owl-carousel').owlCarousel({
             loop: true,
-            items: 3,
+            items: 1,
             nav: true,
             center: true,
             margin: 25,
@@ -190,13 +276,96 @@
                     items: 1
                 },
                 1000: {
-                    items: 3
+                    items: 1
                 }
             }
 
         });
+
+        // Actualizar información y estructura de los botones de control 
+
         $('.owl-item').addClass('carousel-coleccion');
         $('.owl-next').html('<span aria-label="Next"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" class="svg-inline--fa fa-angle-right fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg></span>')
         $('.owl-prev').html('<span aria-label="Previous"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" class="svg-inline--fa fa-angle-left fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg></span>')
+
+        // Definimos el ID del stage para poder seleccionarlo 
+
+        $('.owl-stage').attr('id', 'owl-stage');
+
+        // Captamos todos los contenedores de data inicial que queremos ir modificando
+
+        let medidas = $('#medidas-subasta')
+        let creacion = $('#creacion-subasta')
+        let tecnica = $('#tecnica-subasta')
+        let ubicacion = $('#ubicacion-subasta')
+        let tiempo = $('#tiempo-subasta')
+        let precio = $('#precio-subasta')
+        let link = $('#link-subasta')
+
+        // Apuntamos al elemento hijo que tiene la información que necesitamos
+
+        let activo = document.querySelector('.owl-item.active');
+        let datos = activo.firstChild;
+
+        // Definimos las variables con la información inicial que se desplegará desde el nodo apuntado
+
+        let dmedidas = datos.dataset.medidas
+        let dcreacion = datos.dataset.creacion
+        let dtecnica = datos.dataset.tecnica
+        let dubicacion = datos.dataset.ubicacion
+        let dtiempo = datos.dataset.tiempo
+        let dprecio = datos.dataset.precio
+        let dlink = datos.dataset.link
+
+        // Incrustamos la data en cada sección
+
+        medidas.html(dmedidas)
+        creacion.html(dcreacion)
+        tecnica.html(dtecnica)
+        ubicacion.html(dubicacion)
+        tiempo.html(dtiempo)
+        precio.html(dprecio)
+        link.attr('href', `/subasta/${dlink}`)
+
+        // Comienza lo divertido
+        // Definimos el target de nuestro observador con el ID que definimos antes
+
+        let target = document.querySelector('#owl-stage')
+
+        // Definimos la función que realizará el observador al encontrar alguna mutación en el arbol de nodos seleccionado
+
+        let oberver = new MutationObserver(function () {
+
+            // Repetimos el proceso de captar, definir la data y designar la data
+
+            let activo = document.querySelector('.owl-item.active');
+            let datos = activo.firstChild;
+
+            let dmedidas = datos.dataset.medidas
+            let dcreacion = datos.dataset.creacion
+            let dtecnica = datos.dataset.tecnica
+            let dubicacion = datos.dataset.ubicacion
+            let dtiempo = datos.dataset.tiempo
+            let dprecio = datos.dataset.precio
+            let dlink = datos.dataset.link
+
+            medidas.html(dmedidas)
+            creacion.html(dcreacion)
+            tecnica.html(dtecnica)
+            ubicacion.html(dubicacion)
+            tiempo.html(dtiempo)
+            precio.html(dprecio)
+            link.attr('href', `/subasta/${dlink}`)
+
+        });
+
+        // Verificamos los ajustes que tendrá nuestro Oberver de mutaciones
+
+        let config = { attributes: true, childList: true, characterData: true, subtree: true };
+
+        // Invocamos nuestro observer
+
+        oberver.observe(target, config);
+
     });
 </script>
