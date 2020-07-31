@@ -1,3 +1,5 @@
+{{#each obras}}
+
 <!-- Modal Obra -->
 <div class="modal fade" id="datos-obra-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
@@ -67,7 +69,7 @@
 
 
 <!-- Modal Borrar -->
-<div class="modal fade" id="borrar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="borrar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -90,7 +92,7 @@
 </div>
 
 <!-- Modal cancelar -->
-<div class="modal fade" id="cancelar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="cancelar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -113,7 +115,7 @@
 </div>
 
 <!-- Modal publicar -->
-<div class="modal fade" id="publicar-obra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="publicar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -123,7 +125,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="">
+            <form action="/admin/subastas/publicar" method="POST">
                 <div class="modal-body">
                     <p>¿Estás seguro de que deseas publicar esta obra? Esta acción lo llevará a mostrarse en la
                         sección de subastas.</p>
@@ -132,19 +134,19 @@
                             <div class="form-group">
                                 <label for="precio-base">Precio base</label>
                                 <!-- Valor dicho por el artista, como sugerencia en el placeholder-->
-                                <input name="precio-base" type="number" placeholder="75.000" class="form-control" id="precio-base" />
+                                <input name="precioBase" type="number" placeholder="75.000" class="form-control" id="precio-base" />
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label for="fecha-inicio">Fecha de inicio</label>
-                                <input name="fecha-inicio" type="date" class="form-control" id="fecha-inicio" />
+                                <input name="fechaInicio" type="date" class="form-control" id="fecha-inicio" />
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="form-group">
                                 <label for="hora-inicio">Hora de inicio</label>
-                                <input name="hora-inicio" type="time" class="form-control" id="hora-inicio" />
+                                <input name="horaInicio" type="time" class="form-control" id="hora-inicio" />
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
@@ -158,20 +160,22 @@
                                 <label for="text-descripcion">Escriba la información que desea que acompañe a la obra en
                                     la sección "Subastas" sustituyendo la descripción de la pieza en caso de tenerla.
                                     (OPCIONAL)</label>
-                                <textarea name="text-descripcion" class="form-control" id="text-descripcion" cols="30"
+                                <textarea name="descripcion" class="form-control" id="text-descripcion" cols="30"
                                     rows="10"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-accion-admin">Publicar</button>
+                    <button type="submit" class="btn btn-accion-admin" name="id" value="{{id}}">Publicar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+{{/each}}
 
 {{> Navigation }}
 {{> adminSidebar }}
@@ -205,8 +209,6 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Artista</th>
                             <th scope="col">Ubicación</th>
-                            <th scope="col">ID</th>
-                            <th scope="col">Tipo</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Precio base</th>
                             <th scope="col">Fecha de inicio</th>
@@ -214,33 +216,35 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each obras}}
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Esperanza</h2>
+                                    <h2 style="font-weight: bold;">{{nombreObra}}</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
-                            <td>Lilah Steel</td>
-                            <td><span class="coleccion-mis-obras">New Hampshire</span></td>
+                            <td>{{nombre}} {{apellido}}</td>
+                            <td><span class="coleccion-mis-obras">{{lugarCreacion}}</span></td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">1AB3B14JK1</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="text-muted">Pintura</td>
-                            <td class="text-muted">Por publicar</td>
-                            <td class="gold">75.900 MXN</td>
-                            <td class="gold">28 - 06 - 2020</td>
+                            <td class="text-muted">{{estadoSubasta}}</td>
+                            <td class="gold">{{precio_base}} MXN</td>
+                            <td class="gold">{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}}</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td>
                                 <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#borrar-obra" class="borrar"><i
+                                    <button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i
                                             class="fas fa-trash"></i></button>
-                                    <button data-toggle="modal" data-target="#publicar-obra" class="publicar"><i
+                                    {{#ifCond estado 'En espera'}}
+                                    <button data-toggle="modal" data-target="#publicar-obra{{id}}" class="publicar"><i
                                             class="fas fa-upload"></i></button>
-                                    <button data-toggle="modal" data-target="#cancelar-obra" class="cancelar"><i
+                                    {{/ifCond}}
+                                    <button data-toggle="modal" data-target="#cancelar-obra{{id}}" class="cancelar"><i
                                             class="far fa-times-circle"></i></button>
                                 </div>
                             </td>
                         </tr>
+                        {{/each}}
 
                     </tbody>
                 </table>

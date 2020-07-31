@@ -7,6 +7,10 @@ const { isCliente} = require('../lib/auth');
 const { isArtista} = require('../lib/auth');
 
 //noreply@artelibre.mx < n0N0.r37ly!#
+// ca_HeryjbpRGndoYxvCYMJ2pwCZITTeTHOw cliente id
+// secret sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4
+// public pk_test_6ltlRZ8Ncn5C3Q7DE3X3r5wz00A24gvL0J
+
 
 
 var artista = false;
@@ -269,12 +273,13 @@ router.get('/subastas', async (req, res) => {
   artista = await isArtist(req);
   cliente = await isClient(req);
   admin = await isAdmin(req);
-
   if (artista == true || cliente == true || admin == true) {
     nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   }
+  var obras = await pool.query('SELECT * FROM obraSubasta');
 
-  res.render('general/subastas',  {artista, cliente, logueado, admin, nombre:nombre[0]});
+
+  res.render('general/subastas',  {artista, cliente, logueado, admin, nombre:nombre[0], obras});
 });
 
 
