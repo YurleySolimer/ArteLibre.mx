@@ -1648,7 +1648,10 @@ button.titulo-mis-obras:focus {
 .img-perfil-registro {
     position: relative;
     z-index: 2;
-    top: -350px
+    top: -346px;
+    left: 50%;
+    height: 100%;
+    transform: translateX(-50%);
 }
 
 /*-----------------------------------

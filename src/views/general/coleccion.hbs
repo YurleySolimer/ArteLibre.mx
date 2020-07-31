@@ -63,7 +63,7 @@
                     {{#ifCond admin true}}
                     {{>OptionsColeccionAdmin}}
                     {{/ifCond}}
-                    
+
                 </div>
             </div>
             <div class="col-12 m-3">
@@ -79,24 +79,20 @@
                                 <h3 class="gold">Te puede interear</h3>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="card-group">
-
-                                {{#each myArray}}
-
-                                <div class="card">
-                                    <a href="">
-                                        <img src="/uploads/{{fotoNombre}}" class="obra-recomendada card-img-top" alt="">
-                                    </a>
-                                    <div class="card-body text-left">
-                                        <h5 class="card-title">{{fotoNombre}}</h5>
-                                        <p class="card-text text-muted">{{precio}} MXN</p>
-                                        <p class="card-text"><small class="text-muted">Fecha: 02/15/2020</small></p>
-                                    </div>
+                        {{#each myArray}}
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="card">
+                                <a href="">
+                                    <img src="/uploads/{{fotoNombre}}" class="obra-recomendada card-img-top" alt="">
+                                </a>
+                                <div class="card-body text-left">
+                                    <h5 class="card-title">{{fotoNombre}}</h5>
+                                    <p class="card-text text-muted">{{precio}} MXN</p>
+                                    <p class="card-text"><small class="text-muted">Fecha: 02/15/2020</small></p>
                                 </div>
-                                {{/each}}
                             </div>
                         </div>
+                        {{/each}}
                     </div>
                 </div>
             </div>
