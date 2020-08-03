@@ -3,7 +3,7 @@
         <div class="galeria-uno-inner">
             <div class="section">
                 <div class="volver-galeria">
-                    <button class="btn btn-compra badge badge-pill" style="padding: 10px 20px; font-size: 1.3em;">
+                    <button class="btn btn-compra badge badge-pill" onclick="window.location.href='/artista/{{user.id}}'" style="padding: 10px 20px; font-size: 1.3em;">
                         Volver
                     </button>
                 </div>
@@ -57,23 +57,23 @@
                             </div>
                             <div class="col-12">
                                 <div class="row galeria-info">
-                                    <div class="col text-center">
+                                    <div class="col" style="overflow-wrap: anywhere;">
                                         <span class="galeria-titulo">Técnica</span> <br>
                                         <span id="galeria-seleccion-tecnica"></span>
                                     </div>
-                                    <div class="col">
+                                    <div class="col" style="overflow-wrap: anywhere;">
                                         <span class="galeria-titulo">Estilo</span> <br>
                                         <span id="galeria-seleccion-tipo"></span>
                                     </div>
-                                    <div class="col">
+                                    <div class="col" style="overflow-wrap: anywhere;">
                                         <span class="galeria-titulo">Nombre</span> <br>
                                         <span id="galeria-seleccion-nombre"></span>
                                     </div>
-                                    <div class="col">
+                                    <div class="col" style="overflow-wrap: anywhere;">
                                         <span class="galeria-titulo">Año</span> <br>
                                         <span id="galeria-seleccion-year"></span>
                                     </div>
-                                    <div class="col">
+                                    <div class="col" style="overflow-wrap: anywhere;">
                                         <a id="galeria-seleccion-enlace" class="btn btn-compra badge badge-pill"
                                             href="#">
                                             <span class="galeria-enlace">Ver más</span>
