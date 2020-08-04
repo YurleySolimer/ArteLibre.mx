@@ -1530,6 +1530,8 @@ button.titulo-mis-obras:focus {
 .imagen-galeria-input {
     max-width: 100%;
     transition: .5s ease;
+    min-height: 1px;
+    min-width: 100px;
 }
 
 .imagen-galeria-input:hover {
@@ -1648,7 +1650,10 @@ button.titulo-mis-obras:focus {
 .img-perfil-registro {
     position: relative;
     z-index: 2;
-    top: -350px
+    top: -346px;
+    left: 50%;
+    height: 100%;
+    transform: translateX(-50%);
 }
 
 /*-----------------------------------
@@ -2123,7 +2128,7 @@ html[xmlns] .slider-wrap {
     font-size: 1em;
 }
 
-.table tbody tr:nth-of-type(2n) {
+.tabla .table tbody tr:nth-of-type(2n) {
     background-color: #f8f8f8;
 }
 
@@ -2720,6 +2725,7 @@ Galeria
     position: absolute;
     left: 20px;
     top: 0px;
+    z-index: 4;
 }
 
 .galeria-artista {

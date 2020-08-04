@@ -394,7 +394,8 @@ router.get('/artist-perfil', isLoggedIn, isArtista, async (req, res) => {
   const user = await pool.query('SELECT * FROM usuarioArtista WHERE id =?', [req.user.id]);
   const obras = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =?', [req.user.id]);
   var ultima_obra = {
-    nombreObra: 'N/A'
+    nombreObra: 'N/A',
+    id: '#'
   }
   if (obras.length > 0) {
     ultima_obra = obras[obras.length - 1];

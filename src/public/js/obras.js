@@ -98,9 +98,7 @@ const precioC = document.getElementById('precioC');
 const precioF = document.getElementById('precioF');
 
 precioA.addEventListener('keyup', function () {
-    let digitadoA = precioA.value;
-
-    let pA = parseFloat(digitadoA);
+    let pA = parseFloat(this.value);
 
     let pB = ((pA / .85) * .15).toFixed(2);
     let pC = (((pA / .85) * 0.036) + 3).toFixed(2);
@@ -109,15 +107,15 @@ precioA.addEventListener('keyup', function () {
     precioB.setAttribute('value', pB);
     precioC.setAttribute('value', pC);
     precioF.setAttribute('value', pF);
+    this.setAttribute('value', pA);
     precioB.value = pB;
     precioC.value = pC;
     precioF.value = pF;
+    this.value = pA;
 });
 
 precioB.addEventListener('keyup', function () {
-    let digitadoB = precioB.value;
-
-    let pB = parseFloat(digitadoB);
+    let pB = parseFloat(this.value);
 
     let pA = ((pB / .15) * .85).toFixed(2);
     let pC = (((pB / .15) * 0.036) + 3).toFixed(2);
@@ -126,15 +124,15 @@ precioB.addEventListener('keyup', function () {
     precioA.setAttribute('value', pA);
     precioC.setAttribute('value', pC);
     precioF.setAttribute('value', pF);
+    this.setAttribute('value', pB);
     precioA.value = pA;
     precioC.value = pC;
     precioF.value = pF;
+    this.value = pB;
 });
 
 precioC.addEventListener('keyup', function () {
-    let digitadoC = precioC.value;
-
-    let pC = parseFloat(digitadoC)
+    let pC = parseFloat(this.value);
 
     let pA = (((pC - 3) / 0.036) * .85).toFixed(2);
     let pB = (((pC - 3) / 0.036) * .15).toFixed(2);
@@ -143,15 +141,15 @@ precioC.addEventListener('keyup', function () {
     precioA.setAttribute('value', pA);
     precioB.setAttribute('value', pB);
     precioF.setAttribute('value', pF);
+    this.setAttribute('value', pC);
     precioB.value = pB;
     precioA.value = pA;
     precioF.value = pF;
+    this.value = pC;
 });
 
 precioF.addEventListener('keyup', function () {
-    let digitadoF = precioF.value;
-
-    let pF = parseFloat(digitadoF);
+    let pF = parseFloat(this.value);
 
     let pA = (((pF - 3) / 1.036) * .85).toFixed(2);
     let pB = (((pF - 3) / 1.036) * .15).toFixed(2);
@@ -160,7 +158,9 @@ precioF.addEventListener('keyup', function () {
     precioA.setAttribute('value', pA);
     precioC.setAttribute('value', pC);
     precioB.setAttribute('value', pB);
+    this.setAttribute('value', pF);
     precioB.value = pB;
     precioC.value = pC;
     precioA.value = pA;
+    this.value = pF;
 });

@@ -15,7 +15,7 @@
                     <div id="node-carrusel-subasta" class="owl-carousel owl-theme carousel-index carrusel-coleccion">
                         <div class="item-coleccion-carrusel" data-creacion="creacion" data-ubicacion="ubicacion"
                             data-precio="precio" data-tiempo="tiempo" data-medidas="medidas" data-tecnica="tecnica"
-                            data-link="link">
+                            data-link="link" data-content="content">
                             <figure class="figure">
                                 <img class="item item-carrusel-subasta figure-img img-fluid" src="./images/monet3.jpg"
                                     alt="Pintura" />
@@ -23,7 +23,7 @@
                         </div>
                         <div class="item-coleccion-carrusel" data-creacion="creacion2" data-ubicacion="ubicacion2"
                             data-precio="precio2" data-tiempo="tiempo2" data-medidas="medidas2" data-tecnica="tecnica2"
-                            data-link="link2">
+                            data-link="link2" data-content="content2">
                             <figure class="figure">
                                 <img class="item item-carrusel-subasta figure-img img-fluid" src="./images/vangogh1.jpg"
                                     alt="Pintura">
@@ -31,7 +31,7 @@
                         </div>
                         <div class="item-coleccion-carrusel" data-creacion="creacion3" data-ubicacion="ubicacion3"
                             data-precio="precio3" data-tiempo="tiempo3" data-medidas="medidas3" data-tecnica="tecnica3"
-                            data-link="link3">
+                            data-link="link3" data-content="content3">
                             <figure class="figure">
                                 <img class="item item-carrusel-subasta figure-img img-fluid" src="./images/vangogh1.jpg"
                                     alt="Pintura">
@@ -106,32 +106,8 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <p class="subastas-info">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis cupiditate enim laudantium odit
-                        eos animi quibusdam et maiores quaerat impedit? Officiis expedita atque fugiat deleniti,
-                        assumenda perferendis fuga obcaecati eaque laudantium quas earum facere quibusdam odio ipsa
-                        corrupti, accusamus repudiandae, nisi numquam dolore dicta similique debitis! Aliquid dolor rem
-                        earum, corrupti expedita voluptates repellendus necessitatibus veritatis quas, doloribus quam
-                        nihil veniam modi. Debitis voluptas explicabo, error a autem quisquam adipisci sapiente
-                        exercitationem accusantium sed dolore voluptatum optio fuga, aut sit odio voluptatibus
-                        voluptatem nesciunt. Rerum pariatur consectetur inventore fuga? Vel laborum, quisquam cupiditate
-                        adipisci voluptatem culpa ad provident at sit eum est distinctio illo perferendis ipsa? Est
-                        commodi illum ipsum itaque culpa? Corporis quasi dolore nesciunt nulla. Earum praesentium
-                        aspernatur maiores culpa, accusantium eos eveniet fugiat modi consectetur sequi illo voluptatem
-                        tempora quia a molestias ea, quos veniam expedita voluptates veritatis totam iste. Rem quae
-                        harum cupiditate magnam placeat dolorem architecto voluptas voluptatibus ratione rerum. Facere
-                        voluptatibus mollitia sed modi consectetur. Perspiciatis aut distinctio commodi ipsum tenetur
-                        modi odio tempora exercitationem neque? Sit autem officiis unde a hic beatae quidem
-                        reprehenderit optio nesciunt, quisquam ullam placeat enim expedita facere soluta voluptatibus
-                        odit. Explicabo quidem ut, a ex et libero autem, consequuntur quos sunt nihil minus. Architecto
-                        voluptas corporis odio accusamus distinctio hic qui quam? Placeat dignissimos expedita earum,
-                        recusandae odit laboriosam quis impedit repellat quam quibusdam! Provident numquam error ratione
-                        nemo iusto odio ipsam saepe unde nisi deleniti, perspiciatis cum facere dolor expedita cumque,
-                        molestias incidunt. Temporibus obcaecati quo natus ullam, facere sunt similique qui, officiis
-                        atque quia autem corrupti maxime itaque non deleniti et, ex assumenda? Temporibus id odit quasi
-                        nam similique rerum ipsam inventore! Aliquam possimus ex, blanditiis incidunt nostrum enim
-                        repellat ut quidem animi nemo, fugit illo nam perspiciatis alias laudantium, quod quo voluptatum
-                        quaerat porro? Impedit?
+                    <p id="content-subasta" class="subastas-info">
+                       
                     </p>
                 </div>
             </div>
@@ -301,6 +277,7 @@
         let tiempo = $('#tiempo-subasta')
         let precio = $('#precio-subasta')
         let link = $('#link-subasta')
+        let content = $('#content-subasta')
 
         // Apuntamos al elemento hijo que tiene la información que necesitamos
 
@@ -316,6 +293,7 @@
         let dtiempo = datos.dataset.tiempo
         let dprecio = datos.dataset.precio
         let dlink = datos.dataset.link
+        let dcontent = datos.dataset.content
 
         // Incrustamos la data en cada sección
 
@@ -326,6 +304,7 @@
         tiempo.html(dtiempo)
         precio.html(dprecio)
         link.attr('href', `/subasta/${dlink}`)
+        content.html(dcontent)
 
         // Comienza lo divertido
         // Definimos el target de nuestro observador con el ID que definimos antes
@@ -348,6 +327,7 @@
             let dtiempo = datos.dataset.tiempo
             let dprecio = datos.dataset.precio
             let dlink = datos.dataset.link
+            let dcontent = datos.dataset.content
 
             medidas.html(dmedidas)
             creacion.html(dcreacion)
@@ -356,6 +336,7 @@
             tiempo.html(dtiempo)
             precio.html(dprecio)
             link.attr('href', `/subasta/${dlink}`)
+            content.html(dcontent)
 
         });
 
