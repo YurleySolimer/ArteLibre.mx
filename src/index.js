@@ -10,7 +10,7 @@ const { database } = require('./keys');
 const multer = require('multer');
 
 const bodyParser = require("body-parser");
-const stripe = require("stripe")(process.env.sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4);
+const stripe = require('stripe')('sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4');
 
 
 //Inicializaciones
@@ -61,24 +61,25 @@ app.get("/connect/oauth", async (req, res) => {
   
 	// Send the authorization code to Stripe's API.
 	stripe.oauth.token({
-	  grant_type: 'authorization_code',
-	  code
-	}).then(
-	  (response) => {
-		var connected_account_id = response.stripe_user_id;
-		saveAccountId(connected_account_id);
-  
-		// Render some HTML or redirect to a different page.
-		return res.status(200).json({success: true});
-	  },
-	  (err) => {
-		if (err.type === 'StripeInvalidGrantError') {
-		  return res.status(400).json({error: 'Invalid authorization code: ' + code});
-		} else {
-		  return res.status(500).json({error: 'An unknown error occurred.'});
+		grant_type: 'authorization_code',
+		code
+	  }).then(
+		(response) => {
+		  var connected_account_id = response.stripe_user_id;
+		  saveAccountId(connected_account_id);
+	
+		  // Render some HTML or redirect to a different page.
+		  return res.status(200).json({success: true});
+		},
+		(err) => {
+			console.log(err)
+		  if (err.type === 'StripeInvalidGrantError') {
+			return res.status(400).json({error: 'Invalid authorization code: ' + code});
+		  } else {
+			return res.status(500).json({error: 'An unknown error occurred.'});
+		  }
 		}
-	  }
-	);
+	  );
   });
   
    
