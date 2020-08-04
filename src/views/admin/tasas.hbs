@@ -1,14 +1,98 @@
+<div class="modal fade" id="tasas" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="gold">Defina la nueva distribución de las tasas</h3>
+                            <hr />
+                            <input type="number" class="form-control mb-3" min="0" max="100" name="artista" id="artista"
+                                placeholder="85 % - Artista">
+                            <input type="number" readonly class="form-control mb-3" min="0" max="100" name="artelibre"
+                                id="artelibre" placeholder="15 % - Artelibre">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-sm btn-compra">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {{> Navigation }}
 {{> adminSidebar }}
 
-<div class="container">
-    <div class="content">
-        <div class="m-5">
-            <h2>Tasas</h2>
+
+<div class="bg-light h-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 p-5">
+                <h2>Tasas</h2>
+            </div>
+            <div class="col-12 col-md 3">
+                <div class="card h-100 tasas p-4">
+                    <h3 class="card-title"><span class="gold">Artista</span></h3>
+                    <p class="card-text">Este es el porcentaje que va al Artista por cada transacción</p>
+                    <h2 class="card-title text-center">85 %</h2>
+                    <p class="card-text text-muted text-center">Ej. <span class="gold">8.500 MXN</span></p>
+                </div>
+            </div>
+            <div class="col-12 col-md 3">
+                <div class="card h-100 tasas p-4">
+                    <h3 class="card-title"><span class="gold">Artelibre</span></h3>
+                    <p class="card-text">Este es el porcentaje que va a ArteLibre por cada transacción</p>
+                    <h2 class="card-title text-center">15 %</h2>
+                    <p class="card-text text-muted text-center">Ej. <span class="gold">1.500 MXN</span></p>
+                </div>
+            </div>
+            <div class="col-12 col-md 3">
+                <div class="card h-100 tasas p-4">
+                    <h3 class="card-title"><span class="gold">Comisión</span></h3>
+                    <p class="card-text">Este es el porcentaje que a la plataforma de Stripe por cada transacción</p>
+                    <h2 class="card-title text-center">3,6 % + <br /> 3 MXN</h2>
+                    <p class="card-text text-muted text-center">Ej. <span class="gold">363 MXN</span></p>
+                </div>
+            </div>
+            <div class="col-12 col-md 3">
+                <div class="card h-100 tasas p-4">
+                    <h3 class="card-title"><span class="gold">Final</span></h3>
+                    <p class="card-text">El cliente visualiza como precio la suma de todas estas tarifas</p>
+                    <h2 class="card-title text-center gold">10.363 MXN</h2>
+                    <p class="card-text text-muted text-center">
+                        <button data-toggle="modal" data-target="#tasas" class="btn btn-compra">
+                            <strong>Cambiar</strong>
+                        </button>
+                    </p>
+                </div>
+            </div>
         </div>
-        
     </div>
 </div>
+
+<script>
+    let artelibre = document.getElementById('artelibre');
+    let artista = document.getElementById('artista');
+
+    artista.addEventListener('keyup', function () {
+        let valueArt = artista.value;
+        let valueArtL = 100 - valueArt
+
+        artelibre.value = valueArtL
+        artelibre.setAttribute('value', valueArtL)
+    });
+
+</script>
 
 {{> sidebarEnd }}
 {{> Footer }}

@@ -2961,6 +2961,16 @@ Dashboard Administrador
 Administrador
 -----------------------------------*/
 
+.tasas {
+    border: none;
+    box-shadow: 4px 4px 8px #d3d3d3;
+}
+
+#tasas .modal-content {
+    max-width: 400px;
+    margin: auto;
+}
+
 .filtro-lista {
     justify-content: center;
     align-items: center;
