@@ -80,7 +80,7 @@ button.titulo-mis-obras:focus {
     }
 
     .inicial {
-        padding: 4.5em;
+        padding-top: 4.5em;
     }
 }
 
@@ -2820,8 +2820,156 @@ Galeria
 }
 
 /*-----------------------------------
+Dashboard Artista
+-----------------------------------*/
+
+.tarjeta-dashboard {
+    border-radius: .25rem;
+    background: var(--gold);
+    min-height: 40px;
+    box-shadow: 4px 4px 8px #D3D3D3;
+    display: flex;
+}
+
+.inner-tarjeta-dashboard {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.ultima-obra-dashboard {
+    box-shadow: 4px 4px 8px #d3d3d3;
+    border: none;
+}
+
+.tabla-dashboard thead tr,
+.table-dashboard tbody tr {
+    background-color: #495057 !important;
+}
+
+.tabla-dashboard th {
+    color: var(--second-gold);
+    border-bottom: 2px solid #737373 !important;
+    border-top: none;
+}
+
+.tabla-dashboard td {
+    border-top: 1px solid #737373;
+}
+
+.tabla-dashboard td a {
+    color: var(--third-gold);
+}
+
+.tabla-dashboard td a:hover {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.obras-mas-visitadas-dashboard,
+.colecciones-mas-visitadas-dashboard {
+    padding: 2px;
+    border-radius: .25rem;
+    background: #495057;
+    box-shadow: 4px 4px 8px #d3d3d3;
+}
+
+.proximo-evento-dashboard, .proxima-subasta-dashboard {
+    border: none;
+    box-shadow: 4px 4px 8px #d3d3d3;
+}
+
+/*-----------------------------------
+Dashboard Administrador
+-----------------------------------*/
+
+
+.ultima-coleccion-dashboard,
+.galeria-mas-visitada-dashboard {
+    border: none;
+    box-shadow: 4px 4px 8px #d3d3d3;
+}
+
+.ultima-obra-admin-dashboard,
+.obra-visitada-admin-dashboard {
+    background: #0000008a;
+}
+
+.titulo-obra-card-dashboard a {
+    color: white;
+}
+
+.titulo-obra-card-dashboard a:hover {
+    color: var(--third-gold);
+    text-decoration: none;
+}
+
+.card-img,
+.card-img-overlay,
+.tarjeta-card-dashboard {
+    border-radius: .25rem;
+    border: none;
+}
+
+.tarjeta-card-dashboard {
+    box-shadow: 4px 4px 8px #d3d3d3;
+}
+
+.tarjeta-dashboard-admin {
+    border-radius: .25rem;
+    background: #3c434a;
+    min-height: 40px;
+    box-shadow: 4px 4px 8px #D3D3D3;
+    display: flex;
+}
+
+.proximos-eventos-admin-dashboard,
+.proximas-subastas-admin-dashboard,
+.artistas-relevantes-admin-dashboard {
+    padding: 2px;
+    border-radius: .25rem;
+    background: #FFF;
+    box-shadow: 4px 4px 8px #d3d3d3;
+}
+
+.tabla-dashboard-admin thead tr,
+.table-dashboard-admin tbody tr {
+    background-color: #FFFFFF !important;
+}
+
+.tabla-dashboard-admin th {
+    color: var(--gold);
+    border-top: none;
+    border-bottom: 2px solid var(--third-gold) !important;
+}
+
+.tabla-dashboard-admin td {
+    border-top: 1px solid #bababa;
+}
+
+.tabla-dashboard-admin td a {
+    color: #3c434a;
+}
+
+.tabla-dashboard-admin td a:hover {
+    text-decoration: none;
+    color: var(--third-gold);
+}
+
+/*-----------------------------------
 Administrador
 -----------------------------------*/
+
+.tasas {
+    border: none;
+    box-shadow: 4px 4px 8px #d3d3d3;
+}
+
+#tasas .modal-content {
+    max-width: 400px;
+    margin: auto;
+}
 
 .filtro-lista {
     justify-content: center;
