@@ -231,7 +231,7 @@ SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreac
 		f.fotoNombre, f.fotoUbicacion, f.principal
 FROM obras o 
 JOIN fotosObras f ON f.obra_id = o.id AND f.principal = 'True'
-JOIN artistas a ON a. = o.artista_id
+JOIN artistas a ON a.user_id = o.artista_id
 JOIN users u ON u.id = a.user_id
 ;
 
