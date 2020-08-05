@@ -4,6 +4,7 @@ const pool = require('../database');
 
 const { isArtista } = require('../lib/auth');
 const { isLoggedIn } = require('../lib/auth');
+const stripe = require('stripe')('sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4');
 
 var artista = false;
 var logueado = false;
@@ -18,6 +19,49 @@ Handlebars.registerHelper('ifCond', function (v1, v2, options) {
   }
   return options.inverse(this);
 });
+
+router.get("/connect/oauth", isLoggedIn, isArtista, async (req, res) => {
+	const { code, state } = req.query;
+  
+	// Send the authorization code to Stripe's API.
+	stripe.oauth.token({
+		grant_type: 'authorization_code',
+		code
+	  }).then(
+		async (response) => {
+		  var connected_account_id = response.stripe_user_id;
+		  await saveAccountId(connected_account_id, req, res);
+	
+      // Render some HTML or redirect to a different page.
+      req.flash('success', 'Registro Exitoso')
+      res.redirect('/dashboard/rendimiento');
+		},
+		(err) => {
+			console.log(err)
+		  if (err.type === 'StripeInvalidGrantError') {
+			return res.status(400).json({error: 'Invalid authorization code: ' + code});
+		  } else {
+			return res.status(500).json({error: 'An unknown error occurred.'});
+		  }
+		}
+	  );
+  });
+  
+   
+  async function saveAccountId (id, req, res) {
+  // Save the connected account ID from the response to your database.
+  console.log(id)
+	const id_stripe = {
+		id_stripe : id,
+		estado : 'Registrado',
+		id_user : req.user.id
+	}
+	await pool.query('INSERT INTO artistStripe SET?', [id_stripe]);
+	
+  console.log('Connected account ID: ' + id);
+
+  }
+
 
 //
 // Dashboard
@@ -73,8 +117,13 @@ router.get('/dashboard/rendimiento', isLoggedIn, isArtista, async (req, res) => 
   dashboard = true;
   const email = nombre[0].email;
   const url = req.url;
-  console.log(url)
-  res.render('artist/mi-rendimiento', { nombre: nombre[0], artista, logueado, email, url, dashboard });
+  const artistStripe = await pool.query('SELECT * FROM artistStripe WHERE id_user =? LIMIT 1', [req.user.id]);
+  var stripeRegistro = false;
+  if (artistStripe.length > 0) {
+    stripeRegistro = true;
+  }
+  console.log(stripeRegistro)
+  res.render('artist/mi-rendimiento', { nombre: nombre[0], artista, logueado, email, url, dashboard, stripeRegistro });
 });
 
 router.get('/dashboard/obras', isLoggedIn, isArtista, async (req, res) => {

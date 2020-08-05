@@ -79,6 +79,8 @@
 
 
 {{> Navigation }}
+{{> messages }}
+
 
 {{> artistSidebar }}
 
@@ -89,10 +91,16 @@
 
         </div>
         <div>
-            <a class="btn" id="submit" style="background-color: #bda00899;"
-            href="https://connect.stripe.com/express/oauth/authorize?client_id=ca_HeryjbpRGndoYxvCYMJ2pwCZITTeTHOw&state={STATE_VALUE}&suggested_capabilities[]=transfers&stripe_user[email]={{email}}">
+            {{#if stripeRegistro}}
+            <a class="btn" id="submit" style="background-color: #bda00899;">
             Registrar Método de Pago con Stripe
             </a>
+            {{else}}
+            <a class="btn" id="submit" style="background-color: #bda00899;"
+            href="https://connect.stripe.com/express/oauth/authorize?client_id=ca_HeryjbpRGndoYxvCYMJ2pwCZITTeTHOw&state={STATE_VALUE}&suggested_capabilities[]=transfers&stripe_user[email]={{email}}&stripe_user[business_type]=individual">
+            Registrar Método de Pago con Stripe
+            </a>
+            {{/if}}
         </div>
         <div class="section ventas">
             <div class="tabla mis-ventas">

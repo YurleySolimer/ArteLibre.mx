@@ -341,3 +341,41 @@ JOIN artistas a ON a.user_id = o.artista_id
 JOIN users u ON u.id = a.user_id
 ;
 
+
+--- NUEVAS CONFIGURACIONES
+
+CREATE TABLE artistStripe(
+	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id_stripe VARCHAR (200),
+	estado ENUM ('No Registrado', 'Registrado') DEFAULT 'No Registrado',
+	id_user INT (11)
+);
+
+CREATE TABLE clienteCompra(
+	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	estado ENUM ('Pago', 'No Pago') DEFAULT 'No Pago',
+	estadoObra ENUM ('En espera', 'Enviado', 'Recibido') DEFAULT 'En espera',
+	fecha_compra TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	id_obra INT (11),
+	id_user INT (11)
+);
+
+ALTER TABLE obras 
+modify en_venta ENUM ('Si', 'No') default 'Si';
+
+ALTER TABLE obras 
+add comprada ENUM ('Si', 'No') default 'No';
+
+drop view obraCompleta;
+
+CREATE VIEW obraCompleta AS
+SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
+		o.destacar, o.recomendar, o.cantidad, o.ocultar, o.titulo_recomendada, o.comprada,
+		a.pais, a.region, a.provincia, a.años_experiencia, a.direccion, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
+		u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion,
+		f.fotoNombre, f.fotoUbicacion, f.principal
+FROM obras o 
+JOIN fotosObras f ON f.obra_id = o.id AND f.principal = 'True'
+JOIN artistas a ON a.user_id = o.artista_id
+JOIN users u ON u.id = a.user_id
+;

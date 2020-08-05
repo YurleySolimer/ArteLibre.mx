@@ -5,11 +5,13 @@ const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 const { isCliente} = require('../lib/auth');
 const { isArtista} = require('../lib/auth');
+const stripe = require('stripe')('sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4');
 
 //noreply@artelibre.mx < n0N0.r37ly!#
 // ca_HeryjbpRGndoYxvCYMJ2pwCZITTeTHOw cliente id
 // secret sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4
 // public pk_test_6ltlRZ8Ncn5C3Q7DE3X3r5wz00A24gvL0J
+
 
 
 
@@ -140,6 +142,7 @@ router.get('/colecciones', async (req, res) => {
 });
 
 router.get('/obra/:id', async (req, res) => {
+  const id = req.params.id;
   const obra = await pool.query('SELECT * FROM obraCompleta WHERE id =?', [req.params.id]);
   const fotos = await pool.query('SELECT * FROM fotosObras WHERE obra_id=?', [req.params.id]);
   const obras = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
@@ -147,6 +150,7 @@ router.get('/obra/:id', async (req, res) => {
   artista = await isArtist(req);
   cliente = await isClient(req);
   admin = await isAdmin(req);
+
 
   if (artista == true || cliente == true || admin == true) {
     nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
@@ -165,8 +169,59 @@ router.get('/obra/:id', async (req, res) => {
       myArray[i] = obras[numeroAleatorio-1];
     }
   }
+
+  userStripe = await pool.query('SELECT * FROM artistStripe WHERE id_user =? LIMIT 1', [obra[0].artista_id]);
+  var uStripe = false;
+  if (userStripe.length > 0) {
+    userID = userStripe[0].id_stripe;
+    uStripe = true;
+  }
+  const fee = Math.round(obra[0].precio * 0.15);
+  const pago = obra[0].precio*100;
+  var domainURL = process.env.DOMAIN;
+  console.log(domainURL)
+  if(!domainURL) {
+    domainURL = 'http://localhost:3000'
+  }
+
+
   
-  res.render('general/obra', {obra:obra[0], fotos, myArray, artista, cliente, admin, logueado, nombre:nombre[0]});
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [{
+      name: 'Arte Libre',
+      amount: pago ,
+      currency: 'mxn',
+      quantity: 1,
+    }],
+    payment_intent_data: {
+      application_fee_amount: fee,
+      transfer_data: {
+        destination: userID,
+      },
+    },
+    success_url: `${domainURL}/obra/success/${id}`,
+    cancel_url: `${domainURL}/obra/${id}`,
+  });
+  const session_id = session.id;
+  res.render('general/obra', {obra:obra[0], fotos, myArray, artista, cliente, admin, logueado, nombre:nombre[0],  session_id, uStripe});
+});
+
+router.get('/obra/success/:id', async (req, res) => {
+  const id = req.params.id;
+  const newCompra = {
+    estado : 'Pago',
+    id_obra : id,
+    id_user : req.user.id
+  }
+
+  await pool.query('INSERT INTO clienteCompra SET?', [newCompra]);
+  const comprada = {
+    comprada : 'Si'
+  }
+  await pool.query('UPDATE obras SET ? WHERE id = ? ', [comprada, id]);
+  req.flash('success', 'Felicidades, ha comprado la obra exitosamente');
+  res.redirect(`/obra/${id}`);
 });
 
 
