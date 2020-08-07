@@ -90,10 +90,12 @@ app.use(require('./routes/authentication.js'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bootstrapjs', express.static(path.join(__dirname , '/../node_modules/bootstrap/dist/js'))); // redirect bootstrap JS
 app.use('/jquery', express.static(path.join(__dirname , '/../node_modules/jquery/dist'))); // redirect JS jQuery
+app.use('/jquery', express.static(path.join(__dirname , '/../node_modules/popper/dist'))); // redirect JS Popper
 app.use('/bootstrapcss', express.static(path.join(__dirname , '/../node_modules/bootstrap/dist/css'))); // redirect CSS bootstrap
-app.use('/fontawesome', express.static(path.join(__dirname , '/../node_modules/@fortawesome/fontawesome-free/css'))); // redirect CSS bootstrap
-app.use('/fontawesomejs', express.static(path.join(__dirname , '/../node_modules/@fortawesome/fontawesome-free/js'))); // redirect CSS bootstrap
-app.use('/cleave', express.static(path.join(__dirname , '/../node_modules/cleave.js/dist'))); // redirect CSS bootstrap
+app.use('/fontawesome', express.static(path.join(__dirname , '/../node_modules/@fortawesome/fontawesome-free/css'))); // redirect CSS FontAwesome
+app.use('/fontawesomejs', express.static(path.join(__dirname , '/../node_modules/@fortawesome/fontawesome-free/js'))); // redirect JS FontAwesome
+app.use('/cleave', express.static(path.join(__dirname , '/../node_modules/cleave.js/dist'))); // redirect JS Cleave
+app.use('/cropper', express.static(path.join(__dirname , '/../node_modules/cropperjs/dist'))); // redirect JS Cropper
 
 //Inicializar Servidor
 

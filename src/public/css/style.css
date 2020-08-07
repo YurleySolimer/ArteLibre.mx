@@ -916,11 +916,9 @@ button.titulo-mis-obras:focus {
 
 .btn-compra {
     background-color: var(--gold);
-    font-size: .8em;
+    font-size: 1rem;
     color: #FFFFFF;
-    border: none;
-    padding: 10px 20px;
-    margin: 15px 0;
+    padding: .375rem .75rem;
     transition: .3s ease-in;
 }
 
@@ -1639,6 +1637,7 @@ button.titulo-mis-obras:focus {
     text-transform: uppercase;
     color: var(--gold);
     z-index: 1;
+    position: relative;
 }
 
 .foto-container:hover {
@@ -1648,11 +1647,10 @@ button.titulo-mis-obras:focus {
 }
 
 .img-perfil-registro {
-    position: relative;
+    position: absolute;
     z-index: 2;
-    top: -346px;
+    top: 0;
     left: 50%;
-    height: 100%;
     transform: translateX(-50%);
 }
 
