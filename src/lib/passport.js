@@ -4,6 +4,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const pool = require('../database');
 const helpers = require('./helpers');
 
+var fs      = require('fs');
+
 passport.use('signinUser', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
@@ -86,16 +88,30 @@ passport.use('signupArtista', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, fullname, password, done) => {
-  console.log('Hola');
+  console.log(req);
  
   const {email, apellido, telefono} = req.body;
   var path = '';
   var originalname = '';
+  
+  if(req.body.image) {
+    var img = req.body.image;
+    // luego extraes la cabecera del data url
+    var base64Data = img.replace(/^data:image\/png;base64,/, "");
+    var path = `src/public/uploads/${fullname}${email}.png`;
+    var originalname = `${fullname}${email}.png`;
 
-  if(req.files[0]) {
-    path = req.files[0].path,
-    originalname = req.files[0].originalname
+    // grabas la imagen el disco
+    fs.writeFile(`src/public/uploads/${fullname}${email}.png`, base64Data, 'base64', function(err) {
+        console.log(err);
+    });
+
+    console.log(img.title); // Imagen 264
+
+
+
   }
+
   const noUser2 = await pool.query('SELECT * FROM users WHERE email =?', [email]);
 
   if (noUser2.length>0) {
