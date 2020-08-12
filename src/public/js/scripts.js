@@ -95,28 +95,36 @@ if (document.getElementById('sidebarCollapse') || document.getElementById('sideb
 
     const sidebar = document.getElementById('sidebarCollapse');
     const innerSidebar = document.getElementById('sidebar');
-
+    
+    sidebar.addEventListener('click', function() {
+        let nodo = document.getElementById('nodo-flecha');
+        nodo.classList.toggle('fa-arrow-right');
+        nodo.classList.toggle('fa-arrow-left');
+    });
+    
     // Definir función según el evento disparado
-
     sidebar.addEventListener('click', function () {
-
+        
+        
         if (innerSidebar.classList) {
-
             // Toggle de la clase en nevagadores modernos
-
             innerSidebar.classList.toggle('active');
         } else {
 
             // Para IE9
-
+            let classesBtn = sidebar.className.split(" ");
+            let k = classesBtn.indexOf("active");
             let classes = innerSidebar.className.split(" ");
             let i = classes.indexOf("active");
 
-            if (i >= 0) {
+            if (i >= 0 ) {
+                classesBtn.splice(k, 1);
                 classes.splice(i, 1);
             } else {
+                classesBtn.push("active");
                 classes.push("active");
                 innerSidebar.className = classes.join(" ");
+                sidebar.className = classes.join(" ");
             }
         }
     });

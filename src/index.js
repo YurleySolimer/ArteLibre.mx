@@ -85,7 +85,6 @@ app.use(require('./routes/index.js'));
 app.use(require('./routes/authentication.js'));
 
 
-
 // Public
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bootstrapjs', express.static(path.join(__dirname , '/../node_modules/bootstrap/dist/js'))); // redirect bootstrap JS
@@ -96,6 +95,11 @@ app.use('/fontawesome', express.static(path.join(__dirname , '/../node_modules/@
 app.use('/fontawesomejs', express.static(path.join(__dirname , '/../node_modules/@fortawesome/fontawesome-free/js'))); // redirect JS FontAwesome
 app.use('/cleave', express.static(path.join(__dirname , '/../node_modules/cleave.js/dist'))); // redirect JS Cleave
 app.use('/cropper', express.static(path.join(__dirname , '/../node_modules/cropperjs/dist'))); // redirect JS Cropper
+
+//Error 404
+app.use(function(req, res) {
+	res.status(404).render('404.hbs');
+  });
 
 //Inicializar Servidor
 
