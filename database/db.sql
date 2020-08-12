@@ -379,3 +379,12 @@ JOIN fotosObras f ON f.obra_id = o.id AND f.principal = 'True'
 JOIN artistas a ON a.user_id = o.artista_id
 JOIN users u ON u.id = a.user_id
 ;
+
+
+--// Newwww
+
+ALTER TABLE obras 
+add visitas INT DEFAULT 0;
+
+ALTER TABLE artistas
+add visitas INT DEFAULT 0;

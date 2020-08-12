@@ -97,6 +97,13 @@ router.get('/coleccion/:id', async  (req, res) => {
     obras = await pool.query('SELECT * FROM obraCompleta WHERE coleccion_id =?', [id]);
   }
 
+  var visitasArray = await pool.query('SELECT visitas from colecciones WHERE id =?', [id]);
+  var visitasTotal = visitasArray[0].visitas + 1;
+  var visitas = {
+    visitas : visitasTotal
+  }
+  await pool.query('UPDATE colecciones  SET ? WHERE id =?', [visitas, id]);
+
   const obras2 = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
 
   var myArray = [];
@@ -150,6 +157,13 @@ router.get('/obra/:id', async (req, res) => {
   artista = await isArtist(req);
   cliente = await isClient(req);
   admin = await isAdmin(req);
+
+  var visitasArray = await pool.query('SELECT visitas from obras WHERE id =?', [id]);
+  var visitasTotal = visitasArray[0].visitas + 1;
+  var visitas = {
+    visitas : visitasTotal
+  }
+  await pool.query('UPDATE obras  SET ? WHERE id =?', [visitas, id]);
 
 
   if (artista == true || cliente == true || admin == true) {
@@ -225,17 +239,11 @@ router.get('/obra/success/:id', async (req, res) => {
 });
 
 
-router.get('/artista/:id', async (req, res) => {
-  artista = await isArtist(req);
-  cliente = await isClient(req);
-  admin = await isAdmin(req);
+router.get('/artista/:id', async (req, res)  => {
+  const id = req.params.id;
 
-  if (artista == true || cliente == true || admin == true) {
-    nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
-  }
-
-  const user = await pool.query('SELECT * FROM usuarioArtista WHERE id =?', [req.params.id]);
-  const obras = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =?', [req.params.id]);
+  const user = await pool.query('SELECT * FROM usuarioArtista WHERE id =?', [id]);
+  const obras = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =?', [id]);
   var ultima_obra = {
     nombreObra: 'N/A'
   }
@@ -243,9 +251,25 @@ router.get('/artista/:id', async (req, res) => {
     ultima_obra = obras[obras.length-1];
   }
 
-  res.render('general/artista' , {user:user[0], obras, ultima_obra, artista, cliente, admin, logueado, nombre:nombre[0]});
-});
+  artista = await isArtist(req);
+  cliente = await isClient(req);
+  admin = await isAdmin(req);
+  if (artista == true || cliente == true || admin == true) {
+    nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+  }
 
+  var visitasArray = await pool.query('SELECT visitas from artistas WHERE user_id =?', [id]);
+  if (visitasArray.length>0) { 
+    var visitasTotal = visitasArray[0].visitas + 1;
+    var visitas = {
+      visitas : visitasTotal
+    }
+    await pool.query('UPDATE artistas  SET ? WHERE user_id =?', [visitas, id]);
+  }
+  res.render('general/artista' , {user:user[0], obras, ultima_obra, artista, cliente, admin, logueado, nombre:nombre[0]});
+})
+
+ 
 router.get('/artista/:id/galeria', async (req, res) => {
   artista = await isArtist(req);
   cliente = await isClient(req);
@@ -261,6 +285,7 @@ router.get('/artista/:id/galeria', async (req, res) => {
 
   res.render('artist/galeria' , {user:user[0], obras1, obras2, artista, cliente, admin, logueado, nombre:nombre[0]});
 });
+
 
 router.get('/artistas', async (req, res) => {
   var artistas = await pool.query('SELECT * FROM usuarioArtista');
