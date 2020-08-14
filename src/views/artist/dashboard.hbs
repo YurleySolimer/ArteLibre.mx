@@ -56,21 +56,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{#each obras}}
                                         <tr>
-                                            <td><a href="#">Bouguereau 1</a></td>
+                                            <td><a href="/obra/{{id}}">{{nombreObra}}</a></td>
                                         </tr>
-                                        <tr>
-                                            <td><a href="#">Bouguereau 2</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Bouguereau 3</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Bouguereau 4</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Bouguereau 5</a></td>
-                                        </tr>
+                                        {{/each}}
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -98,21 +89,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{#each colecciones}}
                                         <tr>
-                                            <td><a href="#">Modernismo 1</a></td>
+                                            <td><a href="/coleccion/{{id}}">{{nombreColeccion}}</a></td>
                                         </tr>
-                                        <tr>
-                                            <td><a href="#">Modernismo 2</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Modernismo 3</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Modernismo 4</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Modernismo 5</a></td>
-                                        </tr>
+                                        {{/each}}
+
                                     </tbody>
                                 </table>
                             </div>

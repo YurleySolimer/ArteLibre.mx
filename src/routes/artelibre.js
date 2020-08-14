@@ -221,7 +221,7 @@ router.get('/obra/:id', async (req, res) => {
   res.render('general/obra', {obra:obra[0], fotos, myArray, artista, cliente, admin, logueado, nombre:nombre[0],  session_id, uStripe});
 });
 
-router.get('/obra/success/:id', async (req, res) => {
+router.get('/obra/success/:id', isLoggedIn, isClient, async (req, res) => {
   const id = req.params.id;
   const newCompra = {
     estado : 'Pago',

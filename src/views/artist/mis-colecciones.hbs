@@ -20,6 +20,7 @@
                         </div>
                     </div>
                     <div class="col-lg-7">
+                        
                         <div class="row">
                             <div class="col-12 col-lg-6">
                                 <div class="py-2 my-3">
@@ -235,26 +236,22 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Ubicación</th>
                             <th scope="col">Piezas</th>
-                            <th scope="col">ID</th>
                             <th scope="col">Valor Promedio</th>
-                            <th scope="col">Rendimiento</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each colecciones}}
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#coleccion{{id}}" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Nombre</h2>
+                                    <h2 style="font-weight: bold;">{{nombreColeccion}}</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
-                            <td>Ubicación</td>
+                            <td>{{pais}} - {{ciudad}}</td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">Piezas</td>
-                            <td class="text-muted">ID</td>
-                            <td class="text-muted">100 MXN</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">100 MXN </td>
+                            <td class="text-muted">{{piezas}}</td>
+                            <td class="text-muted">{{precioPromedio}} MXN</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td>
                                 <div class="opciones-admin-list">
@@ -273,6 +270,7 @@
                                 </div>
                             </td>
                         </tr>
+                        {{/each}}
                     </tbody>
                 </table>
             </div>

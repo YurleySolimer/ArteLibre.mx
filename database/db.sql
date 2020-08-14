@@ -388,3 +388,16 @@ add visitas INT DEFAULT 0;
 
 ALTER TABLE artistas
 add visitas INT DEFAULT 0;
+
+ALTER TABLE colecciones
+add visitas INT DEFAULT 0;
+
+drop view coleccionArtista;
+
+CREATE VIEW coleccionArtista AS
+SELECT c.id, c.nombreColeccion, c.artista_id, c.anio, c.estilo, c.tecnica, c.pais, c.ciudad, c.descripcion, c.fotoNombre, c.destacar, c.ocultar, c.piezas, c.precioPromedio,
+       u.nombre, u.apellido, a.id as artistaId
+FROM colecciones c
+JOIN artistas a ON a.user_id = c.artista_id
+JOIN users u ON u.id = a.user_id
+;

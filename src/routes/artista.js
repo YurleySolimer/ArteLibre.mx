@@ -75,7 +75,11 @@ router.get('/dashboard', isLoggedIn, isArtista, async (req, res) => {
   artista = true;
   logueado = true;
   dashboard = true;
-  res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard });
+  const obras = await pool.query('SELECT * FROM obras WHERE artista_id =? ORDER BY visitas DESC LIMIT 5', [req.user.id]);
+  const colecciones = await pool.query('SELECT * FROM colecciones WHERE artista_id =? ORDER BY visitas DESC LIMIT 5', [req.user.id]);
+
+
+  res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard, obras, colecciones });
 });
 
 router.get('/dashboard/ventas', isLoggedIn, isArtista, async (req, res) => {
@@ -107,7 +111,8 @@ router.get('/dashboard/colecciones', isLoggedIn, isArtista, async (req, res) => 
   artista = true;
   logueado = true;
   dashboard = true;
-  res.render('artist/mis-colecciones', { nombre: nombre[0], artista, logueado, dashboard });
+  const colecciones = await pool.query('SELECT * from coleccionArtista WHERE artista_id =?', [req.user.id]);
+  res.render('artist/mis-colecciones', { nombre: nombre[0], artista, logueado, dashboard, colecciones });
 });
 
 router.get('/dashboard/rendimiento', isLoggedIn, isArtista, async (req, res) => {
@@ -132,7 +137,6 @@ router.get('/dashboard/obras', isLoggedIn, isArtista, async (req, res) => {
   artista = true;
   logueado = true;
   dashboard = true;
-  console.log(obras)
   res.render('artist/mis-obras', { obras, nombre: nombre[0], artista, logueado, dashboard });
 });
 
