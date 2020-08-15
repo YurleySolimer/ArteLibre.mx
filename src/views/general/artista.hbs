@@ -8,9 +8,8 @@
                     <h2 class="my-5">{{user.nombre}} {{user.apellido}}</h2> {{#ifCond admin true}}{{>OptionsArtistAdmin}}{{/ifCond}}
                 </div>
                 <div class="container-perfil-image">
-                    <div class="perfil-image-inner">
-                        <img class="img-perfil-artista" src="/./uploads/{{user.foto_nombre}}"
-                            alt="{{user.foto_nombre}}">
+                    <div class="img-perfil-artista">
+                        <img src="/./uploads/{{user.foto_nombre}}" alt="{{user.foto_nombre}}">
                     </div>
                 </div>
             </div>
