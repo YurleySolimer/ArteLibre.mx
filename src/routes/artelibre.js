@@ -184,10 +184,10 @@ router.get('/obra/:id', async (req, res) => {
     }
   }
 
-  userStripe = await pool.query('SELECT * FROM artistStripe WHERE id_user =? LIMIT 1', [obra[0].artista_id]);
+  var userStripe = await pool.query('SELECT * FROM artistStripe WHERE id_user =? LIMIT 1', [obra[0].artista_id]);
   var uStripe = false;
   if (userStripe.length > 0) {
-    userID = userStripe[0].id_stripe;
+    var userID = userStripe[0].id_stripe;
     uStripe = true;
   }
   const fee = Math.round(obra[0].precio * 0.15);
