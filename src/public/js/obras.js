@@ -164,3 +164,8 @@ precioF.addEventListener('keyup', function () {
     precioA.value = pA;
     this.value = pF;
 });
+
+ // Formateamos el precio para que tenga mejor aspecto
+    function precioFormateado(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }

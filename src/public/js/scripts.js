@@ -25,32 +25,32 @@ for (i = 0; i < rutasAdmin.length; i++) {
 const toggleMenu = document.getElementById('toggle-admin-menu');
 const wrapperAdmin = document.getElementById('sidebar-wrapper-admin');
 
-if(toggleMenu != undefined) {
+if (toggleMenu != undefined) {
 
     toggleMenu.addEventListener('click', function () {
 
         if (toggleMenu.classList) {
-            
+
             // Toggle de la clase en nevagadores modernos
 
             toggleMenu.classList.toggle('active');
-        wrapperAdmin.classList.toggle('active');
-        
-    } else {
+            wrapperAdmin.classList.toggle('active');
 
-        // Para IE9
-        
-        let classes = toggleMenu.className.split(" ");
-        let i = classes.indexOf("active");
-
-        if (i >= 0) {
-            classes.splice(i, 1);
         } else {
-            classes.push("active");
-            toggleMenu.className = classes.join(" ");
+
+            // Para IE9
+
+            let classes = toggleMenu.className.split(" ");
+            let i = classes.indexOf("active");
+
+            if (i >= 0) {
+                classes.splice(i, 1);
+            } else {
+                classes.push("active");
+                toggleMenu.className = classes.join(" ");
+            }
         }
-    }
-});
+    });
 }
 
 // Definir variables para la animación del Toggle del menú
@@ -95,17 +95,17 @@ if (document.getElementById('sidebarCollapse') || document.getElementById('sideb
 
     const sidebar = document.getElementById('sidebarCollapse');
     const innerSidebar = document.getElementById('sidebar');
-    
-    sidebar.addEventListener('click', function() {
+
+    sidebar.addEventListener('click', function () {
         let nodo = document.getElementById('nodo-flecha');
         nodo.classList.toggle('fa-arrow-right');
         nodo.classList.toggle('fa-arrow-left');
     });
-    
+
     // Definir función según el evento disparado
     sidebar.addEventListener('click', function () {
-        
-        
+
+
         if (innerSidebar.classList) {
             // Toggle de la clase en nevagadores modernos
             innerSidebar.classList.toggle('active');
@@ -117,7 +117,7 @@ if (document.getElementById('sidebarCollapse') || document.getElementById('sideb
             let classes = innerSidebar.className.split(" ");
             let i = classes.indexOf("active");
 
-            if (i >= 0 ) {
+            if (i >= 0) {
                 classesBtn.splice(k, 1);
                 classes.splice(i, 1);
             } else {
@@ -155,9 +155,14 @@ if (aCreacion != undefined) {
         aCreacion.add(opt);
     }
 }
-    
+
 //
 // Selector END
 //
+
+// Formateamos el precio para que tenga mejor aspecto
+function precioFormateado(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 

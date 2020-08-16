@@ -52,7 +52,7 @@
 
                                 <div class="py-2 my-3">
                                     <h5 class="text-muted">Precio</h5>
-                                    <h4 class="">{{precio}} MXN</h4>
+                                    <h4 class="" id="modal-precio"></h4>
                                 </div>
                             </div>
                         </div>
@@ -243,6 +243,12 @@
     </div>
 </div>
 
+<script>
+    let $precio = {{ precio }}
+    let precio = document.getElementById('modal-precio')
+    precio.innerText = `${precioFormateado($precio)} MXN`
+</script>
+
 {{/each}}
 
 
@@ -288,13 +294,14 @@
                     <tbody>
                         {{#each obras}}
                         <tr class="ml-5">
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal{{id}}" class="titulo-mis-obras">
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal{{id}}"
+                                    class="titulo-mis-obras">
                                     <h2 style="font-weight: bold;">{{nombreObra}}</h2>
                                 </button></td>
                             <td><a href="#" class="coleccion-mis-obras">{{lugarCreacion}}</a></td>
                             <td>{{nombre}} {{apellido}}</td>
                             <td>{{en_venta}}</td>
-                            <td class="gold">{{precio}} MXN</td>
+                            <td class="gold" id="precio{{id}}"></td>
                             <td><a href="#" class="accion-editar">{{cantidad}}</a></td>
                             <td>
                                 <div class="opciones-admin-list">
@@ -324,6 +331,12 @@
                                 </div>
                             </td>
                         </tr>
+<script>
+    let $precio{{ id }} = {{ precio }}
+    let precio{{ id }} = document.getElementById('precio'{{ id }});
+    precio{{ id }}.innerText = `${precioFormateado($precio{{ id }})} MXN`
+</script>
+
                         {{/each}}
                     </tbody>
                 </table>
@@ -335,3 +348,4 @@
 {{> sidebarEnd }}
 
 {{> Footer }}
+
