@@ -6,57 +6,6 @@
 
 <div class="container">
     <div class="content">
-<<<<<<< HEAD
-        <div class="m-5">
-            <h2>Mis Obras</h2>
-
-        </div>
-        <div>
-            {{#if stripeRegistro}}
-            <a class="btn" id="submit" style="background-color: #bda00899;">
-            Registrar Método de Pago con Stripe
-            </a>
-            {{else}}
-            <a class="btn" id="submit" style="background-color: #bda00899;"
-            href="https://connect.stripe.com/express/oauth/authorize?client_id=ca_HeryjbpRGndoYxvCYMJ2pwCZITTeTHOw&state={STATE_VALUE}&suggested_capabilities[]=transfers&stripe_user[email]={{email}}&stripe_user[business_type]=individual">
-            Registrar Método de Pago con Stripe
-            </a>
-            {{/if}}
-        </div>
-        <div class="section ventas">
-            <div class="tabla mis-ventas">
-                <table class="table table-borderless my-5">
-                    <thead style="background-color: #bda00899;">
-                        <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Colección</th>
-                            <th scope="col">Estilo</th>
-                            <th scope="col">P. Definido</th>
-                            <th scope="col">P. Sugerido</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each obras}}
-                        <tr class="ml-5">
-                            <!-- Enlace a la Obra, vista como el cliente -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Enlace a la colección de la obra -->
-                            <td><a href="#" class="coleccion-mis-obras">{{coleccion}}</a></td>
-                            <td>{{estilo}}</td>
-                            <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">{{precio}} MXN</td>
-                            <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">197.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td><a href="#" class="accion-editar">Editar</a></td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-=======
         <div class="row mt-5">
             <div class="col-12 col-md-6 rendimiento-dashboard-header rend-1">
                 <div>
@@ -70,32 +19,494 @@
                         Registrar Método de Pago con Stripe
                     </a>
                 </div>
->>>>>>> 49632e76374cc1430a21d817e2cba43ffcb1d10d
             </div>
         </div>
 
+        <section id="tabs" class="mt-5">
+            <main class="index">
+                <div class="container-estadisticas">
+                    <div class="row">
+                        <div class="col-xs-12 w-100">
+                            <nav>
+                                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link gold active" id="nav-obras-tab" data-toggle="tab"
+                                        href="#nav-obras" role="tab" aria-controls="nav-obras"
+                                        aria-selected="false">Obras</a>
+                                    <a class="nav-item nav-link gold" id="nav-exposicion-tab" data-toggle="tab"
+                                        href="#nav-exposicion" role="tab" aria-controls="nav-exposicion"
+                                        aria-selected="false">Exposición</a>
+                                    <a class="nav-item nav-link gold" id="nav-clientes-tab" data-toggle="tab"
+                                        href="#nav-clientes" role="tab" aria-controls="nav-clientes"
+                                        aria-selected="false">Clientes</a>
+                                </div>
+                            </nav>
+                            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                                <div class="tab-pane fade active show" id="nav-obras" role="tabpanel"
+                                    aria-labelledby="nav-graph3-tab">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="rounded bg-dark chart-rendimiento-horizontal-oscuro">
+                                                        <canvas id="chart-ventas-semanales"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="rounded bg-dark chart-rendimiento-horizontal-oscuro">
+                                                        <canvas id="chart-ventas-mensuales"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="rounded bg-dark card-rendimiento-obras-artista">
+                                                        <h2 class="title-card-rendimiento-obras">Beneficios últimos 30
+                                                            días</h2>
+                                                        <h1 class="mb-2"><i class="convertion-rate-obras-artista">24.340
+                                                                MXN</i></h1>
+                                                        <div class="text-center text-success"><i
+                                                                class="fas fa-angle-up"></i><b> 4,12 %</b></div>
+                                                        <small class="variation-convertion-rate">
+                                                            <p class="text-center">Variación respecto al mes pasado</p>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="rounded bg-white card-rendimiento-obras-artista">
+                                                        <h2 class="title-card-rendimiento-obras">Tasa de conversión
+                                                            Ventas/Visitantes</h2>
+                                                        <h1 class="mb-2"><i class="convertion-rate-obras-artista">5,34
+                                                                %</i></h1>
+                                                        <div class="text-center text-danger"><i
+                                                                class="fas fa-angle-down"></i><b> 34,12%</b></div>
+                                                        <small class="variation-convertion-rate">
+                                                            <p class="text-center">Variación respecto al mes pasado</p>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="rounded bg-white card-rendimiento-obras-artista">
+                                                        <h2 class="title-card-rendimiento-obras">Tasa de retorno de
+                                                            visitantes</h2>
+                                                        <h1 class="mb-2"><i
+                                                                class="convertion-rate-obras-artista">63,51%</i></h1>
+                                                        <div class="text-center text-danger"><i
+                                                                class="fas fa-angle-down"></i><b> 14,13 %</b></div>
+                                                        <small class="variation-convertion-rate">
+                                                            <p class="text-center">Variación respecto al mes pasado</p>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="rounded bg-dark card-rendimiento-obras-artista">
+                                                        <h2 class="title-card-rendimiento-obras">Beneficios últimos 7
+                                                            días</h2>
+                                                        <h1 class="mb-2"><i class="convertion-rate-obras-artista">7.343
+                                                                MXN</i></h1>
+                                                        <div class="text-center text-success"><i
+                                                                class="fas fa-angle-up"></i><b> 8,12 %</b></div>
+                                                        <small class="variation-convertion-rate">
+                                                            <p class="text-center">Variación respecto a la semana
+                                                                anterior</p>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-exposicion" role="tabpanel"
+                                    aria-labelledby="nav-graph6-tab">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="rounded bg-white chart-rendimiento-horizontal">
+                                                        <canvas id="chart-perfil-semanales"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="rounded bg-white chart-rendimiento-horizontal">
+                                                        <canvas id="chart-galeria-semanales"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="rounded bg-dark table-colecciones-exposicion">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-sm tabla-dashboard m-0">
+                                                                <caption>Colecciones más visitadas en el último mes
+                                                                </caption>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Nombre</th>
+                                                                        <th># Visitas</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><a href="/coleccion/{{id}}">Colección 1</a>
+                                                                        </td>
+                                                                        <td>12.432</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><a href="/coleccion/{{id}}">Colección 2</a>
+                                                                        </td>
+                                                                        <td>12.121</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><a href="/coleccion/{{id}}">Colección 3</a>
+                                                                        </td>
+                                                                        <td>10.732</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><a href="/coleccion/{{id}}">Colección 4</a>
+                                                                        </td>
+                                                                        <td>8.432</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><a href="/coleccion/{{id}}">Colección 5</a>
+                                                                        </td>
+                                                                        <td>4.665</td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="rounded bg-white card-rendimiento-obras-artista">
+                                                        <h2 class="title-card-rendimiento-obras">Visitas último evento
+                                                        </h2>
+                                                        <h1 class="mb-2"><i
+                                                                class="convertion-rate-obras-artista">503</i></h1>
+                                                        <div class="text-center text-danger"><i
+                                                                class="fas fa-angle-down"></i><b> 54,13 %</b></div>
+                                                        <small class="variation-convertion-rate">
+                                                            <p class="text-center">Respecto al anterior evento</p>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="rounded bg-white card-rendimiento-obras-artista">
+                                                        <h2 class="title-card-rendimiento-obras">Nuevos visitantes</h2>
+                                                        <h1 class="mb-2"><i
+                                                                class="convertion-rate-obras-artista">542</i></h1>
+                                                        <div class="text-center text-success"><i
+                                                                class="fas fa-angle-up"></i><b> 14,13 %</b></div>
+                                                        <small class="variation-convertion-rate">
+                                                            <p class="text-center">Variación respecto al mes pasado</p>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-clientes" role="tabpanel"
+                                    aria-labelledby="nav-graph8-tab">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="rounded bg-white chart-rendimiento-horizontal">
+                                                        <canvas id="chart-ubicacion-visitantes"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="rounded bg-white chart-rendimiento-horizontal">
+                                                        <canvas id="chart-ubicacion-compradores"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="rounded bg-white d-flex visitantes-artistas">
+                                                        <div class="valor-visitantes-nuevos-artista">
+                                                            <h2>Visitantes nuevos
+                                                            </h2>
+                                                            <h1 class="mb-2"><i>34%</i></h1>
+                                                            <div class="text-center text-success"><i
+                                                                    class="fas fa-angle-up"></i><b> 14,13 %</b></div>
+                                                            <small class="variation-convertion-rate">
+                                                                <p class="text-center">Variación respecto al mes pasado
+                                                                </p>
+                                                            </small>
+                                                        </div>
+                                                        <div class="valor-visitantes-recurrentes-artista">
+                                                            <h2>Visitantes recurrentes
+                                                            </h2>
+                                                            <h1 class="mb-2"><i>66%</i></h1>
+                                                            <div class="text-center text-danger"><i
+                                                                    class="fas fa-angle-down"></i><b> 24,13 %</b></div>
+                                                            <small class="variation-convertion-rate">
+                                                                <p class="text-center">Variación respecto al mes pasado
+                                                                </p>
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="rounded bg-white card-rendimiento-obras-artista">
+                                                        <h2 class="title-card-rendimiento-obras">Visitas perfil
+                                                        </h2>
+                                                        <h1 class="mb-2"><i
+                                                                class="convertion-rate-obras-artista">503</i></h1>
+                                                        <div class="text-center text-danger"><i
+                                                                class="fas fa-angle-down"></i><b> 54,13 %</b></div>
+                                                        <small class="variation-convertion-rate">
+                                                            <p class="text-center">Respecto al anterior evento</p>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="rounded bg-white card-rendimiento-obras-artista">
+                                                        <h2 class="title-card-rendimiento-obras">Visitas galería</h2>
+                                                        <h1 class="mb-2"><i
+                                                                class="convertion-rate-obras-artista">542</i></h1>
+                                                        <div class="text-center text-success"><i
+                                                                class="fas fa-angle-up"></i><b> 14,13 %</b></div>
+                                                        <small class="variation-convertion-rate">
+                                                            <p class="text-center">Variación respecto al mes pasado</p>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </section>
     </div>
 </div>
 
-<style>
-    .rend-1 {
-        text-align: left;
-    }
 
-    .rend-2 {
-        text-align: right;
-    }
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
 
-    @media screen and (max-width: 768px) {
-        .rend-1 {
-            text-align: center;
+    new Chart(document.getElementById("chart-ventas-semanales"), {
+        type: 'line',
+        data: {
+            labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"],
+            datasets: [{
+                data: ["45", "11", "42", "35", "63", "12", "5"],
+                label: "Semana actual",
+                borderColor: "#E6DBA2",
+                backgroundColor: "#E6DBA222",
+                fill: true
+            },
+            {
+                data: ["80", "200", "30", "400", "50", "60", "270"],
+                label: "Semana pasada",
+                borderColor: "#BDA008",
+                backgroundColor: "#BDA00822",
+                fill: true
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Número de ventas semanales',
+                fontColor: "#d3d3d3",
+                fontSize: "14"
+            },
+            legend: {
+                labels: {
+                    fontColor: "#d3d3d3"
+                }
+            }
         }
+    });
 
-        .rend-2 {
-            text-align: center;
+    new Chart(document.getElementById("chart-ventas-mensuales"), {
+        type: 'line',
+        data: {
+            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"],
+            datasets: [{
+                data: ["100", "20", "300", "40", "50", "600", "70", "80", "90", "100", "110", "120", "130", "40", "50", "60", "70", "80", "190", "200", "210", "200", "300", "40", "50", "60", "70", "80", "290", "300", "310"],
+                label: "Mes actual",
+                borderColor: "#E6DBA2",
+                backgroundColor: "#E6DBA222",
+                fill: true
+            },
+            {
+                data: ["80", "200", "30", "400", "50", "60", "270", "180", "190", "10", "150", "100", "30", "400", "150", "260", "70", "90", "90", "60", "100", "200", "300", "40", "50", "60", "70", "80", "290", "300", "310"],
+                label: "Mes pasado",
+                borderColor: "#BDA008",
+                backgroundColor: "#BDA00822",
+                fill: true
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Total ingresos mensuales',
+                fontColor: "#d3d3d3",
+                fontSize: "14"
+            },
+            legend: {
+                labels: {
+                    fontColor: "#d3d3d3"
+                }
+            }
         }
-    }
-</style>
+    });
+
+    new Chart(document.getElementById("chart-galeria-semanales"), {
+        type: 'line',
+        data: {
+            labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"],
+            datasets: [{
+                data: ["45", "11", "42", "35", "63", "12", "5"],
+                label: "Semana actual",
+                borderColor: "#E6DBA2",
+                backgroundColor: "#E6DBA222",
+                fill: true
+            },
+            {
+                data: ["80", "200", "30", "400", "50", "60", "270"],
+                label: "Semana pasada",
+                borderColor: "#BDA008",
+                backgroundColor: "#BDA00822",
+                fill: true
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Visitas a la Galería',
+                fontColor: "#3c3c3c",
+                fontSize: "14"
+            },
+            legend: {
+                labels: {
+                    fontColor: "#3c3c3c"
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById("chart-perfil-semanales"), {
+        type: 'line',
+        data: {
+            labels: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"],
+            datasets: [{
+                data: ["45", "11", "42", "35", "63", "12", "5"],
+                label: "Semana actual",
+                borderColor: "#E6DBA2",
+                backgroundColor: "#E6DBA222",
+                fill: true
+            },
+            {
+                data: ["80", "200", "30", "400", "50", "60", "270"],
+                label: "Semana pasada",
+                borderColor: "#BDA008",
+                backgroundColor: "#BDA00822",
+                fill: true
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Visitas al perfil',
+                fontColor: "#3c3c3c",
+                fontSize: "14"
+            },
+            legend: {
+                labels: {
+                    fontColor: "#3c3c3c"
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById("chart-ubicacion-visitantes"), {
+        type: 'bar',
+        data: {
+            labels: ["Chihuahua", "Toluca", "MXDF", "Nuevo Leon", "Jalisco", "Monterrey", "Juarez", "Guadalajara", "Cancún", "Mérida"],
+            datasets: [{
+                data: ["45", "11", "0", "35", "63", "12", "5", "0", "0", "0"],
+                label: "Semana actual",
+                borderColor: "#E6DBA2",
+                backgroundColor: "#E6DBA2",
+                fill: true
+            },
+            {
+                data: ["80", "0", "30", "0", "50", "60", "0", "13", "43", "42"],
+                label: "Semana pasada",
+                borderColor: "#BDA008",
+                backgroundColor: "#BDA008",
+                fill: true
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Ubicación visitantes',
+                fontColor: "#3c3c3c",
+                fontSize: "14"
+            },
+            legend: {
+                labels: {
+                    fontColor: "#3c3c3c"
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById("chart-ubicacion-compradores"), {
+        type: 'bar',
+        data: {
+            labels: ["Chihuahua", "Toluca", "MXDF", "Nuevo Leon", "Jalisco", "Monterrey", "Juarez", "Guadalajara", "Cancún", "Mérida"],
+            datasets: [{
+                data: ["45", "11", "0", "35", "63", "12", "5", "0", "0", "0"],
+                label: "Semana actual",
+                borderColor: "#E6DBA2",
+                backgroundColor: "#E6DBA2",
+                fill: true
+            },
+            {
+                data: ["80", "0", "30", "0", "50", "60", "0", "13", "43", "42"],
+                label: "Semana pasada",
+                borderColor: "#BDA008",
+                backgroundColor: "#BDA008",
+                fill: true
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Ubicación compradores',
+                fontColor: "#3c3c3c",
+                fontSize: "14"
+            },
+            legend: {
+                labels: {
+                    fontColor: "#3c3c3c"
+                }
+            }
+        }
+    });
+
+
+
+</script>
 
 {{> sidebarEnd}}
 

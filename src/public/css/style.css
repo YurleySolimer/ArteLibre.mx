@@ -3110,6 +3110,122 @@ button.historial-cliente:focus a.contactar:focus {
 
 
 /*-----------------------------------
+Rendimiento 
+-----------------------------------*/
+
+.rend-1 {
+    text-align: left;
+}
+
+.rend-2 {
+    text-align: right;
+}
+
+@media screen and (max-width: 768px) {
+    .rend-1 {
+        text-align: center;
+    }
+
+    .rend-2 {
+        text-align: center;
+    }
+}
+
+.chart-rendimiento-horizontal-oscuro {
+    margin: 10px 20px;
+    padding: 25px;
+    box-shadow: 4px 4px 8px #a0a0a0;
+}
+
+.chart-rendimiento-horizontal {
+    margin: 10px 20px;
+    padding: 25px;
+    box-shadow: 4px 4px 8px #d3d3d3;
+}
+
+.card-rendimiento-obras-artista, .visitantes-artistas {
+    margin: 10px 20px;
+    padding: 25px;
+    box-shadow: 4px 4px 8px #d3d3d3;
+}
+
+.visitantes-artistas {
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 768px) {
+    .visitantes-artistas {
+        flex-direction: column;
+    }
+}
+
+.card-rendimiento-obras-artista.bg-dark, .visitantes-artistas.bg-dark {
+    margin: 10px 20px;
+    padding: 25px;
+    box-shadow: 4px 4px 8px #a0a0a0;
+}
+
+.card-rendimiento-obras-artista h1, .valor-visitantes-nuevos-artista h1, .valor-visitantes-recurrentes-artista h1 {
+    color: var(--gold);
+    text-align: center;
+}
+
+.card-rendimiento-obras-artista h2, .valor-visitantes-nuevos-artista h2, .valor-visitantes-recurrentes-artista h2 {
+    font-size: 1em;
+    color: #d3d3d3;
+    text-align: center;
+    font-weight: bold;
+}
+.card-rendimiento-obras-artista.bg-white h2, .visitantes-artistas.bg-white h2 {
+    color: #3b3b3b;
+}
+
+.card-rendimiento-obras-artista small, .visitantes-artistas small  {
+    color: #d3d3d3;
+    font-size: .8em;
+}
+
+.nav-item.nav-link.active {
+    background-color: #f8f9fa;
+    border-bottom: none;
+}
+
+.table-colecciones-exposicion {
+    margin: 10px 20px;
+    padding: 25px;
+    box-shadow: 4px 4px 8px #a0a0a0;
+}
+
+.table-administrador-rendimiento {
+    margin: 10px 20px;
+    padding: 25px;
+    box-shadow: 4px 4px 8px #d3d3d3;
+}
+
+.table-administrador-rendimiento th {
+    color: var(--gold);
+}
+
+.table-administrador-rendimiento td {
+    color: #a5a5a5;
+}
+
+.table-administrador-rendimiento td a {
+    color: var(--second-gold);
+}
+
+.table-administrador-rendimiento td a:hover {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.table-colecciones-exposicion td{
+    color: #d3d3d3;
+}
+
+/*-----------------------------------
 404
 -----------------------------------*/
 
