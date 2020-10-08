@@ -1,168 +1,102 @@
+{{#each eventos}}
+
 <!-- Modal Editar -->
 <div class="modal fade" id="editarObra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" style="width: 90vw;" role="document">
         <div class="modal-content p-3">
             <div class="modal-header">
-                <div class="modal-title">Editar Evento {{id}} </div>
+                <div class="modal-title">Editar Evento </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/obra/editar/{{id}}" method="POST" enctype="multipart/form-data" class="form">
-                <div class="row">
-                <div class="col-12">
-                    <h4>Fotos del evento</h4>
-                    <p class="text-muted">
-                        Agregar las fotos que aparecerán para tu evento, la primera será la portada en el calendario y
-                        las demás aparecerán en la página del evento.
-                    </p>
-                </div>
-                <div class="col-12 col-lg-4 my-4">
-                    <div class="foto-evento">
-                        <label for="file-input-1">
-                            <div class="foto-container-evento">
-                                <div class="inner-container-evento">
-                                    <div class="m-auto">
-                                        <span class="m-auto">
-                                            <i class="fas fa-plus fa-5x"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <input name="image" id="file-input-1" type="file" style="display: none;" required />
-                                <img id="imgSalida1" src="" class="img-evento-registro img-fluid" />
-                            </div>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4 my-4">
-                    <div class="foto-evento">
-                        <label for="file-input-2">
-                            <div class="foto-container-evento">
-                                <div class="inner-container-evento">
-                                    <div class="m-auto">
-                                        <span class="m-auto">
-                                            <i class="fas fa-plus fa-5x"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <input name="image" id="file-input-2" type="file" style="display: none;" />
-                                <img id="imgSalida2" src=""  class="img-evento-registro img-fluid" />
-                            </div>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4 my-4">
-                    <div class="foto-evento">
-                        <label for="file-input-3">
-                            <div class="foto-container-evento">
-                                <div class="inner-container-evento">
-                                    <div class="m-auto">
-                                        <span class="m-auto">
-                                            <i class="fas fa-plus fa-5x"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <input name="image" id="file-input-3" type="file" style="display: none;" />
-                                <img id="imgSalida3" src="" class="img-evento-registro img-fluid" />
-                            </div>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-12 my-4 text-right">
-                    <small class="text-muted">Puedes cambiar las imagenes volviendo a hacer click en ellas.</small>
-                </div>
-            </div>
+            <form action="/dashboard/eventos/editar/{{id}}" method="POST" enctype="multipart/form-data" class="form">
+           
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="Nombre"
-                            placeholder="Nombre del evento" required>
+                            placeholder="{{nombre}}" value="{{nombre}}" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="titulo">Título</label>
                         <input type="text" class="form-control" id="titulo" name="titulo" aria-describedby="titulo"
-                            placeholder="Título del evento" required>
+                            placeholder="titulo" value="{{titulo}}" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="organizadores">Organizadores</label>
                         <input type="text" class="form-control" id="organizadores" name="organizadores"
-                            aria-describedby="organizadores" placeholder="Organizadores del evento" required>
+                            aria-describedby="organizadores" placeholder="{{organizadores}}" value="{{organizadores}}" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="hora">Hora de Apertura</label>
-                        <input type="time" class="form-control" id="hora" name="hora" aria-describedby="hora" required>
+                        <input type="time" class="form-control" id="hora" name="hora" aria-describedby="hora" placeholder="{{hora_inicio}}" value="{{hora_inicio}}" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="inicio">Fecha de Inicio</label>
-                        <input type="date" class="form-control" id="inicio" name="inicio" aria-describedby="inicio"
+                        <input type="date" class="form-control" id="inicio" name="inicio" placeholder="{{fecha_inicio}}" value="{{fecha_inicio}}" aria-describedby="inicio"
                             required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="fin">Fecha de Fin</label>
-                        <input type="date" class="form-control" id="fin" name="fin" aria-describedby="fin" required>
+                        <input type="date" class="form-control" id="fin" name="fin" aria-describedby="fin" placeholder="{{fecha_fin}}" value="{{fecha_fin}}" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="local">Local</label>
-                        <input type="text" placeholder="Local dónde se realizará" class="form-control" id="local"
+                        <input type="text" placeholder="{{dir_local}}" value="{{dir_local}}" class="form-control" id="local"
                             name="local" aria-describedby="local" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="direccion">Dirección</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección"
+                        <input type="text" class="form-control" id="direccion" name="direccion" value="{{direccion}}" placeholder="{{direccion}}"
                             aria-describedby="direccion" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="ciudad">Ciudad</label>
-                        <input type="text" placeholder="Ciudad" class="form-control" id="ciudad" name="ciudad"
+                        <input type="text" placeholder="{{ciudad}}" value="{{ciudad}}" class="form-control" id="ciudad" name="ciudad"
                             aria-describedby="local" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="pais">País</label>
-                        <input type="text" class="form-control" id="pais" name="pais" placeholder="País"
+                        <input type="text" class="form-control" id="pais" name="pais" placeholder="{{pais}}" value="{{pais}}"
                             aria-describedby="pais" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="piezas">Número de piezas</label>
-                        <input type="number" placeholder="# de Piezas" class="form-control" id="piezas" name="piezas"
+                        <input type="number" placeholder="{{piezas}}" value="{{piezas}}" class="form-control" id="piezas" name="piezas"
                             aria-describedby="piezas" required>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="estilo">Estilo</label>
-                        <input type="text" class="form-control" id="estilo" name="estilo" placeholder="Estilo"
+                        <input type="text" class="form-control" id="estilo" name="estilo" value="{{estilo}}" placeholder="{{estilo}}"
                             aria-describedby="estilo" required>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="form-group">
-                        <label for="descripción">Descripción</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion"
-                            aria-describedby="descripcion" placeholder="Describe el evento" required></textarea>
-                    </div>
-                </div>
+                
                 <div class="col-12 text-right">
                     <button type="submit" class="guardar-obra">  Guardar </button>
                 </div>
@@ -188,14 +122,18 @@
                     datos que corresponden a este evento.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Eliminar</button>
+                <a href="/dashboard/eventos/eliminar/{{id}}" type="button" class="btn btn-danger">Eliminar</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
 
+{{/each}}
+
 {{> Navigation }}
+{{> messages }}
+
 
 {{> artistSidebar }}
 
@@ -236,20 +174,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each eventos}}
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Nombre</h2>
+                                    <h2 style="font-weight: bold;">{{nombre}}</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
-                            <td><a href="/artista/{{id}}" class="coleccion-mis-obras">Artista</a></td>
+                            <td><a href="/artista/{{artista_id}}" class="coleccion-mis-obras">{{nombreArtist}} {{apellido}}</a></td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">Ciudad</td>
+                            <td class="text-muted">{{dirArtist}} - {{paisArtis}}</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">#</td>
-                            <td class="gold">Fecha</td>
-                            <td class="gold">Inicio - Fin</td>
-                            <td class="gold">Dirección</td>
+                            <td class="gold">{{piezas}}</td>
+                            <td class="gold">{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}} </td>
+                            <td class="gold">{{hora_inicio}}</td>
+                            <td class="gold">{{direccion}}, {{dir_local}}, {{ciudad}} - {{pais}}</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td>
                                 <div class="opciones-admin-list">
@@ -261,6 +200,7 @@
                                 </div>
                             </td>
                         </tr>
+                        {{/each}}
                     </tbody>
                 </table>
             </div>

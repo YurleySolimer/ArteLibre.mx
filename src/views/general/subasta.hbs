@@ -7,27 +7,28 @@
                 <div class="carousel-wrapper-outer mt-5" style="overflow: hidden;">
                     <div class="carousel-wrapper-inner">
                         <div class="owl-carousel owl-theme">
-                            <img class="item" src="/images/vangogh1.jpg" style="max-width: 500px;" alt="Pintura">
-                            <img class="item" src="/images/vangogh1.jpg" style="max-width: 500px;" alt="Pintura">
-                            <img class="item" src="/images/vangogh1.jpg" style="max-width: 500px;" alt="Pintura">
-                            <img class="item" src="/images/vangogh1.jpg" style="max-width: 500px;" alt="Pintura">
+                            {{#each fotos}}
+                            <img class="item" src="/./uploads/{{fotoNombre}}" style="max-width: 500px;" alt="Pintura">
+                            {{/each}}
+                            
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
+        {{#each subasta}}
         <div class="col-12 col-lg-6 col-md-6">
-            <h1 class="gold mb-4 mt-5">Jarrón con Doce Girasoles</h1>
+            <h1 class="gold mb-4 mt-5">{{nombreObra}}</h1>
             <small class="text-muted">Última oferta hace: X</small>
             <p class="precio-obra">Puja actual:
                 <strong id="precio">
                 </strong>
             </p>
 
-            <p class="elemento-obra obra-coleccion">Tiempo Restante: <strong>11:14:52</strong></p>
-            <p class="elemento-obra obra-coleccion">Colección: <a href="#">Los Girasoles</a></p>
-            <p class="elemento-obra obra-artista"><a href="#">Vincent Van Gogh</a></p>
+            <p class="elemento-obra obra-coleccion">Tiempo Restante: <strong>{{tiempo_restante}} horas </strong></p>
+            <p class="elemento-obra obra-coleccion">Colección: <a href="#">{{coleccion}}</a></p>
+            <p class="elemento-obra obra-artista"><a href="#">{{nombre}} {{apellido}}</a></p>
             {{#ifCond admin true}}
             {{> OptionsSubastaAdmin}}
             {{/ifCond}}
@@ -39,44 +40,29 @@
             </div>
             <div class="my-5">
                 <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis excepturi sint dicta totam hic
-                    quis tempore at perferendis officia quidem similique illo minus, autem cumque sapiente sunt
-                    quibusdam nulla asperiores.
+                    {{descripcion}}
                 </p>
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis excepturi sint dicta totam hic
-                    quis tempore at perferendis officia quidem similique illo minus, autem cumque sapiente sunt
-                    quibusdam nulla asperiores.
-                </p>
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis excepturi sint dicta totam hic
-                    quis tempore at perferendis officia quidem similique illo minus, autem cumque sapiente sunt
-                    quibusdam nulla asperiores.
-                </p>
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis excepturi sint dicta totam hic
-                    quis tempore at perferendis officia quidem similique illo minus, autem cumque sapiente sunt
-                    quibusdam nulla asperiores.
-                </p>
+              
 
             </div>
             <div class="my-3">
                 <h2 class="elemento-obra obra-dato">Dimensiones</h2>
-                <h3 class="elemento-obra obra-dato-valor">91 x 72 cm</h3>
+                <h3 class="elemento-obra obra-dato-valor">{{ancho}} x {{alto}} cm</h3>
             </div>
             <div class="my-3">
                 <h2 class="elemento-obra obra-dato">Creacion</h2>
-                <h3 class="elemento-obra obra-dato-valor">Agnes, 1888</h3>
+                <h3 class="elemento-obra obra-dato-valor">{{lugarCreacion}}, {{fecha_creacion}}</h3>
             </div>
             <div class="my-3">
                 <h2 class="elemento-obra obra-dato">Técnica</h2>
-                <h3 class="elemento-obra obra-dato-valor">Oleo sobre lienzo</h3>
+                <h3 class="elemento-obra obra-dato-valor">{{tecnica}}</h3>
             </div>
             <div class="my-3">
                 <h2 class="elemento-obra obra-dato">Estilo</h2>
-                <h3 class="elemento-obra obra-dato-valor">Moderno</h3>
+                <h3 class="elemento-obra obra-dato-valor">{{estilo}}</h3>
             </div>
         </div>
+        {{/each}}
     </div>
 </section>
 <div class="div bg-light pujas">
@@ -136,47 +122,31 @@
         </div>
     </div>
 </div>
+
+
 <section class="container">
     <div class="row py-3">
         <div class="col-12">
             <h3 class="m-5">Te puede interear</h3>
         </div>
+        
+         {{#each myArray}}
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card">
                 <a href="">
-                    <img src="/images/monet1.jpeg" class="obra-recomendada card-img-top" alt="">
+                    <img src="/./uploads/{{fotoNombre}}" class="obra-recomendada card-img-top" alt="" id="fotoObra">
                 </a>
                 <div class="card-body text-left">
-                    <h5 class="card-title">Monet</h5>
-                    <p class="card-text text-muted">59.000 MXN</p>
-                    <p class="card-text"><small class="text-muted">Fecha: 12/07/2020</small></p>
+                    <h5 class="card-title">{{nombreObra}}</h5>
+                    <p class="card-text text-muted">{{precio}} MXN</p>
+                    <p class="card-text"><small class="text-muted">Fecha: {{Creacion}}</small></p>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card">
-                <a href="">
-                    <img src="/images/monet1.jpeg" class="obra-recomendada card-img-top" alt="">
-                </a>
-                <div class="card-body text-left">
-                    <h5 class="card-title">Monet</h5>
-                    <p class="card-text text-muted">59.000 MXN</p>
-                    <p class="card-text"><small class="text-muted">Fecha: 12/07/2020</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card">
-                <a href="">
-                    <img src="/images/monet1.jpeg" class="obra-recomendada card-img-top" alt="">
-                </a>
-                <div class="card-body text-left">
-                    <h5 class="card-title">Monet</h5>
-                    <p class="card-text text-muted">59.000 MXN</p>
-                    <p class="card-text"><small class="text-muted">Fecha: 12/07/2020</small></p>
-                </div>
-            </div>
-        </div>
+        {{/each}}
+        
+
+
     </div>
 </section>
 {{> Footer }}

@@ -32,7 +32,6 @@ router.get("/connect/oauth", isLoggedIn, isArtista, async (req, res) => {
 		  var connected_account_id = response.stripe_user_id;
 		  await saveAccountId(connected_account_id, req, res);
 	
-      // Render some HTML or redirect to a different page.
       req.flash('success', 'Registro Exitoso')
       res.redirect('/dashboard/rendimiento');
 		},
@@ -49,7 +48,6 @@ router.get("/connect/oauth", isLoggedIn, isArtista, async (req, res) => {
   
    
   async function saveAccountId (id, req, res) {
-  // Save the connected account ID from the response to your database.
   console.log(id)
 	const id_stripe = {
 		id_stripe : id,
@@ -67,9 +65,6 @@ router.get("/connect/oauth", isLoggedIn, isArtista, async (req, res) => {
 // Dashboard
 //
 
-
-
-
 router.get('/dashboard', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
@@ -77,9 +72,18 @@ router.get('/dashboard', isLoggedIn, isArtista, async (req, res) => {
   dashboard = true;
   const obras = await pool.query('SELECT * FROM obras WHERE artista_id =? ORDER BY visitas DESC LIMIT 5', [req.user.id]);
   const colecciones = await pool.query('SELECT * FROM colecciones WHERE artista_id =? ORDER BY visitas DESC LIMIT 5', [req.user.id]);
+  const ultima_obra = await pool.query('SELECT * FROM obraCompleta WHERE principal =? AND artista_id =? ORDER BY id DESC LIMIT 1', ['True', req.user.id]);
+  const evento = await pool.query('SELECT * FROM eventos WHERE artista_id =?  ORDER BY id DESC LIMIT 1', [req.user.id]);
+  const subasta = await pool.query('SELECT * FROM obraSubasta WHERE artista_id =?  ORDER BY id DESC LIMIT 1', [req.user.id]);
+  var visitas = await pool.query('SELECT visitas FROM artistas WHERE user_id =?', [req.user.id]);
+  if (visitas.length > 0) {
+    visitas = visitas[0].visitas;
+  }
+  else {
+    visitas = 0;
+  }
 
-
-  res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard, obras, colecciones });
+  res.render('artist/dashboard', { nombre: nombre[0], artista, logueado, dashboard, obras, colecciones, ultima_obra, evento, subasta, visitas });
 });
 
 router.get('/dashboard/ventas', isLoggedIn, isArtista, async (req, res) => {
@@ -87,7 +91,8 @@ router.get('/dashboard/ventas', isLoggedIn, isArtista, async (req, res) => {
   artista = true;
   logueado = true;
   dashboard = true;
-  res.render('artist/mis-ventas', { nombre: nombre[0], artista, logueado, dashboard });
+  const obras = await pool.query('SELECT * FROM obraComprada WHERE artista_id =?', [req.user.id]);
+  res.render('artist/mis-ventas', { nombre: nombre[0], artista, logueado, dashboard, obras });
 });
 
 router.get('/dashboard/eventos', isLoggedIn, isArtista, async (req, res) => {
@@ -95,7 +100,9 @@ router.get('/dashboard/eventos', isLoggedIn, isArtista, async (req, res) => {
   artista = true;
   logueado = true;
   dashboard = true;
-  res.render('artist/mis-eventos', { nombre: nombre[0], artista, logueado, dashboard });
+  const eventos = await pool.query('SELECT * from eventoCompleto WHERE userID =?', [req.user.id]);
+  const fotos = await pool.query('SELECT * FROM fotosEventos');
+  res.render('artist/mis-eventos', { nombre: nombre[0], artista, logueado, dashboard, eventos });
 });
 
 router.get('/dashboard/subastas', isLoggedIn, isArtista, async (req, res) => {
@@ -103,7 +110,8 @@ router.get('/dashboard/subastas', isLoggedIn, isArtista, async (req, res) => {
   artista = true;
   logueado = true;
   dashboard = true;
-  res.render('artist/mis-subastas', { nombre: nombre[0], artista, logueado, dashboard });
+  const obras = await pool.query('SELECT * FROM obraSubasta WHERE artista_id=?', [req.user.id]);
+  res.render('artist/mis-subastas', { nombre: nombre[0], artista, logueado, dashboard, obras });
 });
 
 router.get('/dashboard/colecciones', isLoggedIn, isArtista, async (req, res) => {
@@ -127,8 +135,521 @@ router.get('/dashboard/rendimiento', isLoggedIn, isArtista, async (req, res) => 
   if (artistStripe.length > 0) {
     stripeRegistro = true;
   }
-  console.log(stripeRegistro)
-  res.render('artist/mi-rendimiento', { nombre: nombre[0], artista, logueado, email, url, dashboard, stripeRegistro });
+
+  const date = new Date();
+  var hoy = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  var sieteDias = new Date(date.getFullYear(), date.getMonth(), date.getDate()-7);
+  var treintaDias = new Date(date.getFullYear(), date.getMonth(), date.getDate()-30);
+  var diaSemana = hoy.getDay();
+
+
+  //----------------OBRAS--------------------//
+
+  var ventasSemana = 0;
+  var ventasMes = 0;
+  var estaSemana = {
+    ventalunes : 0,
+    ventamartes : 0,
+    ventamiercoles : 0,
+    ventajueves: 0,
+    ventaviernes: 0,
+    ventasabado: 0,
+    ventadomingo: 0
+  }
+
+  var semanaPasada = {
+    ventalunes0 : 0,
+    ventamartes0 : 0,
+    ventamiercoles0 : 0,
+    ventajueves0: 0,
+    ventaviernes0: 0,
+    ventasabado0: 0,
+    ventadomingo0: 0
+  }
+
+  if (diaSemana == 0) {
+
+    const lunes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-6);
+    const martes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-5);
+    const miercoles =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-4);
+    const jueves =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-3);
+    const viernes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-2);
+    const sabado =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-1);
+    const domingo =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+
+    const lunes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-13);
+    const martes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-12);
+    const miercoles0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-11);
+    const jueves0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-10);
+    const viernes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-9);
+    const sabado0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-8);
+    const domingo0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-7);
+
+
+    const ventalunes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes]);
+    const ventamartes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes]);
+    const ventamiercoles = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles]);
+    const ventajueves = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves]);
+    const ventaviernes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes]);
+    const ventasabado = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado]);
+    const ventadomingo = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo]);
+
+    const ventalunes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes0]);
+    const ventamartes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes0]);
+    const ventamiercoles0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles0]);
+    const ventajueves0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves0]);
+    const ventaviernes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes0]);
+    const ventasabado0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado0]);
+    const ventadomingo0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo0]);
+
+    estaSemana = {
+      ventalunes: ventalunes.length,
+      ventamartes: ventamartes.length,
+      ventamiercoles: ventamiercoles.length,
+      ventajueves: ventajueves.length,
+      ventaviernes: ventaviernes.length,
+      ventasabado: ventasabado.length,
+      ventadomingo: ventadomingo.length
+    }
+  
+    semanaPasada = {
+      ventalunes0: ventalunes0.length,
+      ventamartes0: ventamartes0.length,
+      ventamiercoles0: ventamiercoles0.length,
+      ventajueves0: ventajueves0.length,
+      ventaviernes0: ventaviernes0.length,
+      ventasabado0: ventasabado0.length,
+      ventadomingo0: ventadomingo0.length
+    }
+
+  }
+
+  if (diaSemana == 1) {
+
+    const lunes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+    const martes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+1);
+    const miercoles =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+2);
+    const jueves =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+3);
+    const viernes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+4);
+    const sabado =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+5);
+    const domingo =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+6);
+
+    const lunes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-7);
+    const martes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-6);
+    const miercoles0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-5);
+    const jueves0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-4);
+    const viernes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-3);
+    const sabado0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-2);
+    const domingo0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-1);
+
+
+    const ventalunes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes]);
+    const ventamartes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes]);
+    const ventamiercoles = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles]);
+    const ventajueves = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves]);
+    const ventaviernes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes]);
+    const ventasabado = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado]);
+    const ventadomingo = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo]);
+
+    const ventalunes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes0]);
+    const ventamartes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes0]);
+    const ventamiercoles0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles0]);
+    const ventajueves0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves0]);
+    const ventaviernes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes0]);
+    const ventasabado0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado0]);
+    const ventadomingo0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo0]);
+
+    estaSemana = {
+      ventalunes: ventalunes.length,
+      ventamartes: ventamartes.length,
+      ventamiercoles: ventamiercoles.length,
+      ventajueves: ventajueves.length,
+      ventaviernes: ventaviernes.length,
+      ventasabado: ventasabado.length,
+      ventadomingo: ventadomingo.length
+    }
+  
+    semanaPasada = {
+      ventalunes0: ventalunes0.length,
+      ventamartes0: ventamartes0.length,
+      ventamiercoles0: ventamiercoles0.length,
+      ventajueves0: ventajueves0.length,
+      ventaviernes0: ventaviernes0.length,
+      ventasabado0: ventasabado0.length,
+      ventadomingo0: ventadomingo0.length
+    }   
+  }
+
+
+  if (diaSemana == 2) {
+    const lunes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-1);
+    const martes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+    const miercoles =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+1);
+    const jueves =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+2);
+    const viernes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+3);
+    const sabado =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+4);
+    const domingo =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+5);
+
+    const lunes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-8);
+    const martes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-7);
+    const miercoles0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-6);
+    const jueves0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-5);
+    const viernes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-4);
+    const sabado0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-3);
+    const domingo0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-2);
+
+
+    const ventalunes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes]);
+    const ventamartes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes]);
+    const ventamiercoles = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles]);
+    const ventajueves = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves]);
+    const ventaviernes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes]);
+    const ventasabado = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado]);
+    const ventadomingo = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo]);
+
+    const ventalunes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes0]);
+    const ventamartes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes0]);
+    const ventamiercoles0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles0]);
+    const ventajueves0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves0]);
+    const ventaviernes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes0]);
+    const ventasabado0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado0]);
+    const ventadomingo0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo0]);
+
+    estaSemana = {
+      ventalunes: ventalunes.length,
+      ventamartes: ventamartes.length,
+      ventamiercoles: ventamiercoles.length,
+      ventajueves: ventajueves.length,
+      ventaviernes: ventaviernes.length,
+      ventasabado: ventasabado.length,
+      ventadomingo: ventadomingo.length
+    }
+  
+    semanaPasada = {
+      ventalunes0: ventalunes0.length,
+      ventamartes0: ventamartes0.length,
+      ventamiercoles0: ventamiercoles0.length,
+      ventajueves0: ventajueves0.length,
+      ventaviernes0: ventaviernes0.length,
+      ventasabado0: ventasabado0.length,
+      ventadomingo0: ventadomingo0.length
+    }
+    
+  }
+
+
+  if (diaSemana == 3) {
+    const lunes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-2);
+    const martes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-1);
+    const miercoles =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+    const jueves =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+1);
+    const viernes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+2);
+    const sabado =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+3);
+    const domingo =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+4);
+
+    const lunes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-9);
+    const martes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-8);
+    const miercoles0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-7);
+    const jueves0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-6);
+    const viernes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-5);
+    const sabado0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-4);
+    const domingo0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-3);
+
+
+    const ventalunes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes]);
+    const ventamartes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes]);
+    const ventamiercoles = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles]);
+    const ventajueves = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves]);
+    const ventaviernes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes]);
+    const ventasabado = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado]);
+    const ventadomingo = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo]);
+
+    const ventalunes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes0]);
+    const ventamartes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes0]);
+    const ventamiercoles0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles0]);
+    const ventajueves0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves0]);
+    const ventaviernes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes0]);
+    const ventasabado0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado0]);
+    const ventadomingo0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo0]);
+
+    estaSemana = {
+      ventalunes: ventalunes.length,
+      ventamartes: ventamartes.length,
+      ventamiercoles: ventamiercoles.length,
+      ventajueves: ventajueves.length,
+      ventaviernes: ventaviernes.length,
+      ventasabado: ventasabado.length,
+      ventadomingo: ventadomingo.length
+    }
+  
+    semanaPasada = {
+      ventalunes0: ventalunes0.length,
+      ventamartes0: ventamartes0.length,
+      ventamiercoles0: ventamiercoles0.length,
+      ventajueves0: ventajueves0.length,
+      ventaviernes0: ventaviernes0.length,
+      ventasabado0: ventasabado0.length,
+      ventadomingo0: ventadomingo0.length
+    }
+
+    
+  }
+  if (diaSemana == 4) {
+    const lunes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-3);
+    const martes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-2);
+    const miercoles =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-1);
+    const jueves =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+    const viernes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+1);
+    const sabado =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+2);
+    const domingo =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+3);
+
+    const lunes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-10);
+    const martes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-9);
+    const miercoles0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-8);
+    const jueves0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-7);
+    const viernes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-6);
+    const sabado0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-5);
+    const domingo0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-4);
+
+
+    const ventalunes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes]);
+    const ventamartes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes]);
+    const ventamiercoles = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles]);
+    const ventajueves = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves]);
+    const ventaviernes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes]);
+    const ventasabado = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado]);
+    const ventadomingo = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo]);
+
+    const ventalunes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes0]);
+    const ventamartes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes0]);
+    const ventamiercoles0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles0]);
+    const ventajueves0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves0]);
+    const ventaviernes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes0]);
+    const ventasabado0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado0]);
+    const ventadomingo0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo0]);
+
+    estaSemana = {
+      ventalunes: ventalunes.length,
+      ventamartes: ventamartes.length,
+      ventamiercoles: ventamiercoles.length,
+      ventajueves: ventajueves.length,
+      ventaviernes: ventaviernes.length,
+      ventasabado: ventasabado.length,
+      ventadomingo: ventadomingo.length
+    }
+  
+    semanaPasada = {
+      ventalunes0: ventalunes0.length,
+      ventamartes0: ventamartes0.length,
+      ventamiercoles0: ventamiercoles0.length,
+      ventajueves0: ventajueves0.length,
+      ventaviernes0: ventaviernes0.length,
+      ventasabado0: ventasabado0.length,
+      ventadomingo0: ventadomingo0.length
+    }   
+  }
+
+
+  if (diaSemana == 5) {
+    const lunes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-4);
+    const martes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-3);
+    const miercoles =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-2);
+    const jueves =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-1);
+    const viernes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+    const sabado =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+1);
+    const domingo =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+2);
+
+    const lunes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-11);
+    const martes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-10);
+    const miercoles0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-9);
+    const jueves0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-8);
+    const viernes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-7);
+    const sabado0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-6);
+    const domingo0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-5);
+
+
+    const ventalunes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes]);
+    const ventamartes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes]);
+    const ventamiercoles = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles]);
+    const ventajueves = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves]);
+    const ventaviernes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes]);
+    const ventasabado = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado]);
+    const ventadomingo = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo]);
+
+    const ventalunes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes0]);
+    const ventamartes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes0]);
+    const ventamiercoles0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles0]);
+    const ventajueves0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves0]);
+    const ventaviernes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes0]);
+    const ventasabado0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado0]);
+    const ventadomingo0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo0]);
+
+    estaSemana = {
+      ventalunes: ventalunes.length,
+      ventamartes: ventamartes.length,
+      ventamiercoles: ventamiercoles.length,
+      ventajueves: ventajueves.length,
+      ventaviernes: ventaviernes.length,
+      ventasabado: ventasabado.length,
+      ventadomingo: ventadomingo.length
+    }
+  
+    semanaPasada = {
+      ventalunes0: ventalunes0.length,
+      ventamartes0: ventamartes0.length,
+      ventamiercoles0: ventamiercoles0.length,
+      ventajueves0: ventajueves0.length,
+      ventaviernes0: ventaviernes0.length,
+      ventasabado0: ventasabado0.length,
+      ventadomingo0: ventadomingo0.length
+    }   
+  }
+
+  if (diaSemana == 6) {
+    const lunes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-5);
+    const martes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-4);
+    const miercoles =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-3);
+    const jueves =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-2);
+    const viernes =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-1);
+    const sabado =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+    const domingo =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+1);
+
+    const lunes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-12);
+    const martes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-11);
+    const miercoles0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-10);
+    const jueves0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-9);
+    const viernes0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-8);
+    const sabado0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-7);
+    const domingo0 =  new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()-6);
+
+
+    const ventalunes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes]);
+    const ventamartes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes]);
+    const ventamiercoles = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles]);
+    const ventajueves = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves]);
+    const ventaviernes = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes]);
+    const ventasabado = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado]);
+    const ventadomingo = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo]);
+
+    const ventalunes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,lunes0]);
+    const ventamartes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,martes0]);
+    const ventamiercoles0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,miercoles0]);
+    const ventajueves0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,jueves0]);
+    const ventaviernes0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,viernes0]);
+    const ventasabado0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,sabado0]);
+    const ventadomingo0 = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra =?', [req.user.id,domingo0]);
+
+    estaSemana = {
+      ventalunes: ventalunes.length,
+      ventamartes: ventamartes.length,
+      ventamiercoles: ventamiercoles.length,
+      ventajueves: ventajueves.length,
+      ventaviernes: ventaviernes.length,
+      ventasabado: ventasabado.length,
+      ventadomingo: ventadomingo.length
+    }
+  
+    semanaPasada = {
+      ventalunes0: ventalunes0.length,
+      ventamartes0: ventamartes0.length,
+      ventamiercoles0: ventamiercoles0.length,
+      ventajueves0: ventajueves0.length,
+      ventaviernes0: ventaviernes0.length,
+      ventasabado0: ventasabado0.length,
+      ventadomingo0: ventadomingo0.length
+    }  
+    
+  }
+  var ventaSemanal = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?', [req.user.id, hoy, sieteDias]);
+  var ventaMensual = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?', [req.user.id, hoy, treintaDias]);
+ if (ventaSemanal.length>0) {
+   for (var i = 0; i < ventaSemanal.length; i++){
+     ventasSemana = ventasSemana + ventasSemanal[i].precio;
+   }
+ }
+
+ if (ventaMensual.length>=0) {
+  for (var i = 0; i < ventaMensual.length; i++){
+    ventasMes = ventasMes + ventasMensual[i].precio;
+  }
+}
+
+const visitantesTotales =  await pool.query('select * from artistas	where user_id =?', [req.user.id]);;
+const ventasTotales =   await pool.query('select * from obraComprada	where artista_id =?', [req.user.id]);
+const conversionVisitas = (ventasTotales / visitantesTotales[0].visitas)*100;
+
+
+//------------EXPOSICION------------------//
+
+const colecciones = await pool.query('select * from colecciones where artista_id =? ORDER BY visitas DESC  LIMIT 5 ', [req.user.id]);
+const evento = await pool.query('select * from eventos where artista_id =? ORDER BY id DESC  LIMIT 1 ', [req.user.id]);
+const visitasEvento = evento[0].visitas;
+const eventos = await pool.query('select * from eventos where artista_id =? ', [req.user.id]);
+var totalVisitasEventos = 0;
+if (eventos.length > 0) {
+  for (var i = 0; i < eventos.length; i++) {
+    totalVisitasEventos = totalVisitasEventos + eventos[i].visitas;
+  }
+}
+
+
+var estaSemanaPerfil = {
+  perfillunes : 0,
+  perfilmartes : 0,
+  perfilmiercoles : 0,
+  perfiljueves: 0,
+  perfilviernes: 0,
+  perfilsabado: 0,
+  perfildomingo: 0
+}
+
+var semanaPasadaPerfil = {
+  perfillunes0 : 0,
+  perfilmartes0 : 0,
+  perfilmiercoles0 : 0,
+  perfiljueves0: 0,
+  perfilviernes0: 0,
+  perfilsabado0: 0,
+  perfildomingo0: 0
+}
+
+var estaSemanaGaleria = {
+  galerialunes : 0,
+  galeriamartes : 0,
+  galeriamiercoles : 0,
+  galeriajueves: 0,
+  galeriaviernes: 0,
+  galeriasabado: 0,
+  galeriadomingo: 0
+}
+
+var semanaPasadaGaleria = {
+  galerialunes0 : 0,
+  galeriamartes0 : 0,
+  galeriamiercoles0 : 0,
+  galeriajueves0: 0,
+  galeriaviernes0: 0,
+  galeriasabado0: 0,
+  galeriadomingo0: 0
+}
+
+
+
+//---------------CLIENTES ----------------//
+
+console.log(req.user.id)
+
+const artistaCurrent = await pool.query('select * from artistas where user_id =? ', [req.user.id]);
+var totalVisitasPerfil = 0;
+var totalVisitasGaleria = 0;
+
+totalVisitasPerfil = artistaCurrent[0].visitas;
+totalVisitasGaleria = artistaCurrent[0].visitasGaleria;  
+
+
+
+
+  res.render('artist/mi-rendimiento', { nombre: nombre[0], totalVisitasPerfil, totalVisitasGaleria, estaSemana, estaSemanaPerfil, estaSemanaGaleria, totalVisitasEventos, visitasEvento, colecciones, semanaPasada, semanaPasadaPerfil, semanaPasadaGaleria, ventasSemana, ventasMes, conversionVisitas, artista, logueado, email, url, dashboard, stripeRegistro });
 });
 
 router.get('/dashboard/obras', isLoggedIn, isArtista, async (req, res) => {
@@ -139,6 +660,70 @@ router.get('/dashboard/obras', isLoggedIn, isArtista, async (req, res) => {
   dashboard = true;
   res.render('artist/mis-obras', { obras, nombre: nombre[0], artista, logueado, dashboard });
 });
+
+router.get('/dashboard/obras/quitarGaleria/:id', isLoggedIn, isArtista, async (req, res) => {
+  const galeria = {
+      galeria : 'No',
+  }
+  await pool.query('UPDATE obras set? WHERE id=?', [galeria, req.params.id]); 
+  req.flash('success', 'La no se mostrará en tu galería')
+   
+  res.redirect('/dashboard/obras');
+});
+
+router.get('/dashboard/obras/mostrarGaleria/:id', isLoggedIn, isArtista, async (req, res) => {
+  const galeria = {
+      galeria : 'Si',
+  }
+  await pool.query('UPDATE obras set? WHERE id=?', [galeria, req.params.id]);
+  req.flash('success', 'La obra será mostrada en tu galería')
+    
+  res.redirect('/dashboard/obras');
+});
+
+router.get('/dashboard/obras/ocultar/:id', isLoggedIn, isArtista, async (req, res) => {
+  const {id} = req.params;
+  const ocultar = {
+      ocultar : 'Si',
+  }
+
+  await pool.query('UPDATE obras set? WHERE id=?', [ocultar, id]);
+  req.flash('success', 'La obra ha sido oculta')
+  res.redirect('/dashboard/obras');
+});
+
+router.get('/dashboard/obras/mostrar/:id', isLoggedIn, isArtista, async (req, res) => {
+  const {id} = req.params;
+  const ocultar = {
+      ocultar : 'No',
+  }
+
+  await pool.query('UPDATE obras set? WHERE id=?', [ocultar, id]);
+  req.flash('success', 'La obra será mostrada')
+  res.redirect('/dashboard/obras');
+});
+
+router.get('/dashboard/obras/eliminar/:id', isLoggedIn, isArtista, async (req, res) => {
+  const {id} = req.params;
+
+  await pool.query('DELETE from clienteCompra WHERE id_obra=?', [id]);
+  await pool.query('DELETE from subastasInfo WHERE obra_id=?', [id]);
+  await pool.query('DELETE from fotosObras WHERE obra_id=?', [id]);
+
+  await pool.query('DELETE from obras WHERE id=?', [id]);
+  req.flash('success', 'La obra ha sido eliminada')
+  res.redirect('/dashboard/obras');
+});
+
+router.get('/dashboard/eventos/eliminar/:id', isLoggedIn, isArtista, async (req, res) => {
+  const {id} = req.params;
+
+  await pool.query('DELETE from fotosEventos WHERE evento_id=?', [id]);
+  await pool.query('DELETE from eventos WHERE id=?', [id]);
+  req.flash('success', 'El evento ha sido eliminado')
+  res.redirect('/dashboard/eventos');
+});
+
 
 //
 // Dashboard nuevos elementos GET
@@ -220,6 +805,7 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
     nombreColeccion = await pool.query('SELECT nombreColeccion FROM colecciones WHERE id =?', [coleccion]);
     nombreColeccion = nombreColeccion[0];
   }
+
   const newObra = {
     nombreObra: nombreObra,
     coleccion: nombreColeccion.nombreColeccion,
@@ -383,6 +969,30 @@ router.post('/nuevo-evento', isLoggedIn, isArtista, async (req,res) => {
     };
 });
 
+router.post('/dashboard/eventos/editar/:id', isLoggedIn, isArtista, async (req, res) => {
+  const {id} = req.params;
+
+  const {nombre, titulo, organizadores, hora, inicio, fin, local, direccion, piezas, ciudad, pais, estilo} = req.body;
+  const newEvento = {
+    nombre,
+    titulo,
+    organizadores,
+    hora_inicio: hora,
+    fecha_inicio: inicio,
+    fecha_fin: fin,
+    dir_local: local,
+    direccion,
+    ciudad,
+    pais,
+    piezas,
+    estilo
+  }
+
+  const evento = await pool.query('UPDATE eventos SET ? WHERE id =?', [newEvento, id] );
+  req.flash('success', 'Evento actualizado');
+  res.redirect('/dashboard/eventos')
+  });
+
 router.post('/obra/editar/:id', isLoggedIn, isArtista, async (req, res)=> {
   const {id} = req.body;
 
@@ -437,6 +1047,10 @@ router.post('/obra/editar/:id', isLoggedIn, isArtista, async (req, res)=> {
 
   res.redirect('/obra/'+id);
 });
+
+
+
+
 
 //
 // Perfil

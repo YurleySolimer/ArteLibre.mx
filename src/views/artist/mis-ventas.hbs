@@ -351,6 +351,8 @@
 
 {{> Navigation }}
 
+{{> messages }}
+
 {{> artistSidebar }}
 
 <div class="container-fluid">
@@ -388,76 +390,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <!-- Enlace a los detalles de la obra -->
-                            <td><button data-toggle="modal" data-target="#modal-pendiente{{id}}" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Ubicación del cliente/comprador -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo Estimado de envio (puede ser un input al registrar el codigo de envio) -->
-                            <td>2 Semanas</td>
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Estatus de la transacción -->
-                            <td><span class="badge-Pendiente">Pendiente</span></td>
-                            <!-- Contacto es comunicación con el cliente, alerta es comunicación con los de artelibre -->
-                            <td>
-                                <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#modal-pendiente{{id}}" class="ocultar"><i
-                                            class="fas fa-clock"></i></button>
-                                    <button data-toggle="modal" data-target="#alerta-venta{{id}}" class="borrar"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                    <a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>
-                                    <a href="tel:{{telf}}" class="contactar"><i class="fas fa-phone"></i></a>
-                                    {{#ifCond estado 'Pendiente'}}
-                                    <button data-toggle="modal" data-target="#modal-pendiente{{id}}" class="ocultar"><i
-                                            class="fas fa-clock"></i></button>
-                                    <button data-toggle="modal" data-target="#alerta-venta{{id}}" class="borrar"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                    <a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>
-                                    <a href="tel:{{telf}}" class="contactar"><i class="fas fa-phone"></i></a>
-                                    {{/ifCond}}
-                                    {{#ifCond estado 'Pagado'}}
-                                    <button data-toggle="modal" data-target="#modal-pagado{{id}}" class="destacar"><i
-                                            class="fas fa-truck"></i></button>
-                                    <button data-toggle="modal" data-target="#alerta-venta{{id}}" class="borrar"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                    <a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>
-                                    <a href="tel:{{telf}}" class="contactar"><i class="fas fa-phone"></i></a>
-                                    {{/ifCond}}
-                                    {{#ifCond estado 'Enviado'}}
-                                    <button data-toggle="modal" data-target="#modal-enviado{{id}}" class="ocultar"><i
-                                            class="fas fa-info-circle"></i></button>
-                                    <button data-toggle="modal" data-target="#alerta-venta{{id}}" class="borrar"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                    <a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>
-                                    <a href="tel:{{telf}}" class="contactar"><i class="fas fa-phone"></i></a>
-                                    {{/ifCond}}
-                                    {{#ifCond estado 'Recibido'}}
-                                    <button data-toggle="modal" data-target="#modal-recibido{{id}}" class="destacar"><i
-                                            class="fas fa-check"></i></button>
-                                    <button data-toggle="modal" data-target="#alerta-venta{{id}}" class="borrar"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                    <a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>
-                                    <a href="tel:{{telf}}" class="contactar"><i class="fas fa-phone"></i></a>
-                                    {{/ifCond}}
-                                </div>
-                            </td>
-                        </tr>
+
+                        {{#each obras}}
+                       
                         <tr>
                             <!-- Enlace a los detalles de la obra -->
                             <td><button data-toggle="modal" data-target="#modal-pagado{{id}}" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
+                                    <h2 style="font-weight: bold;">{{nombreObra}}a</h2>
                                 </button></td>
                             <!-- Ubicación del cliente/comprador -->
-                            <td>La Haya, Holanda</td>
+                            <td>{{pais}}, {{region}}, {{provincia}}</td>
                             <!-- Tiempo Estimado de envio (puede ser un input al registrar el codigo de envio) -->
-                            <td>2 Semanas</td>
-                            <td class="text-muted">175.000 MXN</td>
+                            <td>-</td>
+                            <td class="text-muted">{{precio}}0 MXN</td>
                             <!-- Estatus de la transacción -->
-                            <td><span class="badge-Pagado">Pagado</span></td>
+                            <td><span class="badge-Pagado">{{estadoObra}}</span></td>
                             <!-- Contacto es comunicación con el cliente, alerta es comunicación con los de artelibre -->
                             <td>
+                                {{#ifCond estadoObra 'En espera'}}
                                 <div class="opciones-admin-list">
                                     <button data-toggle="modal" data-target="#modal-pagado{{id}}" class="destacar"><i
                                             class="fas fa-truck"></i></button>
@@ -466,23 +416,10 @@
                                     <a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>
                                     <a href="tel:{{telf}}" class="contactar"><i class="fas fa-phone"></i></a>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a los detalles de la obra -->
-                            <td><button data-toggle="modal" data-target="#modal-enviado{{id}}" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Ubicación del cliente/comprador -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo Estimado de envio (puede ser un input al registrar el codigo de envio) -->
-                            <td>2 Semanas</td>
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Estatus de la transacción -->
-                            <td><span class="badge-Enviado">Enviado</span></td>
-                            <!-- Contacto es comunicación con el cliente, alerta es comunicación con los de artelibre -->
-                            <td>
-                                <div class="opciones-admin-list">
+                                {{/ifCond}}
+
+                                {{#ifCond estadoObra 'Enviado'}}
+                                 <div class="opciones-admin-list">
                                     <button data-toggle="modal" data-target="#modal-enviado{{id}}" class="ocultar"><i
                                             class="fas fa-info-circle"></i></button>
                                     <button data-toggle="modal" data-target="#alerta-venta{{id}}" class="borrar"><i
@@ -490,32 +427,25 @@
                                     <a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>
                                     <a href="tel:{{telf}}" class="contactar"><i class="fas fa-phone"></i></a>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a los detalles de la obra -->
-                            <td><button data-toggle="modal" data-target="#modal-recibido{{id}}" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Noche Estrellada</h2>
-                                </button></td>
-                            <!-- Ubicación del cliente/comprador -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo Estimado de envio (puede ser un input al registrar el codigo de envio) -->
-                            <td>2 Semanas</td>
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Estatus de la transacción -->
-                            <td><span class="badge-Recibido">Recibido</span></td>
-                            <!-- Contacto es comunicación con el cliente, alerta es comunicación con los de artelibre -->
-                            <td>
-                                <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#modal-recibido{{id}}" class="destacar"><i
-                                            class="fas fa-check"></i></button>
+                                {{/ifCond}}
+
+                                {{#ifCond estadoObra 'Recibido'}}
+                                 <div class="opciones-admin-list">
+                                    <button data-toggle="modal" data-target="#modal-enviado{{id}}" class="ocultar"><i
+                                            class="fas fa-info-circle"></i></button>
                                     <button data-toggle="modal" data-target="#alerta-venta{{id}}" class="borrar"><i
                                             class="fas fa-exclamation-triangle"></i></button>
                                     <a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>
                                     <a href="tel:{{telf}}" class="contactar"><i class="fas fa-phone"></i></a>
                                 </div>
+                                {{/ifCond}}
+
                             </td>
                         </tr>
+
+                        {{/each}}
+                        
+                        
                     </tbody>
                 </table>
             </div>

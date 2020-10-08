@@ -327,13 +327,16 @@ ALTER TABLE subastasInfo
 add estadoSubasta ENUM ('En espera', 'Publicada', 'En Proceso', 'Cancelada', 'Finalizada') 
 DEFAULT 'En espera';
 
+ALTER TABLE subastasInfo
+add tiempo_restante DOUBLE DEFAULT 0;
+
 CREATE VIEW obraSubasta AS
 SELECT o.id as obraId, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
 		o.destacar, o.recomendar, o.cantidad, o.ocultar, o.titulo_recomendada,
 		a.pais, a.region, a.provincia, a.años_experiencia, a.direccion, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
 		u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion,
 		f.fotoNombre, f.fotoUbicacion, f.principal,
-		s.fecha_inicio, s.hora_inicio, s.hora_fin, s.precio_base, s.duracion, s.estadoSubasta, s.id, s.descripcion as subastaDescripcion
+		s.fecha_inicio, s.hora_inicio, s.hora_fin, s.precio_base, s.duracion, s.tiempo_restante, s.estadoSubasta, s.id, s.descripcion as subastaDescripcion
 FROM obras o 
 JOIN fotosObras f ON f.obra_id = o.id AND f.principal = 'True'
 JOIN subastasInfo s ON s.obra_id = o.id AND o.subastar = 'Si'
@@ -389,7 +392,13 @@ add visitas INT DEFAULT 0;
 ALTER TABLE artistas
 add visitas INT DEFAULT 0;
 
+ALTER TABLE artistas
+add visitasGaleria INT DEFAULT 0;
+
 ALTER TABLE colecciones
+add visitas INT DEFAULT 0;
+
+ALTER TABLE eventos
 add visitas INT DEFAULT 0;
 
 drop view coleccionArtista;
@@ -401,3 +410,55 @@ FROM colecciones c
 JOIN artistas a ON a.user_id = c.artista_id
 JOIN users u ON u.id = a.user_id
 ;
+
+drop view obraCompleta;
+
+CREATE VIEW obraCompleta AS
+SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
+		o.destacar, o.recomendar, o.cantidad, o.ocultar, o.titulo_recomendada, o.comprada, o.visitas,
+		a.pais, a.region, a.provincia, a.años_experiencia, a.direccion, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
+		u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion,
+		f.fotoNombre, f.fotoUbicacion, f.principal
+FROM obras o 
+JOIN fotosObras f ON f.obra_id = o.id AND f.principal = 'True'
+JOIN artistas a ON a.user_id = o.artista_id
+JOIN users u ON u.id = a.user_id
+;
+
+CREATE VIEW obraComprada AS
+SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
+		o.destacar, o.recomendar, o.cantidad, o.ocultar, o.titulo_recomendada, o.comprada, o.visitas,
+		cc.estadoObra, cc.fecha_compra, cc.id_user,estado,
+		c.pais, c.region, c.provincia, c.direccion
+FROM obras o
+JOIN artistas a ON o.artista_id = a.user_id AND o.comprada = 'Si'
+JOIN users u ON u.id = a.user_id
+JOIN clienteCompra cc ON cc.id_obra = o.id 
+JOIN clientes c ON cc.id_user = c.user_id;
+
+
+ALTER TABLE obras
+add galeria ENUM ('Si', 'No') DEFAULT 'Si';
+
+drop view obraCompleta;
+
+CREATE VIEW obraCompleta AS
+SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
+		o.destacar, o.recomendar, o.cantidad, o.ocultar, o.titulo_recomendada, o.comprada, o.visitas, o.galeria,
+		a.pais, a.region, a.provincia, a.años_experiencia, a.direccion, a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase,
+		u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion,
+		f.fotoNombre, f.fotoUbicacion, f.principal
+FROM obras o 
+JOIN fotosObras f ON f.obra_id = o.id AND f.principal = 'True'
+JOIN artistas a ON a.user_id = o.artista_id
+JOIN users u ON u.id = a.user_id
+;
+
+ALTER TABLE eventos
+modify organizadores VARCHAR(200);
+
+ALTER TABLE obras
+modify precio DOUBLE;
+
+ALTER TABLE colecciones
+modify precioPromedio DOUBLE;

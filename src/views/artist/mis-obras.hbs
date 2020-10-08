@@ -6,7 +6,7 @@
     <div class="modal-dialog" style="width: 90vw;" role="document">
         <div class="modal-content p-3">
             <div class="modal-header">
-                <div class="modal-title">Editar Obra {{id}} </div>
+                <div class="modal-title">Editar Obra </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -196,7 +196,7 @@
                     datos que corresponden a esta obra.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Eliminar</button>
+                <a href="/dashboard/obras/eliminar/{{id}}" type="button" class="btn btn-danger">Eliminar</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
@@ -219,7 +219,7 @@
                     que decidas cambiar el estado.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-accion-admin">Ocultar</button>
+                <a href="/dashboard/obras/ocultar/{{id}}" type="button" class="btn btn-accion-admin">Ocultar</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
@@ -242,7 +242,7 @@
                     que decidas cambiar el estado.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-accion-admin">Mostrar</button>
+                <a href="/dashboard/obras/mostrar/{{id}}" type="button" class="btn btn-accion-admin">Mostrar</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
@@ -266,7 +266,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-accion-admin">Aceptar</button>
+                <a href="/dashboard/obras/mostrarGaleria/{{id}}" type="button" class="btn btn-accion-admin">Aceptar</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
@@ -288,7 +288,7 @@
                 <p>¿Estás de acuerdo con quitar esta obra de tu galeria? De ser así, presiona "Quitar".</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Quitar</button>
+                <a href="/dashboard/obras/quitarGaleria/{{id}}" type="button" class="btn btn-danger">Quitar</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
@@ -299,6 +299,8 @@
 
 
 {{> Navigation }}
+
+{{> messages }}
 
 {{> artistSidebar }}
 
@@ -353,14 +355,14 @@
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td>
                                 <div class="opciones-admin-list">
-                                    {{#ifCond galeria 'Si'}}
+                                    {{#ifCond galeria 'No'}}
                                     <button data-toggle="modal" data-target="#galeria-obra{{id}}" class="recomendar"><i
                                             class="fas fa-images"></i></button>
                                     {{else}}
                                     <button data-toggle="modal" data-target="#quitar-galeria-obra{{id}}" class="borrar"><i
                                             class="fas fa-times-circle"></i></button>
                                     {{/ifCond}}
-                                    {{#ifCond ocultar 'Si'}}
+                                    {{#ifCond ocultar 'No'}}
                                     <button data-toggle="modal" data-target="#ocultar-obra{{id}}" class="ocultar"><i
                                             class="fas fa-eye-slash"></i></button>
                                     {{else}}

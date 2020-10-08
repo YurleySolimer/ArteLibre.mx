@@ -6,23 +6,23 @@
     <div class="container">
         <div class="row py-4">
             <div class="col-12 col-md-3 col-lg-3">
+                {{#each ultima_obra}}
                 <div class="card ultima-obra-dashboard">
-                    <img src="/images/boguereau3.jpg" class="card-img-top" alt="">
+                    <img src="/./uploads/{{fotoNombre}}" class="card-img-top" alt="">
                     <div class="card-body">
-                        <p class="card-text d-flex justify-content-between">Visitantes: <span class="gold">4</span></p>
-                        <p class="card-text d-flex justify-content-between">Ofertas: <span class="gold">N/A</span></p>
-                        <p class="card-text d-flex justify-content-around">Estado: <span class="gold">Sin Ofertas</span>
-                        </p>
+                        <p class="card-text d-flex justify-content-between">Visitantes: <span class="gold">{{visitas}}</span></p>
+                        
                     </div>
                 </div>
+                {{/each}}
             </div>
             <div class="col-12 col-md-9">
                 <div class="row mb-3">
                     <div class="col-12 col-md-6 mb-3">
                         <div class="tarjeta-dashboard">
                             <div class="inner-tarjeta-dashboard">
-                                <span class="text-white">Visitantes semanales</span>
-                                <i class="text-white">78</i>
+                                <span class="text-white">Visitas al Perfil</span>
+                                <i class="text-white">{{visitas}}</i>
                             </div>
                         </div>
                     </div>
@@ -37,14 +37,16 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 col-md-4">
+                        {{#each evento}}
                         <div class="card proximo-evento-dashboard h-100">
                             <div class="card-body">
                                 <div class="card-title gold"><small><i>Próximo evento</i></small></div>
-                                <h3>Repensando el Modernismo</h3>
-                                <p class="card-text">Galería Brunoise</p>
-                                <p class="card-text gold">05 - 09 - 2020</p>
+                                <h3>{{nombre}}</h3>
+                                <p class="card-text">{{dir_local}}, {{direccion}}</p>
+                                <p class="card-text gold">{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}} </p>
                             </div>
                         </div>
+                        {{/each}}
                     </div>
                     <div class="col-12 col-md-8">
                         <div class="obras-mas-visitadas-dashboard">
@@ -69,16 +71,18 @@
                     </div>
                 </div>
                 <div class="row mb-3">
+                    {{#each subasta}}
                     <div class="col-12 col-md-4">
                         <div class="card proxima-subasta-dashboard h-100">
                             <div class="card-body">
                                 <div class="card-title gold"><small><i>Próxima subasta</i></small></div>
-                                <h3>N/A (nombre)</h3>
-                                <p class="card-text">N/A (precio base)</p>
-                                <p class="card-text gold">N/A (fecha)</p>
+                                <h3>{{nombreObra}}</h3>
+                                <p class="card-text">{{precio_base}} MXN </p>
+                                <p class="card-text gold">{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}} </p>
                             </div>
                         </div>
                     </div>
+                    {{/each}}
                     <div class="col-12 col-md-8">
                         <div class="colecciones-mas-visitadas-dashboard">
                             <div class="table-responsive">

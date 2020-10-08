@@ -2,16 +2,12 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database');
 
-const { isLoggedIn } = require('../lib/auth');
-const { isCliente} = require('../lib/auth');
-const { isArtista} = require('../lib/auth');
 const stripe = require('stripe')('sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4');
 
 //noreply@artelibre.mx < n0N0.r37ly!#
 // ca_HeryjbpRGndoYxvCYMJ2pwCZITTeTHOw cliente id
 // secret sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4
 // public pk_test_6ltlRZ8Ncn5C3Q7DE3X3r5wz00A24gvL0J
-
 
 
 
@@ -184,44 +180,51 @@ router.get('/obra/:id', async (req, res) => {
     }
   }
 
-  var userStripe = await pool.query('SELECT * FROM artistStripe WHERE id_user =? LIMIT 1', [obra[0].artista_id]);
-  var uStripe = false;
-  if (userStripe.length > 0) {
-    var userID = userStripe[0].id_stripe;
-    uStripe = true;
-  }
-  const fee = Math.round(obra[0].precio * 0.15);
-  const pago = obra[0].precio*100;
-  var domainURL = process.env.DOMAIN;
-  console.log(domainURL)
-  if(!domainURL) {
-    domainURL = 'http://localhost:3000'
-  }
-
-
-  
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: [{
-      name: 'Arte Libre',
-      amount: pago ,
-      currency: 'mxn',
-      quantity: 1,
-    }],
-    payment_intent_data: {
-      application_fee_amount: fee,
-      transfer_data: {
-        destination: userID,
+  if (cliente == true) { 
+    var userStripe = await pool.query('SELECT * FROM artistStripe WHERE id_user =? LIMIT 1', [obra[0].artista_id]);
+    var uStripe = false;
+    if (userStripe.length > 0) {
+      var userID = userStripe[0].id_stripe;
+      uStripe = true;
+    }
+    const fee = Math.round(obra[0].precio * 0.15);
+    const pago = obra[0].precio*100;
+    var domainURL = process.env.DOMAIN;
+    console.log(domainURL)
+    if(!domainURL) {
+      domainURL = 'http://localhost:3000'
+    }
+    
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [{
+        name: 'Arte Libre',
+        amount: pago ,
+        currency: 'mxn',
+        quantity: 1,
+      }],
+      payment_intent_data: {
+        application_fee_amount: fee,
+        transfer_data: {
+          destination: userID,
+        },
       },
-    },
-    success_url: `${domainURL}/obra/success/${id}`,
-    cancel_url: `${domainURL}/obra/${id}`,
-  });
-  const session_id = session.id;
-  res.render('general/obra', {obra:obra[0], fotos, myArray, artista, cliente, admin, logueado, nombre:nombre[0],  session_id, uStripe});
+      success_url: `${domainURL}/obra/success/${id}`,
+      cancel_url: `${domainURL}/obra/${id}`,
+    });
+    const session_id = session.id;
+    res.render('general/obra', {obra:obra[0], fotos, myArray, artista, cliente, admin, logueado, nombre:nombre[0],  session_id, uStripe});
+
+  }
+  else {
+  res.render('general/obra', {obra:obra[0], fotos, myArray, artista, cliente, admin, logueado, nombre:nombre[0]});
+  }
 });
 
-router.get('/obra/success/:id', isLoggedIn, isClient, async (req, res) => {
+router.get('/obra/success/:id', async (req, res) => {
+  cliente = await isClient(req);
+  if (cliente == true) { 
+
   const id = req.params.id;
   const newCompra = {
     estado : 'Pago',
@@ -236,6 +239,11 @@ router.get('/obra/success/:id', isLoggedIn, isClient, async (req, res) => {
   await pool.query('UPDATE obras SET ? WHERE id = ? ', [comprada, id]);
   req.flash('success', 'Felicidades, ha comprado la obra exitosamente');
   res.redirect(`/obra/${id}`);
+  }
+  else {
+    res.redirect(`/obra/${id}`);
+
+  }
 });
 
 
@@ -280,8 +288,15 @@ router.get('/artista/:id/galeria', async (req, res) => {
   }
 
   const user = await pool.query('SELECT * FROM usuarioArtista WHERE id =?', [req.params.id]);
-  const obras1 = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =? ORDER BY id ASC', [req.params.id]);
-  const obras2 = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =? ORDER BY id DESC', [req.params.id]);
+  const obras1 = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =? AND galeria =? ORDER BY id ASC ', [req.params.id, 'Si']);
+  const obras2 = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =? AND galeria =? ORDER BY id DESC ', [req.params.id, 'Si']);
+
+  var visitasArray = await pool.query('SELECT visitasGaleria from artistas WHERE user_id =?', [req.params.id]);
+  var visitasTotal = visitasArray[0].visitasGaleria + 1;
+  var visitasGaleria = {
+    visitasGaleria : visitasTotal
+  }
+  await pool.query('UPDATE artistas  SET ? WHERE user_id =?', [visitasGaleria, req.params.id]);
 
   res.render('artist/galeria' , {user:user[0], obras1, obras2, artista, cliente, admin, logueado, nombre:nombre[0]});
 });
@@ -338,15 +353,34 @@ router.get('/obras',  async (req, res) => {
   res.render('general/obras', {obras, artista, cliente, logueado, admin, nombre:nombre[0]});
 });
 
-router.get('/subasta', async (req, res) => {
+router.get('/subasta/:id', async (req, res) => {
   artista = await isArtist(req);
   cliente = await isClient(req);
   admin = await isAdmin(req);
-
   if (artista == true || cliente == true || admin == true) {
     nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   }
-  res.render('general/subasta',  {artista, cliente, logueado, admin, nombre:nombre[0]});
+  const subasta = await pool.query('SELECT * FROM obraSubasta WHERE id =?', [req.params.id]);
+  const obraId = subasta[0].obraId;
+  const fotos = await pool.query('SELECT * FROM fotosObras WHERE obra_id =?', [obraId]);
+  const obras = await pool.query('SELECT * FROM obraCompleta WHERE principal =?', ['True']);
+
+  var myArray = [];
+  for(var i=0;i<3;i++){
+    var numeroAleatorio = Math.ceil(Math.random()*obras.length);
+    var existe = false;
+    for (var j=0; j<myArray.length; j++) {
+      if (myArray[j] == obras[numeroAleatorio-1]) {
+          existe = true;
+      }
+    }
+    if (existe == false) {
+      myArray[i] = obras[numeroAleatorio-1];
+    }
+  }
+
+
+  res.render('general/subasta',  {artista, cliente, myArray, logueado, admin, subasta, fotos, nombre:nombre[0]});
 });
 
 router.get('/subastas', async (req, res) => {
@@ -356,7 +390,43 @@ router.get('/subastas', async (req, res) => {
   if (artista == true || cliente == true || admin == true) {
     nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   }
-  var obras = await pool.query('SELECT * FROM obraSubasta');
+  const obras = await pool.query('SELECT * FROM obraSubasta');
+  if(obras.length>0) {
+    for(var i = 0; i < obras.length ; i++) {
+      const fecha = obras[i].fecha_inicio;
+      const datetime1 = new Date();
+
+      const hora_inicio = obras[i].hora_inicio;
+      const hora = (hora_inicio[0]+hora_inicio[1])*1;
+      const minutos = (hora_inicio[3]+hora_inicio[4])*1;
+      fecha.setHours(hora,minutos);
+
+      var fecha2= new Date (datetime1.getFullYear(), datetime1.getMonth() , datetime1.getDate(), datetime1.getHours(), datetime1.getMinutes());
+     
+      var fecha_final =  new Date (fecha.getFullYear(), fecha.getMonth() , fecha.getDate(), fecha.getHours(), fecha.getMinutes());
+      const hora_final =  (obras[i].duracion)*1;
+      fecha_final.setHours(hora+hora_final);     
+
+      if (fecha.getTime() <= fecha2.getTime() &&  fecha2.getTime() < fecha_final.getTime() ) {
+        var tiempo_restante = ((((fecha_final.getTime() - fecha2.getTime())/1000)/60)/60);
+        tiempo_restante = tiempo_restante.toFixed(2);
+        const estadoSubasta = {
+          estadoSubasta : 'En Proceso',
+          tiempo_restante
+        }
+        await pool.query('UPDATE subastasInfo SET? WHERE obra_id =?', [estadoSubasta, obras[i].obraId]);
+      }           
+
+      if (fecha_final.getTime() <= fecha2.getTime()) {
+        const estadoSubasta = {
+          estadoSubasta : 'Finalizada'
+        }
+        await pool.query('UPDATE subastasInfo SET? WHERE obra_id =?', [estadoSubasta, obras[i].obraId]);
+      }
+
+    }
+    
+  }
 
 
   res.render('general/subastas',  {artista, cliente, logueado, admin, nombre:nombre[0], obras});
@@ -374,7 +444,14 @@ router.get('/evento/:id', async (req, res) => {
 
   const evento = await pool.query('SELECT * FROM eventos WHERE id =?', [req.params.id]);
   const fotos = await pool.query('SELECT * FROM fotosEventos WHERE evento_id =?', [req.params.id]);
-  console.log(fotos)
+  
+  var visitasArray = await pool.query('SELECT visitas from eventos WHERE id =?', [req.params.id]);
+  var visitasTotal = visitasArray[0].visitas + 1;
+  var visitas = {
+    visitas : visitasTotal
+  }
+  await pool.query('UPDATE eventos SET ? WHERE id =?', [visitas, req.params.id]);
+
   res.render('general/evento',  {evento: evento[0], fotos, artista, cliente,admin, logueado, nombre:nombre[0]});
 });
 

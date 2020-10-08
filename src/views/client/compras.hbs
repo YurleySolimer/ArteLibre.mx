@@ -92,38 +92,35 @@
                         <tr>
                             <th scope="col">Obra</th>
                             <th scope="col">Colección</th>
-                            <th scope="col">Cantidad</th>
                             <th scope="col">Ubicación</th>
                             <th scope="col">Precio</th>
-                            <th scope="col">Pagar</th>
+                            <th scope="col">Pagado</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each obras}}
                         <tr>
                             <!-- Detalles de la obra y del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2><b>Noche Estrellada</b></h2></button><span class="artista-tabla"><h3>Vincent Van Gogh</h3></span></td>
+                            <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras"><h2><b>{{nombreObra}}</b></h2></button><span class="artista-tabla"><h3>{{apellido}} {{nombre}} </h3></span></td>
                             <!-- Colección de la obra -->
-                            <td>La noche de la carcel</td>
-                            <!-- Cantidad de obras a comprar (segun el contador que se agregará -->
-                            <td>3</td>
+                            <td>{{coleccion}}</td>
+                            
                             <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
+                            <td>{{pais}}, {{region}}</td>
                             <!-- Precio de la obra -->
-                            <td class="text-muted">175.000 MXN</td>
+                            <td class="text-muted"> {{precio}} MXN</td>
                             <!-- Botón para pagar esta obra exclusivamente -->
-                            <td><button class="badge-pagar">Pagar</button></td>
+                             <td>{{#ifCond estado 'Pago'}} 
+                                 Sí
+                                 {{else}}
+                                 No 
+                                 {{/ifCond}}
+                             </td>
+                            
                         </tr>
+                        {{/each}}
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><button class="badge-pagar">Pagar Todos</button></td>
-                        </tr>
-                    </tfoot>
+                    
                 </table>
             </div>
         </div>

@@ -23,7 +23,9 @@ router.get('/cliente/compras', isLoggedIn, isCliente, async (req, res) => {
   const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
   cliente = true;
   logueado = true;
-  res.render('client/compras', {nombre:nombre[0], cliente, logueado});
+  const obras = await pool.query('SELECT * from obraComprada WHERE id_user =?', [req.user.id]);
+
+  res.render('client/compras', {nombre:nombre[0], cliente, logueado, obras});
 });
 
 router.get('/cliente/perfil', isLoggedIn, isCliente, async (req, res) => {
@@ -37,7 +39,9 @@ router.get('/cliente/historial', isLoggedIn, isCliente, async (req, res) => {
   const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
   cliente = true;
   logueado = true;
-  res.render('client/mis-pedidos', {nombre:nombre[0], cliente, logueado});
+  const obras = await pool.query('SELECT * from obraComprada WHERE id_user =?', [req.user.id]);
+
+  res.render('client/mis-pedidos', {nombre:nombre[0], cliente, obras, logueado});
 });
 
 

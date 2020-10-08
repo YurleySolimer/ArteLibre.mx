@@ -235,7 +235,7 @@
                                 <div class="opciones-admin-list">
                                     <button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i
                                             class="fas fa-trash"></i></button>
-                                    {{#ifCond estado 'En espera'}}
+                                    {{#ifCond estadoSubasta 'En espera'}}
                                     <button data-toggle="modal" data-target="#publicar-obra{{id}}" class="publicar"><i
                                             class="fas fa-upload"></i></button>
                                     {{/ifCond}}

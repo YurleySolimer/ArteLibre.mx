@@ -1,16 +1,17 @@
 
+{{#each obras}}
 <!-- Modal Obra -->
-<div class="modal fade" id="editarObra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="editarObra{{obraId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" style="width: 90vw;" role="document">
         <div class="modal-content p-3">
             <div class="modal-header">
-                <div class="modal-title">Editar Obra {{id}} </div>
+                <div class="modal-title">Editar Obra </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/obra/editar/{{id}}" method="POST" enctype="multipart/form-data" class="form">
+            <form action="/obra/editar/{{obraId}}" method="POST" enctype="multipart/form-data" class="form">
                 <div class="row mb-3">
                     <div class="col-12">
                         <input type="file" name="image" accept="image/gif, image/png, image/jpeg" multiple
@@ -180,7 +181,7 @@
 </div>
 
 <!-- Modal Borrar -->
-<div class="modal fade" id="borrar-obra{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="borrar-obra{{obraId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -202,9 +203,12 @@
     </div>
 </div>
 
+{{/each}}
+
 
 
 {{> Navigation }}
+{{> messages }}
 
 {{> artistSidebar }}
 
@@ -237,7 +241,6 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Artista</th>
                             <th scope="col">Ubicación</th>
-                            <th scope="col">ID</th>
                             <th scope="col">Tipo</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Precio Base</th>
@@ -246,32 +249,33 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each obras}}
                         <tr class="ml-5">
                             <!-- Enlace a la Obra, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-obra-modal" class="titulo-mis-obras">
-                                    <h2 style="font-weight: bold;">Nombre</h2>
+                                    <h2 style="font-weight: bold;">{{nombreObra}}</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la obra -->
-                            <td><a href="/artista/{{id}}" class="coleccion-mis-obras">Artista</a></td>
-                            <td>Ciudad</td>
+                            <td><a href="/artista/{{artista_id}}" class="coleccion-mis-obras">{{nombre}} {{apellido}} </a></td>
+                            <td>{{pais}} - {{direccion}} </td>
                             <!-- Estilo y Precio definidos durante la creación de la obra -->
-                            <td class="text-muted">ID</td>
                             <!-- Precio sugerido por el administrador, si no ha sugerido aparece vacio -->
-                            <td class="gold">Tipo</td>
-                            <td class="gold">Estado</td>
-                            <td class="gold">Precio Base</td>
-                            <td class="gold">Fecha de inicio</td>
+                            <td class="gold">{{estilo}}</td>
+                            <td class="gold">{{estadoSubasta}}</td>
+                            <td class="gold">{{precio_base}}e</td>
+                            <td class="gold">{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}} </td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td>
                                 <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#borrar-obra{{id}}" class="borrar"><i
+                                    <button data-toggle="modal" data-target="#borrar-obra{{obraId}}" class="borrar"><i
                                             class="fas fa-trash"></i></button>
-                                    <button data-toggle="modal" data-target="#editarObra" class="editar"><i
+                                    <button data-toggle="modal" data-target="#editarObra{{obraId}}" class="editar"><i
                                             class="fas fa-pen"></i></button>
 
                                 </div>
                             </td>
                         </tr>
+                        {{/each}}
                     </tbody>
                 </table>
             </div>

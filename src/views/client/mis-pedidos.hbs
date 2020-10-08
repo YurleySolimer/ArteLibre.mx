@@ -272,21 +272,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each obras}}
                         <tr>
                             <!-- Enlace a los detalles de la obra y a la página del artista -->
                             <td><button data-toggle="modal" data-target="#datos-obra-Recibido" class="titulo-mis-obras">
-                                    <h2>Noche Estrellada</h2>
+                                    <h2>{{nombreObra}}</h2>
                                 </button><a href="#" class="artista-tabla">
-                                    <h3 class="text-muted">Vincent Van Gogh</h3>
+                                    <h3 class="text-muted">{{apellido}} {{nombre}} </h3>
                                 </a></td>
                             <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
+                            <td>{{pais}}, {{region}} </td>
                             <!-- Tiempo estimado de envio, antes de que se defina aparece como "-" o vacio -->
                             <td>-</td>
                             <!-- Precio designado por el artista -->
-                            <td class="text-muted">175.000 MXN</td>
+                            <td class="text-muted">{{precio}} MXN</td>
                             <!-- Estado de la transacción -->
-                            <td><span class="badge-Recibido">Recibido</span></td>
+                            <td><span class="badge-Recibido">{{estadoObra}}</span></td>
                             <!-- Contacto con el artista o reclamo a los de ArteLibre -->
                             <td>
                                 <div class="opciones-admin-list">
@@ -297,56 +298,8 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <!-- Enlace a los detalles de la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-Enviado" class="titulo-mis-obras">
-                                    <h2>Noche Estrellada</h2>
-                                </button><a href="#" class="artista-tabla">
-                                    <h3 class="text-muted">Vincent Van Gogh</h3>
-                                </a></td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio, antes de que se defina aparece como "-" o vacio -->
-                            <td>2 Semanas</td>
-                            <!-- Precio designado por el artista -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Estado de la transacción -->
-                            <td><span class="badge-Enviado">Enviado</span></td>
-                            <!-- Contacto con el artista o reclamo a los de ArteLibre -->
-                            <td>
-                                <div class="opciones-admin-list">
-                                    <a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>
-                                    <a href="tel:{{telf}}" class="contactar"><i class="fas fa-phone"></i></a>
-                                    <button data-toggle="modal" data-target="#alerta-venta{{id}}" class="borrar"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <!-- Enlace a los detalles de la obra y a la página del artista -->
-                            <td><button data-toggle="modal" data-target="#datos-obra-Pendiente" class="titulo-mis-obras">
-                                    <h2>Noche Estrellada</h2>
-                                </button><a href="#" class="artista-tabla">
-                                    <h3 class="text-muted">Vincent Van Gogh</h3>
-                                </a></td>
-                            <!-- Ubicación de la obra -->
-                            <td>La Haya, Holanda</td>
-                            <!-- Tiempo estimado de envio, antes de que se defina aparece como "-" o vacio -->
-                            <td>Sin Enviar</td>
-                            <!-- Precio designado por el artista -->
-                            <td class="text-muted">175.000 MXN</td>
-                            <!-- Estado de la transacción -->
-                            <td><span class="badge-Pendiente">Pendiente</span></td>
-                            <!-- Contacto con el artista o reclamo a los de ArteLibre -->
-                            <td>
-                                <div class="opciones-admin-list">
-                                    <a href="mailto:{{email}}" class="contactar"><i class="fas fa-envelope"></i></a>
-                                    <a href="tel:{{telf}}" class="contactar"><i class="fas fa-phone"></i></a>
-                                    <button data-toggle="modal" data-target="#alerta-venta{{id}}" class="borrar"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                </div>
-                            </td>
-                        </tr>
+                        {{/each}}
+                       
                     </tbody>
                 </table>
             </div>
