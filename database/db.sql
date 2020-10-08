@@ -428,17 +428,22 @@ JOIN users u ON u.id = a.user_id
 CREATE VIEW obraComprada AS
 SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
 		o.destacar, o.recomendar, o.cantidad, o.ocultar, o.titulo_recomendada, o.comprada, o.visitas,
-		cc.estadoObra, cc.fecha_compra, cc.id_user,estado,
-		c.pais, c.region, c.provincia, c.direccion
+		cc.estadoObra, cc.fecha_compra, cc.id_user,
+		c.pais, c.region, c.provincia, c.direccion,
+		u.nombre, u.apellido, u.email, u.telefono
 FROM obras o
 JOIN artistas a ON o.artista_id = a.user_id AND o.comprada = 'Si'
-JOIN users u ON u.id = a.user_id
 JOIN clienteCompra cc ON cc.id_obra = o.id 
-JOIN clientes c ON cc.id_user = c.user_id;
+JOIN clientes c ON cc.id_user = c.user_id
+JOIN users u ON u.id = c.user_id
+;
 
 
 ALTER TABLE obras
 add galeria ENUM ('Si', 'No') DEFAULT 'Si';
+
+ALTER TABLE clienteCompra
+add codigo VARCHAR(200) DEFAULT 'N/A';
 
 drop view obraCompleta;
 
@@ -462,3 +467,17 @@ modify precio DOUBLE;
 
 ALTER TABLE colecciones
 modify precioPromedio DOUBLE;
+
+drop view obraComprada;
+CREATE VIEW obraComprada AS
+SELECT o.id, o.nombreObra, o.en_venta, o.coleccion, o.coleccion_id, o.lugarCreacion, o.descripcion, o.tecnica, o.fecha_creacion, o.estilo, o.ancho, o.alto, o.subastar, o.copias, o.precio, o.artista_id,
+		o.destacar, o.recomendar, o.cantidad, o.ocultar, o.titulo_recomendada, o.comprada, o.visitas,
+		cc.estadoObra, cc.fecha_compra, cc.id_user,estado, cc.codigo, cc.estado as estadoCompra, cc.id as idCompra,
+		c.pais, c.region, c.provincia, c.direccion,
+		u.nombre, u.apellido, u.email, u.telefono
+FROM obras o
+JOIN artistas a ON o.artista_id = a.user_id AND o.comprada = 'Si'
+JOIN clienteCompra cc ON cc.id_obra = o.id 
+JOIN clientes c ON cc.id_user = c.user_id
+JOIN users u ON u.id = c.user_id
+;

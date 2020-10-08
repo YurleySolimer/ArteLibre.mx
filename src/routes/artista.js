@@ -95,6 +95,19 @@ router.get('/dashboard/ventas', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/mis-ventas', { nombre: nombre[0], artista, logueado, dashboard, obras });
 });
 
+router.post('/dashboard/ventas/envio', isLoggedIn, isArtista, async (req, res) => {
+  const codigo = req.body.codigo;
+  const id = req.body.id;
+  console.log(req.body)
+  const newCodigo = {
+    codigo,
+    estadoObra: 'Enviado'
+  }
+  await pool.query('UPDATE clienteCompra SET? WHERE id =?', [newCodigo, id]);
+  req.flash('success', 'Obra enviada');
+  res.redirect('/dashboard/ventas');
+});
+
 router.get('/dashboard/eventos', isLoggedIn, isArtista, async (req, res) => {
   const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   artista = true;
