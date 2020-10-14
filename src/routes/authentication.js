@@ -44,6 +44,7 @@ router.post('/registro-artista', passport.authenticate('signupArtista', {
 ));
 
 router.get('/iniciar-sesion',  isNotLoggedIn, (req, res) => {
+	
 	res.render('auth/signin');
   });
 
@@ -93,7 +94,7 @@ router.post('/recuperar-contrasena', async (req,res) => {
 		  });*/
 	  
 		  var mailOptions = {
-			  from: 'Arte Libre  <noreply@artelibre@.mx>', 
+			  from: 'Arte Libre  <noreply@artelibre.mx>', 
 			  to: email,
 			  subject: 'Arte Libre: Recuperar Contraseña',
 			  text: 'Código de validación: '+encodeURIComponent(token)

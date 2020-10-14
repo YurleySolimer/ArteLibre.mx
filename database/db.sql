@@ -481,3 +481,7 @@ JOIN clienteCompra cc ON cc.id_obra = o.id
 JOIN clientes c ON cc.id_user = c.user_id
 JOIN users u ON u.id = c.user_id
 ;
+
+INSERT INTO users (email, password, tipo, nombre, apellido) VALUES('noreply@artelibre.mx', '$2a$10$OVX/1njSpQUM1fQ7n5pBdukFLWtA4xV1tZrPDcsJ1cFZMOGP0ZiEi', 'Admin', 'Admin', 'ArteLibre');
+-- pss  arteLibre_Admin1*
+  

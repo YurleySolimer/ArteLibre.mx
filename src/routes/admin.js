@@ -16,7 +16,13 @@ Handlebars.registerHelper('fecha', function(date) {
 });
 
 const { isArtista } = require('../lib/auth');
+const { isAdmin } = require('../lib/auth');
+
 const { isLoggedIn } = require('../lib/auth');
+
+var admin = false;
+var logueado = false;
+var dashboard = false;
 
 Handlebars.registerHelper('ifCond', function(v1, v2, options) {
 	if(v1 === v2) {
@@ -25,13 +31,20 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
 	return options.inverse(this);
   });
 
-router.get('/admin/artistas', isLoggedIn, async (req, res) => {
+router.get('/admin/artistas', isLoggedIn, isAdmin, async (req, res) => {
     var artistasCompletos = await pool.query('SELECT * FROM usuarioArtista');
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+   
+
     
-    res.render('admin/artistas', {artistasCompletos});
+    res.render('admin/artistas', {nombre: nombre[0], admin, logueado, dashboard, artistasCompletos});
 });
 
-router.post('/admin/artistas/destacar', isLoggedIn, async (req, res) => {
+router.post('/admin/artistas/destacar', isLoggedIn, isAdmin, async (req, res) => {
+    
+
     const {id, text} = req.body;
     const destacar = {
         destacar : 'Si',
@@ -41,7 +54,7 @@ router.post('/admin/artistas/destacar', isLoggedIn, async (req, res) => {
     res.redirect('/admin/artistas');
 });
 
-router.post('/admin/artistas/suspender/:id', isLoggedIn, async (req, res) => {
+router.post('/admin/artistas/suspender/:id', isLoggedIn, isAdmin, async (req, res) => {
     const inactivo = {
         inactivo : 'Si',
     }
@@ -50,12 +63,20 @@ router.post('/admin/artistas/suspender/:id', isLoggedIn, async (req, res) => {
 });
 
 
-router.get('/admin/obras', isLoggedIn, async (req, res) => {
+router.get('/admin/obras', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
     var obras = await pool.query('SELECT * FROM obraCompleta');
-    res.render('admin/obras', {obras});
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
+    res.render('admin/obras', {nombre: nombre[0], admin, logueado, dashboard, obras});
 });
 
-router.get('/admin/obras/ocultar/:id', isLoggedIn, async (req, res) => {
+router.get('/admin/obras/ocultar/:id', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
     const ocultar = {
         ocultar : 'Si',
     }
@@ -63,7 +84,7 @@ router.get('/admin/obras/ocultar/:id', isLoggedIn, async (req, res) => {
 res.redirect('/admin/obras');
 });
 
-router.post('/admin/obras/destacar', isLoggedIn, async (req, res) => {
+router.post('/admin/obras/destacar', isLoggedIn, isAdmin, async (req, res) => {
     const {id} = req.body;
     const destacar = {
         destacar : 'Si',
@@ -73,7 +94,7 @@ router.post('/admin/obras/destacar', isLoggedIn, async (req, res) => {
 }); 
 
 
-router.post('/admin/obras/recomendar', isLoggedIn, async (req, res) => {
+router.post('/admin/obras/recomendar', isLoggedIn, isAdmin, async (req, res) => {
     const {id, text} = req.body;
     console.log('holi')
     const recomendar = {
@@ -86,12 +107,16 @@ router.post('/admin/obras/recomendar', isLoggedIn, async (req, res) => {
 
 
 
-router.get('/admin/colecciones', isLoggedIn, async (req, res) => {
+router.get('/admin/colecciones', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
     const colecciones = await pool.query('SELECT * from coleccionArtista');
-    res.render('admin/colecciones', {colecciones});
+    res.render('admin/colecciones', {nombre: nombre[0], admin, logueado, dashboard, colecciones});
 });
 
-router.post('/admin/colecciones/destacar', isLoggedIn, async (req, res) => {
+router.post('/admin/colecciones/destacar', isLoggedIn, isAdmin, async (req, res) => {
     const {id} = req.body;
     const destacar = {
         destacar : 'Si',
@@ -100,7 +125,11 @@ router.post('/admin/colecciones/destacar', isLoggedIn, async (req, res) => {
     res.redirect('/admin/colecciones');
 }); 
 
-router.get('/admin/colecciones/ocultar/:id', isLoggedIn, async (req, res) => {
+router.get('/admin/colecciones/ocultar/:id', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
     const ocultar = {
         ocultar : 'Si',
     }
@@ -109,21 +138,37 @@ res.redirect('/admin/colecciones');
 });
 
 
-router.get('/admin/dashboard', isLoggedIn, (req, res) => {
-    res.render('admin/dashboard');
+router.get('/admin/dashboard', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
+    res.render('admin/dashboard', {nombre: nombre[0], admin, logueado, dashboard});
 });
-router.get('/admin/tasas', isLoggedIn, (req, res) => {
-    res.render('admin/tasas');
+router.get('/admin/tasas', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
+    res.render('admin/tasas', {nombre: nombre[0], admin, logueado, dashboard});
 });
-router.get('/admin/rendimiento', isLoggedIn, (req, res) => {
-    res.render('admin/rendimiento');
+router.get('/admin/rendimiento', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
+    res.render('admin/rendimiento', {nombre: nombre[0], admin, logueado, dashboard});
 });
-router.get('/admin/subastas', isLoggedIn, async (req, res) => {
+router.get('/admin/subastas', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
     var obras = await pool.query('SELECT * FROM obraSubasta');
-    res.render('admin/subastas', {obras});
+    res.render('admin/subastas', {nombre: nombre[0], admin, logueado, dashboard, obras});
 });
 
-router.post('/admin/subastas/publicar', isLoggedIn, async (req, res) => {
+router.post('/admin/subastas/publicar', isLoggedIn, isAdmin, async (req, res) => {
     const {precioBase, horaInicio, fechaInicio, descripcion, duracion, id} = req.body;
     const newSubasta = {
         fecha_inicio: fechaInicio,
@@ -140,16 +185,28 @@ router.post('/admin/subastas/publicar', isLoggedIn, async (req, res) => {
 });
 
 
-router.get('/admin/clientes', isLoggedIn, (req, res) => {
-    res.render('admin/clientes');
+router.get('/admin/clientes', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
+    res.render('admin/clientes', {nombre: nombre[0], admin, logueado, dashboard});
 });
-router.get('/admin/eventos', isLoggedIn, async (req, res) => {
+router.get('/admin/eventos', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
     const eventos = await pool.query('SELECT * FROM eventoCompleto');
 
-    res.render('admin/eventos', {eventos});
+    res.render('admin/eventos', {nombre: nombre[0], admin, logueado, dashboard, eventos});
 });
-router.get('/admin/ventas', isLoggedIn, (req, res) => {
-    res.render('admin/ventas');
+router.get('/admin/ventas', isLoggedIn, isAdmin, async (req, res) => {
+    admin = true;
+    logueado = true;
+    const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
+
+    res.render('admin/ventas', {nombre: nombre[0], admin, logueado, dashboard});
 });
 
 module.exports = router;

@@ -44,6 +44,9 @@
                         {{#if cliente}}
                         {{> MenuClient }}
                         {{/if}}
+                        {{#if admin}}
+                        {{> MenuAdmin }}
+                        {{/if}}
                     </div>
                 </span>
             </div>
@@ -109,6 +112,9 @@
                             {{#ifCond cliente true}}
                             {{> MenuClient}}
                             {{/ifCond}}
+                             {{#ifCond admin true }}
+                            {{> MenuAdmin }}
+                            {{/ifCond}}
                         </div>
                     </span>
 
@@ -133,6 +139,9 @@
                             {{#ifCond cliente true}}
                             {{> MenuClient}}
                             {{/ifCond}}
+                             {{#ifCond admin true}}
+                        {{> MenuAdmin }}
+                        {{/ifCond}}
                         </div>
                     </span>
 

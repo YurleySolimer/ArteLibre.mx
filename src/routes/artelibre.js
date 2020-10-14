@@ -5,10 +5,6 @@ const pool = require('../database');
 const stripe = require('stripe')('sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4');
 
 //noreply@artelibre.mx < n0N0.r37ly!#
-// ca_HeryjbpRGndoYxvCYMJ2pwCZITTeTHOw cliente id
-// secret sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4
-// public pk_test_6ltlRZ8Ncn5C3Q7DE3X3r5wz00A24gvL0J
-
 
 
 var artista = false;
@@ -115,6 +111,10 @@ router.get('/coleccion/:id', async  (req, res) => {
       myArray[i] = obras2[numeroAleatorio-1];
     }
   }  
+
+
+ 
+
   res.render('general/coleccion', {colecciones, obras, myArray, artista, cliente, admin, logueado, nombre:nombre[0]});
 });
 
