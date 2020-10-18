@@ -1733,6 +1733,7 @@ button.titulo-mis-obras:focus {
     display: flex;
     justify-content: center;
     align-items: center;
+    max-height: 320px;
 }
 
 .owl-carousel .carousel-coleccion.active.center {

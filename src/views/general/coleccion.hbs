@@ -9,16 +9,16 @@
             <div class="col-12">
                 <div class="carousel-wrapper-inner">
                     <div class="owl-carousel owl-theme carousel-index carrusel-coleccion">
+                        {{#each obras}}
                         <div class="item-coleccion-carrusel" onclick="window.open('/obra/{{id}}', '_self')" ;>
-                            {{#each obras}}
                             <figure class="figure">
                                 <img class="item .item-carrusel-subasta figure-img img-fluid"
                                     src="/uploads/{{fotoNombre}}" alt="Pintura">
 
                                 <figcaption class="figure-caption text-center gold">{{precio}} MXN</figcaption>
                             </figure>
-                            {{/each}}
                         </div>
+                        {{/each}}
                     </div>
                 </div>
             </div>
