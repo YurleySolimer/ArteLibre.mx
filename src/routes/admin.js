@@ -190,7 +190,9 @@ router.get('/admin/clientes', isLoggedIn, isAdmin, async (req, res) => {
     logueado = true;
     const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
 
-    res.render('admin/clientes', {nombre: nombre[0], admin, logueado, dashboard});
+    var clientesCompletos = await pool.query('SELECT * FROM usuarioCliente');
+
+    res.render('admin/clientes', {nombre: nombre[0], admin, logueado, dashboard, clientesCompletos});
 });
 router.get('/admin/eventos', isLoggedIn, isAdmin, async (req, res) => {
     admin = true;

@@ -74,31 +74,27 @@
                     <thead style="background-color: #bda00899;">
                         <tr>
                             <th scope="col">Nombre</th>
-                            <th scope="col">ID</th>
                             <th scope="col">Ubicación</th>
                             <th scope="col">Piezas compradas</th>
                             <th scope="col">Última compra</th>
-                            <th scope="col">Valor promedio</th>
                             <th scope="col">Rendimiento</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each clientesCompletos}}
                         <tr class="ml-5">
                             <!-- Nombre del cliente -->
-                            <td><h2 style="font-weight: bold;">Luis Fernando Méndez</h2></td>
-                            <!-- ID del Cliente -->
-                            <td class="text-muted">1AB3B14JK1</td>
+                            <td><h2 style="font-weight: bold;">{{nombre}} {{apellidp}} </h2></td>
+                            
                             <!-- Ubicación del Cliente -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire - EEUU</a></td>
+                            <td><a href="#" class="coleccion-mis-obras">{{region}} - {{pais}}</a></td>
                             <!-- # de obras compradas -->
-                            <td>12</td>
+                            <td>{{obrasCompradas}}</td>
                             <!-- Ùltima compra -->
-                            <td class="text-muted">14 - 09 - 2020</td>
-                            <!--Valor promedio de las obras compradas -->
-                            <td class="gold">5.900 MXN</td>
+                            <td class="text-muted">{{#fecha ultima_compra}} {{ultima_compra}} {{/fecha}} </td>
+                            <td class="gold">- MXN</td>
                             <!--Total de las obras compradas -->
-                            <td class="gold">149.000 MXN</td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td>
                                 <div class="opciones-admin-list">
@@ -110,110 +106,8 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr class="ml-5">
-                            <!-- Nombre del cliente -->
-                            <td><h2 style="font-weight: bold;">Luis Fernando Méndez</h2></td>
-                            <!-- ID del Cliente -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Ubicación del Cliente -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire - EEUU</a></td>
-                            <!-- # de obras compradas -->
-                            <td>12</td>
-                            <!-- Ùltima compra -->
-                            <td class="text-muted">14 - 09 - 2020</td>
-                            <!--Valor promedio de las obras compradas -->
-                            <td class="gold">5.900 MXN</td>
-                            <!--Total de las obras compradas -->
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td>
-                                <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#borrar-cliente" class="borrar"><i
-                                            class="fas fa-trash"></i></button>
-                                    <button data-toggle="modal" data-target="#suspender-cliente" class="suspender"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Nombre del cliente -->
-                            <td><h2 style="font-weight: bold;">Luis Fernando Méndez</h2></td>
-                            <!-- ID del Cliente -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Ubicación del Cliente -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire - EEUU</a></td>
-                            <!-- # de obras compradas -->
-                            <td>12</td>
-                            <!-- Ùltima compra -->
-                            <td class="text-muted">14 - 09 - 2020</td>
-                            <!--Valor promedio de las obras compradas -->
-                            <td class="gold">5.900 MXN</td>
-                            <!--Total de las obras compradas -->
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td>
-                                <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#borrar-cliente" class="borrar"><i
-                                            class="fas fa-trash"></i></button>
-                                    <button data-toggle="modal" data-target="#suspender-cliente" class="suspender"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Nombre del cliente -->
-                            <td><h2 style="font-weight: bold;">Luis Fernando Méndez</h2></td>
-                            <!-- ID del Cliente -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Ubicación del Cliente -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire - EEUU</a></td>
-                            <!-- # de obras compradas -->
-                            <td>12</td>
-                            <!-- Ùltima compra -->
-                            <td class="text-muted">14 - 09 - 2020</td>
-                            <!--Valor promedio de las obras compradas -->
-                            <td class="gold">5.900 MXN</td>
-                            <!--Total de las obras compradas -->
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td>
-                                <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#borrar-cliente" class="borrar"><i
-                                            class="fas fa-trash"></i></button>
-                                    <button data-toggle="modal" data-target="#suspender-cliente" class="suspender"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="ml-5">
-                            <!-- Nombre del cliente -->
-                            <td><h2 style="font-weight: bold;">Luis Fernando Méndez</h2></td>
-                            <!-- ID del Cliente -->
-                            <td class="text-muted">1AB3B14JK1</td>
-                            <!-- Ubicación del Cliente -->
-                            <td><a href="#" class="coleccion-mis-obras">New Hampshire - EEUU</a></td>
-                            <!-- # de obras compradas -->
-                            <td>12</td>
-                            <!-- Ùltima compra -->
-                            <td class="text-muted">14 - 09 - 2020</td>
-                            <!--Valor promedio de las obras compradas -->
-                            <td class="gold">5.900 MXN</td>
-                            <!--Total de las obras compradas -->
-                            <td class="gold">149.000 MXN</td>
-                            <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
-                            <td>
-                                <div class="opciones-admin-list">
-                                    <button data-toggle="modal" data-target="#borrar-cliente" class="borrar"><i
-                                            class="fas fa-trash"></i></button>
-                                    <button data-toggle="modal" data-target="#suspender-cliente" class="suspender"><i
-                                            class="fas fa-exclamation-triangle"></i></button>
-                                    <a href="mailto:#" class="contactar"><i class="fas fa-envelope"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+                        {{/each}}
+                        
                     </tbody>
                 </table>
             </div>
