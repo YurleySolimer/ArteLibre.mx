@@ -30,9 +30,9 @@
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
-                        <div class="form-group">
-                            <input type="tel" class="form-control" required id="telefono" aria-describedby="telefono"
-                                placeholder="Teléfono" name="telefono">
+                        <div class="form-group pd-telephone-input">
+                            <input type="tel" class="form-control telefono" id="telefono" aria-describedby="telefono"
+                                name="telefono" required>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6  mb-3">
@@ -110,9 +110,25 @@
 </div>
 
 {{> Footer }}
-
+<script src="/js/intlTelInput-jquery.min.js"></script>
 <script>
     $(document).ready(function () {
+
+ $('#telefono').intlTelInput({
+            preferredCountries: ['mx', 'us', 'co', 've'],
+            separateDialCode: true,
+            nationalMode: false,
+            initialCountry: 'mx',
+            geoIpLookup: function (success, failure) {
+                $.get("https://ipinfo.io", function () { }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    success(countryCode);
+                });
+            },
+            utilsScript: '/js/utils.js'
+        });
+
+
        //variables
         let pass1 = $('[name=password]');
         let pass2 = $('[name=confirmarContraseña]');

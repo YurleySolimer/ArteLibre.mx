@@ -7,7 +7,10 @@ const { isLoggedIn } = require('../lib/auth');
 
 var cliente = false;
 var logueado = false;
-
+var nombre = {
+  nombre: '',
+  apellido: '',
+}
 const Handlebars = require('handlebars');
 
 
@@ -20,7 +23,7 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
 
 
 router.get('/cliente/compras', isLoggedIn, isCliente, async (req, res) => {
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
+  nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   cliente = true;
   logueado = true;
   const obras = await pool.query('SELECT * from obraComprada WHERE id_user =?', [req.user.id]);
@@ -29,14 +32,14 @@ router.get('/cliente/compras', isLoggedIn, isCliente, async (req, res) => {
 });
 
 router.get('/cliente/perfil', isLoggedIn, isCliente, async (req, res) => {
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
+  nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   cliente: true;
   logueado: true;
   res.render('client/perfil', {nombre:nombre[0], cliente, logueado});
 });
 
 router.get('/cliente/historial', isLoggedIn, isCliente, async (req, res) => {
-  const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
+  nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
   cliente = true;
   logueado = true;
   const obras = await pool.query('SELECT * from obraComprada WHERE id_user =?', [req.user.id]);

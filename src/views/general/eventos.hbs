@@ -20,7 +20,7 @@
 
             {{#each eventos}}
             <div class="timeline-item-eventos" onclick="window.open('evento/{{id}}', '_self');" data-text-1="{{nombre}}" data-text-2="{{titulo}}"
-                data-text-3="{{dir_local}} {{direccion}} {{ciudad}}" data-text-4="{{hora_inicio}}">
+                data-text-3="{{direccion}} - {{ciudad}}" data-text-4="{{dir_local}} - {{hora_inicio}}">
                 <div class="timeline__content-eventos"><img class="timeline__img-eventos" src="./uploads/{{fotoNombre}}" />
                         <h2 class="badge badge-pill timeline__content-title-eventos">{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}}</h2>
                 </div>

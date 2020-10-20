@@ -325,7 +325,7 @@ router.get('/artistas', async (req, res) => {
   }
 
 
-  res.render('general/artistas', {artistas, artista, logueado, admin, nombre:nombre[0]});
+  res.render('general/artistas', {artistas, artista, cliente, logueado, admin, nombre:nombre[0]});
 
 });
 
