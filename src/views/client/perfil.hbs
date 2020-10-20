@@ -11,28 +11,28 @@
             </div>
             <div class="col-lg-6 col-12">
                 <div class="titulo">
-                    <h2>Farid Aboud</h2>
+                    <h2>{{clienteCompleto.nombre}} {{clienteCompleto.apellido}} </h2>
                 </div>
                 <div class="info-perfil-cliente">
                     <h4>Correo</h4>
-                    <p class="text-muted">Faridaboud@correo.com</p>
+                    <p class="text-muted">{{clienteCompleto.email}}</p>
                     <br>
                     <h4>Teléfono</h4>
-                    <p class="text-muted">+123 456 789</p>
+                    <p class="text-muted">{{clienteCompleto.telefono}}</p>
                     <br>
                     <h4>Dirección</h4>
-                    <p class="text-muted">Calle 23, Carrera 141 - #123</p>
+                    <p class="text-muted">{{clienteCompleto.direccion}}</p>
                     <br>
                     <h4>Ubicación</h4>
-                    <p class="text-muted">Estado, País</p>
+                    <p class="text-muted">{{clienteCompleto.region}} {{clienteCompleto.pais}} </p>
                     <br>
-                    <h4>Registrado desde</h4>
-                    <p class="text-muted">Julio 2020</p>
+                    
                 </div>
             </div>
         </div>
         <br>
-        <h4>Sobre mí</h4>
+        
+       {{!--  <h4>Sobre mí</h4>
         <div class="row mb-5">
             <div class="col-lg-6 col-12">
                 <p style="text-align: justify;">
@@ -105,7 +105,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

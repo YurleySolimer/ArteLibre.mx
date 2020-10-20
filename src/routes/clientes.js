@@ -32,7 +32,8 @@ router.get('/cliente/perfil', isLoggedIn, isCliente, async (req, res) => {
   const nombre = await pool.query('SELECT nombre FROM users WHERE id =?', [req.user.id]);
   cliente: true;
   logueado: true;
-  res.render('client/perfil', {nombre:nombre[0], cliente, logueado});
+  const clienteCompleto = await pool.query('SELECT * from usuarioCliente WHERE id =?', [req.user.id]);
+  res.render('client/perfil', {nombre:nombre[0], cliente, logueado, clienteCompleto:clienteCompleto[0]});
 });
 
 router.get('/cliente/historial', isLoggedIn, isCliente, async (req, res) => {
