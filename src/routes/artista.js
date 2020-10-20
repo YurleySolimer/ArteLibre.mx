@@ -878,7 +878,7 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
 
   const todoColeccicones = await pool.query('SELECT * from colecciones WHERE id =?', [coleccion])
   if (todoColeccicones.length > 0 ) { 
-    var precioPromedio = todoColeccicones[0].precioPromedio + precioFinal;
+    var precioPromedio = ((todoColeccicones[0].precioPromedio) * 1) + ((precioFinal)*1);
     const colecicon_obras = await pool.query('SELECT * FROM obras WHERE coleccion_id =?', [coleccion]);
     var piezas = 0;
     if (colecicon_obras) {
@@ -887,6 +887,8 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
     else {
       piezas + 1;
     }
+
+    console.log(precioPromedio)
     const NewColeccion = {
       fotoNombre: originalname,
       precioPromedio,

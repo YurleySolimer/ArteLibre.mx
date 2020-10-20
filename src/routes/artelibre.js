@@ -237,6 +237,19 @@ router.get('/obra/success/:id', async (req, res) => {
     comprada : 'Si'
   }
   await pool.query('UPDATE obras SET ? WHERE id = ? ', [comprada, id]);
+
+  var obrasCompradas = await pool.query('SELECT * FROM clientes WHERE user_id =?', [req.user.id]);
+  var obrasTotal = obrasCompradas[0].obrasCompradas + 1;
+  const date = new Date();
+  const hoy = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  var obrasTotalCompradas = {
+    obrasCompradas : obrasTotal,
+    ultima_compra : hoy
+  }
+
+  await pool.query('UPDATE clientes SET? WHERE user_id=?', [obrasTotalCompradas, req.user.id]); 
+  
+
   req.flash('success', 'Felicidades, ha comprado la obra exitosamente');
   res.redirect(`/obra/${id}`);
   }

@@ -484,4 +484,33 @@ JOIN users u ON u.id = c.user_id
 
 INSERT INTO users (email, password, tipo, nombre, apellido) VALUES('noreply@artelibre.mx', '$2a$10$OVX/1njSpQUM1fQ7n5pBdukFLWtA4xV1tZrPDcsJ1cFZMOGP0ZiEi', 'Admin', 'Admin', 'ArteLibre');
 -- pss  arteLibre_Admin1*
+
+
+---------------------------Nuevo----------------------
   
+ALTER TABLE obras
+modify precio DOUBLE DEFAULT 0;
+
+ALTER TABLE colecciones
+modify precioPromedio DOUBLE DEFAULT 0;
+
+ALTER TABLE subastasInfo
+modify precio_base DOUBLE DEFAULT 0;
+
+ALTER TABLE clientes
+add obrasCompradas INT DEFAULT 0;
+
+
+ALTER TABLE clientes
+add ultima_compra timestamp;
+
+
+CREATE VIEW usuarioCliente AS ( 
+	SELECT c.pais, c.region, c.provincia, c.fecha_nacimiento, c.direccion, c.obrasCompradas, c.ultima_compra,
+		   u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion, u.id, u.inactivo
+	FROM clientes c
+	JOIN users u 
+	ON u.id = c.user_id
+); 
+
+
