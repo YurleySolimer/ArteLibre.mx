@@ -852,7 +852,7 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
     numero_obras : artista_obras.length
   }
 
-  await pool.query('UPDATE artistas SET? WHERE id =?', [numero_obras, req.user.id]);
+  await pool.query('UPDATE artistas SET? WHERE user_id =?', [numero_obras, req.user.id]);
 
   //GUARDANDO FOTOS DE LA OBRA//
 
@@ -923,7 +923,7 @@ router.post('/nueva-coleccion', isLoggedIn, isArtista, async (req, res) => {
     numero_colecciones : artista_colecciones.length
   }
 
-  await pool.query('UPDATE artistas SET? WHERE id =?', [numero_colecciones, req.user.id]);
+  await pool.query('UPDATE artistas SET? WHERE user_id =?', [numero_colecciones, req.user.id]);
 
   if(dashboard) {
     res.redirect('/artista/dashboard-nueva-obra')
@@ -958,7 +958,7 @@ router.post('/nuevo-evento', isLoggedIn, isArtista, async (req,res) => {
     numero_eventos : artista_eventos.length
   }
 
-  await pool.query('UPDATE artistas SET? WHERE id =?', [numero_eventos, req.user.id]);
+  await pool.query('UPDATE artistas SET? WHERE user_id =?', [numero_eventos, req.user.id]);
 
    for (var i = 0 ; i<req.files.length; i ++) {
      var principal = 'false';

@@ -513,4 +513,15 @@ CREATE VIEW usuarioCliente AS (
 	ON u.id = c.user_id
 ); 
 
+drop view usuarioArtista;
+
+CREATE VIEW usuarioArtista AS ( 
+	SELECT a.pais, a.region, a.provincia, a.destacar, a.info_destacar, a.numero_obras, a.años_experiencia, a.direccion, a.visitas, a.id as idArtist,
+		   a.disciplina_principal,a.disciplina_sec, a.biografia, a.frase, a.numero_eventos, a.numero_colecciones,
+		   u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion, u.id, u.inactivo
+	FROM artistas a
+	JOIN users u 
+	ON u.id = a.user_id
+); 
+
 

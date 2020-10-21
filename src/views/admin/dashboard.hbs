@@ -8,35 +8,28 @@
             <div class="col-12">
                 <small style="color: var(--gold);">Resumen semanal</small>
             </div>
-            <div class="col-12 col-md-6 col-lg-3 mb-3">
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="tarjeta-dashboard-admin">
                     <div class="inner-tarjeta-dashboard">
                         <span class="gold">Transacciones</span>
-                        <i class="text-white">78</i>
+                        <i class="text-white">{{transaccionesTotal}}</i>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-3 mb-3">
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="tarjeta-dashboard-admin">
                     <div class="inner-tarjeta-dashboard">
                         <span class="gold">Ingresos</span>
-                        <i class="text-white">98.000 MXN</i>
+                        <i class="text-white">{{ingresos}} MXN</i>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-3 mb-3">
-                <div class="tarjeta-dashboard-admin">
-                    <div class="inner-tarjeta-dashboard">
-                        <span class="gold">Nuevos Registros</span>
-                        <i class="text-white">21</i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 mb-3">
+           
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="tarjeta-dashboard-admin">
                     <div class="inner-tarjeta-dashboard">
                         <span class="gold">Eventos</span>
-                        <i class="text-white">5</i>
+                        <i class="text-white">{{eventos}}</i>
                     </div>
                 </div>
             </div>
@@ -46,12 +39,12 @@
                 <div class="row">
                     <div class="col-12 mb-3">
                         <div class="card bg-dark tarjeta-card-dashboard h-100">
-                            <img class="card-img" src="/images/vangogh1.jpg" alt="Card image">
+                            <img class="card-img" src="/./uploads/{{ultimaObra.fotoNombre}}" alt="Card image">
                             <div class="card-img-overlay ultima-obra-admin-dashboard">
                                 <small class="card-title gold"><i>Última obra</i></small>
-                                <h3 class="titulo-obra-card-dashboard"><a href="">Nombre de la obra</a></h3>
-                                <p class="card-text text-white">Nombre del artista</p>
-                                <p class="card-text gold">12.000 MXN</p>
+                                <h3 class="titulo-obra-card-dashboard"><a href="">{{ultimaObra.nombreObra}}</a></h3>
+                                <p class="card-text text-white">{{ultimaObra.nombre}} {{ultimaObra.apellido}} </p>
+                                <p class="card-text gold">{{ultimaObra.precio}} MXN</p>
                             </div>
                         </div>
                     </div>
@@ -59,9 +52,9 @@
                         <div class="card galeria-mas-visitada-dashboard h-100">
                             <div class="card-body">
                                 <div class="card-title gold"><small><i>Galería más visitada</i></small></div>
-                                <h3>Jean Claude Monet</h3>
-                                <p class="card-text">La Haya, Holanda</p>
-                                <p class="card-text gold">43 Piezas</p>
+                                <h3>{{galeria.nombre}} {{galeria.apellido}} </h3>
+                                <p class="card-text">{{galeria.direccion}}, {{galeria.pais}}</p>
+                                <p class="card-text gold">{{galeria.numero_obras}} Piezas</p>
                             </div>
                         </div>
                     </div>
@@ -73,19 +66,18 @@
                         <div class="card ultima-coleccion-dashboard h-100">
                             <div class="card-body">
                                 <div class="card-title gold"><small><i>Última Colección</i></small></div>
-                                <h3>Repensando el Modernismo</h3>
-                                <p class="card-text">Jean Baptiste Monet</p>
-                                <p class="card-text gold">14 Piezas</p>
+                                <h3>{{ultimaColeccion.nombreColeccion}}</h3>
+                                <p class="card-text gold">{{ultimaColeccion.piezas}} Piezas</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 mb-3">
                         <div class="card bg-dark tarjeta-card-dashboard h-100">
-                            <img class="card-img" src="/images/vangogh3.jpg" alt="Card image">
+                            <img class="card-img" src="/./uploads/{{obraVisitada.fotoNombre}}" alt="Card image">
                             <div class="card-img-overlay obra-visitada-admin-dashboard">
                                 <small class="card-title gold"><i>Obra más visitada</i></small>
-                                <h3 class="titulo-obra-card-dashboard"><a href="">Nombre de la obra</a></h3>
-                                <p class="card-text gold">12.000 MXN</p>
+                                <h3 class="titulo-obra-card-dashboard"><a href="">{{obraVisitada.nombreObra}}</a></h3>
+                                <p class="card-text gold">{{obraVisitada.precio}} MXN</p>
                             </div>
                         </div>
                     </div>
@@ -103,15 +95,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{#each artistasRelevantes}}
                                         <tr>
-                                            <td><a href="#">Artista 1</a></td>
+                                            <td><a href="#">{{nombre}} {{apellido}} </a></td>
                                         </tr>
-                                        <tr>
-                                            <td><a href="#">Artista 2</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Artista 3</a></td>
-                                        </tr>
+                                        {{/each}}
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -130,18 +119,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{#each proximasSubastas}}
                                         <tr>
-                                            <td><a href="#">Subasta 1</a></td>
-                                            <td>06 - 12 - 2020</td>
+                                            <td><a href="#">{{nombreObra}}</a></td>
+                                            <td>{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}} </td>
                                         </tr>
-                                        <tr>
-                                            <td><a href="#">Subasta 2</a></td>
-                                            <td>06 - 12 - 2020</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Subasta 3</a></td>
-                                            <td>06 - 12 - 2020</td>
-                                        </tr>
+                                        {{/each}}
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -160,18 +144,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{#each proximosEventos}}
                                         <tr>
-                                            <td><a href="#">Evento 1</a></td>
-                                            <td>05 - 09 - 2020</td>
+                                            <td><a href="#">{{nombre}}</a></td>
+                                            <td>{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}}</td>
                                         </tr>
-                                        <tr>
-                                            <td><a href="#">Evento 2</a></td>
-                                            <td>05 - 09 - 2020</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Evento 3</a></td>
-                                            <td>05 - 09 - 2020</td>
-                                        </tr>
+                                        {{/each}}
+                                        
                                     </tbody>
                                 </table>
                             </div>
