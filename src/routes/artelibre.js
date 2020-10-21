@@ -271,6 +271,9 @@ router.get('/artista/:id', async (req, res)  => {
 
   const user = await pool.query('SELECT * FROM usuarioArtista WHERE id =?', [id]);
   const obras = await pool.query('SELECT * FROM obraCompleta WHERE artista_id =?', [id]);
+  const colecciones = await pool.query('SELECT * FROM colecciones WHERE artista_id =?', [id]);
+  const eventos = await pool.query('SELECT * FROM eventos WHERE artista_id =?', [id]);
+
   var ultima_obra = {
     nombreObra: 'N/A'
   }
@@ -293,7 +296,7 @@ router.get('/artista/:id', async (req, res)  => {
     }
     await pool.query('UPDATE artistas  SET ? WHERE user_id =?', [visitas, id]);
   }
-  res.render('general/artista' , {user:user[0], obras, ultima_obra, artista, cliente, admin, logueado, nombre:nombre[0]});
+  res.render('general/artista' , {user:user[0],  colecciones, eventos, obras, ultima_obra, artista, cliente, admin, logueado, nombre:nombre[0]});
 })
 
  
