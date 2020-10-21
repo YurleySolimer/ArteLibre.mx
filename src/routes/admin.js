@@ -143,6 +143,12 @@ router.get('/admin/dashboard', isLoggedIn, isAdmin, async (req, res) => {
     logueado = true;
     const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
 
+    const date = new Date();
+    var hoy = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    var sieteDias = new Date(date.getFullYear(), date.getMonth(), date.getDate()-7);
+
+    const transacciones = await pool.query('select * from obraComprada	fecha_compra between ? and ?', [hoy, sieteDias]);
+
     res.render('admin/dashboard', {nombre: nombre[0], admin, logueado, dashboard});
 });
 router.get('/admin/tasas', isLoggedIn, isAdmin, async (req, res) => {
@@ -191,7 +197,6 @@ router.get('/admin/clientes', isLoggedIn, isAdmin, async (req, res) => {
     const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
 
     var clientesCompletos = await pool.query('SELECT * FROM usuarioCliente');
-
     res.render('admin/clientes', {nombre: nombre[0], admin, logueado, dashboard, clientesCompletos});
 });
 router.get('/admin/eventos', isLoggedIn, isAdmin, async (req, res) => {
