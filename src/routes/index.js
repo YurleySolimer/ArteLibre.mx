@@ -97,7 +97,7 @@ router.get('/', async (req, res) => {
     obras_coleccion = await pool.query('SELECT * FROM obraCompleta WHERE coleccion_id =?', [coleccion_destacada[0].id]);
   }
 
-	res.render('index', {artista, admin, nombre:nombre[0], cliente, logueado, eventos, coleccion_destacada, obras_coleccion, obra_destacada, destacadas, obra1_artista, obra2_artista,  artista_destacado});
+	res.render('index', {artista, admin, nombre:nombre[0], cliente, logueado, eventos, coleccion_destacada:coleccion_destacada[0], obras_coleccion, obra_destacada, destacadas, obra1_artista, obra2_artista,  artista_destacado});
 });
 
 
