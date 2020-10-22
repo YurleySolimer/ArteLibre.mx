@@ -143,7 +143,37 @@ router.get('/admin/dashboard', isLoggedIn, isAdmin, async (req, res) => {
     logueado = true;
     const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
 
-    res.render('admin/dashboard', {nombre: nombre[0], admin, logueado, dashboard});
+    const date = new Date();
+    var hoy = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    var sieteDias = new Date(date.getFullYear(), date.getMonth(), date.getDate()-7);
+
+    const transaccionesGeneral = await pool.query('select * from obraComprada where fecha_compra between ? and ?', [sieteDias, hoy]);
+    var transaccionesTotal = 0;
+    var ingresos = 0;    
+   
+    if (transaccionesGeneral.length > 0) {
+        transaccionesTotal = transaccionesGeneral.length;
+        for (var i = 0; i < transaccionesGeneral.length; i++) {
+            ingresos = transaccionesGeneral[i].precio + ingresos;
+        }
+    }
+
+    const eventosGeneral = await pool.query('select * from eventos where fecha_inicio between ? and ?', [sieteDias, hoy]);
+    var eventos = 0;
+    if( eventosGeneral.length > 0) {
+        eventos = eventosGeneral.length;
+    }
+
+    const ultimaObra = await pool.query('select * from obraCompleta order by id desc limit 1');
+    const galeria = await pool.query('select * from artistas order by visitasGaleria desc limit 1 ');
+    const ultimaColeccion = await pool.query('select * from colecciones order by id desc limit 1');
+    const obraVisitada = await pool.query('select * from obraCompleta order by visitas desc limit 1');
+    const artistasRelevantes = await pool.query('select * from usuarioArtista order by visitas desc limit 3 ');
+    const proximasSubastas = await pool.query('select * from obraSubasta order by fecha_inicio desc limit 3 ');
+    const proximosEventos = await pool.query('select * from eventos order by fecha_inicio desc limit 3 ');
+
+
+    res.render('admin/dashboard', {nombre: nombre[0], admin, transaccionesTotal, ingresos, eventos, proximosEventos, artistasRelevantes, proximasSubastas, ultimaObra:ultimaObra[0], obraVisitada:obraVisitada[0], ultimaColeccion:ultimaColeccion[0], galeria:galeria[0], logueado, dashboard});
 });
 router.get('/admin/tasas', isLoggedIn, isAdmin, async (req, res) => {
     admin = true;
@@ -157,7 +187,44 @@ router.get('/admin/rendimiento', isLoggedIn, isAdmin, async (req, res) => {
     logueado = true;
     const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
 
-    res.render('admin/rendimiento', {nombre: nombre[0], admin, logueado, dashboard});
+    const clientesRegion = await pool.query('SELECT region, count(*) as numero from clientes  group by region order by numero desc limit 5');
+    const clientesDestacados = await pool.query('SELECT * from usuarioCliente order by obrasCompradas desc limit 5');
+    const clientesTotal = await pool.query('SELECT * from clientes');
+    const compradoresTotal = await pool.query('SELECT id_user, count(*) as comprador from clienteCompra group by id_user');
+    var compradoresTasa = 0;
+    if (clientesTotal.length > 0 && compradoresTotal.length > 0) { 
+        compradoresTasa = (compradoresTotal.length / clientesTotal.length) * 100;
+    }
+    const obrasTotal = await pool.query('Select precio from obraComprada');
+    var precioSuma = 0;
+    if (obrasTotal.length > 0) {
+        for (var i = 0; i < obrasTotal.length; i++) {
+            precioSuma = obrasTotal[i].precio + precioSuma;
+        }
+    var precioPromedio = precioSuma / obrasTotal.length
+
+    }
+
+    const artistasDestacados = await pool.query('SELECT *, avg(precio) as precioProm, count(id) as totalObras from obraComprada group by artista_id order by precioProm desc limit 5');
+    const obrasSuma = await pool.query('SELECT *  FROM obras');
+    const artistasSuma = await pool.query('SELECT *  FROM artistas');
+    var promArtistasObra = 0;
+    if (obrasSuma.length > 0 && artistasSuma.length > 0) {
+        promArtistasObra = obrasSuma.length / artistasSuma.length
+    }
+
+    const totalGanancia = await pool.query('SELECT * from obraComprada');
+    var promGanancia = 0;
+    var sumGanancia = 0;
+    if (totalGanancia.length > 0) {
+        for (var j = 0; j < totalGanancia.length; j++) {
+            sumGanancia = totalGanancia[j].precio + sumGanancia;
+        }
+        promGanancia = (sumGanancia / totalGanancia.length) * 0.85;
+    }
+
+
+    res.render('admin/rendimiento', {nombre: nombre[0], admin, precioPromedio, promArtistasObra, promGanancia, logueado, dashboard, clientesRegion, artistasDestacados, compradoresTasa, clientesDestacados});
 });
 router.get('/admin/subastas', isLoggedIn, isAdmin, async (req, res) => {
     admin = true;
@@ -191,7 +258,6 @@ router.get('/admin/clientes', isLoggedIn, isAdmin, async (req, res) => {
     const nombre = await pool.query('SELECT nombre, apellido FROM users WHERE id =?', [req.user.id]);
 
     var clientesCompletos = await pool.query('SELECT * FROM usuarioCliente');
-
     res.render('admin/clientes', {nombre: nombre[0], admin, logueado, dashboard, clientesCompletos});
 });
 router.get('/admin/eventos', isLoggedIn, isAdmin, async (req, res) => {

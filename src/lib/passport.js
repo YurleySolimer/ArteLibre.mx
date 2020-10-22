@@ -13,10 +13,10 @@ passport.use('signinUser', new LocalStrategy({
 }, async (req, password, email, done) => {
   const email2 = req.body.email;
   const password2 = req.body.password;
-  console.log(req.body);
+  
 
   const rows = await pool.query('SELECT * FROM users WHERE email = ?', [email2]);
-  console.log(rows);
+  
 
   if (rows.length > 0) {
     const user = rows[0];
@@ -75,8 +75,7 @@ passport.use('signupCliente', new LocalStrategy({
     };
   
     const cliente = await pool.query('INSERT INTO clientes SET ? ', newCliente);
-    console.log(newUser);
-    console.log(newCliente);
+    
     return done(null, newUser);
   }
 }));
@@ -88,7 +87,7 @@ passport.use('signupArtista', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, fullname, password, done) => {
-  console.log(req);
+  
  
   const {email, apellido, telefono} = req.body;
   var path = '';
@@ -106,10 +105,7 @@ passport.use('signupArtista', new LocalStrategy({
         console.log(err);
     });
 
-    console.log(img.title); // Imagen 264
-
-
-
+    
   }
 
   const noUser2 = await pool.query('SELECT * FROM users WHERE email =?', [email]);

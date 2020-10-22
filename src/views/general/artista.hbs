@@ -107,7 +107,7 @@
             </div>
             <div>
                 {{#each colecciones}}
-                <a class="coleccion-perfil-artista" href="#">
+                <a class="coleccion-perfil-artista" href="/coleccion/{{id}}">
                     <p>{{nombreColeccion}}</p>
                 </a>
                 <hr class="gray">
@@ -119,6 +119,14 @@
                 <h3>
                     Próximos eventos
                 </h3>
+            </div>
+             <div>
+                {{#each eventos}}
+                <a class="coleccion-perfil-artista" href="/evento/{{id}}">
+                    <p>{{titulo}}</p>
+                </a>
+                <hr class="gray">
+                {{/each}}
             </div>
         </div>
 </section>
