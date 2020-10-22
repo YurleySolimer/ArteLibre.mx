@@ -866,7 +866,7 @@ button.titulo-mis-obras:focus {
     }
 
     .container-coleccion-index {
-        height: 50vh;
+        min-height: 650px;
     }
 }
 
