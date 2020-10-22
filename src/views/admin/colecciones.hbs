@@ -1,7 +1,7 @@
 {{#each colecciones}}
 
 <!-- Modal -->
-<div class="modal fade" id="datos-obra-modal{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+<div class="modal fade" id="datos-coleccion-modal{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="">
-                            <img class="img-fluid" src="./uploads/{{fotoNombre}}" alt="{{nombreColeccion}}">
+                            <img class="img-fluid" src="/uploads/{{fotoNombre}}" alt="{{nombreColeccion}}">
                         </div>
                     </div>
                     <div class="col-lg-7">
@@ -230,7 +230,7 @@
                         <tr class="ml-5">
                             <!-- Enlace a la coleccion, vista como el cliente -->
                             <td><button data-toggle="modal" data-target="#datos-coleccion-modal{{id}}"
-                                    class="titulo-mis-coleccions">
+                                    class="titulo-mis-coleccions btn btn-compra">
                                     <h2 style="font-weight: bold;">{{nombreColeccion}}</h2>
                                 </button></td>
                             <!-- Enlace a la colección de la coleccion -->
