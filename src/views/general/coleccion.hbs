@@ -1,7 +1,7 @@
 {{> Navigation }}
 
 <div class="content inicial">
-    <div class="container">
+    <div class="container inicial">
         <div class="row">
             <div class="col-12 mb-5">
                 <h1>{{colecciones.nombreColeccion}}</h1>
@@ -24,32 +24,21 @@
             </div>
             <div class="col-12 m-3">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-4">
-                                <h2 style="font-size: 1em;">Técnica</h2>
-                                <h3 style="font-size: 1em;" class="text-muted">{{colecciones.tecnica}}</h3>
-                            </div>
-
-                        </div>
+                    <div class="col-lg-3 col-6">
+                        <h2 style="font-size: 1em;">Técnica</h2>
+                        <h3 style="font-size: 1em;" class="text-muted">{{colecciones.tecnica}}</h3>
                     </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-1"></div>
-                            <div class="col-4">
-                                <h2 style="font-size: 1em;">Ubicación</h2>
-                                <h3 style="font-size: 1em;" class="text-muted">{{colecciones.lugarCreacion}}</h3>
-                            </div>
-                            <div class="col-4">
-                                <h2 style="font-size: 1em;">Año</h2>
-                                <h3 style="font-size: 1em;" class="text-muted">{{colecciones.anio}}</h3>
-                            </div>
-                            <div class="col-3">
-                                <h2 style="font-size: 1em;">Estilo</h2>
-                                <h3 style="font-size: 1em;" class="text-muted">{{colecciones.estilo}}</h3>
-                            </div>
-                        </div>
+                    <div class="col-lg-3 col-6">
+                        <h2 style="font-size: 1em;">Ubicación</h2>
+                        <h3 style="font-size: 1em;" class="text-muted">{{colecciones.ciudad}}, {{colecciones.pais}}</h3>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <h2 style="font-size: 1em;">Año</h2>
+                        <h3 style="font-size: 1em;" class="text-muted">{{colecciones.anio}}</h3>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <h2 style="font-size: 1em;">Estilo</h2>
+                        <h3 style="font-size: 1em;" class="text-muted">{{colecciones.estilo}}</h3>
                     </div>
                 </div>
             </div>
