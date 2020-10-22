@@ -92,8 +92,13 @@
                             <!-- # de obras compradas -->
                             <td>{{obrasCompradas}}</td>
                             <!-- Ùltima compra -->
-                            <td class="text-muted">{{#fecha ultima_compra}} {{ultima_compra}} {{/fecha}} </td>
-                            <td class="gold">- MXN</td>
+                            <td class="text-muted">
+                                {{#if ultima_compra}}
+                                {{#fecha ultima_compra}} {{ultima_compra}} {{/fecha}}
+                                {{else}} n/a 
+                                {{/if}}
+                                 </td>
+                            <td class="gold"> {{totalCompras}} MXN</td>
                             <!--Total de las obras compradas -->
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td>

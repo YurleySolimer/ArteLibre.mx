@@ -525,3 +525,17 @@ CREATE VIEW usuarioArtista AS (
 ); 
 
 
+ALTER TABLE clientes
+add totalCompras DOUBLE DEFAULT 0;
+
+drop view usuarioCliente;
+
+CREATE VIEW usuarioCliente AS ( 
+	SELECT c.pais, c.region, c.provincia, c.fecha_nacimiento, c.direccion, c.obrasCompradas, c.ultima_compra, c.totalCompras,
+		   u.email, u.telefono, u.nombre, u.apellido, u.foto_nombre, u.foto_ubicacion, u.id, u.inactivo
+	FROM clientes c
+	JOIN users u 
+	ON u.id = c.user_id
+); 
+
+
