@@ -4,7 +4,12 @@
         <div class="col-12">
             <div class="text-center">
                 <div class="d-flex justify-content-center align-items-center">
-                <h2 class="my-5">{{user.nombre}} {{user.apellido}}</h2>  {{>OptionsArtistAdmin}}
+                <h2 class="my-5">{{user.nombre}} {{user.apellido}}</h2> {{#ifCond artista true}}
+                {{> OptionsArtistArtist }}
+                {{/ifCond}}
+                {{#ifCond admin true}}
+                {{> OptionsArtistAdmin}}
+                {{/ifCond}} 
                 </div>
                 <div class="container-perfil-image">
                     <div class="perfil-image-inner">
@@ -83,7 +88,7 @@
             </p>
         </div>
         <div class="col-12 text-right">
-            <a href="/artista/{{user.id}}/galeria" class="btn btn-compra">Galeria</a>
+            <a href="/artista/{{user.id}}/galeria" class="btn m-5 btn-compra">Galeria</a>
         </div>
     </div>
 </section>
