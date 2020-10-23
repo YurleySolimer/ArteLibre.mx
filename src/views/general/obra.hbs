@@ -34,6 +34,17 @@
             </p>
             <h2 class="elemento-obra obra-coleccion">Colección: <a href="#">{{obra.coleccion}}</a></h2>
             <h2 class="elemento-obra obra-artista"><a href="#">{{obra.nombre}} {{obra.apellido}}</a></h2>
+             {{#ifCond cliente true}}
+            {{#ifCond uStripe true}}
+            {{#ifCond obra.comprada 'No'}}
+            <div class="my-3">                
+                <button class="btn btn-compra" id="checkout-button" value="{{session_id}}">COMPRAR</button>
+            </div>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{else}}
+                <h5>Debe registrarse para poder comprar una obra</h5>
+            {{/ifCond}}
             <div class="my-5">
                 <p>
                     {{obra.descripcion}}
@@ -56,17 +67,6 @@
                 <h2 class="elemento-obra obra-dato">Estilo</h2>
                 <h3 class="elemento-obra obra-dato-valor">{{obra.estilo}}</h3>
             </div>
-            {{#ifCond cliente true}}
-            {{#ifCond uStripe true}}
-            {{#ifCond obra.comprada 'No'}}
-            <div class="mt-1 mb-5">                
-                <button class="btn btn-compra" id="checkout-button" value="{{session_id}}">COMPRAR</button>
-            </div>
-            {{/ifCond}}
-            {{/ifCond}}
-            {{else}}
-                <h5>Debe registrarse para poder comprar una obra</h5>
-            {{/ifCond}}
         </div>
     </div>
 </section>
