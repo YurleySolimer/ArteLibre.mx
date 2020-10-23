@@ -78,7 +78,12 @@
                                 <div class="card-title gold"><small><i>Próxima subasta</i></small></div>
                                 <h3>{{nombreObra}}</h3>
                                 <p class="card-text">{{precio_base}} MXN </p>
-                                <p class="card-text gold">{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}} </p>
+                                <p class="card-text gold">
+                                    {{#if fecha_inicio}}
+                                    {{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}}
+                                    {{else}} n/a 
+                                    {{/if}}
+                                     </p>
                             </div>
                         </div>
                     </div>
