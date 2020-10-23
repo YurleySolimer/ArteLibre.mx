@@ -7,14 +7,14 @@
             <div class="col-12 col-lg-6">
                 <figure class="figure contenedor-hero">
                     <figcaption class="figure-caption caption-obra-destacada">Obra recomendada</figcaption>
-                    <a href="#">
+                    <a href="/obra/{{id}}">
                         <img src="/./uploads/{{fotoNombre}}" alt="obra recomendada"
                             class="figure-img img-fluid imagen-obra-destacada">
                     </a>
                 </figure>
             </div>
             <div class="col-12 col-lg-6 mb-5">
-                <a href="#" class="hero-title">
+                <a href="/obra/{{id}}" class="hero-title">
                     <h1>{{titulo_recomendada}}</h1>
                 </a>
             </div>
@@ -31,11 +31,11 @@
                 <div class="carousel-wrapper-inner">
                     <div class="owl-carousel owl-theme carousel-index">
                         {{#each destacadas}}
-                        <a href="">
+                        <a href="/obra/{{id}}">
                             <img class="item" src="/./uploads/{{fotoNombre}}" style="max-width: 500px;" alt="Pintura">
                         </a>
                         {{/each}}
-                        
+
                     </div>
                 </div>
             </div>
@@ -47,12 +47,12 @@
             <div class="col-12 my-3">
                 <figure class="figure contenedor-artista-index">
                     <figcaption class="figure-caption caption-artista-destacado">Artista destacado</figcaption>
-                    <a href="#">
+                    <a href="/artista/{{id}}">
                         <img src="/./uploads/{{foto_nombre}}" alt="Artista destacada"
                             class="figure-img img-fluid imagen-artista-destacado">
                     </a>
                 </figure>
-                <a class="artista-title-index" href="#">
+                <a class="artista-title-index" href="/artista/{{id}}">
                     <h2><b>{{nombre}} {{apellido}}</b></h2>
                 </a>
             </div>
@@ -71,7 +71,7 @@
                 <img src="/./uploads/{{fotoNombre}}" class="imagen-descripcion imagen-descripcion-2" alt="">
                 {{/each}}
             </div>
-        {{/each}}
+            {{/each}}
         </div>
 
         <div class="section">
@@ -83,7 +83,8 @@
                 <div class="row row-event-index col-12">
                     <div class="col-12 col-lg-6 container-image-event">
                         <div class="container-badge-index container-badge-index-1">
-                            <span class="badge badge-pill badge-eventos-index my-3">{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}}</span>
+                            <span class="badge badge-pill badge-eventos-index my-3">{{#fecha fecha_inicio}}
+                                {{fecha_inicio}} {{/fecha}}</span>
                         </div>
                         <figure class="figure imagen-evento-index">
                             <img src="/./uploads/{{fotoNombre}}" class="evento-inner-image" alt="">
@@ -97,28 +98,30 @@
                 </div>
 
                 {{/each}}
-                
+
             </div>
         </div>
 
         <div class="section">
             <div class="row index-fifth-section text-center">
-                <figure class="coleccion-destacada">
+                <figure class="coleccion-destacada mb-5">
                     <figcaption class="figure-caption caption-coleccion-destacada">Colección destacada</figcaption>
                     <h1 class="titulo-coleccion-destacada">{{coleccion_destacada.nombreColeccion}}</h1>
                     <div class="container-coleccion-index">
                         {{#each obras_coleccion}}
-                        <div class="image-coleccion-destacada coleccion-index-1">
+                        <div class="image-coleccion-destacada coleccion-index-{{id}}">
                             <img src="./uploads/{{fotoNombre}}" alt="Pintura"
                                 class="figure-img img-fluid imagen-obra-destacada">
                         </div>
                         {{/each}}
-                        
+
                     </div>
-                    <a class="coleccion-title" href="#">
-                        <span class="badge badge-pill badge-ver-coleccion-index my-3">Ver Colección</span>
-                    </a>
                 </figure>
+                <div class="text-center w-100">
+                <a class="coleccion-title" style="position: relative;" href="/coleccion/{{coleccion_destacada.id}}">
+                    <span class="badge badge-pill badge-ver-coleccion-index my-3">Ver Colección</span>
+                </a>
+                </div>
             </div>
         </div>
     </div>
