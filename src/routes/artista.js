@@ -150,7 +150,7 @@ router.get('/dashboard/rendimiento', isLoggedIn, isArtista, async (req, res) => 
   }
 
   const date = new Date();
-  var hoy = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  var hoy = new Date(date.getFullYear(), date.getMonth(), date.getDate()+1);
   var sieteDias = new Date(date.getFullYear(), date.getMonth(), date.getDate()-7);
   var treintaDias = new Date(date.getFullYear(), date.getMonth(), date.getDate()-30);
   var diaSemana = hoy.getDay();
@@ -573,17 +573,18 @@ router.get('/dashboard/rendimiento', isLoggedIn, isArtista, async (req, res) => 
     }  
     
   }
-  var ventaSemanal = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?', [req.user.id, hoy, sieteDias]);
-  var ventaMensual = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?', [req.user.id, hoy, treintaDias]);
- if (ventaSemanal.length>0) {
+  var ventaSemanal = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?', [req.user.id, sieteDias, hoy]);
+  var ventaMensual = await pool.query('select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?', [req.user.id, treintaDias, hoy]);
+
+  if (ventaSemanal.length>0) {
    for (var i = 0; i < ventaSemanal.length; i++){
-     ventasSemana = ventasSemana + ventasSemanal[i].precio;
+     ventasSemana = ventasSemana + ventaSemanal[i].precio;
    }
  }
 
  if (ventaMensual.length>=0) {
   for (var i = 0; i < ventaMensual.length; i++){
-    ventasMes = ventasMes + ventasMensual[i].precio;
+    ventasMes = ventasMes + ventaMensual[i].precio;
   }
 }
 
@@ -596,7 +597,10 @@ const conversionVisitas = (ventasTotales / visitantesTotales[0].visitas)*100;
 
 const colecciones = await pool.query('select * from colecciones where artista_id =? ORDER BY visitas DESC  LIMIT 5 ', [req.user.id]);
 const evento = await pool.query('select * from eventos where artista_id =? ORDER BY id DESC  LIMIT 1 ', [req.user.id]);
-const visitasEvento = evento[0].visitas;
+var visitasEvento = 0;
+if (evento.length>0) {
+  visitasEvento = evento[0].visitas;
+}
 const eventos = await pool.query('select * from eventos where artista_id =? ', [req.user.id]);
 var totalVisitasEventos = 0;
 if (eventos.length > 0) {

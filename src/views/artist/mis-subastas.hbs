@@ -263,7 +263,12 @@
                             <td class="gold">{{estilo}}</td>
                             <td class="gold">{{estadoSubasta}}</td>
                             <td class="gold">{{precio_base}}e</td>
-                            <td class="gold">{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}} </td>
+                            <td class="gold">
+                                {{#if fecha_inicio}}
+                                {{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}} 
+                                {{else}} n/a
+                                {{/if}}
+                                </td>
                             <!-- Acción de editar esta obra, redirige a "Editar Obra" -->
                             <td>
                                 <div class="opciones-admin-list">
