@@ -59,7 +59,8 @@ CREATE TABLE obras (
     precio INT (50),
 	descripcion TEXT,
     artista_id INT (11) DEFAULT 0,
-	fecha_creacion year default '2020';	coleccion_id INT(11) DEFAULT 0,
+	fecha_creacion year default '2020',
+	coleccion_id INT(11) DEFAULT 0,
 	CONSTRAINT fk_artista2 FOREIGN KEY  (artista_id) REFERENCES artistas(id)
 
 );
@@ -357,5 +358,8 @@ CREATE VIEW usuarioCliente AS (
 	JOIN users u 
 	ON u.id = c.user_id
 ); 
+
+
+
 
 

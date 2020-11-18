@@ -155,11 +155,13 @@ router.get('/obra/:id', async (req, res) => {
   admin = await isAdmin(req);
 
   var visitasArray = await pool.query('SELECT visitas from obras WHERE id =?', [id]);
-  var visitasTotal = visitasArray[0].visitas + 1;
+  if (visitasArray.length>0) { 
+    var visitasTotal = visitasArray[0].visitas + 1;
   var visitas = {
     visitas : visitasTotal
   }
   await pool.query('UPDATE obras  SET ? WHERE id =?', [visitas, id]);
+  } 
 
 
   if (artista == true || cliente == true || admin == true) {
