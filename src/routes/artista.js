@@ -902,7 +902,7 @@ router.post('/nueva-obra', isLoggedIn, isArtista, async (req, res) => {
   }
 
   if (dashboard) {
-    res.redirect('/artista/dashboard')
+    res.redirect('/dashboard')
   } else {
     res.redirect('/dashboard/obras');
   };
@@ -930,7 +930,7 @@ router.post('/nueva-coleccion', isLoggedIn, isArtista, async (req, res) => {
   await pool.query('UPDATE artistas SET? WHERE user_id =?', [numero_colecciones, req.user.id]);
 
   if(dashboard) {
-    res.redirect('/artista/dashboard-nueva-obra')
+    res.redirect('/dashboard/nueva-obra')
   } else {
     res.redirect('nueva-obra');
   };
@@ -982,7 +982,7 @@ router.post('/nuevo-evento', isLoggedIn, isArtista, async (req,res) => {
       await pool.query('INSERT INTO fotosEventos SET?', [newFotoEvento]);
     }
     if(dashboard) {
-      res.redirect('/artista/dashboard')
+      res.redirect('/dashboard')
     } else {
       res.redirect('/dashboard/eventos')
     };
