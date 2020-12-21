@@ -1092,4 +1092,59 @@ router.get('/artist-perfil', isLoggedIn, isArtista, async (req, res) => {
   res.render('artist/perfil', { nombre: nombre[0], user: user[0], obras, ultima_obra, artista, logueado, dashboard });
 });
 
+router.post('/editar-Artista', isLoggedIn, isArtista, async (req, res) => {
+
+  const {fullname, email, apellido, telefono} = req.body;
+  var path = '';
+  var originalname = '';
+  
+  if(req.body.image) {
+    var img = req.body.image;
+    // luego extraes la cabecera del data url
+    var base64Data = img.replace(/^data:image\/png;base64,/, "");
+    var path = `src/public/uploads/${fullname}${email}.png`;
+    var originalname = `${fullname}${email}.png`;
+
+    // grabas la imagen el disco
+    fs.writeFile(`src/public/uploads/${fullname}${email}.png`, base64Data, 'base64', function(err) {
+        console.log(err);
+    });    
+  }
+
+  
+  let newUser = {
+    nombre: fullname,
+    email, 
+    apellido,
+    telefono,
+    foto_ubicacion : path,
+		foto_nombre: originalname,
+  };
+
+    const result = await pool.query('UPDATE users SET ? WHERE id=? ', [newUser, req.body.idArtist]);
+
+    console.log(req.body)
+
+console.log(result)
+
+    const {pais, region, provincia, años, direccion, disciplina_principal, estilo, frase, biografia} = req.body;
+
+    let newArtista = {
+      pais,
+      region, 
+      provincia,
+      años_experiencia: años,
+      direccion,
+      disciplina_principal,
+      biografia,
+      frase
+    };
+
+  
+    const artist = await pool.query('UPDATE artistas SET ? WHERE user_id=? ', [newArtista, req.body.idArtist]);
+  console.log(artist)
+
+  res.redirect('/artist-perfil');
+});
+
 module.exports = router;

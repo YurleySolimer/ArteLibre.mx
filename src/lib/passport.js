@@ -147,8 +147,7 @@ passport.use('signupArtista', new LocalStrategy({
     };
   
     const artist = await pool.query('INSERT INTO artistas SET ? ', newArtista);
-    console.log(newUser);
-    console.log(newArtista); 
+
     return done(null, newUser);
   }
 }));

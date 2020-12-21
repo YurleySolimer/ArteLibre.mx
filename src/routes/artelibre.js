@@ -345,13 +345,13 @@ router.get('/artistas', async (req, res) => {
 
   if(req.query) { 
 
-    if (req.query.tecnicaArtistas || req.query.nombreArtistas) {
+    if (req.query.tecnicaArtistas || req.query.nombreArtistas ||  req.query.tipoArtistas ) {
 
-      artistas = await pool.query('SELECT * FROM usuarioArtista WHERE nombre =? OR apellido =? OR disciplina_principal =? OR disciplina_sec =?', [req.query.nombreArtistas, req.query.nombreArtistas, req.query.tecnicaArtistas, req.query.tecnicaArtistas]);
+     artistas = await pool.query('SELECT * FROM usuarioArtista WHERE nombre =? OR apellido =? OR disciplina_principal =? OR disciplina_sec =?', [req.query.nombreArtistas, req.query.nombreArtistas, req.query.tecnicaArtistas, req.query.tecnicaArtistas]);
     }
     if (req.query.tecnicaArtistas && req.query.nombreArtistas) {
       artistas = await pool.query('SELECT * FROM usuarioArtista WHERE nombre =? OR apellido =? AND disciplina_principal =? OR disciplina_sec =?', [req.query.nombreArtistas, req.query.nombreArtistas, req.query.tecnicaArtistas, req.query.tecnicaArtistas]);
-    }
+    }  
   }
 
 

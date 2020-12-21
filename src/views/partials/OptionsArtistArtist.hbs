@@ -9,7 +9,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="registro-artista" class="form" method="POST" enctype="multipart/form-data">
+            <form action="editar-Artista" class="form" method="POST" enctype="multipart/form-data">
                 <div class="row mb-5">
                     <div class="col-12 col-lg-3 text-center">
                         <label for="file-input">
@@ -22,7 +22,8 @@
                                     </div>
                                 </div>
                                 <input name="image" id="file-input" type="file" style="display: none;" />
-                                <img id="imgSalida" src="" class="img-perfil-registro img-fluid" />
+ 
+                                <img id="imgSalida" class="img-perfil-artista" src="/./uploads/{{user.foto_nombre}}" alt="{{user.foto_nombre}}" />
                             </div>
                         </label>
                         <div>
@@ -34,118 +35,88 @@
                         <div class="row m-3">
                             <div class="col-12 col-lg-6  mb-3">
                                 <div class="form-group">
+                                    Nombre
                                     <input type="text" class="form-control" id="nombre" aria-describedby="nombre"
-                                        placeholder="Nombre" name="fullname" required>
+                                        placeholder="{{user.nombre}}" value="{{user.nombre}}" name="fullname" >
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6  mb-3">
                                 <div class="form-group">
+                                    Apellido
                                     <input type="text" class="form-control" id="apellido" aria-describedby="apellid"
-                                        placeholder="Apellido" name="apellido" required>
+                                        placeholder="{{user.apellido}}" value="{{user.apellido}}" name="apellido" >
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6  mb-3">
                                 <div class="form-group">
+                                    Email
                                     <input type="email" class="form-control" id="correo" aria-describedby="correo"
-                                        placeholder="Correo electrónico" name="email" required>
+                                         placeholder="{{user.email}}" value="{{user.email}}" name="email" >
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6  mb-3">
+                                Telefono
                                 <div class="form-group pd-telephone-input">
                                     <input type="tel" class="form-control telefono" id="telefono"
-                                        aria-describedby="telefono" name="telefono" required>
+                                        aria-describedby="{{user.telefono}}" value="{{user.telefono}}" name="telefono" >
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6  mb-3">
                                 <div class="form-group">
+                                    País
                                     <input type="text" class="form-control" id="pais" aria-describedby="pais"
-                                        placeholder="País" name="pais" required>
+                                        placeholder="{{user.pais}}" value="{{user.pais}}" name="pais" >
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6  mb-3">
                                 <div class="form-group">
+                                    Provincia
                                     <input type="text" class="form-control" id="povincia" aria-describedby="provincia"
-                                        placeholder="Ciudad (Provincia)" name="provincia" required>
+                                        placeholder="{{user.provincia}}" value="{{user.provincia}}" name="provincia">
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
                                 <div class="form-group">
+                                    Dirección
                                     <input type="text" class="form-control" id="direccion" aria-describedby="direccion"
-                                        placeholder="Dirección (Facturación)" name="direccion" required>
+                                        placeholder="{{user.direccion}}" value="{{user.direccion}}" name="direccion" >
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6  mb-3">
                                 <div class="form-group">
+                                    Años de Experiencia
                                     <input type="number" class="form-control" id="años" aria-describedby="años"
-                                        placeholder="Años de actividad" name="años" required>
+                                        placeholder="{{user.años_experiencia}}" value="{{user.años_experiencia}}" name="años" >
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6 mb-3">
-                                <div class="form-group">
-                                    <select name="tipo-principal" id="tipo" class="form-control">
-                                        <option value="">Tipo (Principal)</option>
-                                        <option value="pintura">Pintura</option>
-                                        <option value="escultura">Escultura</option>
-                                        <option value="fotografia" disabled>Fotografía</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
+                           
                             <div class="col-12 col-lg-6  mb-3">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="disciplina" aria-describedby="tecnica"
-                                        placeholder="Estilo" name="disciplina_principal" required>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6  mb-3">
-                                <div class="form-group">
+                                    Disciplina
                                     <input type="text" class="form-control" id="disciplina2" aria-describedby="tecnica"
-                                        placeholder="Técnica (Principal)" name="disciplina_sec" required>
+                                        placeholder="{{user.disciplina_principal}}" value="{{user.disciplina_principal}}" name="disciplina_sec" >
                                 </div>
                             </div>
                             <div class="col-12  mb-3">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="estilo" aria-describedby="estilo"
-                                        placeholder="Tu estilo en una frase" name="frase">
+                                        placeholder="{{user.frase}}" value="{{user.frase}}" name="frase">
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
                                 <div class="form-group">
+                                    Biografia
                                     <textarea class="form-control" id="biografia" aria-describedby="biografia"
-                                        placeholder="Biografía" name="briografia" required></textarea>
+                                        placeholder="{{user.biografia}}" value="{{user.biografia}}" name="biografia" ></textarea>
                                 </div>
                             </div>
                             <div class="border-bottom mb-5 col-12"></div>
-                            <div class="col-12 col-lg-6  mb-3">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="password" class="form-control m-0" placeholder="Contraseña"
-                                            name="password" aria-label="Contraseña" aria-describedby="Contraseña"
-                                            id="pwd" minlength="8" required
-                                            pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*"
-                                            title="Debe contener al menos una mayúscula, una minúscula y un dígito">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" id="eye" style="cursor: pointer;"><i
-                                                    class="fa fa-eye"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6  mb-3">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="password" class="form-control m-0" name="confirmarContraseña"
-                                            placeholder="Confirmar Contraseña" aria-label="Contraseña" minlength="8"
-                                            aria-describedby="Contraseña" id="pwdDos">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" id="eyeDos" style="cursor: pointer;"><i
-                                                    class="fa fa-eye"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
+                            
                             <div class="col-12 text-right">
-                                <button class="btn btn-compra" type="submit" name='tipo' id="buttonSubmit"
-                                    value="artista">Guardar</button>
+                                <button class="btn btn-compra" type="submit" name='idArtist' id="buttonSubmit"
+                                    value="{{user.id}}" name="idArtist">Guardar</button>
                             </div>
                         </div>
                     </div>
