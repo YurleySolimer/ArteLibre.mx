@@ -1327,6 +1327,10 @@ button.titulo-mis-obras:focus {
     filter: grayscale(1);
 }
 
+.modal {
+    overflow-y:auto;
+  }
+
 @media screen and (min-width: 768px) {
     .biografia-artista {
         column-count: 2;
@@ -3283,7 +3287,7 @@ Carrusel Colección
     background-color: var(--gold);
     width: 200px;
     height: 250px;
-    border-radius: 20px;
+    border-radius: 5px;
     overflow: hidden;
     margin-right: 10px;
     display: inline-block;
