@@ -3,7 +3,7 @@
 <div id="content" class="content inicial">
     <div class="content-wrap">
         <div class="container clearfix">
-        <h2 class="my-5">Colecciones</h2>
+            <h2 class="my-5">Colecciones</h2>
             <div class="postcontent nobottommargin clearfix">
                 <div id="posts">
 
@@ -15,11 +15,13 @@
                             <div class="fslider" data-arrows="false" data-lightbox="gallery">
                                 <div class="flexslider" style="max-height: 625px;">
                                     <div class="slider-wrap">
-                                        <div class="slide"><a href="/coleccion/{{id}}"
-                                                data-lightbox="gallery-item"><img class="image_fade"
-                                                    src="./uploads/{{fotoNombre}}"
-                                                    alt="Standard Post with Gallery"></a></div>
+                                        <div class="slide">
+                                            <a href="/coleccion/{{id}}" data-lightbox="gallery-item">
+                                                <img class="image_fade" src="./uploads/{{fotoNombre}}"
+                                                    alt="Standard Post with Gallery">
+                                            </a>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -28,8 +30,10 @@
                         </div>
                         <ul class="entry-meta clearfix">
                             <li><i class="icon-calendar3"></i> Creado en {{anio}}</li>
-                            <li><a href="/artista/{{artistaId}}"><i class="icon-user"></i> {{nombre}} {{apellido}}</a></li>
-                            <li><i class="icon-folder-open"></i> <a href="obras">{{tecnica}}</a>, <a href="obras">{{estilo}}</a></li>
+                            <li><a href="/artista/{{artistaId}}"><i class="icon-user"></i> {{nombre}} {{apellido}}</a>
+                            </li>
+                            <li><i class="icon-folder-open"></i> <a href="obras">{{tecnica}}</a>, <a
+                                    href="obras">{{estilo}}</a></li>
                             </li>
                         </ul>
                         <div class="entry-content">
@@ -38,16 +42,16 @@
                         </div>
                     </div>
 
-                     {{/ifCond}}
+                    {{/ifCond}}
 
-                   {{/each}}
+                    {{/each}}
 
-                        
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 {{> Footer}}

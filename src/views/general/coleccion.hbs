@@ -7,20 +7,24 @@
                 <h1>{{colecciones.nombreColeccion}}</h1>
             </div>
             <div class="col-12">
-                <div class="carousel-wrapper-inner">
-                    <div class="owl-carousel owl-theme carousel-index carrusel-coleccion">
-                        {{#each obras}}
-                        <div class="item-coleccion-carrusel" onclick="window.open('/obra/{{id}}', '_self')" ;>
-                            <figure class="figure">
-                                <img class="item .item-carrusel-subasta figure-img img-fluid"
-                                    src="/uploads/{{fotoNombre}}" alt="Pintura">
 
-                                <figcaption class="figure-caption text-center gold">{{precio}} MXN</figcaption>
-                            </figure>
+
+                <section class="carouselColeccion">
+                    <div class="carouselColeccion__container">
+                        {{#each obras}}
+                        <div class="carouselColeccion-item">
+                            <img class="carouselColeccion-item__img" src='/uploads/{{fotoNombre}}' alt='{{nombre}}' />
+                            <div class="carouselColeccion-item__details">
+                                <a class='gold' href='/obra/{{id}}'
+                                <p class="carouselColeccion-item__details--title">Ir a la obra</p>
+                                </a>
+                                <p class="carouselColeccion-item__details--subtitle">{{precio}} MXN</p>
+                            </div>
                         </div>
                         {{/each}}
                     </div>
-                </div>
+                </section>
+                
             </div>
             <div class="col-12 m-3">
                 <div class="row">
@@ -91,30 +95,3 @@
 
 {{> Footer }}
 
-
-<script>
-    $(document).ready(function () {
-        var divAWidth = $('#carousal-wrapper-outer').css('width');
-        $('#carousal-wrapper-inner').css('width', divAWidth);
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            autoplay: 3000,
-            items: 3,
-            nav: true,
-            center: true,
-            margin: 25,
-            responsive: {
-                500: {
-                    items: 1
-                },
-                800: {
-                    items: 3
-                }
-            }
-
-        });
-        $('.owl-item').addClass('carousel-coleccion');
-        $('.owl-next').html('<span aria-label="Next"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" class="svg-inline--fa fa-angle-right fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg></span>')
-        $('.owl-prev').html('<span aria-label="Previous"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" class="svg-inline--fa fa-angle-left fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg></span>')
-    });
-</script>

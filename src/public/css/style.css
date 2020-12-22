@@ -3237,3 +3237,99 @@ Rendimiento
     padding: 30px;
     margin: 30px 0;
 }
+
+
+/*-----------------------------------
+Carrusel Colección
+-----------------------------------*/
+
+
+.carouselColeccion {
+    width: 100%;
+    overflow: scroll;
+    padding: 30px;
+    position: relative;
+}
+
+.carouselColeccion::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
+.carouselColeccion::-webkit-scrollbar-thumb {
+    background: var(--bg-dark);
+    border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.carouselColeccion::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.carouselColeccion::-webkit-scrollbar-thumb:active {
+    background-color: var(--gold);
+}
+
+.carouselColeccion__container {
+    white-space: nowrap;
+    margin: 70px 0px;
+    padding-bottom: 10px;
+}
+
+.carouselColeccion-item {
+    background-color: var(--gold);
+    width: 200px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-right: 10px;
+    display: inline-block;
+    cursor: pointer;
+    transition: 450ms all;
+    transform-origin: center left;
+    position: relative;
+}
+
+.carouselColeccion-item:hover~.carouselColeccion-item {
+    transform: translate3d(100px, 0, 0);
+}
+
+.carouselColeccion-item:hover .carouselColeccion-item__details {
+    opacity: 1;
+    transition: 450ms all;
+    color: white;
+}
+
+.carouselColeccion__container:hover .carouselColeccion-item {
+    opacity: 0.3;
+}
+
+.carouselColeccion__container:hover .carouselColeccion-item:hover {
+    transform: scale(1.5);
+    opacity: 1;
+}
+
+.carouselColeccion-item__img {
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.carouselColeccion-item__details {
+    background: linear-gradient(to top, rgba(0, 0, 0, .9) 0%, rgba(0, 0, 0, 0) 100%);
+    font-size: 10px;
+    opacity: 0;
+    transition: 450ms opacity;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
