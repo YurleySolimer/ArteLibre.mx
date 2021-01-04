@@ -6,6 +6,9 @@ const { isArtista } = require('../lib/auth');
 const { isLoggedIn } = require('../lib/auth');
 const stripe = require('stripe')('sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4');
 
+var fs      = require('fs');
+
+
 var artista = false;
 var logueado = false;
 var dashboard = false;
