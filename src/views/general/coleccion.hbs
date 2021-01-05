@@ -51,7 +51,7 @@
                     {{#ifCond artista true}}
                     {{>OptionsColeccionArtist}}
                     {{else}}
-                    <button class="btn btn-compra badge badge-pill">Comprar Colección</button>
+                    {{!-- <button class="btn btn-compra badge badge-pill">Comprar Colección</button> --}}
                     {{/ifCond}}
                     {{#ifCond admin true}}
                     {{>OptionsColeccionAdmin}}
@@ -75,13 +75,13 @@
                         {{#each myArray}}
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="card">
-                                <a href="">
+                                <a href='/obra/{{id}}'>
                                     <img src="/uploads/{{fotoNombre}}" class="obra-recomendada card-img-top" alt="">
                                 </a>
                                 <div class="card-body text-left">
-                                    <h5 class="card-title">{{fotoNombre}}</h5>
+                                    <h5 class="card-title">{{nombreObra}}</h5>
                                     <p class="card-text text-muted">{{precio}} MXN</p>
-                                    <p class="card-text"><small class="text-muted">Fecha: 02/15/2020</small></p>
+                                    <p class="card-text"><small class="text-muted">Fecha: {{fecha_creacion}}</small></p>
                                 </div>
                             </div>
                         </div>
