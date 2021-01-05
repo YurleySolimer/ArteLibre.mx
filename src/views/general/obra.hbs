@@ -33,7 +33,7 @@
                 </strong>
             </p>
             <h2 class="elemento-obra obra-coleccion">Colección: <a href="/coleccion/{{obra.coleccion_id}}">{{obra.coleccion}}</a></h2>
-            <h2 class="elemento-obra obra-artista"><a href="#">{{obra.nombre}} {{obra.apellido}}</a></h2>
+            <h2 class="elemento-obra obra-artista"><a href="/artista/{{obra.artista_id}}">{{obra.nombre}} {{obra.apellido}}</a></h2>
              {{#ifCond cliente true}}
             {{#ifCond uStripe true}}
             {{#ifCond obra.comprada 'No'}}
