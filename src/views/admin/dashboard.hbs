@@ -42,7 +42,7 @@
                             <img class="card-img" src="/./uploads/{{ultimaObra.fotoNombre}}" alt="Card image">
                             <div class="card-img-overlay ultima-obra-admin-dashboard">
                                 <small class="card-title gold"><i>Última obra</i></small>
-                                <h3 class="titulo-obra-card-dashboard"><a href="">{{ultimaObra.nombreObra}}</a></h3>
+                                <h3 class="titulo-obra-card-dashboard"><a href="/obra/{{ultimaObra.id}}">{{ultimaObra.nombreObra}}</a></h3>
                                 <p class="card-text text-white">{{ultimaObra.nombre}} {{ultimaObra.apellido}} </p>
                                 <p class="card-text gold">{{ultimaObra.precio}} MXN</p>
                             </div>
@@ -76,7 +76,7 @@
                             <img class="card-img" src="/./uploads/{{obraVisitada.fotoNombre}}" alt="Card image">
                             <div class="card-img-overlay obra-visitada-admin-dashboard">
                                 <small class="card-title gold"><i>Obra más visitada</i></small>
-                                <h3 class="titulo-obra-card-dashboard"><a href="">{{obraVisitada.nombreObra}}</a></h3>
+                                <h3 class="titulo-obra-card-dashboard"><a href="/obra/{{obraVisitada.id}}">{{obraVisitada.nombreObra}}</a></h3>
                                 <p class="card-text gold">{{obraVisitada.precio}} MXN</p>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                     <tbody>
                                         {{#each artistasRelevantes}}
                                         <tr>
-                                            <td><a href="#">{{nombre}} {{apellido}} </a></td>
+                                            <td><a href="/artista/{{id}}">{{nombre}} {{apellido}} </a></td>
                                         </tr>
                                         {{/each}}
                                         
@@ -121,7 +121,7 @@
                                     <tbody>
                                         {{#each proximasSubastas}}
                                         <tr>
-                                            <td><a href="#">{{nombreObra}}</a></td>
+                                            <td><a href="/obra/{{id}}">{{nombreObra}}</a></td>
                                             <td>{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}} </td>
                                         </tr>
                                         {{/each}}
@@ -146,7 +146,7 @@
                                     <tbody>
                                         {{#each proximosEventos}}
                                         <tr>
-                                            <td><a href="#">{{nombre}}</a></td>
+                                            <td><a href="/evento/{{id}}">{{nombre}}</a></td>
                                             <td>{{#fecha fecha_inicio}} {{fecha_inicio}} {{/fecha}}</td>
                                         </tr>
                                         {{/each}}
