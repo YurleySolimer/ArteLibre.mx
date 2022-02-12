@@ -32,8 +32,8 @@
                     {{obra.precio}} MXN
                 </strong>
             </p>
-            <h2 class="elemento-obra obra-coleccion">Colección: <a href="#">{{obra.coleccion}}</a></h2>
-            <h2 class="elemento-obra obra-artista"><a href="#">{{obra.nombre}} {{obra.apellido}}</a></h2>
+            <h2 class="elemento-obra obra-coleccion">Colección: <a href="/coleccion/{{obra.coleccion_id}}">{{obra.coleccion}}</a></h2>
+            <h2 class="elemento-obra obra-artista"><a href="/artista/{{obra.artista_id}}">{{obra.nombre}} {{obra.apellido}}</a></h2>
              {{#ifCond cliente true}}
             {{#ifCond uStripe true}}
             {{#ifCond obra.comprada 'No'}}
@@ -81,13 +81,13 @@
         {{#each myArray}}
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card">
-                <a href="">
+               <a href="/obra/{{id}}">
                     <img src="/./uploads/{{fotoNombre}}" class="obra-recomendada card-img-top" alt="" id="fotoObra">
                 </a>
                 <div class="card-body text-left">
                     <h5 class="card-title">{{nombreObra}}</h5>
                     <p class="card-text text-muted">{{precio}} MXN</p>
-                    <p class="card-text"><small class="text-muted">Fecha: {{Creacion}}</small></p>
+                    <p class="card-text"><small class="text-muted">Fecha: {{fecha_creacion}}</small></p
                 </div>
             </div>
         </div>
