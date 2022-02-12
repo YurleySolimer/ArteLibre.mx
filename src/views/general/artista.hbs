@@ -62,7 +62,7 @@
                         </div>
                         <div>
                             <p class="artista-caracteristica-valor"
-                                style="font-family: 'MontserratThin'; font-weight: bold;"><a href="/obra/{{ultima_obra.id}}"
+                                style="font-family: 'MontserratThin'; font-weight: bold;"><a href="#"
                                     class="coleccion-perfil-artista gold">{{ultima_obra.nombreObra}}</a></p>
                         </div>
                         <div>
@@ -173,7 +173,7 @@
                 var max, min;
                 var pos = $(this).scrollTop();
                 selectors.item.each(function (i) {
-                    min = $(this).offset().top - 150;
+                    min = $(this).offset().top;
                     max = $(this).height() + $(this).offset().top;
                     var that = $(this);
                     if (i == itemLength - 2 && pos > min + $(this).height() / 2) {
