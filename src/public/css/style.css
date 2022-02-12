@@ -3291,6 +3291,7 @@ Carrusel Colección
     overflow: hidden;
     margin-right: 10px;
     display: inline-block;
+    cursor: pointer;
     transition: 450ms all;
     transform-origin: center left;
     position: relative;
