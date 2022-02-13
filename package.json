@@ -1,14 +1,14 @@
 {
   "name": "artelibre",
   "version": "1.0.0",
-  "description": "Marketplace dedicado a la compra y venta de arte online, con sistema de referidos y soporte para:",
+  "description": "A Marketplace focused on buying and selling art online. ",
   "main": "index.js",
   "scripts": {
     "start": "node src",
     "dev": "nodemon src"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yurley Solimer & Luis Fernando Mendez",
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
