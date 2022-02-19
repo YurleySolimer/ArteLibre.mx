@@ -55,8 +55,8 @@ router.get("/logout", isLoggedIn, (req, res) => {
 });
 
 router.post("/recuperar-contrasena", async (req, res) => {
-  const result = recuperarPass(req.body);
-  email = req.body.email
+  const result = await recuperarPass(req.body);
+  email = req.body.email;
   if (result) {
     req.flash("success", "Código enviado Satisfactoriamente");
     return res.redirect("validacion-de-codigo/?email=" + email);
@@ -71,7 +71,7 @@ router.get("/validacion-de-codigo", isNotLoggedIn, (req, res) => {
 });
 
 router.post("/validacion-de-codigo", async (req, res) => {
-  const codeResult = code(req.body);
+  const codeResult = await code(req.body);
   if (codeResult === "true") {
     res.redirect("/cambio-de-contrasena/?param=" + email);
   } else if (codeResult === "expirado") {
@@ -88,7 +88,7 @@ router.get("/cambio-de-contrasena", isNotLoggedIn, (req, res) => {
 });
 
 router.post("/cambio-de-contrasena", async (req, res) => {
-  changePass(req.body, email)
+  const changed = await changePass(req.body, email);
   req.flash("success", "Contraseña cambiada Satisfactoriamente");
   email = "";
   res.redirect("iniciar-sesion");
