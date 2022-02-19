@@ -1,11 +1,7 @@
 const express = require("express");
-const router = express.Router();
-const pool = require("../database");
-
-
-var dashboard = false;
-
 const Handlebars = require("handlebars");
+
+const router = express.Router();
 
 const { isArtista } = require("../lib/auth");
 const { isLoggedIn } = require("../lib/auth");
@@ -36,6 +32,8 @@ const editEvent = require("../artist-controllers/editEvent");
 const editObra = require("../artist-controllers/editObra");
 const artistProfile = require("../artist-controllers/artistProfile");
 const editProfile = require("../artist-controllers/editProfile");
+
+var dashboard = false;
 
 Handlebars.registerHelper("ifCond", function (v1, v2, options) {
   if (v1 === v2) {
