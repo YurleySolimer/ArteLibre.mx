@@ -65,7 +65,7 @@ router.get("/connect/oauth", isLoggedIn, isArtista, async (req, res) => {
 router.get("/dashboard", isLoggedIn, isArtista, async (req, res) => {
   const artistDashboardResult = await artistDashboard(req);
   res.render("artist/dashboard", {
-    nombre: artistDashboardResult.nombre.nombre[0],
+    nombre: artistDashboardResult.nombre[0],
     artista: artistDashboardResult.artista,
     logueado: artistDashboardResult.logueado,
     dashboard: artistDashboardResult.dashboard,
@@ -81,7 +81,7 @@ router.get("/dashboard", isLoggedIn, isArtista, async (req, res) => {
 router.get("/dashboard/ventas", isLoggedIn, isArtista, async (req, res) => {
   const dashboardResult = await dashboardSales(req);
   res.render("artist/mis-ventas", {
-    nombre: dashboardResult.nombre.nombre[0],
+    nombre: dashboardResult.nombre[0],
     artista: dashboardResult.artista,
     logueado: dashboardResult.logueado,
     dashboard: dashboardResult.dashboard,
@@ -103,7 +103,7 @@ router.post(
 router.get("/dashboard/eventos", isLoggedIn, isArtista, async (req, res) => {
   const events = await dashboardEvents(req);
   res.render("artist/mis-eventos", {
-    nombre: events.nombre.nombre[0],
+    nombre: events.nombre[0],
     artista: events.artist,
     logueado: events.logueado,
     dashboard: events.dashboard,
@@ -114,7 +114,7 @@ router.get("/dashboard/eventos", isLoggedIn, isArtista, async (req, res) => {
 router.get("/dashboard/subastas", isLoggedIn, isArtista, async (req, res) => {
   const auction = await dashboardAuction(req);
   res.render("artist/mis-subastas", {
-    nombre: auction.nombre.nombre[0],
+    nombre: auction.nombre[0],
     artista: auction.artista,
     logueado: auction.logueado,
     dashboard: auction.dashboard,
@@ -129,7 +129,7 @@ router.get(
   async (req, res) => {
     const collections = await dashboardCollections(req);
     res.render("artist/mis-colecciones", {
-      nombre: collections.nombre.nombre[0],
+      nombre: collections.nombre[0],
       artista: collections.artista,
       logueado: collections.logueado,
       dashboard: collections.dashboard,
@@ -146,7 +146,7 @@ router.get(
     const stats = await dashboardStats(req);
 
     res.render("artist/mi-rendimiento", {
-      nombre: stats.nombre.nombre[0],
+      nombre: stats.nombre[0],
       totalVisitasPerfil: stats.totalVisitasPerfil,
       totalVisitasGaleria: stats.totalVisitasGaleria,
       estaSemana: stats.estaSemana,
@@ -176,7 +176,7 @@ router.get("/dashboard/obras", isLoggedIn, isArtista, async (req, res) => {
 
   res.render("artist/mis-obras", {
     obras: obras.obras,
-    nombre: obras.nombre.nombre[0],
+    nombre: obras.nombre[0],
     artista: obras.artista,
     logueado: obras.logu,
     dashboard: obras.dashboard,
@@ -262,7 +262,7 @@ router.get(
     dashboard = true;
 
     res.render("artist/dashboard-nuevo-evento", {
-      nombre: newEvent.nombre.nombre[0],
+      nombre: newEvent.nombre[0],
       artista: newEvent.artista,
       logueado: newEvent.logueado,
       dashboard,
@@ -274,7 +274,7 @@ router.get("/dashboard/nueva-obra", isLoggedIn, isArtista, async (req, res) => {
   const newObra = await getNewObra(req);
   dashboard = true;
   res.render("artist/dashboard-nueva-obra", {
-    nombre: newObra.nombrenombre[0],
+    nombre: newObra.nombre[0],
     colecciones: newObra.colecciones,
     artista: newObra.artista,
     logueado: newObra.logueado,
@@ -291,7 +291,7 @@ router.get(
     dashboard = true;
 
     res.render("artist/dashboard-nueva-coleccion", {
-      nombre: newCollection.nombre.nombre[0],
+      nombre: newCollection.nombre[0],
       artista: newCollection.artista,
       logueado: newCollection.logueado,
       dashboard,
@@ -307,7 +307,7 @@ router.get("/nuevo-evento", isLoggedIn, isArtista, async (req, res) => {
   const newEvent = await getNewEvent(req);
   dashboard = false;
   res.render("artist/nuevo-evento", {
-    nombre: newEvent.nombre.nombre[0],
+    nombre: newEvent.nombre[0],
     artista: newEvent.artista,
     logueado: newEvent.logueado,
     dashboard,
@@ -318,7 +318,7 @@ router.get("/nueva-obra", isLoggedIn, isArtista, async (req, res) => {
   const newObra = await getNewObra(req);
   dashboard = false;
   res.render("artist/nueva-obra", {
-    nombre: newObra.nombre.nombre[0],
+    nombre: newObra.nombre[0],
     colecciones: newObra.colecciones,
     artista: newObra.artista,
     logueado: newObra.logueado,
@@ -330,7 +330,7 @@ router.get("/nueva-coleccion", isLoggedIn, isArtista, async (req, res) => {
   const newCollection = await getNewCollection(req);
   dashboard = false;
   res.render("artist/nueva-coleccion", {
-    nombre: newCollection.nombre.nombre[0],
+    nombre: newCollection.nombre[0],
     artista: newCollection.artista,
     logueado: newCollection.logueado,
     dashboard,
@@ -393,8 +393,8 @@ router.get("/artist-perfil", isLoggedIn, isArtista, async (req, res) => {
   const profile = await artistProfile(req);
   dashboard = false;
   res.render("artist/perfil", {
-    nombre: profile.nombre.nombre[0],
-    user: profile.user.user[0],
+    nombre: profile.nombre[0],
+    user: profile.user[0],
     obras: profile.obras,
     ultima_obra: profile.ultima_obra,
     artista: profile.artista,

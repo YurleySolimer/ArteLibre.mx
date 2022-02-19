@@ -3,14 +3,14 @@ const pool = require("../database");
 var artistProfile = async (data) => {
     const nombre = await pool.query(
         "SELECT nombre, apellido FROM users WHERE id =?",
-        [req.user.id]
+        [data.user.id]
       );
       const user = await pool.query("SELECT * FROM usuarioArtista WHERE id =?", [
-        req.user.id,
+        data.user.id,
       ]);
       const obras = await pool.query(
         "SELECT * FROM obraCompleta WHERE artista_id =?",
-        [req.user.id]
+        [data.user.id]
       );
       var ultima_obra = {
         nombreObra: "N/A",
