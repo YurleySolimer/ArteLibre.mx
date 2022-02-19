@@ -43,3 +43,5 @@ const changePass = async (data, email) => {
     });
   
 }
+
+module.exports = changePass;
