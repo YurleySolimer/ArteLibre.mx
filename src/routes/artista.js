@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../database");
 
+
+var dashboard = false;
+
+const Handlebars = require("handlebars");
+
 const { isArtista } = require("../lib/auth");
 const { isLoggedIn } = require("../lib/auth");
 
@@ -13,14 +18,6 @@ const dashboardEvents = require("../artist-controllers/dashboardEvents");
 const dashboardAuction = require("../artist-controllers/dashboardAuction");
 const dashboardCollections = require("../artist-controllers/dashboardCollections");
 
-
-var fs = require("fs");
-
-var artista = false;
-var logueado = false;
-var dashboard = false;
-
-const Handlebars = require("handlebars");
 const dashboardStats = require("../artist-controllers/dashboardStats");
 const dashboardObras = require("../artist-controllers/dashboardObras");
 const dashboardNoGallery = require("../artist-controllers/dashboardNoGallery");
@@ -29,9 +26,16 @@ const dashboardObrasHide = require("../artist-controllers/dashboardObrasHide");
 const dashboardObrasShow = require("../artist-controllers/dashboardObrasShow");
 const dashboardObrasDelete = require("../artist-controllers/dashboardObrasDelete");
 const dashboardEventsDelete = require("../artist-controllers/dashboardEventsDelete");
-const dashboardNewEvent = require("../artist-controllers/dashboardNewEvent");
-const dashboardNewObra = require("../artist-controllers/dashboardNewObra");
-const dashboardNewCollection = require("../artist-controllers/dashboardNewCollection");
+const getNewEvent = require("../artist-controllers/getNewEvent");
+const getNewObra = require("../artist-controllers/getNewObra");
+const getNewCollection = require("../artist-controllers/getNewCollection");
+const saveNewObra = require("../artist-controllers/saveNewObra");
+const saveNewCollection = require("../artist-controllers/saveNewCollection");
+const saveNewEvent = require("../artist-controllers/saveNewEvent");
+const editEvent = require("../artist-controllers/editEvent");
+const editObra = require("../artist-controllers/editObra");
+const artistProfile = require("../artist-controllers/artistProfile");
+const editProfile = require("../artist-controllers/editProfile");
 
 Handlebars.registerHelper("ifCond", function (v1, v2, options) {
   if (v1 === v2) {
@@ -42,7 +46,7 @@ Handlebars.registerHelper("ifCond", function (v1, v2, options) {
 
 router.get("/connect/oauth", isLoggedIn, isArtista, async (req, res) => {
   const data = req.query;
-  const stripeAuthResult = stripeAuth(data);
+  const stripeAuthResult = await stripeAuth(data);
   if (stripeAuthResult === true) {
     req.flash("success", "Registro Exitoso");
     res.redirect("/dashboard/rendimiento");
@@ -57,11 +61,10 @@ router.get("/connect/oauth", isLoggedIn, isArtista, async (req, res) => {
   }
 });
 
-
 // Dashboard
 router.get("/dashboard", isLoggedIn, isArtista, async (req, res) => {
-  const artistDashboardResult = artistDashboard(req)
-    res.render("artist/dashboard", {
+  const artistDashboardResult = await artistDashboard(req);
+  res.render("artist/dashboard", {
     nombre: artistDashboardResult.nombre.nombre[0],
     artista: artistDashboardResult.artista,
     logueado: artistDashboardResult.logueado,
@@ -75,8 +78,8 @@ router.get("/dashboard", isLoggedIn, isArtista, async (req, res) => {
   });
 });
 
-router.get("/dashboard/ventas", isLoggedIn, isArtista, async (req, res) => { 
-  const dashboardResult = dashboardSales(req) 
+router.get("/dashboard/ventas", isLoggedIn, isArtista, async (req, res) => {
+  const dashboardResult = await dashboardSales(req);
   res.render("artist/mis-ventas", {
     nombre: dashboardResult.nombre.nombre[0],
     artista: dashboardResult.artista,
@@ -91,15 +94,14 @@ router.post(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const codigo = dashboardSend(req)    
+    const codigo = await dashboardSend(req);
     req.flash("success", "Obra enviada");
     res.redirect("/dashboard/ventas");
   }
 );
 
 router.get("/dashboard/eventos", isLoggedIn, isArtista, async (req, res) => {
-  
-  const events = dashboardEvents(req)
+  const events = await dashboardEvents(req);
   res.render("artist/mis-eventos", {
     nombre: events.nombre.nombre[0],
     artista: events.artist,
@@ -110,7 +112,7 @@ router.get("/dashboard/eventos", isLoggedIn, isArtista, async (req, res) => {
 });
 
 router.get("/dashboard/subastas", isLoggedIn, isArtista, async (req, res) => {
-  const auction = dashboardAuction(req)
+  const auction = await dashboardAuction(req);
   res.render("artist/mis-subastas", {
     nombre: auction.nombre.nombre[0],
     artista: auction.artista,
@@ -125,7 +127,7 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const collections = dashboardCollections(req)
+    const collections = await dashboardCollections(req);
     res.render("artist/mis-colecciones", {
       nombre: collections.nombre.nombre[0],
       artista: collections.artista,
@@ -141,8 +143,7 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-
-    const stats = dashboardStats(req)
+    const stats = await dashboardStats(req);
 
     res.render("artist/mi-rendimiento", {
       nombre: stats.nombre.nombre[0],
@@ -171,7 +172,7 @@ router.get(
 );
 
 router.get("/dashboard/obras", isLoggedIn, isArtista, async (req, res) => {
-  const obras = dashboardObras(req)
+  const obras = await dashboardObras(req);
 
   res.render("artist/mis-obras", {
     obras: obras.obras,
@@ -186,8 +187,8 @@ router.get(
   "/dashboard/obras/quitarGaleria/:id",
   isLoggedIn,
   isArtista,
-  async (req, res) => {    
-    const gallery = dashboardNoGallery(req)
+  async (req, res) => {
+    const gallery = await dashboardNoGallery(req);
     req.flash("success", "La no se mostrará en tu galería");
     res.redirect("/dashboard/obras");
   }
@@ -198,7 +199,7 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const gallery = dashboardYesGallery(req)
+    const gallery = await dashboardYesGallery(req);
     req.flash("success", "La obra será mostrada en tu galería");
     res.redirect("/dashboard/obras");
   }
@@ -209,7 +210,7 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-   const hide = dashboardObrasHide(req)
+    const hide = await dashboardObrasHide(req);
     req.flash("success", "La obra ha sido oculta");
     res.redirect("/dashboard/obras");
   }
@@ -220,7 +221,7 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const show = dashboardObrasShow(req)
+    const show = await dashboardObrasShow(req);
     req.flash("success", "La obra será mostrada");
     res.redirect("/dashboard/obras");
   }
@@ -231,7 +232,7 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const deleted = dashboardObrasDelete(req)
+    const deleted = await dashboardObrasDelete(req);
     req.flash("success", "La obra ha sido eliminada");
     res.redirect("/dashboard/obras");
   }
@@ -242,7 +243,7 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const deleted = dashboardEventsDelete(req)
+    const deleted = await dashboardEventsDelete(req);
     req.flash("success", "El evento ha sido eliminado");
     res.redirect("/dashboard/eventos");
   }
@@ -256,25 +257,28 @@ router.get(
   "/dashboard/nuevo-evento",
   isLoggedIn,
   isArtista,
-  async (req, res) => {    
-    const newEvent = dashboardNewEvent(req)
+  async (req, res) => {
+    const newEvent = await getNewEvent(req);
+    dashboard = true;
+
     res.render("artist/dashboard-nuevo-evento", {
       nombre: newEvent.nombre.nombre[0],
       artista: newEvent.artista,
       logueado: newEvent.logueado,
-      dashboard: newEvent.dashboard,
+      dashboard,
     });
   }
 );
 
 router.get("/dashboard/nueva-obra", isLoggedIn, isArtista, async (req, res) => {
-  const newObra = dashboardNewObra(req)
+  const newObra = await getNewObra(req);
+  dashboard = true;
   res.render("artist/dashboard-nueva-obra", {
     nombre: newObra.nombrenombre[0],
     colecciones: newObra.colecciones,
     artista: newObra.artista,
     logueado: newObra.logueado,
-    dashboard: newObra.dashboard,
+    dashboard,
   });
 });
 
@@ -283,12 +287,14 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-   const newCollection = dashboardNewCollection(req)
+    const newCollection = await getNewCollection(req);
+    dashboard = true;
+
     res.render("artist/dashboard-nueva-coleccion", {
       nombre: newCollection.nombre.nombre[0],
       artista: newCollection.artista,
       logueado: newCollection.logueado,
-      dashboard: newCollection.dashboard,
+      dashboard,
     });
   }
 );
@@ -298,57 +304,35 @@ router.get(
 //
 
 router.get("/nuevo-evento", isLoggedIn, isArtista, async (req, res) => {
-  const nombre = await pool.query(
-    "SELECT nombre, apellido FROM users WHERE id =?",
-    [req.user.id]
-  );
-  artista = true;
-  logueado = true;
+  const newEvent = await getNewEvent(req);
   dashboard = false;
   res.render("artist/nuevo-evento", {
-    nombre: nombre[0],
-    artista,
-    logueado,
+    nombre: newEvent.nombre.nombre[0],
+    artista: newEvent.artista,
+    logueado: newEvent.logueado,
     dashboard,
   });
 });
 
 router.get("/nueva-obra", isLoggedIn, isArtista, async (req, res) => {
-  const nombre = await pool.query(
-    "SELECT nombre, apellido FROM users WHERE id =?",
-    [req.user.id]
-  );
-  artista = true;
-  logueado = true;
+  const newObra = await getNewObra(req);
   dashboard = false;
-  const artistainfo =
-    ("SELECT id FROM artistas WHERE user_id =?", [req.user.id]);
-  console.log(artistainfo);
-  const colecciones = await pool.query(
-    "SELECT nombreColeccion, id from colecciones WHERE artista_id =?",
-    [artistainfo[0]]
-  );
   res.render("artist/nueva-obra", {
-    nombre: nombre[0],
-    colecciones,
-    artista,
-    logueado,
+    nombre: newObra.nombre.nombre[0],
+    colecciones: newObra.colecciones,
+    artista: newObra.artista,
+    logueado: newObra.logueado,
     dashboard,
   });
 });
 
 router.get("/nueva-coleccion", isLoggedIn, isArtista, async (req, res) => {
-  const nombre = await pool.query(
-    "SELECT nombre, apellido FROM users WHERE id =?",
-    [req.user.id]
-  );
-  artista = true;
-  logueado = true;
+  const newCollection = await getNewCollection(req);
   dashboard = false;
   res.render("artist/nueva-coleccion", {
-    nombre: nombre[0],
-    artista,
-    logueado,
+    nombre: newCollection.nombre.nombre[0],
+    artista: newCollection.artista,
+    logueado: newCollection.logueado,
     dashboard,
   });
 });
@@ -358,128 +342,7 @@ router.get("/nueva-coleccion", isLoggedIn, isArtista, async (req, res) => {
 //
 
 router.post("/nueva-obra", isLoggedIn, isArtista, async (req, res) => {
-  //GUARDANDO DATOS DE LA OBRA//
-  const {
-    nombreObra,
-    coleccion,
-    creacion,
-    tecnica,
-    estilo,
-    precioFinal,
-    ancho,
-    alto,
-    subasta,
-    copias,
-    descripcion,
-    lcreacion,
-    fcreacion,
-  } = req.body;
-  var nombreColeccion = "N/A";
-  var subastar = "No";
-
-  if (subasta == "on") {
-    subastar = "Si";
-  }
-
-  if (coleccion > 0) {
-    nombreColeccion = await pool.query(
-      "SELECT nombreColeccion FROM colecciones WHERE id =?",
-      [coleccion]
-    );
-    nombreColeccion = nombreColeccion[0];
-  }
-
-  const newObra = {
-    nombreObra: nombreObra,
-    coleccion: nombreColeccion.nombreColeccion,
-    coleccion_id: coleccion,
-    lugarCreacion: lcreacion,
-    fecha_creacion: fcreacion,
-    tecnica,
-    estilo,
-    ancho,
-    alto,
-    subastar,
-    precio: precioFinal,
-    descripcion,
-    artista_id: req.user.id,
-  };
-
-  const obra = await pool.query("INSERT INTO obras set ?", [newObra]);
-
-  if (subastar == "Si") {
-    const newSubasta = {
-      obra_id: obra.insertId,
-    };
-
-    await pool.query("INSERT INTO subastasInfo set ?", [newSubasta]);
-  }
-
-  const artista_obras = await pool.query(
-    "SELECT * FROM obras WHERE artista_id =?",
-    [req.user.id]
-  );
-  const numero_obras = {
-    numero_obras: artista_obras.length,
-  };
-
-  await pool.query("UPDATE artistas SET? WHERE user_id =?", [
-    numero_obras,
-    req.user.id,
-  ]);
-
-  //GUARDANDO FOTOS DE LA OBRA//
-
-  const fotos = req.files;
-  var principal = "false";
-  for (var i = 0; i < fotos.length; i++) {
-    if (i == fotos.length - 1) {
-      principal = true;
-    }
-    const path = fotos[i].path;
-    var originalname = fotos[i].originalname;
-    const newFoto = {
-      fotoNombre: originalname,
-      fotoUbicacion: path,
-      principal,
-      obra_id: obra.insertId,
-    };
-
-    const foto = await pool.query("INSERT INTO fotosObras set ?", [newFoto]);
-  }
-  artista = true;
-  logueado = true;
-
-  const todoColeccicones = await pool.query(
-    "SELECT * from colecciones WHERE id =?",
-    [coleccion]
-  );
-  if (todoColeccicones.length > 0) {
-    var precioPromedio =
-      todoColeccicones[0].precioPromedio * 1 + precioFinal * 1;
-    const colecicon_obras = await pool.query(
-      "SELECT * FROM obras WHERE coleccion_id =?",
-      [coleccion]
-    );
-    var piezas = 0;
-    if (colecicon_obras) {
-      piezas = colecicon_obras.length;
-    } else {
-      piezas + 1;
-    }
-
-    console.log(precioPromedio);
-    const NewColeccion = {
-      fotoNombre: originalname,
-      precioPromedio,
-      piezas,
-    };
-    await pool.query("UPDATE colecciones set? WHERE id=?", [
-      NewColeccion,
-      coleccion,
-    ]);
-  }
-
+  const saveObra = await saveNewObra(req);
   if (dashboard) {
     res.redirect("/dashboard");
   } else {
@@ -488,40 +351,7 @@ router.post("/nueva-obra", isLoggedIn, isArtista, async (req, res) => {
 });
 
 router.post("/nueva-coleccion", isLoggedIn, isArtista, async (req, res) => {
-  const {
-    nombre,
-    año,
-    descripcion,
-    estilo,
-    tecnica,
-    ubicacionPais,
-    ubicacionCiudad,
-  } = req.body;
-  const newColeccion = {
-    nombreColeccion: nombre,
-    anio: año,
-    descripcion,
-    estilo,
-    tecnica,
-    pais: ubicacionPais,
-    ciudad: ubicacionCiudad,
-    artista_id: req.user.id,
-  };
-  await pool.query("INSERT into colecciones SET ?", [newColeccion]);
-
-  const artista_colecciones = await pool.query(
-    "SELECT * FROM colecciones WHERE artista_id =?",
-    [req.user.id]
-  );
-  const numero_colecciones = {
-    numero_colecciones: artista_colecciones.length,
-  };
-
-  await pool.query("UPDATE artistas SET? WHERE user_id =?", [
-    numero_colecciones,
-    req.user.id,
-  ]);
-
+  const newCollection = await saveNewCollection(req);
   if (dashboard) {
     res.redirect("/dashboard/nueva-obra");
   } else {
@@ -530,68 +360,7 @@ router.post("/nueva-coleccion", isLoggedIn, isArtista, async (req, res) => {
 });
 
 router.post("/nuevo-evento", isLoggedIn, isArtista, async (req, res) => {
-  const {
-    nombre,
-    titulo,
-    organizadores,
-    hora,
-    inicio,
-    fin,
-    local,
-    direccion,
-    piezas,
-    ciudad,
-    pais,
-    estilo,
-    descripcion,
-  } = req.body;
-  const newEvento = {
-    nombre,
-    titulo,
-    organizadores,
-    hora_inicio: hora,
-    fecha_inicio: inicio,
-    fecha_fin: fin,
-    dir_local: local,
-    direccion,
-    ciudad,
-    pais,
-    piezas,
-    estilo,
-    descripcion,
-    artista_id: req.user.id,
-  };
-
-  const evento = await pool.query("INSERT INTO eventos SET?", [newEvento]);
-  const artista_eventos = await pool.query(
-    "SELECT * FROM eventos WHERE artista_id =?",
-    [req.user.id]
-  );
-  const numero_eventos = {
-    numero_eventos: artista_eventos.length,
-  };
-
-  await pool.query("UPDATE artistas SET? WHERE user_id =?", [
-    numero_eventos,
-    req.user.id,
-  ]);
-
-  for (var i = 0; i < req.files.length; i++) {
-    var principal = "false";
-    if (i == 0) {
-      principal = "true";
-    } else {
-      principal = "false";
-    }
-    const { originalname, path } = req.files[i];
-    const newFotoEvento = {
-      fotoNombre: originalname,
-      fotoUbicacion: path,
-      evento_id: evento.insertId,
-      principal,
-    };
-    await pool.query("INSERT INTO fotosEventos SET?", [newFotoEvento]);
-  }
+  const newEvent = await saveNewEvent(req);
   if (dashboard) {
     res.redirect("/dashboard");
   } else {
@@ -604,121 +373,15 @@ router.post(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const { id } = req.params;
-
-    const {
-      nombre,
-      titulo,
-      organizadores,
-      hora,
-      inicio,
-      fin,
-      local,
-      direccion,
-      piezas,
-      ciudad,
-      pais,
-      estilo,
-    } = req.body;
-    const newEvento = {
-      nombre,
-      titulo,
-      organizadores,
-      hora_inicio: hora,
-      fecha_inicio: inicio,
-      fecha_fin: fin,
-      dir_local: local,
-      direccion,
-      ciudad,
-      pais,
-      piezas,
-      estilo,
-    };
-
-    const evento = await pool.query("UPDATE eventos SET ? WHERE id =?", [
-      newEvento,
-      id,
-    ]);
+    const eventUpdated = await editEvent(req);
     req.flash("success", "Evento actualizado");
     res.redirect("/dashboard/eventos");
   }
 );
 
 router.post("/obra/editar/:id", isLoggedIn, isArtista, async (req, res) => {
+  const obraUpdated = await editObra(req);
   const { id } = req.body;
-
-  //ACTUALIZANDO DATOS DE LA OBRA//
-  const {
-    nombre,
-    coleccion,
-    creacion,
-    tecnica,
-    estilo,
-    precio,
-    ancho,
-    alto,
-    subasta,
-    copias,
-    descripcion,
-    lcreacion,
-    fcreacion,
-  } = req.body;
-  var nombreColeccion = "N/A";
-
-  if (coleccion > 0) {
-    nombreColeccion = await pool.query(
-      "SELECT nombreColeccion FROM colecciones WHERE id =?",
-      [coleccion]
-    );
-    nombreColeccion = nombreColeccion[0];
-  }
-  const newObra = {
-    nombreObra: nombre,
-    coleccion: nombre,
-    coleccion_id: coleccion,
-    lugarCreacion: lcreacion,
-    fecha_creacion: fcreacion,
-    tecnica,
-    estilo,
-    ancho,
-    alto,
-    precio,
-    descripcion,
-    artista_id: req.user.id,
-  };
-
-  const obra = await pool.query("UPDATE obras set ? WHERE id =?", [
-    newObra,
-    id,
-  ]);
-
-  //GUARDANDO FOTOS DE LA OBRA//
-
-  const fotos = req.files;
-  var principal = "false";
-  for (var i = 0; i < fotos.length; i++) {
-    if (i == fotos.length - 1) {
-      principal = true;
-    }
-    const path = fotos[i].path;
-    var originalname = fotos[i].originalname;
-    const newFoto = {
-      fotoNombre: originalname,
-      fotoUbicacion: path,
-      principal,
-      obra_id: id,
-    };
-
-    const foto = await pool.query("INSERT INTO fotosObras set ?", [newFoto]);
-  }
-  const fotoColeccion = {
-    fotoNombre: originalname,
-  };
-  await pool.query("UPDATE colecciones set? WHERE id=?", [
-    fotoColeccion,
-    coleccion,
-  ]);
-
   res.redirect("/obra/" + id);
 });
 
@@ -727,108 +390,21 @@ router.post("/obra/editar/:id", isLoggedIn, isArtista, async (req, res) => {
 //
 
 router.get("/artist-perfil", isLoggedIn, isArtista, async (req, res) => {
-  const nombre = await pool.query(
-    "SELECT nombre, apellido FROM users WHERE id =?",
-    [req.user.id]
-  );
-  const user = await pool.query("SELECT * FROM usuarioArtista WHERE id =?", [
-    req.user.id,
-  ]);
-  const obras = await pool.query(
-    "SELECT * FROM obraCompleta WHERE artista_id =?",
-    [req.user.id]
-  );
-  var ultima_obra = {
-    nombreObra: "N/A",
-    id: "#",
-  };
-  if (obras.length > 0) {
-    ultima_obra = obras[obras.length - 1];
-  }
-  artista = true;
-  logueado = true;
+  const profile = await artistProfile(req);
   dashboard = false;
   res.render("artist/perfil", {
-    nombre: nombre[0],
-    user: user[0],
-    obras,
-    ultima_obra,
-    artista,
-    logueado,
+    nombre: profile.nombre.nombre[0],
+    user: profile.user.user[0],
+    obras: profile.obras,
+    ultima_obra: profile.ultima_obra,
+    artista: profile.artista,
+    logueado: profile.logueado,
     dashboard,
   });
 });
 
 router.post("/editar-Artista", isLoggedIn, isArtista, async (req, res) => {
-  const { fullname, email, apellido, telefono } = req.body;
-  var path = "";
-  var originalname = "";
-
-  if (req.body.image) {
-    var img = req.body.image;
-    // luego extraes la cabecera del data url
-    var base64Data = img.replace(/^data:image\/png;base64,/, "");
-    var path = `src/public/uploads/${fullname}${email}.png`;
-    var originalname = `${fullname}${email}.png`;
-
-    // grabas la imagen el disco
-    fs.writeFile(
-      `src/public/uploads/${fullname}${email}.png`,
-      base64Data,
-      "base64",
-      function (err) {
-        console.log(err);
-      }
-    );
-  }
-
-  let newUser = {
-    nombre: fullname,
-    email,
-    apellido,
-    telefono,
-    foto_ubicacion: path,
-    foto_nombre: originalname,
-  };
-
-  const result = await pool.query("UPDATE users SET ? WHERE id=? ", [
-    newUser,
-    req.body.idArtist,
-  ]);
-
-  console.log(req.body);
-
-  console.log(result);
-
-  const {
-    pais,
-    region,
-    provincia,
-    años,
-    direccion,
-    disciplina_principal,
-    estilo,
-    frase,
-    biografia,
-  } = req.body;
-
-  let newArtista = {
-    pais,
-    region,
-    provincia,
-    años_experiencia: años,
-    direccion,
-    disciplina_principal,
-    biografia,
-    frase,
-  };
-
-  const artist = await pool.query("UPDATE artistas SET ? WHERE user_id=? ", [
-    newArtista,
-    req.body.idArtist,
-  ]);
-  console.log(artist);
-
+  const edit = await editProfile(req)
   res.redirect("/artist-perfil");
 });
 

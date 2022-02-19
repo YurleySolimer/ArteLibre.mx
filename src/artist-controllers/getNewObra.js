@@ -1,6 +1,6 @@
 const pool = require("../database");
 
-var dashboardNewObra = async (data) => {
+var getNewObra = async (data) => {
   const nombre = await pool.query(
     "SELECT nombre, apellido FROM users WHERE id =?",
     [data.user.id]
@@ -8,7 +8,6 @@ var dashboardNewObra = async (data) => {
 
   const artista = true;
   const logueado = true;
-  const dashboard = true;
 
   const artistainfo =
     ("SELECT id FROM artistas WHERE user_id =?", [data.user.id]);
@@ -23,9 +22,8 @@ var dashboardNewObra = async (data) => {
       nombre,
       artista,
       logueado,
-      dashboard,
       colecciones
   }
 };
 
-module.exports = dashboardNewObra;
+module.exports = getNewObra;
