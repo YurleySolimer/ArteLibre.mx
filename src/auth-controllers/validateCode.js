@@ -1,10 +1,7 @@
-const pool = require("../database");
+const { getToken } = require("../services-mysql/tokens");
 const code = async (data) => {
   const token = data.token;
-  const allToken = await pool.query(
-    "SELECT * FROM ResetTokens WHERE token =?",
-    [token]
-  );
+  const allToken = await getToken(token)
   if (allToken.length > 0) {
     var current = new Date();
     var expiration = allToken[0].expiration;

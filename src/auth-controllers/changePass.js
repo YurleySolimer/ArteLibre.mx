@@ -1,5 +1,6 @@
-const pool = require("../database");
 const nodemailer = require("nodemailer");
+const { deleteToken } = require("../services-mysql/tokens");
+const { updateUserByEmail } = require("../services-mysql/users");
 
 const emailAdmin = process.env.ADMIN_EMAIL;
 const passAdmin = process.env.ADMIN_PASS;
@@ -15,16 +16,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 const changePass = async (data, email) => {
-    await pool.query("DELETE FROM ResetTokens WHERE email =?", [email]);
+    await deleteToken(email)
     const { password } = data;
     const passw = {
       password: password,
     };
     passw.password = await helpers.encryptPassword(password);
-    const act = await pool.query("UPDATE users set ? WHERE email =?", [
-      passw,
-      email,
-    ]);
+    const act = await updateUserByEmail(passw, email)
   
     var mailOptions = {
       from: "Arte Libre  <norepply@artelibre.mx>",

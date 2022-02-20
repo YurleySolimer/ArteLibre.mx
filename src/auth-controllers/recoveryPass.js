@@ -1,7 +1,7 @@
-const pool = require("../database");
 const newToken = require("./createToken");
 const nodemailer = require("nodemailer");
-const crypto = require("crypto");
+const { getUsersByEmail } = require("../services-mysql/users");
+const { saveToken } = require("../services-mysql/tokens");
 
 var email = "";
 
@@ -21,13 +21,10 @@ const transporter = nodemailer.createTransport({
 
 const recuperarPass = async (data) => {
   email = data.email;
-  const usuario = await pool.query("SELECT * FROM users WHERE email =?", [
-    email,
-  ]);
+  const usuario = await getUsersByEmail(email)
   if (usuario.length > 0) {
-    const token = newToken(req.body);
-
-    await pool.query("INSERT INTO ResetTokens set?", [token]);
+    const token = newToken(data.body);
+    await saveToken(token)
     var mailOptions = {
       from: "Arte Libre  <noreply@artelibre.mx>",
       to: email,

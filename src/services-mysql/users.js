@@ -27,9 +27,21 @@ var saveUser = async (newUser) => {
   return user;
 };
 
+var updateUserByEmail = async (passw, email) => {
+    //Update an user by email
+    const user = await pool.query("UPDATE users set ? WHERE email =?", [
+        passw,
+        email,
+      ]);
+    return user;
+  };
+
+
+
 module.exports = {
   getUser,
   getUsersByEmail,
   getUserName,
   saveUser,
+  updateUserByEmail
 };
