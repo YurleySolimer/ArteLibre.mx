@@ -6,11 +6,13 @@ const { getUserName } = require("../services-mysql/users");
 const { getNotableObra, getNotableObras, getFirstArtistObra, getLastArtistObra, getObrasFromCollection } = require("../services-mysql/obras");
 const { getNotableArtist } = require("../services-mysql/artists");
 const { getNotableCollection } = require("../services-mysql/colletions");
+const { getEvents } = require("../services-mysql/events");
 
 var getIndex = async (data) => {
   const artista = await isArtist(data);
   const cliente = await isClient(data);
   const admin = await isAdmin(data);
+  var nombre = ''
 
   if (artista == true || cliente == true || admin == true) {
     nombre = await getUserName(data.user.id)
@@ -27,7 +29,7 @@ var getIndex = async (data) => {
     var obra2_artista = await getLastArtistObra(id_artista)
   }
 
-  const eventos = await pool.query("SELECT * FROM eventoCompleto LIMIT 8");
+  const eventos = await getEvents();
   const coleccion_destacada = await getNotableCollection()
   var obras_coleccion = [];
   if (coleccion_destacada.length > 0) {

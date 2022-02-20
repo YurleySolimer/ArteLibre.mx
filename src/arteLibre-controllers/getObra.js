@@ -19,6 +19,7 @@ var getObra = async (data) => {
   const artista = await isArtist(data);
   const cliente = await isClient(data);
   const admin = await isAdmin(data);
+  var nombre = ''
 
   var visitasArray = await pool.query("SELECT visitas from obras WHERE id =?", [
     id,

@@ -7,6 +7,7 @@ var getEvent = async (data) => {
   artista = await isArtist(data);
   cliente = await isClient(data);
   admin = await isAdmin(data);
+  var nombre = ''
 
   if (artista == true || cliente == true || admin == true) {
     nombre = await pool.query(

@@ -8,9 +8,10 @@ var getArtists = async (data) => {
     "SELECT * FROM usuarioArtista ORDER BY nombre ASC"
   );
 
-  artista = await isArtist(data);
-  cliente = await isClient(data);
-  admin = await isAdmin(data);
+  const artista = await isArtist(data);
+  const cliente = await isClient(data);
+  const admin = await isAdmin(data);
+  var nombre = ''
 
   if (artista == true || cliente == true || admin == true) {
     nombre = await pool.query(

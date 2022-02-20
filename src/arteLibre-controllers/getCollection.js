@@ -8,6 +8,7 @@ var getCollection = async (data) => {
   const artista = await isArtist(data);
   const cliente = await isClient(data);
   const admin = await isAdmin(data);
+  var nombre = ''
 
   if (artista == true || cliente == true || admin == true) {
     nombre = await pool.query(

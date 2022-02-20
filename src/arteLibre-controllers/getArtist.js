@@ -29,6 +29,8 @@ var getArtist = async (data) => {
     ultima_obra = obras[obras.length - 1];
   }
 
+  var nombre = ''
+
   const artista = await isArtist(data);
   const cliente = await isClient(data);
   const admin = await isAdmin(data);
