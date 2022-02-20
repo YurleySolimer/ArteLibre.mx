@@ -1,18 +1,8 @@
 const express = require("express");
-const router = express.Router();
-const pool = require("../database");
-
-const stripe = require("stripe")("sk_test_6WBQDi7VDQidnFxhgzQOtNBT007MvmFzD4");
-
-var artista = false;
-var cliente = false;
-var admin = false;
-var nombre = {
-  nombre: "",
-  apellido: "",
-};
-var logueado = false;
 const Handlebars = require("handlebars");
+
+const router = express.Router();
+
 const getCollection = require("../arteLibre-controllers/getCollection");
 const getSignUp = require("../arteLibre-controllers/getSignUp");
 const getCollections = require("../arteLibre-controllers/getCollections");
@@ -35,57 +25,6 @@ Handlebars.registerHelper("fecha", function (date) {
   const año = date.getFullYear();
   return `${dia} - ${mes} - ${año}`;
 });
-
-async function isArtist(req) {
-  if (req.isAuthenticated()) {
-    var usuario = await pool.query("SELECT tipo FROM users WHERE id =?", [
-      req.user.id,
-    ]);
-
-    if (usuario[0].tipo == "Artista") {
-      logueado = true;
-      return true;
-    }
-    return false;
-  } else {
-    logueado = false;
-    return false;
-  }
-}
-
-async function isClient(req) {
-  if (req.isAuthenticated()) {
-    var usuario = await pool.query("SELECT tipo FROM users WHERE id =?", [
-      req.user.id,
-    ]);
-
-    if (usuario[0].tipo == "Cliente") {
-      logueado = true;
-      return true;
-    }
-    return false;
-  } else {
-    logueado = false;
-    return false;
-  }
-}
-
-async function isAdmin(req) {
-  if (req.isAuthenticated()) {
-    var usuario = await pool.query("SELECT tipo FROM users WHERE id =?", [
-      req.user.id,
-    ]);
-
-    if (usuario[0].tipo == "Admin") {
-      logueado = true;
-      return true;
-    }
-    return false;
-  } else {
-    logueado = false;
-    return false;
-  }
-}
 
 router.get("/coleccion/:id", async (req, res) => {
   const collection = await getCollection(req);
