@@ -38,12 +38,12 @@ router.get("/cliente/perfil", isLoggedIn, isCliente, async (req, res) => {
 });
 
 router.get("/cliente/historial", isLoggedIn, isCliente, async (req, res) => {
-  const history = clientHistory(req)
+  const history = await clientHistory(req)
   res.render("client/mis-pedidos", {
-    nombre: nombre[0],
-    cliente,
-    obras,
-    logueado,
+    nombre: history.nombre[0],
+    cliente: history.cliente,
+    obras: history.obras,
+    logueado: history.logueado,
   });
 });
 

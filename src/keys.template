@@ -1,0 +1,10 @@
+//Conexion a la db
+
+module.exports = {
+	database : {
+		host: 'localhost',
+		user: 'user',
+		password: 'userPass',
+		database: 'databaseName'
+	}
+}
