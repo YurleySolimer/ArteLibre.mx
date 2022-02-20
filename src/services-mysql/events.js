@@ -6,6 +6,16 @@ var getEvents = async () => {
   return event;
 };
 
+var getLastArtistEvent = async (id) => {
+  //get last event
+  const event = await pool.query(
+    "SELECT * FROM eventos WHERE artista_id =?  ORDER BY id DESC LIMIT 1",
+    [id]
+  );
+  return event;
+};
+
 module.exports = {
   getEvents,
+  getLastArtistEvent,
 };

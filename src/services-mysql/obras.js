@@ -47,8 +47,17 @@ var getObrasFromCollection = async (coleccion_destacada) => {
 
 var getClientObras = async (id) => {
   //Get obras of a client
-  const obras = await await pool.query(
+  const obras = await pool.query(
     "SELECT * from obraComprada WHERE id_user =?",
+    [id]
+  );
+  return obras;
+};
+
+var getFiveArtistObras = async (id) => {
+  //Get five obras from artists
+  const obras = await pool.query(
+    "SELECT * FROM obras WHERE artista_id =? ORDER BY visitas DESC LIMIT 5",
     [id]
   );
   return obras;
@@ -61,4 +70,5 @@ module.exports = {
   getLastArtistObra,
   getObrasFromCollection,
   getClientObras,
+  getFiveArtistObras,
 };

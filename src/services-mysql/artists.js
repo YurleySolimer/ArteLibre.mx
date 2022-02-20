@@ -15,7 +15,17 @@ var getNotableArtist = async () => {
   return artist;
 };
 
+var getVisits = async (id) => {
+  //Get profile visits
+  const visits = await pool.query(
+    "SELECT visitas FROM artistas WHERE user_id =?",
+    [id]
+  );
+  return visits;
+};
+
 module.exports = {
   saveArtist,
   getNotableArtist,
+  getVisits,
 };
