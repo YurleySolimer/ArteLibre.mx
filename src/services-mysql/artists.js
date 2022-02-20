@@ -6,6 +6,16 @@ var saveArtist = async (newArtista) => {
   return artist;
 };
 
+var getNotableArtist = async () => {
+  //Get a completed artist where is notable
+  const artist = await pool.query(
+    "SELECT * FROM usuarioArtista WHERE destacar =? LIMIT 1",
+    ["Si"]
+  );
+  return artist;
+};
+
 module.exports = {
   saveArtist,
+  getNotableArtist,
 };

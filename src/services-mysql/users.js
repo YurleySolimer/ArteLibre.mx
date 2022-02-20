@@ -12,6 +12,15 @@ var getUsersByEmail = async (email) => {
   return users;
 };
 
+var getUserName = async (id) => {
+  //Get name from user by id
+  const name = await pool.query(
+    "SELECT nombre, apellido FROM users WHERE id =?",
+    id
+  );
+  return name;
+};
+
 var saveUser = async (newUser) => {
   //Save a new user in DB
   const user = await pool.query("INSERT INTO users SET ? ", newUser);
@@ -21,5 +30,6 @@ var saveUser = async (newUser) => {
 module.exports = {
   getUser,
   getUsersByEmail,
+  getUserName,
   saveUser,
 };
