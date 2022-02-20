@@ -1,4 +1,3 @@
-const pool = require("../database");
 const isArtist = require("../arteLibre-controllers/isArtist");
 const isAdmin = require("../arteLibre-controllers/isAdmin");
 const isClient = require("../arteLibre-controllers/isClient");

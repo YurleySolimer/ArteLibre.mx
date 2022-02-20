@@ -6,6 +6,15 @@ var saveClient = async (newCliente) => {
   return client;
 };
 
+var getClientCompleted = async (id) => {
+  //Get all data about a client
+  const client = await pool.query("SELECT * from usuarioCliente WHERE id =?", [
+    id,
+  ]);
+  return client;
+};
+
 module.exports = {
   saveClient,
+  getClientCompleted,
 };

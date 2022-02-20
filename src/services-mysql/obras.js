@@ -19,7 +19,7 @@ var getNotableObras = async () => {
 };
 
 var getFirstArtistObra = async (id_artista) => {
-  //Get firts obra from an artist 
+  //Get firts obra from an artist
   const obras = await pool.query(
     "SELECT * FROM obraCompleta WHERE principal =? AND artista_id ORDER BY id ASC LIMIT 1",
     ["True", id_artista]
@@ -28,7 +28,7 @@ var getFirstArtistObra = async (id_artista) => {
 };
 
 var getLastArtistObra = async (id_artista) => {
-  //Get last obra from an artist 
+  //Get last obra from an artist
   const obras = await pool.query(
     "SELECT * FROM obraCompleta WHERE principal =? AND artista_id ORDER BY id DESC LIMIT 1",
     ["True", id_artista]
@@ -37,13 +37,22 @@ var getLastArtistObra = async (id_artista) => {
 };
 
 var getObrasFromCollection = async (coleccion_destacada) => {
-    //Get obras from a collection
-    const obras = await pool.query(
-        "SELECT * FROM obraCompleta WHERE coleccion_id =?",
-        [coleccion_destacada[0].id]
-      );
-    return obras;
-  };
+  //Get obras from a collection
+  const obras = await pool.query(
+    "SELECT * FROM obraCompleta WHERE coleccion_id =?",
+    [coleccion_destacada[0].id]
+  );
+  return obras;
+};
+
+var getClientObras = async (id) => {
+  //Get obras of a client
+  const obras = await await pool.query(
+    "SELECT * from obraComprada WHERE id_user =?",
+    [id]
+  );
+  return obras;
+};
 
 module.exports = {
   getNotableObra,
@@ -51,4 +60,5 @@ module.exports = {
   getFirstArtistObra,
   getLastArtistObra,
   getObrasFromCollection,
+  getClientObras,
 };
