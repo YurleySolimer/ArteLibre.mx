@@ -5,9 +5,9 @@ const isClient = require("./isClient")
 
 
 var getSignUp = async (data) => {
-  const artista = await isArtist(req);
-  const cliente = await isClient(req);
-  const admin = await isAdmin(req);
+  const artista = await isArtist(data);
+  const cliente = await isClient(data);
+  const admin = await isAdmin(data);
   const nombre = "";
 
   if (artista == true || cliente == true || admin == true) {

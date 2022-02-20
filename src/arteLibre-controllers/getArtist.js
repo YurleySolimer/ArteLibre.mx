@@ -29,9 +29,9 @@ var getArtist = async (data) => {
     ultima_obra = obras[obras.length - 1];
   }
 
-  artista = await isArtist(data);
-  cliente = await isClient(data);
-  admin = await isAdmin(data);
+  const artista = await isArtist(data);
+  const cliente = await isClient(data);
+  const admin = await isAdmin(data);
   if (artista == true || cliente == true || admin == true) {
     nombre = await pool.query(
       "SELECT nombre, apellido FROM users WHERE id =?",
@@ -62,7 +62,7 @@ var getArtist = async (data) => {
     admin,
     logueado,
     nombre,
-  }
+  };
 };
 
 module.exports = getArtist;
