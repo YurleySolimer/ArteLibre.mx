@@ -72,6 +72,16 @@ var getArtistObras = async (id) => {
   return obras;
 };
 
+var getArtistObrasAuction = async (id) => {
+  //Get all the obras from artists
+  const obras = await pool.query(
+    "SELECT * FROM obraSubasta WHERE artista_id=?",
+    [id]
+  );
+
+  return obras;
+};
+
 module.exports = {
   getNotableObra,
   getNotableObras,
@@ -81,4 +91,5 @@ module.exports = {
   getClientObras,
   getFiveArtistObras,
   getArtistObras,
+  getArtistObrasAuction,
 };
