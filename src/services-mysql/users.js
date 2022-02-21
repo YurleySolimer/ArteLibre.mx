@@ -28,20 +28,27 @@ var saveUser = async (newUser) => {
 };
 
 var updateUserByEmail = async (passw, email) => {
-    //Update an user by email
-    const user = await pool.query("UPDATE users set ? WHERE email =?", [
-        passw,
-        email,
-      ]);
-    return user;
-  };
+  //Update an user by email
+  const user = await pool.query("UPDATE users set ? WHERE email =?", [
+    passw,
+    email,
+  ]);
+  return user;
+};
 
-
+var getUserArtist = async (id) => {
+  //Get user of artist
+  const user = await pool.query("SELECT * FROM usuarioArtista WHERE id =?", [
+    id,
+  ]);
+  return user;
+};
 
 module.exports = {
   getUser,
   getUsersByEmail,
   getUserName,
   saveUser,
-  updateUserByEmail
+  updateUserByEmail,
+  getUserArtist,
 };

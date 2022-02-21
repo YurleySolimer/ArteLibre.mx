@@ -63,6 +63,15 @@ var getFiveArtistObras = async (id) => {
   return obras;
 };
 
+var getArtistObras = async (id) => {
+  //Get all the obras from artists
+  const obras = await pool.query(
+    "SELECT * FROM obraCompleta WHERE artista_id =?",
+    [id]
+  );
+  return obras;
+};
+
 module.exports = {
   getNotableObra,
   getNotableObras,
@@ -71,4 +80,5 @@ module.exports = {
   getObrasFromCollection,
   getClientObras,
   getFiveArtistObras,
+  getArtistObras,
 };

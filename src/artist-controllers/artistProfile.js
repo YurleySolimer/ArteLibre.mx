@@ -1,35 +1,28 @@
-const pool = require("../database");
+const { getArtistObras } = require("../services-mysql/obras");
+const { getUserName, getUserArtist } = require("../services-mysql/users");
 
 var artistProfile = async (data) => {
-    const nombre = await pool.query(
-        "SELECT nombre, apellido FROM users WHERE id =?",
-        [data.user.id]
-      );
-      const user = await pool.query("SELECT * FROM usuarioArtista WHERE id =?", [
-        data.user.id,
-      ]);
-      const obras = await pool.query(
-        "SELECT * FROM obraCompleta WHERE artista_id =?",
-        [data.user.id]
-      );
-      var ultima_obra = {
-        nombreObra: "N/A",
-        id: "#",
-      };
-      if (obras.length > 0) {
-        ultima_obra = obras[obras.length - 1];
-      }
-      artista = true;
-      logueado = true;
+  const nombre = await getUserName(data.user.id);
+  const user = await getUserArtist(data.user.id);
+  const obras = await getArtistObras(data.user.id);
+  var ultima_obra = {
+    nombreObra: "N/A",
+    id: "#",
+  };
+  if (obras.length > 0) {
+    ultima_obra = obras[obras.length - 1];
+  }
+  artista = true;
+  logueado = true;
 
-      return {
-          nombre,
-          user,
-          obras,
-          ultima_obra,
-          artista,
-          logueado
-      }
+  return {
+    nombre,
+    user,
+    obras,
+    ultima_obra,
+    artista,
+    logueado,
+  };
 };
 
 module.exports = artistProfile;
