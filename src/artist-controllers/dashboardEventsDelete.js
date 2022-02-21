@@ -1,10 +1,11 @@
 const pool = require("../database");
+const { deleteEvent, deleteEventPics } = require("../services-mysql/events");
 
 var dashboardEventsDelete = async (data) => {
     const { id } = data.params;
 
-    await pool.query("DELETE from fotosEventos WHERE evento_id=?", [id]);
-    await pool.query("DELETE from eventos WHERE id=?", [id]);
+    await deleteEvent(id)
+    await deleteEventPics(id)
 };
 
 module.exports = dashboardEventsDelete;

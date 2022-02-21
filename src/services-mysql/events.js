@@ -15,7 +15,40 @@ var getLastArtistEvent = async (id) => {
   return event;
 };
 
+var getArtistEvents = async (id) => {
+  //get last event
+  const event = await pool.query(
+    "SELECT * from eventoCompleto WHERE userID =?",
+    [id]
+  );
+  return event;
+};
+
+var getFotos = async () => {
+  //get all pics
+  const fotos = await pool.query("SELECT * FROM fotosEventos");
+  return fotos;
+};
+
+var deleteEvent = async (id) => {
+  //delete and event
+  const event = await pool.query("DELETE from fotosEventos WHERE evento_id=?", [
+    id,
+  ]);
+  return event;
+};
+
+var deleteEventPics = async (id) => {
+  //delete all event pics
+  const event = await pool.query("DELETE from eventos WHERE id=?", [id]);
+  return event;
+};
+
 module.exports = {
   getEvents,
   getLastArtistEvent,
+  getArtistEvents,
+  getFotos,
+  deleteEvent,
+  deleteEventPics,
 };

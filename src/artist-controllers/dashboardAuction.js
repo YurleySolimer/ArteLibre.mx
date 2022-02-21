@@ -1,4 +1,3 @@
-const pool = require("../database");
 const { getArtistObrasAuction } = require("../services-mysql/obras");
 const { getUserName } = require("../services-mysql/users");
 

@@ -1,26 +1,21 @@
-const pool = require("../database");
+const { getArtistEvents, getFotos } = require("../services-mysql/events");
+const { getUserName } = require("../services-mysql/users");
 
 var dashboardEvents = async (data) => {
-    const nombre = await pool.query(
-        "SELECT nombre, apellido FROM users WHERE id =?",
-        [data.user.id]
-      );
-      const artista = true;
-      const logueado = true;
-      const dashboard = true;
-      const eventos = await pool.query(
-        "SELECT * from eventoCompleto WHERE userID =?",
-        [data.user.id]
-      );
-      const fotos = await pool.query("SELECT * FROM fotosEventos");
+  const nombre = await getUserName(data.user.id);
+  const artista = true;
+  const logueado = true;
+  const dashboard = true;
+  const eventos = await getArtistEvents(data.user.id);
+  const fotos = await getFotos();
 
-      return {
-          nombre,
-          artista,
-          logueado,
-          dashboard,
-          eventos,
-          fotos
-      }
+  return {
+    nombre,
+    artista,
+    logueado,
+    dashboard,
+    eventos,
+    fotos,
+  };
 };
 module.exports = dashboardEvents;
