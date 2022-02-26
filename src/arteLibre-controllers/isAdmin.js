@@ -1,10 +1,8 @@
-const pool = require("../database");
+const { getUserType } = require("../services-mysql/users");
 
 var isAdmin = async (data) => {
   if (data.isAuthenticated()) {
-    var usuario = await pool.query("SELECT tipo FROM users WHERE id =?", [
-      data.user.id,
-    ]);
+    var usuario = await getUserType(data.user.id)
 
     if (usuario[0].tipo == "Admin") {
       logueado = true;

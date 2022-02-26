@@ -1,42 +1,31 @@
-const pool = require("../database");
 const isArtist = require("./isArtist");
 const isAdmin = require("./isAdmin");
 const isClient = require("./isClient");
+const { getObrasCompletedById, getObraPics, getMainObra, updateObra, getObraVisits } = require("../services-mysql/obras");
+const { getUserName } = require("../services-mysql/users");
 
 var getObra = async (data) => {
   const id = data.params.id;
-  const obra = await pool.query("SELECT * FROM obraCompleta WHERE id =?", [
-    data.params.id,
-  ]);
-  const fotos = await pool.query("SELECT * FROM fotosObras WHERE obra_id=?", [
-    data.params.id,
-  ]);
-  const obras = await pool.query(
-    "SELECT * FROM obraCompleta WHERE principal =?",
-    ["True"]
-  );
+  const obra = await getObrasCompletedById(id)
+  const fotos = await getObraPics(id)
+  const obras = await getMainObra()
 
   const artista = await isArtist(data);
   const cliente = await isClient(data);
   const admin = await isAdmin(data);
   var nombre = ''
 
-  var visitasArray = await pool.query("SELECT visitas from obras WHERE id =?", [
-    id,
-  ]);
+  var visitasArray = await getObraVisits(id)
   if (visitasArray.length > 0) {
     var visitasTotal = visitasArray[0].visitas + 1;
     var visitas = {
       visitas: visitasTotal,
     };
-    await pool.query("UPDATE obras  SET ? WHERE id =?", [visitas, id]);
+    await updateObra(visitas, id)
   }
 
   if (artista == true || cliente == true || admin == true) {
-    nombre = await pool.query(
-      "SELECT nombre, apellido FROM users WHERE id =?",
-      [data.user.id]
-    );
+    nombre = await getUserName(data.user.id)
   }
 
   var myArray = [];

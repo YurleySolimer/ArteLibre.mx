@@ -173,6 +173,12 @@ var getObrasCompletedByCollection = async (id) => {
   return obra;
 };
 
+var getObrasCompletedById = async (id) => {
+  //save new obra
+  const obra = await pool.query("SELECT * FROM obraCompleta WHERE id =?", [id]);
+  return obra;
+};
+
 var getObraGallery1 = async (id, gallery) => {
   //save new obra
   const obra = await pool.query(
@@ -200,15 +206,54 @@ var getObraPics = async (id) => {
 };
 
 var getMainObra = async () => {
-  //save new obra
-  const obra = pool.query(
+  //
+  const obra = await pool.query(
     "SELECT * FROM obraCompleta WHERE principal =?",
     ["True"]
   );
   return obra;
 };
 
+var getMainObraNoHide = async () => {
+  //
+  const obra = await pool.query(
+    "SELECT * FROM obraCompleta WHERE principal =? AND ocultar =? ORDER BY id DESC",
+    ["True", "No"]
+  );
+  return obra;
+};
 
+var getObraVisits = async (id) => {
+  //
+  const obra = await pool.query("SELECT visitas from obras WHERE id =?", [id]);
+  return obra;
+};
+
+var filterObras1 = async (data) => {
+  //
+  const obra = await pool.query(
+    "SELECT * FROM obraCompleta WHERE nombre =? OR apellido =? OR tecnica =?",
+    [
+      data.query.artistaPinturas,
+      data.query.artistaPinturas,
+      data.query.tecnicaPinturas,
+    ]
+  );
+  return obra;
+};
+
+var filterObras2 = async (data) => {
+  //
+  const obra = await pool.query(
+    "SELECT * FROM obraCompleta WHERE nombre =? OR apellido =? AND tecnica =?",
+    [
+      data.query.artistaPinturas,
+      data.query.artistaPinturas,
+      data.query.tecnicaPinturas,
+    ]
+  );
+  return obra;
+};
 
 module.exports = {
   getNotableObra,
@@ -235,5 +280,10 @@ module.exports = {
   getObraGallery2,
   getObraPics,
   getMainObra,
-  getObrasCompletedByCollection
+  getObrasCompletedByCollection,
+  getObrasCompletedById,
+  getObraVisits,
+  getMainObraNoHide,
+  filterObras1,
+  filterObras2,
 };

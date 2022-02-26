@@ -50,6 +50,23 @@ var updateUserById = async (data, id) => {
   return user;
 };
 
+var getUserStripe = async (id) => {
+  //Update an user by id
+  const user = await pool.query(
+    "SELECT * FROM artistStripe WHERE id_user =? LIMIT 1",
+    [id]
+  );
+  return user;
+};
+
+var getUserType = async (id) => {
+  //Update an user by id
+  const user = await pool.query("SELECT tipo FROM users WHERE id =?", [
+    id,
+  ]);
+  return user;
+};
+
 module.exports = {
   getUser,
   getUsersByEmail,
@@ -58,4 +75,6 @@ module.exports = {
   updateUserByEmail,
   getUserArtist,
   updateUserById,
+  getUserStripe,
+  getUserType
 };
