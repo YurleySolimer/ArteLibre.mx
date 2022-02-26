@@ -1,4 +1,3 @@
-const pool = require("../database");
 const { deleteEvent, deleteEventPics } = require("../services-mysql/events");
 
 var dashboardEventsDelete = async (data) => {

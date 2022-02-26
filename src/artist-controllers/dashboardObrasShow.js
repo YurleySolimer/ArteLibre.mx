@@ -1,4 +1,4 @@
-const pool = require("../database");
+const { updateObra } = require("../services-mysql/obras");
 
 var dashboardObrasShow = async (data) => {
   const { id } = data.params;
@@ -6,7 +6,7 @@ var dashboardObrasShow = async (data) => {
     ocultar: "No",
   };
 
-  await pool.query("UPDATE obras set? WHERE id=?", [ocultar, id]);
+  await updateObra(ocultar, id)
 };
 
 module.exports = dashboardObrasShow;

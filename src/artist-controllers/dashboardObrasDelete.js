@@ -1,13 +1,14 @@
-const pool = require("../database");
+const { deleteAuctionInfo } = require("../services-mysql/auctions");
+const { deleteClientShop } = require("../services-mysql/clients");
+const { deleteObraPics, deleteObra } = require("../services-mysql/obras");
 
 var dashboardObrasDelete = async (data) => {
   const { id } = data.params;
 
-  await pool.query("DELETE from clienteCompra WHERE id_obra=?", [id]);
-  await pool.query("DELETE from subastasInfo WHERE obra_id=?", [id]);
-  await pool.query("DELETE from fotosObras WHERE obra_id=?", [id]);
-
-  await pool.query("DELETE from obras WHERE id=?", [id]);
+  await deleteClientShop(id)
+  await deleteAuctionInfo(id)
+  await deleteObraPics(id)
+  await deleteObra(id)
 };
 
 module.exports = dashboardObrasDelete;

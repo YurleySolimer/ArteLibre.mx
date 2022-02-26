@@ -27,8 +27,29 @@ var getArtistsCollections = async (id) => {
   return colletion;
 };
 
+var getCollectionName = async (id) => {
+  //Get collection name
+  const colletion = await pool.query(
+    "SELECT nombreColeccion FROM colecciones WHERE id =?",
+    [id]
+  );
+  return colletion;
+};
+
+var updateCollection = async (data, id) => {
+  //Get collection name
+  const colletion = await pool.query("UPDATE colecciones set? WHERE id=?", [
+    data,
+    id,
+  ]);
+  return colletion;
+};
+
+
 module.exports = {
   getNotableCollection,
   getFiveArtistsCollections,
   getArtistsCollections,
+  getCollectionName,
+  updateCollection
 };

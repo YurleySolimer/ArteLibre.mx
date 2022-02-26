@@ -1,4 +1,4 @@
-const pool = require("../database");
+const { updateEvent } = require("../services-mysql/events");
 
 var editEvent = async (data) => {
   const { id } = data.params;
@@ -32,10 +32,7 @@ var editEvent = async (data) => {
     estilo,
   };
 
-  const evento = await pool.query("UPDATE eventos SET ? WHERE id =?", [
-    newEvento,
-    id,
-  ]);
+  const evento = await updateEvent(newEvento, id)
 };
 
 module.exports = editEvent;

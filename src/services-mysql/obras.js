@@ -82,6 +82,66 @@ var getArtistObrasAuction = async (id) => {
   return obras;
 };
 
+var updateObra = async (data, id) => {
+  //Update data from an obra
+  const obra = await pool.query("UPDATE obras set? WHERE id=?", [data, id]);
+  return obra;
+};
+
+var deleteObraPics = async (id) => {
+  //Delete all pics from an obra
+  const obra = await pool.query("DELETE from fotosObras WHERE obra_id=?", [id]);
+  return obra;
+};
+
+var deleteObra = async (id) => {
+  //Delete an obra data
+  const obra = await pool.query("DELETE from obras WHERE id=?", [id]);
+  return obra;
+};
+
+var getArtistObrasSold = async (id) => {
+  //Delete an obra data
+  const obra = await pool.query(
+    "SELECT * FROM obraComprada WHERE artista_id =?",
+    [id]
+  );
+  return obra;
+};
+
+var getObraBySoldDate = async (id, date) => {
+  //Get an obra
+  const obra = await pool.query(
+    "select * from obraComprada	where artista_id =? and  fecha_compra =?",
+    [id, date]
+  );
+  return obra;
+};
+
+var getObrasWeekly = async (id, date, today) => {
+  //Get obras in a week
+  const obras = await pool.query(
+    "select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?",
+    [id, date, hoy]
+  );
+  return obras;
+};
+
+var getObrasMothly = async (id, date) => {
+  //Get in a month
+  const obras = await pool.query(
+    "select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?",
+    [id, date, hoy]
+  );
+  return obras;
+};
+
+var savePics = async (data) => {
+  //save pics of obras
+  const obra = await pool.query("INSERT INTO fotosObras set ?", [data]);
+  return obra;
+};
+
 module.exports = {
   getNotableObra,
   getNotableObras,
@@ -92,4 +152,12 @@ module.exports = {
   getFiveArtistObras,
   getArtistObras,
   getArtistObrasAuction,
+  updateObra,
+  deleteObraPics,
+  deleteObra,
+  getArtistObrasSold,
+  getObraBySoldDate,
+  getObrasWeekly,
+  getObrasMothly,
+  savePics
 };

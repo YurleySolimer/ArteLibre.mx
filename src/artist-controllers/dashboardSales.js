@@ -1,18 +1,14 @@
 const pool = require("../database");
+const { getArtistObrasSold } = require("../services-mysql/obras");
+const { getUserName } = require("../services-mysql/users");
 
 var dashboardSales = async (data) => {
-  const nombre = await pool.query(
-    "SELECT nombre, apellido FROM users WHERE id =?",
-    [data.user.id]
-  );
+  const nombre = await getUserName(data.user.id)
   const artista = true;
   const logueado = true;
   const dashboard = true;
 
-  const obras = await pool.query(
-    "SELECT * FROM obraComprada WHERE artista_id =?",
-    [data.user.id]
-  );
+  const obras = await getArtistObrasSold(data.user.id)
 
   return {
       artista,

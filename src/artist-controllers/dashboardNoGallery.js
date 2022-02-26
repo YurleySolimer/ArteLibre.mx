@@ -1,10 +1,10 @@
-const pool = require("../database");
+const { updateObra } = require("../services-mysql/obras");
 
 var dashboardNoGallery = async (data) => {
   const galeria = {
     galeria: "No",
   };
-  await pool.query("UPDATE obras set? WHERE id=?", [galeria, data.params.id]);
+  await updateObra(galeria, data.params.id)
   return true;
 };
 

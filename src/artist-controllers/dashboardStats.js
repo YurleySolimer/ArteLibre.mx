@@ -1,14 +1,20 @@
-const pool = require("../database");
+const { getArtistStripe, getDataArtist } = require("../services-mysql/artists");
+const { getFiveArtistsCollections } = require("../services-mysql/colletions");
+const { getLastArtistEvent, getAllEvents } = require("../services-mysql/events");
+const {
+  getObraBySoldDate,
+  getObrasWeekly,
+  getObrasMothly,
+  getArtistObrasSold,
+} = require("../services-mysql/obras");
+const { getUserName } = require("../services-mysql/users");
 
 var dashboardStats = async (data) => {
   const artista = true;
   const logueado = true;
   const dashboard = true;
 
-  const artistStripe = await pool.query(
-    "SELECT * FROM artistStripe WHERE id_user =? LIMIT 1",
-    [data.user.id]
-  );
+  const artistStripe = await getArtistStripe(data.user.id);
   var stripeRegistro = false;
   if (artistStripe.length > 0) {
     stripeRegistro = true;
@@ -121,63 +127,21 @@ var dashboardStats = async (data) => {
       hoy.getDate() - 7
     );
 
-    const ventalunes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes]
-    );
-    const ventamartes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes]
-    );
-    const ventamiercoles = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles]
-    );
-    const ventajueves = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves]
-    );
-    const ventaviernes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes]
-    );
-    const ventasabado = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado]
-    );
-    const ventadomingo = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo]
-    );
+    const ventalunes = await getObraBySoldDate(data.user.id, lunes);
+    const ventamartes = await getObraBySoldDate(data.user.id, martes);
+    const ventamiercoles = await getObraBySoldDate(data.user.id, miercoles);
+    const ventajueves = await getObraBySoldDate(data.user.id, jueves);
+    const ventaviernes = await getObraBySoldDate(data.user.id, viernes);
+    const ventasabado = await getObraBySoldDate(data.user.id, sabado);
+    const ventadomingo = await getObraBySoldDate(data.user.id, domingo);
 
-    const ventalunes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes0]
-    );
-    const ventamartes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes0]
-    );
-    const ventamiercoles0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles0]
-    );
-    const ventajueves0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves0]
-    );
-    const ventaviernes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes0]
-    );
-    const ventasabado0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado0]
-    );
-    const ventadomingo0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo0]
-    );
+    const ventalunes0 = await getObraBySoldDate(data.user.id, lunes0);
+    const ventamartes0 = await getObraBySoldDate(data.user.id, martes0);
+    const ventamiercoles0 = await getObraBySoldDate(data.user.id, miercoles0);
+    const ventajueves0 = await getObraBySoldDate(data.user.id, jueves0);
+    const ventaviernes0 = await getObraBySoldDate(data.user.id, viernes0);
+    const ventasabado0 = await getObraBySoldDate(data.user.id, sabado0);
+    const ventadomingo0 = await getObraBySoldDate(data.user.id, domingo0);
 
     estaSemana = {
       ventalunes: ventalunes.length,
@@ -269,63 +233,21 @@ var dashboardStats = async (data) => {
       hoy.getDate() - 1
     );
 
-    const ventalunes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes]
-    );
-    const ventamartes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes]
-    );
-    const ventamiercoles = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles]
-    );
-    const ventajueves = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves]
-    );
-    const ventaviernes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes]
-    );
-    const ventasabado = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado]
-    );
-    const ventadomingo = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo]
-    );
+    const ventalunes = await getObraBySoldDate(data.user.id, lunes);
+    const ventamartes = await getObraBySoldDate(data.user.id, martes);
+    const ventamiercoles = await getObraBySoldDate(data.user.id, miercoles);
+    const ventajueves = await getObraBySoldDate(data.user.id, jueves);
+    const ventaviernes = await getObraBySoldDate(data.user.id, viernes);
+    const ventasabado = await getObraBySoldDate(data.user.id, sabado);
+    const ventadomingo = await getObraBySoldDate(data.user.id, domingo);
 
-    const ventalunes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes0]
-    );
-    const ventamartes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes0]
-    );
-    const ventamiercoles0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles0]
-    );
-    const ventajueves0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves0]
-    );
-    const ventaviernes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes0]
-    );
-    const ventasabado0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado0]
-    );
-    const ventadomingo0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo0]
-    );
+    const ventalunes0 = await getObraBySoldDate(data.user.id, lunes0);
+    const ventamartes0 = await getObraBySoldDate(data.user.id, martes0);
+    const ventamiercoles0 = await getObraBySoldDate(data.user.id, miercoles0);
+    const ventajueves0 = await getObraBySoldDate(data.user.id, jueves0);
+    const ventaviernes0 = await getObraBySoldDate(data.user.id, viernes0);
+    const ventasabado0 = await getObraBySoldDate(data.user.id, sabado0);
+    const ventadomingo0 = await getObraBySoldDate(data.user.id, domingo0);
 
     estaSemana = {
       ventalunes: ventalunes.length,
@@ -417,63 +339,21 @@ var dashboardStats = async (data) => {
       hoy.getDate() - 2
     );
 
-    const ventalunes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes]
-    );
-    const ventamartes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes]
-    );
-    const ventamiercoles = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles]
-    );
-    const ventajueves = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves]
-    );
-    const ventaviernes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes]
-    );
-    const ventasabado = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado]
-    );
-    const ventadomingo = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo]
-    );
+    const ventalunes = await getObraBySoldDate(data.user.id, lunes);
+    const ventamartes = await getObraBySoldDate(data.user.id, martes);
+    const ventamiercoles = await getObraBySoldDate(data.user.id, miercoles);
+    const ventajueves = await getObraBySoldDate(data.user.id, jueves);
+    const ventaviernes = await getObraBySoldDate(data.user.id, viernes);
+    const ventasabado = await getObraBySoldDate(data.user.id, sabado);
+    const ventadomingo = await getObraBySoldDate(data.user.id, domingo);
 
-    const ventalunes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes0]
-    );
-    const ventamartes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes0]
-    );
-    const ventamiercoles0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles0]
-    );
-    const ventajueves0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves0]
-    );
-    const ventaviernes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes0]
-    );
-    const ventasabado0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado0]
-    );
-    const ventadomingo0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo0]
-    );
+    const ventalunes0 = await getObraBySoldDate(data.user.id, lunes0);
+    const ventamartes0 = await getObraBySoldDate(data.user.id, martes0);
+    const ventamiercoles0 = await getObraBySoldDate(data.user.id, miercoles0);
+    const ventajueves0 = await getObraBySoldDate(data.user.id, jueves0);
+    const ventaviernes0 = await getObraBySoldDate(data.user.id, viernes0);
+    const ventasabado0 = await getObraBySoldDate(data.user.id, sabado0);
+    const ventadomingo0 = await getObraBySoldDate(data.user.id, domingo0);
 
     estaSemana = {
       ventalunes: ventalunes.length,
@@ -569,63 +449,21 @@ var dashboardStats = async (data) => {
       hoy.getDate() - 3
     );
 
-    const ventalunes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes]
-    );
-    const ventamartes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes]
-    );
-    const ventamiercoles = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles]
-    );
-    const ventajueves = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves]
-    );
-    const ventaviernes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes]
-    );
-    const ventasabado = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado]
-    );
-    const ventadomingo = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo]
-    );
+    const ventalunes = await getObraBySoldDate(data.user.id, lunes);
+    const ventamartes = await getObraBySoldDate(data.user.id, martes);
+    const ventamiercoles = await getObraBySoldDate(data.user.id, miercoles);
+    const ventajueves = await getObraBySoldDate(data.user.id, jueves);
+    const ventaviernes = await getObraBySoldDate(data.user.id, viernes);
+    const ventasabado = await getObraBySoldDate(data.user.id, sabado);
+    const ventadomingo = await getObraBySoldDate(data.user.id, domingo);
 
-    const ventalunes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes0]
-    );
-    const ventamartes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes0]
-    );
-    const ventamiercoles0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles0]
-    );
-    const ventajueves0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves0]
-    );
-    const ventaviernes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes0]
-    );
-    const ventasabado0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado0]
-    );
-    const ventadomingo0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo0]
-    );
+    const ventalunes0 = await getObraBySoldDate(data.user.id, lunes0);
+    const ventamartes0 = await getObraBySoldDate(data.user.id, martes0);
+    const ventamiercoles0 = await getObraBySoldDate(data.user.id, miercoles0);
+    const ventajueves0 = await getObraBySoldDate(data.user.id, jueves0);
+    const ventaviernes0 = await getObraBySoldDate(data.user.id, viernes0);
+    const ventasabado0 = await getObraBySoldDate(data.user.id, sabado0);
+    const ventadomingo0 = await getObraBySoldDate(data.user.id, domingo0);
 
     estaSemana = {
       ventalunes: ventalunes.length,
@@ -716,63 +554,21 @@ var dashboardStats = async (data) => {
       hoy.getDate() - 4
     );
 
-    const ventalunes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes]
-    );
-    const ventamartes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes]
-    );
-    const ventamiercoles = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles]
-    );
-    const ventajueves = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves]
-    );
-    const ventaviernes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes]
-    );
-    const ventasabado = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado]
-    );
-    const ventadomingo = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo]
-    );
+    const ventalunes = await getObraBySoldDate(data.user.id, lunes);
+    const ventamartes = await getObraBySoldDate(data.user.id, martes);
+    const ventamiercoles = await getObraBySoldDate(data.user.id, miercoles);
+    const ventajueves = await getObraBySoldDate(data.user.id, jueves);
+    const ventaviernes = await getObraBySoldDate(data.user.id, viernes);
+    const ventasabado = await getObraBySoldDate(data.user.id, sabado);
+    const ventadomingo = await getObraBySoldDate(data.user.id, domingo);
 
-    const ventalunes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes0]
-    );
-    const ventamartes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes0]
-    );
-    const ventamiercoles0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles0]
-    );
-    const ventajueves0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves0]
-    );
-    const ventaviernes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes0]
-    );
-    const ventasabado0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado0]
-    );
-    const ventadomingo0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo0]
-    );
+    const ventalunes0 = await getObraBySoldDate(data.user.id, lunes0);
+    const ventamartes0 = await getObraBySoldDate(data.user.id, martes0);
+    const ventamiercoles0 = await getObraBySoldDate(data.user.id, miercoles0);
+    const ventajueves0 = await getObraBySoldDate(data.user.id, jueves0);
+    const ventaviernes0 = await getObraBySoldDate(data.user.id, viernes0);
+    const ventasabado0 = await getObraBySoldDate(data.user.id, sabado0);
+    const ventadomingo0 = await getObraBySoldDate(data.user.id, domingo0);
 
     estaSemana = {
       ventalunes: ventalunes.length,
@@ -864,63 +660,21 @@ var dashboardStats = async (data) => {
       hoy.getDate() - 5
     );
 
-    const ventalunes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes]
-    );
-    const ventamartes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes]
-    );
-    const ventamiercoles = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles]
-    );
-    const ventajueves = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves]
-    );
-    const ventaviernes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes]
-    );
-    const ventasabado = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado]
-    );
-    const ventadomingo = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo]
-    );
+    const ventalunes = await getObraBySoldDate(data.user.id, lunes);
+    const ventamartes = await getObraBySoldDate(data.user.id, martes);
+    const ventamiercoles = await getObraBySoldDate(data.user.id, miercoles);
+    const ventajueves = await getObraBySoldDate(data.user.id, jueves);
+    const ventaviernes = await getObraBySoldDate(data.user.id, viernes);
+    const ventasabado = await getObraBySoldDate(data.user.id, sabado);
+    const ventadomingo = await getObraBySoldDate(data.user.id, domingo);
 
-    const ventalunes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes0]
-    );
-    const ventamartes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes0]
-    );
-    const ventamiercoles0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles0]
-    );
-    const ventajueves0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves0]
-    );
-    const ventaviernes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes0]
-    );
-    const ventasabado0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado0]
-    );
-    const ventadomingo0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo0]
-    );
+    const ventalunes0 = await getObraBySoldDate(data.user.id, lunes0);
+    const ventamartes0 = await getObraBySoldDate(data.user.id, martes0);
+    const ventamiercoles0 = await getObraBySoldDate(data.user.id, miercoles0);
+    const ventajueves0 = await getObraBySoldDate(data.user.id, jueves0);
+    const ventaviernes0 = await getObraBySoldDate(data.user.id, viernes0);
+    const ventasabado0 = await getObraBySoldDate(data.user.id, sabado0);
+    const ventadomingo0 = await getObraBySoldDate(data.user.id, domingo0);
 
     estaSemana = {
       ventalunes: ventalunes.length,
@@ -1012,63 +766,21 @@ var dashboardStats = async (data) => {
       hoy.getDate() - 6
     );
 
-    const ventalunes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes]
-    );
-    const ventamartes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes]
-    );
-    const ventamiercoles = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles]
-    );
-    const ventajueves = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves]
-    );
-    const ventaviernes = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes]
-    );
-    const ventasabado = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado]
-    );
-    const ventadomingo = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo]
-    );
+    const ventalunes = await getObraBySoldDate(data.user.id, lunes);
+    const ventamartes = await getObraBySoldDate(data.user.id, martes);
+    const ventamiercoles = await getObraBySoldDate(data.user.id, miercoles);
+    const ventajueves = await getObraBySoldDate(data.user.id, jueves);
+    const ventaviernes = await getObraBySoldDate(data.user.id, viernes);
+    const ventasabado = await getObraBySoldDate(data.user.id, sabado);
+    const ventadomingo = await getObraBySoldDate(data.user.id, domingo);
 
-    const ventalunes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, lunes0]
-    );
-    const ventamartes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, martes0]
-    );
-    const ventamiercoles0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, miercoles0]
-    );
-    const ventajueves0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, jueves0]
-    );
-    const ventaviernes0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, viernes0]
-    );
-    const ventasabado0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, sabado0]
-    );
-    const ventadomingo0 = await pool.query(
-      "select * from obraComprada	where artista_id =? and  fecha_compra =?",
-      [data.user.id, domingo0]
-    );
+    const ventalunes0 = await getObraBySoldDate(data.user.id, lunes0);
+    const ventamartes0 = await getObraBySoldDate(data.user.id, martes0);
+    const ventamiercoles0 = await getObraBySoldDate(data.user.id, miercoles0);
+    const ventajueves0 = await getObraBySoldDate(data.user.id, jueves0);
+    const ventaviernes0 = await getObraBySoldDate(data.user.id, viernes0);
+    const ventasabado0 = await getObraBySoldDate(data.user.id, sabado0);
+    const ventadomingo0 = await getObraBySoldDate(data.user.id, domingo0);
 
     estaSemana = {
       ventalunes: ventalunes.length,
@@ -1090,14 +802,8 @@ var dashboardStats = async (data) => {
       ventadomingo0: ventadomingo0.length,
     };
   }
-  var ventaSemanal = await pool.query(
-    "select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?",
-    [data.user.id, sieteDias, hoy]
-  );
-  var ventaMensual = await pool.query(
-    "select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?",
-    [data.user.id, treintaDias, hoy]
-  );
+  var ventaSemanal = await getObrasWeekly(data.user.id, sieteDias, hoy);
+  var ventaMensual = await getObrasMothly(data.user.id, treintaDias, hoy);
 
   if (ventaSemanal.length > 0) {
     for (var i = 0; i < ventaSemanal.length; i++) {
@@ -1111,35 +817,21 @@ var dashboardStats = async (data) => {
     }
   }
 
-  const visitantesTotales = await pool.query(
-    "select * from artistas	where user_id =?",
-    [data.user.id]
-  );
-  const ventasTotales = await pool.query(
-    "select * from obraComprada	where artista_id =?",
-    [data.user.id]
-  );
+  const visitantesTotales = await getDataArtist(data.user.id);
+  const ventasTotales = await getArtistObrasSold(data.user.id);
   const conversionVisitas =
     (ventasTotales / visitantesTotales[0].visitas) * 100;
 
   //------------EXPOSICION------------------//
 
-  const colecciones = await pool.query(
-    "select * from colecciones where artista_id =? ORDER BY visitas DESC  LIMIT 5 ",
-    [data.user.id]
-  );
-  const evento = await pool.query(
-    "select * from eventos where artista_id =? ORDER BY id DESC  LIMIT 1 ",
-    [data.user.id]
-  );
+  const colecciones = await getFiveArtistsCollections(data.user.id);
+  const evento = await getLastArtistEvent(data.user.id);
+
   var visitasEvento = 0;
   if (evento.length > 0) {
     visitasEvento = evento[0].visitas;
   }
-  const eventos = await pool.query(
-    "select * from eventos where artista_id =? ",
-    [data.user.id]
-  );
+  const eventos = await getAllEvents(data.user.id)
   var totalVisitasEventos = 0;
   if (eventos.length > 0) {
     for (var i = 0; i < eventos.length; i++) {
@@ -1189,22 +881,14 @@ var dashboardStats = async (data) => {
 
   //---------------CLIENTES ----------------//
 
-  console.log(data.user.id);
-
-  const artistaCurrent = await pool.query(
-    "select * from artistas where user_id =? ",
-    [data.user.id]
-  );
+  const artistaCurrent = await getDataArtist(data.user.id);
   var totalVisitasPerfil = 0;
   var totalVisitasGaleria = 0;
 
   totalVisitasPerfil = artistaCurrent[0].visitas;
   totalVisitasGaleria = artistaCurrent[0].visitasGaleria;
 
-  const nombre = await pool.query(
-    "SELECT nombre, apellido, email FROM users WHERE id =?",
-    [data.user.id]
-  );
+  const nombre = await getUserName(data.user.id);
   const email = nombre[0].email;
   const url = data.url;
 

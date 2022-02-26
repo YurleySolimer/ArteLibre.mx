@@ -14,7 +14,21 @@ var getClientCompleted = async (id) => {
   return client;
 };
 
+var deleteClientShop = async (id) => {
+  //Delete
+  const client = pool.query("DELETE from clienteCompra WHERE id_obra=?", [id]);
+  return client;
+};
+
+var updateClientShop = async (data, id) => {
+  //Delete
+  const client = pool.query("UPDATE clienteCompra SET? WHERE id =?", [data, id]);
+  return client;
+};
+
 module.exports = {
   saveClient,
   getClientCompleted,
+  deleteClientShop,
+  updateClientShop
 };

@@ -1,4 +1,5 @@
-const pool = require("../database");
+const { getCollectionName, updateCollection } = require("../services-mysql/colletions");
+const { updateObra, savePics } = require("../services-mysql/obras");
 
 var editObra = async (data) => {
   const { id } = data.body;
@@ -22,10 +23,7 @@ var editObra = async (data) => {
   var nombreColeccion = "N/A";
 
   if (coleccion > 0) {
-    nombreColeccion = await pool.query(
-      "SELECT nombreColeccion FROM colecciones WHERE id =?",
-      [coleccion]
-    );
+    nombreColeccion = await getCollectionName(coleccion)
     nombreColeccion = nombreColeccion[0];
   }
   const newObra = {
@@ -43,10 +41,7 @@ var editObra = async (data) => {
     artista_id: data.user.id,
   };
 
-  const obra = await pool.query("UPDATE obras set ? WHERE id =?", [
-    newObra,
-    id,
-  ]);
+  const obra = await updateObra(newObra, id)
 
   //GUARDANDO FOTOS DE LA OBRA//
 
@@ -65,15 +60,12 @@ var editObra = async (data) => {
       obra_id: id,
     };
 
-    const foto = await pool.query("INSERT INTO fotosObras set ?", [newFoto]);
+    const foto = await savePics(newFoto)
   }
   const fotoColeccion = {
     fotoNombre: originalname,
   };
-  await pool.query("UPDATE colecciones set? WHERE id=?", [
-    fotoColeccion,
-    coleccion,
-  ]);
+  await updateCollection(fotoColeccion, coleccion)
 };
 
 module.exports = editObra;

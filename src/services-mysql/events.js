@@ -44,6 +44,24 @@ var deleteEventPics = async (id) => {
   return event;
 };
 
+var getAllEvents = async (id) => {
+  //
+  const event = await pool.query(
+    "select * from eventos where artista_id =? ",
+    [data.user.id]
+  );
+  return event;
+};
+
+var updateEvent = async (data, id) => {
+  //update data event
+  const event = await pool.query("UPDATE eventos SET ? WHERE id =?", [
+    data,
+    id,
+  ]);
+  return event;
+};
+
 module.exports = {
   getEvents,
   getLastArtistEvent,
@@ -51,4 +69,6 @@ module.exports = {
   getFotos,
   deleteEvent,
   deleteEventPics,
+  getAllEvents,
+  updateEvent
 };

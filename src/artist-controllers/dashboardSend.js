@@ -1,4 +1,4 @@
-const pool = require("../database");
+const { updateClientShop } = require("../services-mysql/clients");
 
 var dashboardSend = async (data) => {
     const codigo = data.body.codigo;
@@ -7,7 +7,7 @@ var dashboardSend = async (data) => {
       codigo,
       estadoObra: "Enviado",
     };
-    await pool.query("UPDATE clienteCompra SET? WHERE id =?", [newCodigo, id]);
+    await updateClientShop(newCodigo, id)
     return true
 };
 module.exports = dashboardSend;

@@ -1,5 +1,6 @@
-const pool = require("../database");
 var fs = require("fs");
+const { updateUserById } = require("../services-mysql/users");
+const { updateArtist } = require("../services-mysql/artists");
 
 var editProfile = async (data) => {
   const { fullname, email, apellido, telefono } = data.body;
@@ -33,11 +34,7 @@ var editProfile = async (data) => {
     foto_nombre: originalname,
   };
 
-  const result = await pool.query("UPDATE users SET ? WHERE id=? ", [
-    newUser,
-    data.body.idArtist,
-  ]);
-
+  const result = await updateUserById(newUser, data.body.idArtist)
 
   const {
     pais,
@@ -62,10 +59,8 @@ var editProfile = async (data) => {
     frase,
   };
 
-  const artist = await pool.query("UPDATE artistas SET ? WHERE user_id=? ", [
-    newArtista,
-    data.body.idArtist,
-  ]);
+  const artist = await updateArtist(newArtista, data.body.idArtist)
+
 };
 
 module.exports = editProfile;

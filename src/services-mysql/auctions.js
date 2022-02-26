@@ -9,6 +9,13 @@ var getLastArtistAuction = async (id) => {
   return auction;
 };
 
+var deleteAuctionInfo = async (id) => {
+  //Get an auction
+  const auction = await pool.query("DELETE from subastasInfo WHERE obra_id=?", [id]);
+  return auction;
+};
+
 module.exports = {
   getLastArtistAuction,
+  deleteAuctionInfo
 };
