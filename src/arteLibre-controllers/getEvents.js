@@ -1,7 +1,8 @@
-const pool = require("../database");
 const isArtist = require("./isArtist");
 const isAdmin = require("./isAdmin");
 const isClient = require("./isClient");
+const { getUserName } = require("../services-mysql/users");
+const { getAllEventsCompleted } = require("../services-mysql/events");
 
 var getEvents = async (data) => {
   const artista = await isArtist(data);
@@ -10,13 +11,10 @@ var getEvents = async (data) => {
   var nombre = ''
 
   if (artista == true || cliente == true || admin == true) {
-    nombre = await pool.query(
-      "SELECT nombre, apellido FROM users WHERE id =?",
-      [data.user.id]
-    );
+    nombre = await getUserName(data.user.id)
   }
 
-  const eventos = await pool.query("SELECT * FROM eventoCompleto");
+  const eventos = await getAllEventsCompleted()
 
   return {
     eventos,

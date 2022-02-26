@@ -52,6 +52,12 @@ var getAllEvents = async (id) => {
   return event;
 };
 
+var getAllEventsCompleted = async () => {
+  //
+  const event = await pool.query("SELECT * FROM eventoCompleto");
+  return event;
+};
+
 var updateEvent = async (data, id) => {
   //update data event
   const event = await pool.query("UPDATE eventos SET ? WHERE id =?", [
@@ -76,6 +82,26 @@ var saveEventsPics = async (data) => {
   return event;
 };
 
+var getEventById = async (id) => {
+  const event = await pool.query("SELECT * FROM eventos WHERE id =?", [id]);
+  return event;
+};
+
+var getEventPics = async (id) => {
+  const event = await pool.query(
+    "SELECT * FROM fotosEventos WHERE evento_id =?",
+    [id]
+  );
+  return event;
+};
+
+var getEventVisits = async (id) => {
+  const event = await pool.query("SELECT visitas from eventos WHERE id =?", [
+    id,
+  ]);
+  return event;
+};
+
 module.exports = {
   getEvents,
   getLastArtistEvent,
@@ -87,4 +113,8 @@ module.exports = {
   updateEvent,
   saveEvent,
   saveEventsPics,
+  getEventById,
+  getEventPics,
+  getEventVisits,
+  getAllEventsCompleted
 };
