@@ -2,6 +2,8 @@ const pool = require("../database");
 const isArtist = require("./isArtist");
 const isAdmin = require("./isAdmin");
 const isClient = require("./isClient");
+const { getUserName } = require("../services-mysql/users");
+const { getAllCollections } = require("../services-mysql/colletions");
 
 var getCollections = async (data) => {
   const artista = await isArtist(data);
@@ -10,13 +12,10 @@ var getCollections = async (data) => {
   var nombre = ''
 
   if (artista == true || cliente == true || admin == true) {
-    nombre = await pool.query(
-      "SELECT nombre, apellido FROM users WHERE id =?",
-      [data.user.id]
-    );
+    nombre = await getUserName(data.user.id)
   }
 
-  const colecciones = await pool.query("SELECT * from coleccionArtista");
+  const colecciones = await getAllCollections()
 
   return {
     colecciones,

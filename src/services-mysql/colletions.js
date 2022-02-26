@@ -77,6 +77,37 @@ var getCollectionById = async (id) => {
   return colletion;
 };
 
+var getArtistCollectionById = async (id) => {
+  //
+  const colletion = await pool.query(
+    "SELECT * from coleccionArtista WHERE id =?",
+    [id]
+  );
+  return colletion;
+};
+
+var getCollectionVisits = async (id) => {
+  //
+  const colletion = await pool.query(
+    "SELECT visitas from colecciones WHERE id =?",
+    [id]
+  );
+  return colletion;
+};
+
+var updateCollection = async (data, id) => {
+  //
+  const colletion = await pool.query("UPDATE colecciones  SET ? WHERE id =?", [data, id]);
+  return colletion;
+};
+
+var getAllCollections = async () => {
+  //
+  const colletion = await pool.query("SELECT * from coleccionArtista");
+  return colletion;
+};
+
+
 module.exports = {
   getNotableCollection,
   getFiveArtistsCollections,
@@ -87,4 +118,8 @@ module.exports = {
   getCollections,
   saveCollection,
   getCollectionById,
+  getArtistCollectionById,
+  getCollectionVisits,
+  updateCollection,
+  getAllCollections
 };

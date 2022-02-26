@@ -1,7 +1,9 @@
-const pool = require("../database");
 const isArtist = require("./isArtist");
 const isAdmin = require("./isAdmin");
 const isClient = require("./isClient");
+const { getUserName } = require("../services-mysql/users");
+const { getArtistCollectionById, getCollectionVisits, updateCollection } = require("../services-mysql/colletions");
+const { getObrasCompletedByCollection, getMainObra } = require("../services-mysql/obras");
 
 var getCollection = async (data) => {
   const id = data.params.id;
@@ -11,38 +13,24 @@ var getCollection = async (data) => {
   var nombre = ''
 
   if (artista == true || cliente == true || admin == true) {
-    nombre = await pool.query(
-      "SELECT nombre, apellido FROM users WHERE id =?",
-      [data.user.id]
-    );
+    nombre = await getUserName(data.user.id)
   }
 
   var obras = [];
-  const colecciones = await pool.query(
-    "SELECT * from coleccionArtista WHERE id =?",
-    [id]
-  );
+  const colecciones = await getArtistCollectionById(id)
+
   if (colecciones.length > 0) {
-    obras = await pool.query(
-      "SELECT * FROM obraCompleta WHERE coleccion_id =?",
-      [id]
-    );
+    obras = await getObrasCompletedByCollection(id)     
   }
 
-  var visitasArray = await pool.query(
-    "SELECT visitas from colecciones WHERE id =?",
-    [id]
-  );
+  var visitasArray = await getCollectionVisits(id)
   var visitasTotal = visitasArray[0].visitas + 1;
   var visitas = {
     visitas: visitasTotal,
   };
-  await pool.query("UPDATE colecciones  SET ? WHERE id =?", [visitas, id]);
+  await updateCollection(visitas, id)
 
-  const obras2 = await pool.query(
-    "SELECT * FROM obraCompleta WHERE principal =?",
-    ["True"]
-  );
+  const obras2 = await getMainObra()
 
   var myArray = [];
   for (var i = 0; i < 3; i++) {

@@ -164,6 +164,15 @@ var getObrasByCollection = async (collection) => {
   return obra;
 };
 
+var getObrasCompletedByCollection = async (id) => {
+  //save new obra
+  const obra = await pool.query(
+    "SELECT * FROM obraCompleta WHERE coleccion_id =?",
+    [id]
+  );
+  return obra;
+};
+
 var getObraGallery1 = async (id, gallery) => {
   //save new obra
   const obra = await pool.query(
@@ -225,5 +234,6 @@ module.exports = {
   getObraGallery1,
   getObraGallery2,
   getObraPics,
-  getMainObra
+  getMainObra,
+  getObrasCompletedByCollection
 };
