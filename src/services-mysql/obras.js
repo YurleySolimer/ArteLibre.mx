@@ -229,6 +229,15 @@ var getObraVisits = async (id) => {
   return obra;
 };
 
+var getObraPrice = async (id) => {
+  //
+  const obra = await pool.query(
+    "SELECT precio FROM obras WHERE id =?",
+    [id]
+  );
+  return obra;
+};
+
 var filterObras1 = async (data) => {
   //
   const obra = await pool.query(
@@ -286,4 +295,5 @@ module.exports = {
   getMainObraNoHide,
   filterObras1,
   filterObras2,
+  getObraPrice
 };

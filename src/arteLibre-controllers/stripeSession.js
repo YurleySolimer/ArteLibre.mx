@@ -1,5 +1,3 @@
-const pool = require("../database");
-
 var stripeSession = async (data, userID) => {
   const id = data.params.id;
 

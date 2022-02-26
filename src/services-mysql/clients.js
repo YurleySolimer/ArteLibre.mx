@@ -16,22 +16,51 @@ var getClientCompleted = async (id) => {
 
 var deleteClientShop = async (id) => {
   //Delete
-  const client = pool.query("DELETE from clienteCompra WHERE id_obra=?", [id]);
+  const client = await pool.query("DELETE from clienteCompra WHERE id_obra=?", [id]);
   return client;
 };
 
 var updateClientShop = async (data, id) => {
-  //Delete
-  const client = pool.query("UPDATE clienteCompra SET? WHERE id =?", [
+  //
+  const client = await pool.query("UPDATE clienteCompra SET? WHERE id =?", [
     data,
     id,
   ]);
   return client;
 };
 
+var saveClientShop = async (data) => {
+  //
+  const client = await pool.query("INSERT INTO clienteCompra SET?", [newCompra]);
+  return client;
+};
+
+
+var getClientData = async (id) => {
+  //
+  const client = await pool.query(
+    "SELECT * FROM clientes WHERE user_id =?",
+    [id]
+  );
+  return client;
+};
+
+var updateClient = async (data, id) => {
+  //
+  const client = await pool.query("UPDATE clientes SET? WHERE user_id=?", [
+    data,
+    id,
+  ]);
+  return client;
+};
+
+
 module.exports = {
   saveClient,
   getClientCompleted,
   deleteClientShop,
   updateClientShop,
+  saveClientShop,
+  getClientData,
+  updateClient
 };

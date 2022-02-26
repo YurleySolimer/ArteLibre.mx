@@ -1,4 +1,5 @@
-const pool = require("../database");
+const { saveClientShop, getClientData, updateClient } = require("../services-mysql/clients");
+const { updateObra, getObraPrice } = require("../services-mysql/obras");
 const isClient = require("./isClient");
 
 var getObraSuccess = async (data) => {
@@ -11,21 +12,15 @@ var getObraSuccess = async (data) => {
       id_user: data.user.id,
     };
 
-    await pool.query("INSERT INTO clienteCompra SET?", [newCompra]);
+    await saveClientShop(newCompra)
     const comprada = {
       comprada: "Si",
     };
-    await pool.query("UPDATE obras SET ? WHERE id = ? ", [comprada, id]);
+    await updateObra(comprada, id)
 
-    const precioObra = await pool.query(
-      "SELECT precio FROM obras WHERE id =?",
-      [id]
-    );
+    const precioObra = await getObraPrice(id)
 
-    var obrasCompradas = await pool.query(
-      "SELECT * FROM clientes WHERE user_id =?",
-      [data.user.id]
-    );
+    var obrasCompradas = await getClientData(data.user.id)
     var obrasTotal = obrasCompradas[0].obrasCompradas + 1;
     const totalCompras = obrasCompradas[0].totalCompras + precioObra[0].precio;
     const date = new Date();
@@ -36,11 +31,7 @@ var getObraSuccess = async (data) => {
       ultima_compra: hoy,
       totalCompras,
     };
-
-    await pool.query("UPDATE clientes SET? WHERE user_id=?", [
-      obrasTotalCompradas,
-      data.user.id,
-    ]);
+    await updateClient(obrasTotalCompradas, data.user.id) 
   }
 
   return true
