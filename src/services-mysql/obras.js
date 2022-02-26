@@ -122,16 +122,16 @@ var getObrasWeekly = async (id, date, today) => {
   //Get obras in a week
   const obras = await pool.query(
     "select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?",
-    [id, date, hoy]
+    [id, date, today]
   );
   return obras;
 };
 
-var getObrasMothly = async (id, date) => {
+var getObrasMothly = async (id, date, today) => {
   //Get in a month
   const obras = await pool.query(
     "select * from obraComprada	where artista_id =? and  fecha_compra BETWEEN ? AND ?",
-    [id, date, hoy]
+    [id, date, today]
   );
   return obras;
 };

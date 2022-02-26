@@ -48,7 +48,7 @@ var getAllEvents = async (id) => {
   //
   const event = await pool.query(
     "select * from eventos where artista_id =? ",
-    [data.user.id]
+    [id]
   );
   return event;
 };
