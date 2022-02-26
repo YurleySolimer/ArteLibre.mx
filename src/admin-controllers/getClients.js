@@ -1,14 +1,12 @@
-const pool = require("../database");
+const { getAllClients } = require("../services-mysql/clients");
+const { getUserName } = require("../services-mysql/users");
 
 var getClients = async (data) => {
   const admin = true;
   const logueado = true;
-  const nombre = await pool.query(
-    "SELECT nombre, apellido FROM users WHERE id =?",
-    [data.user.id]
-  );
+  const nombre = await getUserName(data.user.id)
 
-  var clientesCompletos = await pool.query("SELECT * FROM usuarioCliente");
+  var clientesCompletos = await getAllClients()
   return {
     nombre,
     admin,

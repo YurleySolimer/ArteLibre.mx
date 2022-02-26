@@ -1,13 +1,10 @@
-const pool = require("../database");
+const { updateArtist } = require("../services-mysql/artists");
 
 var suspendArtists = async (data) => {
   const inactivo = {
     inactivo: "Si",
   };
-  await pool.query("UPDATE artistas set? WHERE id=?", [
-    inactivo,
-    data.params.id,
-  ]);
+  await updateArtist(inactivo, data.params.id)
 };
 
 module.exports = suspendArtists;

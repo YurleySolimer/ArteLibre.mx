@@ -1,4 +1,5 @@
 const pool = require("../database");
+const { updateAuctionsInfo } = require("../services-mysql/auctions");
 
 var publicAuctions = async (data) => {
   const { precioBase, horaInicio, fechaInicio, descripcion, duracion, id } =
@@ -12,7 +13,7 @@ var publicAuctions = async (data) => {
     estadoSubasta: "Publicada",
   };
 
-  await pool.query("UPDATE subastasInfo set? WHERE id =?", [newSubasta, id]);
+  updateAuctionsInfo(newSubasta, id)
 };
 
 module.exports = publicAuctions;

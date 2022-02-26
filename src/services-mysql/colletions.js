@@ -107,6 +107,14 @@ var getAllCollections = async () => {
   return colletion;
 };
 
+var getLastCollection = async () => {
+  //
+  const colletion = await pool.query(
+    "select * from colecciones order by id desc limit 1"
+  );
+  return colletion;
+};
+
 
 module.exports = {
   getNotableCollection,
@@ -121,5 +129,6 @@ module.exports = {
   getArtistCollectionById,
   getCollectionVisits,
   updateCollection,
-  getAllCollections
+  getAllCollections,
+  getLastCollection
 };

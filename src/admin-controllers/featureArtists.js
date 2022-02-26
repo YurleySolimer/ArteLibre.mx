@@ -1,4 +1,4 @@
-const pool = require("../database");
+const { updateArtist } = require("../services-mysql/artists");
 
 var featureArtists = async (data) => {
   const { id, text } = data.body;
@@ -6,7 +6,7 @@ var featureArtists = async (data) => {
     destacar: "Si",
     info_destacar: text,
   };
-  await pool.query("UPDATE artistas set? WHERE id=?", [destacar, id]);
+  await updateArtist(destacar, id)
 };
 
 module.exports = featureArtists;

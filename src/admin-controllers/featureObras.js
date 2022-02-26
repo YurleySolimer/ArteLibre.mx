@@ -1,11 +1,11 @@
-const pool = require("../database");
+const { updateObra } = require("../services-mysql/obras");
 
 var featureObras = async (data) => {
   const { id } = data.body;
   const destacar = {
     destacar: "Si",
   };
-  await pool.query("UPDATE obras set? WHERE id=?", [destacar, id]);
+  await updateObra(destacar, id)
 };
 
 module.exports = featureObras;

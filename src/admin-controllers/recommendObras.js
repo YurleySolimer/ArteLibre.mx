@@ -1,4 +1,4 @@
-const pool = require("../database");
+const { updateObra } = require("../services-mysql/obras");
 
 var recommendObras = async (data) => {
   const { id, text } = data.body;
@@ -6,7 +6,7 @@ var recommendObras = async (data) => {
     recomendar: "Si",
     titulo_recomendada: text,
   };
-  const obras = await pool.query("UPDATE obras set? WHERE id=?", [recomendar, id]);
+  const obras = await updateObra(recomendar, id)
 };
 
 module.exports = recommendObras;

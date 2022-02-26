@@ -117,7 +117,35 @@ var filterArtists2 = async (data) => {
   return artists;
 };
 
+var getAllArtistsByVisits = async () => {
+  //
+  const artists = await pool.query(
+    "select * from artistas order by visitasGaleria desc limit 1 "
+  );
+  return artists;
+};
 
+var getRelevantArtists = async () => {
+  //
+  const artists = await pool.query(
+    "select * from usuarioArtista order by visitas desc limit 3 "
+  );
+  return artists;
+};
+
+var getTopArtists = async () => {
+  //
+  const artists = await pool.query(
+    "SELECT *, avg(precio) as precioProm, count(id) as totalObras from obraComprada group by artista_id order by precioProm desc limit 5"
+  );
+  return artists;
+};
+
+var getTotalArtists = async () => {
+  //
+  const artists = await pool.query("SELECT *  FROM artistas");
+  return artists;
+};
 
 module.exports = {
   saveArtist,
@@ -132,5 +160,9 @@ module.exports = {
   getGalleryVisits,
   getAllArtists,
   filterArtists1,
-  filterArtists2
+  filterArtists2,
+  getAllArtistsByVisits,
+  getRelevantArtists,
+  getTopArtists,
+  getTotalArtists
 };

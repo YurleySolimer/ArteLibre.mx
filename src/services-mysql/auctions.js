@@ -46,6 +46,14 @@ var updateAuctionsInfo = async (data, id) => {
   return auction;
 };
 
+var getNextAuctions = async () => {
+  //save an auction
+  const auction = await pool.query(
+    "select * from obraSubasta order by fecha_inicio desc limit 3 "
+  );
+  return auction;
+};
+
 module.exports = {
   getLastArtistAuction,
   deleteAuctionInfo,
@@ -53,4 +61,5 @@ module.exports = {
   getAuctionById,
   getAllAuctions,
   updateAuctionsInfo,
+  getNextAuctions
 };

@@ -264,6 +264,58 @@ var filterObras2 = async (data) => {
   return obra;
 };
 
+var getAllObrasWeekly = async (date, today) => {
+  //Get obras in a week
+  const obras = await pool.query(
+    "select * from obraComprada where fecha_compra between ? and ?",
+    [date, today]
+  );
+  return obras;
+};
+
+var getLastObra = async () => {
+  //Get last obra
+  const obras = await pool.query(
+    "select * from obraCompleta order by id desc limit 1"
+  );
+  return obras;
+};
+
+var getAllObrasByVisit = async () => {
+  //Get last obra
+  const obras = await pool.query(
+    "select * from obraCompleta order by visitas desc limit 1"
+  );
+  return obras;
+};
+
+var getAllObrasCompleted = async () => {
+  //Get last obra
+  const obras = await pool.query("SELECT * FROM obraCompleta");
+  return obras;
+};
+
+var getAllPrices = async () => {
+  //
+  const obras = await pool.query("Select precio from obraComprada");
+  return obras;
+};
+
+var getAllObras = async () => {
+  //
+  const obras = await pool.query("SELECT *  FROM obras");
+  return obras;
+};
+
+var getAllObrasSold = async () => {
+  //
+  const obras = await pool.query("SELECT * from obraComprada");
+  return obras;
+};
+
+
+
+
 module.exports = {
   getNotableObra,
   getNotableObras,
@@ -295,5 +347,13 @@ module.exports = {
   getMainObraNoHide,
   filterObras1,
   filterObras2,
-  getObraPrice
+  getObraPrice,
+  getAllObrasWeekly,
+  getLastObra,
+  getAllObrasByVisit,
+  getAllObrasCompleted,
+  getAllPrices,
+  getAllObras,
+  getAllObrasSold
+  
 };

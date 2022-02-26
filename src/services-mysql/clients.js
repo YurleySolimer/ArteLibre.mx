@@ -54,6 +54,42 @@ var updateClient = async (data, id) => {
   return client;
 };
 
+var getAllClients = async () => {
+  //
+  const client = await pool.query("SELECT * FROM usuarioCliente");
+  return client;
+};
+
+var getClientsByRegion = async () => {
+  //
+  const client = await pool.query(
+    "SELECT region, count(*) as numero from clientes  group by region order by numero desc limit 5"
+  );
+  return client;
+};
+
+var getTotalClients = async () => {
+  //
+  const client = await pool.query("SELECT * from clientes");
+  return client;
+};
+
+var getTopClients = async () => {
+  //
+  const client = await pool.query(
+    "SELECT * from usuarioCliente order by obrasCompradas desc limit 5"
+  );
+  return client;
+};
+
+var getTotalShoppers = async () => {
+  //
+  const client = await pool.query(
+    "SELECT id_user, count(*) as comprador from clienteCompra group by id_user"
+  );;
+  return client;
+};
+
 
 module.exports = {
   saveClient,
@@ -62,5 +98,10 @@ module.exports = {
   updateClientShop,
   saveClientShop,
   getClientData,
-  updateClient
+  updateClient,
+  getAllClients,
+  getClientsByRegion,
+  getTotalClients,
+  getTopClients,
+  getTotalShoppers
 };

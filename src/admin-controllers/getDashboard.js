@@ -1,12 +1,14 @@
-const pool = require("../database");
+const { getAllArtistsByVisits, getRelevantArtists } = require("../services-mysql/artists");
+const { getNextAuctions } = require("../services-mysql/auctions");
+const { getLastCollection } = require("../services-mysql/colletions");
+const { getAllEventsWeekly, getNextEvents } = require("../services-mysql/events");
+const { getAllObrasWeekly, getLastObra, getAllObrasByVisit } = require("../services-mysql/obras");
+const { getUserName } = require("../services-mysql/users");
 
 var getDashboard = async (data) => {
   const admin = true;
   const logueado = true;
-  const nombre = await pool.query(
-    "SELECT nombre, apellido FROM users WHERE id =?",
-    [data.user.id]
-  );
+  const nombre = await getUserName(data.user.id)
 
   const date = new Date();
   var hoy = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -16,10 +18,7 @@ var getDashboard = async (data) => {
     date.getDate() - 7
   );
 
-  const transaccionesGeneral = await pool.query(
-    "select * from obraComprada where fecha_compra between ? and ?",
-    [sieteDias, hoy]
-  );
+  const transaccionesGeneral = await getAllObrasWeekly(sieteDias, hoy)
   var transaccionesTotal = 0;
   var ingresos = 0;
 
@@ -30,36 +29,19 @@ var getDashboard = async (data) => {
     }
   }
 
-  const eventosGeneral = await pool.query(
-    "select * from eventos where fecha_inicio between ? and ?",
-    [sieteDias, hoy]
-  );
+  const eventosGeneral = await getAllEventsWeekly(sieteDias, hoy)
   var eventos = 0;
   if (eventosGeneral.length > 0) {
     eventos = eventosGeneral.length;
   }
 
-  const ultimaObra = await pool.query(
-    "select * from obraCompleta order by id desc limit 1"
-  );
-  const galeria = await pool.query(
-    "select * from artistas order by visitasGaleria desc limit 1 "
-  );
-  const ultimaColeccion = await pool.query(
-    "select * from colecciones order by id desc limit 1"
-  );
-  const obraVisitada = await pool.query(
-    "select * from obraCompleta order by visitas desc limit 1"
-  );
-  const artistasRelevantes = await pool.query(
-    "select * from usuarioArtista order by visitas desc limit 3 "
-  );
-  const proximasSubastas = await pool.query(
-    "select * from obraSubasta order by fecha_inicio desc limit 3 "
-  );
-  const proximosEventos = await pool.query(
-    "select * from eventos order by fecha_inicio desc limit 3 "
-  );
+  const ultimaObra = await getLastObra()
+  const galeria = await getAllArtistsByVisits()
+  const ultimaColeccion = await getLastCollection()
+  const obraVisitada = await getAllObrasByVisit()
+  const artistasRelevantes = await getRelevantArtists()
+  const proximasSubastas = await getNextAuctions()
+  const proximosEventos = await getNextEvents()
 
   return {
     nombre,

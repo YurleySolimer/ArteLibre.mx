@@ -102,6 +102,23 @@ var getEventVisits = async (id) => {
   return event;
 };
 
+var getAllEventsWeekly = async (date, today) => {
+  //Get events in a week
+  const events = await pool.query(
+    "select * from eventos where fecha_inicio between ? and ?",
+    [sieteDias, hoy]
+  );
+  return events;
+};
+
+var getNextEvents = async () => {
+  const event = await pool.query(
+    "select * from eventos order by fecha_inicio desc limit 3 "
+  );
+
+  return event;
+};
+
 module.exports = {
   getEvents,
   getLastArtistEvent,
@@ -116,5 +133,7 @@ module.exports = {
   getEventById,
   getEventPics,
   getEventVisits,
-  getAllEventsCompleted
+  getAllEventsCompleted,
+  getAllEventsWeekly,
+  getNextEvents
 };
