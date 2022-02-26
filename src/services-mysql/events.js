@@ -46,10 +46,9 @@ var deleteEventPics = async (id) => {
 
 var getAllEvents = async (id) => {
   //
-  const event = await pool.query(
-    "select * from eventos where artista_id =? ",
-    [id]
-  );
+  const event = await pool.query("select * from eventos where artista_id =? ", [
+    id,
+  ]);
   return event;
 };
 
@@ -87,5 +86,5 @@ module.exports = {
   getAllEvents,
   updateEvent,
   saveEvent,
-  saveEventsPics
+  saveEventsPics,
 };

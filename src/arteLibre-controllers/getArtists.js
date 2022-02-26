@@ -1,23 +1,23 @@
-const pool = require("../database");
 const isArtist = require("./isArtist");
 const isAdmin = require("./isAdmin");
 const isClient = require("./isClient");
+const {
+  getAllArtists,
+  filterArtists1,
+  filterArtists2,
+} = require("../services-mysql/artists");
+const { getUserName } = require("../services-mysql/users");
 
 var getArtists = async (data) => {
-  var artistas = await pool.query(
-    "SELECT * FROM usuarioArtista ORDER BY nombre ASC"
-  );
+  var artistas = await getAllArtists();
 
   const artista = await isArtist(data);
   const cliente = await isClient(data);
   const admin = await isAdmin(data);
-  var nombre = ''
+  var nombre = "";
 
   if (artista == true || cliente == true || admin == true) {
-    nombre = await pool.query(
-      "SELECT nombre, apellido FROM users WHERE id =?",
-      [data.user.id]
-    );
+    nombre = await getUserName(data.user.id);
   }
 
   if (data.query) {
@@ -26,26 +26,10 @@ var getArtists = async (data) => {
       data.query.nombreArtistas ||
       data.query.tipoArtistas
     ) {
-      artistas = await pool.query(
-        "SELECT * FROM usuarioArtista WHERE nombre =? OR apellido =? OR disciplina_principal =? OR disciplina_sec =?",
-        [
-          data.query.nombreArtistas,
-          data.query.nombreArtistas,
-          data.query.tecnicaArtistas,
-          data.query.tecnicaArtistas,
-        ]
-      );
+      artistas = await filterArtists1(data);
     }
     if (data.query.tecnicaArtistas && data.query.nombreArtistas) {
-      artistas = await pool.query(
-        "SELECT * FROM usuarioArtista WHERE nombre =? OR apellido =? AND disciplina_principal =? OR disciplina_sec =?",
-        [
-          data.query.nombreArtistas,
-          data.query.nombreArtistas,
-          data.query.tecnicaArtistas,
-          data.query.tecnicaArtistas,
-        ]
-      );
+      artistas = await filterArtists2(data);
     }
   }
 
@@ -56,6 +40,7 @@ var getArtists = async (data) => {
     logueado,
     admin,
     nombre,
-  }
+  };
 };
+
 module.exports = getArtists;

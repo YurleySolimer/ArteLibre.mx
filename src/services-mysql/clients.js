@@ -22,7 +22,10 @@ var deleteClientShop = async (id) => {
 
 var updateClientShop = async (data, id) => {
   //Delete
-  const client = pool.query("UPDATE clienteCompra SET? WHERE id =?", [data, id]);
+  const client = pool.query("UPDATE clienteCompra SET? WHERE id =?", [
+    data,
+    id,
+  ]);
   return client;
 };
 
@@ -30,5 +33,5 @@ module.exports = {
   saveClient,
   getClientCompleted,
   deleteClientShop,
-  updateClientShop
+  updateClientShop,
 };

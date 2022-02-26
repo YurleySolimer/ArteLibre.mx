@@ -1,7 +1,9 @@
-const pool = require("../database");
 const isArtist = require("./isArtist");
 const isAdmin = require("./isAdmin");
 const isClient = require("./isClient");
+const { getUserName } = require("../services-mysql/users");
+const { getAuctionById } = require("../services-mysql/auctions");
+const { getObraPics, getMainObra } = require("../services-mysql/obras");
 
 var getAuction = async (data) => {
   const artista = await isArtist(data);
@@ -10,25 +12,13 @@ var getAuction = async (data) => {
   var nombre = ''
 
   if (artista == true || cliente == true || admin == true) {
-    nombre = await pool.query(
-      "SELECT nombre, apellido FROM users WHERE id =?",
-      [data.user.id]
-    );
+    nombre = await getUserName(data.user.id)
   }
 
-  const subasta = await pool.query("SELECT * FROM obraSubasta WHERE id =?", [
-    data.params.id,
-  ]);
-
+  const subasta = await getAuctionById(data.params.id)
   const obraId = subasta[0].obraId;
-  const fotos = await pool.query("SELECT * FROM fotosObras WHERE obra_id =?", [
-    obraId,
-  ]);
-  
-  const obras = await pool.query(
-    "SELECT * FROM obraCompleta WHERE principal =?",
-    ["True"]
-  );
+  const fotos = await getObraPics(obraId)    
+  const obras = await getMainObra()
 
   var myArray = [];
   for (var i = 0; i < 3; i++) {

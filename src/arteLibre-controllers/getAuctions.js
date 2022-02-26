@@ -1,21 +1,22 @@
-const pool = require("../database");
 const isArtist = require("./isArtist");
 const isAdmin = require("./isAdmin");
 const isClient = require("./isClient");
+const { getUserName } = require("../services-mysql/users");
+const {
+  getAllAuctions,
+  updateAuctionsInfo,
+} = require("../services-mysql/auctions");
 
 var getAuctions = async (data) => {
   artista = await isArtist(data);
   cliente = await isClient(data);
   admin = await isAdmin(data);
-  var nombre = ''
+  var nombre = "";
 
   if (artista == true || cliente == true || admin == true) {
-    nombre = await pool.query(
-      "SELECT nombre, apellido FROM users WHERE id =?",
-      [data.user.id]
-    );
+    nombre = await getUserName(data.user.id);
   }
-  const obras = await pool.query("SELECT * FROM obraSubasta");
+  const obras = await getAllAuctions();
   if (obras.length > 0) {
     for (var i = 0; i < obras.length; i++) {
       const fecha = obras[i].fecha_inicio;
@@ -55,20 +56,14 @@ var getAuctions = async (data) => {
           estadoSubasta: "En Proceso",
           tiempo_restante,
         };
-        await pool.query("UPDATE subastasInfo SET? WHERE obra_id =?", [
-          estadoSubasta,
-          obras[i].obraId,
-        ]);
+        await updateAuctionsInfo(estadoSubasta, obras[i].obraId);
       }
 
       if (fecha_final.getTime() <= fecha2.getTime()) {
         const estadoSubasta = {
           estadoSubasta: "Finalizada",
         };
-        await pool.query("UPDATE subastasInfo SET? WHERE obra_id =?", [
-          estadoSubasta,
-          obras[i].obraId,
-        ]);
+        await updateAuctionsInfo(estadoSubasta, obras[i].obraId);
       }
     }
   }

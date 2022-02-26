@@ -71,10 +71,9 @@ var saveCollection = async (data) => {
 
 var getCollectionById = async (id) => {
   //
-  const colletion = await pool.query(
-    "SELECT * from colecciones WHERE id =?",
-    [id]
-  );
+  const colletion = await pool.query("SELECT * from colecciones WHERE id =?", [
+    id,
+  ]);
   return colletion;
 };
 
@@ -87,5 +86,5 @@ module.exports = {
   getIdCollection,
   getCollections,
   saveCollection,
-  getCollectionById
+  getCollectionById,
 };

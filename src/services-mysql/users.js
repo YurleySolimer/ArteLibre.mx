@@ -46,13 +46,9 @@ var getUserArtist = async (id) => {
 
 var updateUserById = async (data, id) => {
   //Update an user by id
-  const user = await   pool.query("UPDATE users SET ? WHERE id=? ", [
-    data,
-    id,
-  ]);
+  const user = await pool.query("UPDATE users SET ? WHERE id=? ", [data, id]);
   return user;
 };
-
 
 module.exports = {
   getUser,
@@ -61,5 +57,5 @@ module.exports = {
   saveUser,
   updateUserByEmail,
   getUserArtist,
-  updateUserById
+  updateUserById,
 };

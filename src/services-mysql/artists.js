@@ -24,6 +24,15 @@ var getVisits = async (id) => {
   return visits;
 };
 
+var getGalleryVisits = async (id) => {
+  //Get profile visits
+  const visits = await pool.query(
+    "SELECT visitasGaleria from artistas WHERE user_id =?",
+    [id]
+  );
+  return visits;
+};
+
 var getArtistStripe = async (id) => {
   //Get stripe info
   const artist = await pool.query(
@@ -52,17 +61,62 @@ var updateArtist = async (data, id) => {
 
 var getArtistId = async (id) => {
   //
-  const artist = await pool.query
-  ("SELECT id FROM artistas WHERE user_id =?", [id]);
+  const artist = await pool.query("SELECT id FROM artistas WHERE user_id =?", [
+    id,
+  ]);
   return artist;
 };
-
 
 var saveArtistStripe = async (id) => {
   //
   const artist = await pool.query("INSERT INTO artistStripe SET?", [id]);
   return artist;
 };
+
+var getArtistById = async (id) => {
+  //
+  const artist = await pool.query("SELECT * FROM usuarioArtista WHERE id =?", [
+    id,
+  ]);
+  return artist;
+};
+
+var getAllArtists = async () => {
+  //
+  const artists = await pool.query(
+    "SELECT * FROM usuarioArtista ORDER BY nombre ASC"
+  );
+  return artists;
+};
+
+var filterArtists1 = async (data) => {
+  //
+  const artists = await pool.query(
+    "SELECT * FROM usuarioArtista WHERE nombre =? OR apellido =? OR disciplina_principal =? OR disciplina_sec =?",
+    [
+      data.query.nombreArtistas,
+      data.query.nombreArtistas,
+      data.query.tecnicaArtistas,
+      data.query.tecnicaArtistas,
+    ]
+  );
+  return artists;
+};
+
+var filterArtists2 = async (data) => {
+  //
+  const artists = await pool.query(
+    "SELECT * FROM usuarioArtista WHERE nombre =? OR apellido =? AND disciplina_principal =? OR disciplina_sec =?",
+    [
+      data.query.nombreArtistas,
+      data.query.nombreArtistas,
+      data.query.tecnicaArtistas,
+      data.query.tecnicaArtistas,
+    ]
+  );
+  return artists;
+};
+
 
 
 module.exports = {
@@ -73,5 +127,10 @@ module.exports = {
   getDataArtist,
   updateArtist,
   getArtistId,
-  saveArtistStripe
+  saveArtistStripe,
+  getArtistById,
+  getGalleryVisits,
+  getAllArtists,
+  filterArtists1,
+  filterArtists2
 };

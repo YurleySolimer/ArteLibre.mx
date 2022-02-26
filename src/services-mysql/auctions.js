@@ -11,7 +11,9 @@ var getLastArtistAuction = async (id) => {
 
 var deleteAuctionInfo = async (id) => {
   //Get an auction
-  const auction = await pool.query("DELETE from subastasInfo WHERE obra_id=?", [id]);
+  const auction = await pool.query("DELETE from subastasInfo WHERE obra_id=?", [
+    id,
+  ]);
   return auction;
 };
 
@@ -21,8 +23,34 @@ var saveAuctionInfo = async (data) => {
   return auction;
 };
 
+var getAuctionById = async (id) => {
+  //save an auction
+  const auction = await pool.query("SELECT * FROM obraSubasta WHERE id =?", [
+    id,
+  ]);
+  return auction;
+};
+
+var getAllAuctions = async () => {
+  //save an auction
+  const auction = await pool.query("SELECT * FROM obraSubasta");
+  return auction;
+};
+
+var updateAuctionsInfo = async (data, id) => {
+  //save an auction
+  const auction = await pool.query(
+    "UPDATE subastasInfo SET? WHERE obra_id =?",
+    [data, id]
+  );
+  return auction;
+};
+
 module.exports = {
   getLastArtistAuction,
   deleteAuctionInfo,
-  saveAuctionInfo
+  saveAuctionInfo,
+  getAuctionById,
+  getAllAuctions,
+  updateAuctionsInfo,
 };
