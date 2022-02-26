@@ -1,4 +1,5 @@
-const pool = require("../database");
+const { updateArtist } = require("../services-mysql/artists");
+const { getCollections, saveCollection } = require("../services-mysql/colletions");
 
 var saveNewCollection = async (data) => {
   const {
@@ -20,20 +21,14 @@ var saveNewCollection = async (data) => {
     ciudad: ubicacionCiudad,
     artista_id: data.user.id,
   };
-  await pool.query("INSERT into colecciones SET ?", [newColeccion]);
+  await saveCollection(newColeccion)
 
-  const artista_colecciones = await pool.query(
-    "SELECT * FROM colecciones WHERE artista_id =?",
-    [data.user.id]
-  );
+  const artista_colecciones = await getCollections(data.user.id)
   const numero_colecciones = {
     numero_colecciones: artista_colecciones.length,
   };
 
-  await pool.query("UPDATE artistas SET? WHERE user_id =?", [
-    numero_colecciones,
-    data.user.id,
-  ]);
+  await updateArtist(numero_colecciones, data.user.id)
 };
 
 module.exports = saveNewCollection;

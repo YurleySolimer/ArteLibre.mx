@@ -15,7 +15,14 @@ var deleteAuctionInfo = async (id) => {
   return auction;
 };
 
+var saveAuctionInfo = async (data) => {
+  //save an auction
+  const auction = await pool.query("INSERT INTO subastasInfo set ?", [data]);
+  return auction;
+};
+
 module.exports = {
   getLastArtistAuction,
-  deleteAuctionInfo
+  deleteAuctionInfo,
+  saveAuctionInfo
 };

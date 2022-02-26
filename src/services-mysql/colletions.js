@@ -45,11 +45,47 @@ var updateCollection = async (data, id) => {
   return colletion;
 };
 
+var getIdCollection = async (id) => {
+  //Get collection name and id
+  const colletion = await pool.query(
+    "SELECT nombreColeccion, id from colecciones WHERE artista_id =?",
+    id
+  );
+  return colletion;
+};
+
+var getCollections = async (id) => {
+  //Get collections by artist
+  const colletion = await pool.query(
+    "SELECT * FROM colecciones WHERE artista_id =?",
+    [id]
+  );
+  return colletion;
+};
+
+var saveCollection = async (data) => {
+  //
+  const colletion = await pool.query("INSERT into colecciones SET ?", [data]);
+  return colletion;
+};
+
+var getCollectionById = async (id) => {
+  //
+  const colletion = await pool.query(
+    "SELECT * from colecciones WHERE id =?",
+    [id]
+  );
+  return colletion;
+};
 
 module.exports = {
   getNotableCollection,
   getFiveArtistsCollections,
   getArtistsCollections,
   getCollectionName,
-  updateCollection
+  updateCollection,
+  getIdCollection,
+  getCollections,
+  saveCollection,
+  getCollectionById
 };

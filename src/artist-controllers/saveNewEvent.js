@@ -1,4 +1,5 @@
-const pool = require("../database");
+const { updateArtist } = require("../services-mysql/artists");
+const { saveEvent, getAllEvents, saveEventsPics } = require("../services-mysql/events");
 
 var saveNewEvent = async (data) => {
   const {
@@ -33,19 +34,14 @@ var saveNewEvent = async (data) => {
     artista_id: data.user.id,
   };
 
-  const evento = await pool.query("INSERT INTO eventos SET?", [newEvento]);
-  const artista_eventos = await pool.query(
-    "SELECT * FROM eventos WHERE artista_id =?",
-    [data.user.id]
-  );
+  const evento = await saveEvent(newEvento)
+  
+  const artista_eventos = await getAllEvents(data.user.id)
   const numero_eventos = {
     numero_eventos: artista_eventos.length,
   };
 
-  await pool.query("UPDATE artistas SET? WHERE user_id =?", [
-    numero_eventos,
-    data.user.id,
-  ]);
+  await updateArtist(numero_eventos, data.user.id)
 
   for (var i = 0; i < data.files.length; i++) {
     var principal = "false";
@@ -61,7 +57,7 @@ var saveNewEvent = async (data) => {
       evento_id: evento.insertId,
       principal,
     };
-    await pool.query("INSERT INTO fotosEventos SET?", [newFotoEvento]);
+    await saveEventsPics(newFotoEvento)
   }
 };
 

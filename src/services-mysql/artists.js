@@ -50,6 +50,21 @@ var updateArtist = async (data, id) => {
   return artist;
 };
 
+var getArtistId = async (id) => {
+  //
+  const artist = await pool.query
+  ("SELECT id FROM artistas WHERE user_id =?", [id]);
+  return artist;
+};
+
+
+var saveArtistStripe = async (id) => {
+  //
+  const artist = await pool.query("INSERT INTO artistStripe SET?", [id]);
+  return artist;
+};
+
+
 module.exports = {
   saveArtist,
   getNotableArtist,
@@ -57,4 +72,6 @@ module.exports = {
   getArtistStripe,
   getDataArtist,
   updateArtist,
+  getArtistId,
+  saveArtistStripe
 };

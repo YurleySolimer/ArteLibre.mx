@@ -142,6 +142,32 @@ var savePics = async (data) => {
   return obra;
 };
 
+
+var saveObra = async (data) => {
+  //save new obra
+  const obra = await pool.query("INSERT INTO obras set ?", [data]);
+  return obra;
+};
+
+
+var getAllArtistObras = async (id) => {
+  //save new obra
+  const obra = await pool.query(
+    "SELECT * FROM obras WHERE artista_id =?",
+    [id]
+  );
+  return obra;
+};
+
+var getObrasByCollection = async (collection) => {
+  //save new obra
+  const obra = await pool.query(
+    "SELECT * FROM obras WHERE coleccion_id =?",
+    [collection]
+  );
+  return obra;
+};
+
 module.exports = {
   getNotableObra,
   getNotableObras,
@@ -159,5 +185,8 @@ module.exports = {
   getObraBySoldDate,
   getObrasWeekly,
   getObrasMothly,
-  savePics
+  savePics,
+  saveObra,
+  getAllArtistObras,
+  getObrasByCollection
 };

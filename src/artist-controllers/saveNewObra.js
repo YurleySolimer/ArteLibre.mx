@@ -1,4 +1,16 @@
-const pool = require("../database");
+const { updateArtist } = require("../services-mysql/artists");
+const { saveAuctionInfo } = require("../services-mysql/auctions");
+const {
+  getCollectioName,
+  getCollectionById,
+  updateCollection,
+} = require("../services-mysql/colletions");
+const {
+  saveObra,
+  getAllArtistObras,
+  savePics,
+  getObrasByCollection,
+} = require("../services-mysql/obras");
 
 var saveNewObra = async (data) => {
   //GUARDANDO DATOS DE LA OBRA//
@@ -25,10 +37,7 @@ var saveNewObra = async (data) => {
   }
 
   if (coleccion > 0) {
-    nombreColeccion = await pool.query(
-      "SELECT nombreColeccion FROM colecciones WHERE id =?",
-      [coleccion]
-    );
+    nombreColeccion = await getCollectioName(coleccion);
     nombreColeccion = nombreColeccion[0];
   }
 
@@ -48,28 +57,22 @@ var saveNewObra = async (data) => {
     artista_id: data.user.id,
   };
 
-  const obra = await pool.query("INSERT INTO obras set ?", [newObra]);
+  const obra = await saveObra(newObra);
 
   if (subastar == "Si") {
     const newSubasta = {
       obra_id: obra.insertId,
     };
 
-    await pool.query("INSERT INTO subastasInfo set ?", [newSubasta]);
+    await saveAuctionInfo(newSubasta);
   }
 
-  const artista_obras = await pool.query(
-    "SELECT * FROM obras WHERE artista_id =?",
-    [data.user.id]
-  );
+  const artista_obras = await getAllArtistObras(data.user.id);
   const numero_obras = {
     numero_obras: artista_obras.length,
   };
 
-  await pool.query("UPDATE artistas SET? WHERE user_id =?", [
-    numero_obras,
-    data.user.id,
-  ]);
+  await updateArtist(numero_obras, data.user.id);
 
   //GUARDANDO FOTOS DE LA OBRA//
 
@@ -88,23 +91,17 @@ var saveNewObra = async (data) => {
       obra_id: obra.insertId,
     };
 
-    const foto = await pool.query("INSERT INTO fotosObras set ?", [newFoto]);
+    const foto = await savePics(newFoto);
   }
 
   artista = true;
   logueado = true;
 
-  const todoColeccicones = await pool.query(
-    "SELECT * from colecciones WHERE id =?",
-    [coleccion]
-  );
+  const todoColeccicones = await getCollectionById(coleccion);
   if (todoColeccicones.length > 0) {
     var precioPromedio =
       todoColeccicones[0].precioPromedio * 1 + precioFinal * 1;
-    const colecicon_obras = await pool.query(
-      "SELECT * FROM obras WHERE coleccion_id =?",
-      [coleccion]
-    );
+    const colecicon_obras = await getObrasByCollection(coleccion);
     var piezas = 0;
     if (colecicon_obras) {
       piezas = colecicon_obras.length;
@@ -117,10 +114,7 @@ var saveNewObra = async (data) => {
       precioPromedio,
       piezas,
     };
-    await pool.query("UPDATE colecciones set? WHERE id=?", [
-      NewColeccion,
-      coleccion,
-    ]);
+    await updateCollection(NewColeccion, coleccion);
   }
 };
 

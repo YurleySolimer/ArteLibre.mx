@@ -62,6 +62,21 @@ var updateEvent = async (data, id) => {
   return event;
 };
 
+var saveEvent = async (data) => {
+  //insert newEvent
+  const event = await pool.query("UPDATE eventos SET ? WHERE id =?", [
+    data,
+    id,
+  ]);
+  return event;
+};
+
+var saveEventsPics = async (data) => {
+  //insert newEvent
+  const event = await pool.query("INSERT INTO fotosEventos SET?", [data]);
+  return event;
+};
+
 module.exports = {
   getEvents,
   getLastArtistEvent,
@@ -70,5 +85,7 @@ module.exports = {
   deleteEvent,
   deleteEventPics,
   getAllEvents,
-  updateEvent
+  updateEvent,
+  saveEvent,
+  saveEventsPics
 };

@@ -1,6 +1,6 @@
 const stripeSecret = process.env.STRIPE_SECRET_KEY;
 const stripe = require("stripe")(stripeSecret);
-const pool = require("../database");
+const { saveArtistStripe } = require("../services-mysql/artists");
 
 var stripeAuth = async (data) => {
   const { code, state } = data;
@@ -30,6 +30,6 @@ async function saveAccountId(id, req, res) {
     estado: "Registrado",
     id_user: req.user.id,
   };
-  await pool.query("INSERT INTO artistStripe SET?", [id_stripe]);
+  await saveArtistStripe(id_stripe)
 }
 module.exports = stripeAuth;
