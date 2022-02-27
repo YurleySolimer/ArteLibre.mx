@@ -10,6 +10,8 @@ const clientPurchase = require("../clients-controllers/clientPurchases");
 const clientProfile = require("../clients-controllers/clientProflie");
 const clientHistory = require("../clients-controllers/clientHistory");
 
+const handleError = require("../handlers/handleErrors");
+
 Handlebars.registerHelper("ifCond", function (v1, v2, options) {
   if (v1 === v2) {
     return options.fn(this);
@@ -18,33 +20,58 @@ Handlebars.registerHelper("ifCond", function (v1, v2, options) {
 });
 
 router.get("/cliente/compras", isLoggedIn, isCliente, async (req, res) => {
-  const purchases = await clientPurchase(req);
-  res.render("client/compras", {
-    nombre: purchases.nombre[0],
-    cliente: purchases.cliente,
-    logueado: purchases.logueado,
-    obras: purchases.obras,
-  });
+  try {
+    const purchases = await clientPurchase(req);
+    res.render("client/compras", purchases);
+  } catch (err) {
+    console.error("GET-CLIENT-PURCHASE", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener tus compras.",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/cliente/perfil", isLoggedIn, isCliente, async (req, res) => {
-  const profile = await clientProfile(req)
-  res.render("client/perfil", {
-    nombre: profile.nombre[0],
-    cliente: profile.cliente,
-    logueado: profile.logueado,
-    clienteCompleto: profile.clienteCompleto[0],
-  });
+  try {
+    const profile = await clientProfile(req);
+    console.log(profile)
+    res.render("client/perfil", profile);
+  } catch (err) {
+    console.error("GET-CLIENT-PROFILE", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener tu perfil.",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/cliente/historial", isLoggedIn, isCliente, async (req, res) => {
-  const history = await clientHistory(req)
-  res.render("client/mis-pedidos", {
-    nombre: history.nombre[0],
-    cliente: history.cliente,
-    obras: history.obras,
-    logueado: history.logueado,
-  });
+  try {
+    const history = await clientHistory(req);
+    res.render("client/mis-pedidos", history);
+  } catch (err) {
+    console.error("GET-CLIENT-HISTORY", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener tu historial de compras.",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 module.exports = router;
