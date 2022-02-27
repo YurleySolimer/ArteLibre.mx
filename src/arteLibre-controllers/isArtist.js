@@ -1,4 +1,4 @@
-const pool = require("../database");
+const { getUserType } = require("../services-mysql/users");
 
 var isArtist = async (data) => {
   if (data.isAuthenticated()) {

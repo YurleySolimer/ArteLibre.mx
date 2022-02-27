@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const getIndex = require("../index-controllers/getIndex");
+const handleError = require("../handlers/handleErrors");
 
 Handlebars.registerHelper("fecha", function (date) {
   const dia = date.getDate();
@@ -12,22 +13,17 @@ Handlebars.registerHelper("fecha", function (date) {
 });
 
 router.get("/", async (req, res) => {
-  const index = await getIndex(req);
-  res.render("index", {
-    artista: index.artista ,
-    admin: index.admin,
-    nombre: index.nombre[0],
-    cliente: index.cliente,
-    logueado: index.logueado,
-    eventos: index.eventos,
-    coleccion_destacada: index.coleccion_destacada[0],
-    obras_coleccion: index.obras_coleccion,
-    obra_destacada: index.obra_destacada,
-    destacadas: index.destacadas,
-    obra1_artista: index.obra1_artista,
-    obra2_artista: index.obra2_artista,
-    artista_destacado: index.artista_destacado,
-  });
+  try {
+    const index = await getIndex(req);
+    res.render("index", index);
+  } catch (err) {
+    console.error('GET-INDEX', err);
+      return handleError({ 
+        status: 500, 
+        message: "Error al obtener la pagina de inicio.",
+        errorDetail: err.message,
+      }, {}, res);
+  }
 });
 
 module.exports = router;

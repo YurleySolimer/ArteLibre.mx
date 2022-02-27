@@ -9,8 +9,6 @@ const passport = require('passport');
 const { database } = require('./keys');
 const multer = require('multer');
 
-const bodyParser = require("body-parser");
-
 
 //Inicializaciones
 
@@ -99,7 +97,8 @@ app.use('/cropper', express.static(path.join(__dirname , '/../node_modules/cropp
 //Error 404
 app.use(function(req, res) {
 	res.status(404).render('404.hbs');
-  });
+});
+
 
 //Inicializar Servidor
 
