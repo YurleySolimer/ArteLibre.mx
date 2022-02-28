@@ -20,31 +20,37 @@ const transporter = nodemailer.createTransport({
 });
 
 const recuperarPass = async (data) => {
-  email = data.email;
-  const usuario = await getUsersByEmail(email)
-  if (usuario.length > 0) {
-    const token = newToken(data.body);
-    await saveToken(token)
-    var mailOptions = {
-      from: "Arte Libre  <noreply@artelibre.mx>",
-      to: email,
-      subject: "Arte Libre: Recuperar Contraseña",
-      text: "Código de validación: " + encodeURIComponent(token.token),
-    };
+  return new Promise(async (resolve, reject) => {
+    try {
+      email = data.email;
+      const usuario = await getUsersByEmail(email);
+      if (usuario.length > 0) {
+        const token = newToken(data.body);
+        await saveToken(token);
+        var mailOptions = {
+          from: "Arte Libre  <noreply@artelibre.mx>",
+          to: email,
+          subject: "Arte Libre: Recuperar Contraseña",
+          text: "Código de validación: " + encodeURIComponent(token.token),
+        };
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      console.log("senMail returned!");
-      if (error) {
-        console.log("ERROR!!!!!!", error);
+        transporter.sendMail(mailOptions, function (error, info) {
+          console.log("senMail returned!");
+          if (error) {
+            console.log("ERROR!!!!!!", error);
+          } else {
+            console.log("Email sent: " + info.response);
+          }
+        });
+
+        return true;
       } else {
-        console.log("Email sent: " + info.response);
+        return false;
       }
-    });
-
-    return true
-  } else {
-    return false
-  }
+    } catch (error) {
+      reject(error);
+    }
+  });
 };
 
-module.exports = recuperarPass
+module.exports = recuperarPass;

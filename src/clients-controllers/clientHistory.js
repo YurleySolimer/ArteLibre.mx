@@ -10,7 +10,7 @@ var clientHistory = async (data) => {
       const logueado = true;
 
       return resolve({
-        nombre: nombre[0],
+        nombre,
         cliente,
         logueado,
         obras,

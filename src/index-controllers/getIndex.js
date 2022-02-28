@@ -45,7 +45,7 @@ var getIndex = async (data) => {
       return resolve ({
         artista,
         admin,
-        nombre: nombre[0],
+        nombre,
         cliente,
         logueado,
         eventos,

@@ -3,6 +3,8 @@ const Handlebars = require("handlebars");
 
 const router = express.Router();
 
+const handleError = require("../handlers/handleErrors");
+
 const { isArtista } = require("../lib/auth");
 const { isLoggedIn } = require("../lib/auth");
 
@@ -43,48 +45,70 @@ Handlebars.registerHelper("ifCond", function (v1, v2, options) {
 });
 
 router.get("/connect/oauth", isLoggedIn, isArtista, async (req, res) => {
-  const data = req.query;
-  const stripeAuthResult = await stripeAuth(data);
-  if (stripeAuthResult === true) {
-    req.flash("success", "Registro Exitoso");
-    res.redirect("/dashboard/rendimiento");
-  } else {
-    if (stripeAuthResult.type === "StripeInvalidGrantError") {
-      return res
-        .status(400)
-        .json({ error: "Invalid authorization code: " + code });
+  try {
+    const data = req.query;
+    const stripeAuthResult = await stripeAuth(data);
+    if (stripeAuthResult === true) {
+      req.flash("success", "Registro Exitoso");
+      res.redirect("/dashboard/rendimiento");
     } else {
-      return res.status(500).json({ error: "An unknown error occurred." });
+      if (stripeAuthResult.type === "StripeInvalidGrantError") {
+        return res
+          .status(400)
+          .json({ error: "Invalid authorization code: " + code });
+      } else {
+        return res.status(500).json({ error: "An unknown error occurred." });
+      }
     }
+  } catch (err) {
+    console.error("GET-STRIPE-AUTH", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener el código de stripe.",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
   }
 });
 
 // Dashboard
 router.get("/dashboard", isLoggedIn, isArtista, async (req, res) => {
-  const artistDashboardResult = await artistDashboard(req);
-  res.render("artist/dashboard", {
-    nombre: artistDashboardResult.nombre[0],
-    artista: artistDashboardResult.artista,
-    logueado: artistDashboardResult.logueado,
-    dashboard: artistDashboardResult.dashboard,
-    obras: artistDashboardResult.obras,
-    colecciones: artistDashboardResult.colecciones,
-    ultima_obra: artistDashboardResult.ultima_obra,
-    evento: artistDashboardResult.evento,
-    subasta: artistDashboardResult.subasta,
-    visitas: artistDashboardResult.visitas,
-  });
+  try {
+    const artistDashboardResult = await artistDashboard(req);
+    res.render("artist/dashboard", artistDashboardResult);
+  } catch (err) {
+    console.error("GET-DASHBOARD", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener el dashboard",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/dashboard/ventas", isLoggedIn, isArtista, async (req, res) => {
-  const dashboardResult = await dashboardSales(req);
-  res.render("artist/mis-ventas", {
-    nombre: dashboardResult.nombre[0],
-    artista: dashboardResult.artista,
-    logueado: dashboardResult.logueado,
-    dashboard: dashboardResult.dashboard,
-    obras: dashboardResult.obras,
-  });
+  try {
+    const dashboardResult = await dashboardSales(req);
+    res.render("artist/mis-ventas", dashboardResult);
+  } catch (err) {
+    console.error("GET-DASHBOARD-SALES", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener tus ventas",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.post(
@@ -92,32 +116,59 @@ router.post(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const codigo = await dashboardSend(req);
-    req.flash("success", "Obra enviada");
-    res.redirect("/dashboard/ventas");
+    try {
+      const codigo = await dashboardSend(req);
+      req.flash("success", "Obra enviada");
+      res.redirect("/dashboard/ventas");
+    } catch (err) {
+      console.error("GET-DASHBOARD-SEND", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error en el envio",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
 router.get("/dashboard/eventos", isLoggedIn, isArtista, async (req, res) => {
-  const events = await dashboardEvents(req);
-  res.render("artist/mis-eventos", {
-    nombre: events.nombre[0],
-    artista: events.artist,
-    logueado: events.logueado,
-    dashboard: events.dashboard,
-    eventos: events.eventos,
-  });
+  try {
+    const events = await dashboardEvents(req);
+    res.render("artist/mis-eventos", events);
+  } catch (err) {
+    console.error("GET-DASHBOARD-EVENTS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener tus eventos",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/dashboard/subastas", isLoggedIn, isArtista, async (req, res) => {
-  const auction = await dashboardAuction(req);
-  res.render("artist/mis-subastas", {
-    nombre: auction.nombre[0],
-    artista: auction.artista,
-    logueado: auction.logueado,
-    dashboard: auction.dashboard,
-    obras: auction.obras,
-  });
+  try {
+    const auction = await dashboardAuction(req);
+    res.render("artist/mis-subastas", auction);
+  } catch (err) {
+    console.error("GET-DASHBOARD-AUCTIONS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener tus subastas",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get(
@@ -125,14 +176,21 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const collections = await dashboardCollections(req);
-    res.render("artist/mis-colecciones", {
-      nombre: collections.nombre[0],
-      artista: collections.artista,
-      logueado: collections.logueado,
-      dashboard: collections.dashboard,
-      colecciones: collections.colecciones,
-    });
+    try {
+      const collections = await dashboardCollections(req);
+      res.render("artist/mis-colecciones", collections);
+    } catch (err) {
+      console.error("GET-DASHBOARD-COLLECTIONS", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al obtener tus colecciones",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
@@ -141,44 +199,40 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const stats = await dashboardStats(req);
-
-    res.render("artist/mi-rendimiento", {
-      nombre: stats.nombre[0],
-      totalVisitasPerfil: stats.totalVisitasPerfil,
-      totalVisitasGaleria: stats.totalVisitasGaleria,
-      estaSemana: stats.estaSemana,
-      estaSemanaPerfil: stats.estaSemanaPerfil,
-      estaSemanaGaleria: stats.estaSemanaGaleria,
-      totalVisitasEventos: stats.totalVisitasEventos,
-      visitasEvento: stats.visitasEvento,
-      colecciones: stats.colecciones,
-      semanaPasada: stats.semanaPasada,
-      semanaPasadaPerfil: stats.semanaPasadaPerfil,
-      semanaPasadaGaleria: stats.semanaPasadaGaleria,
-      ventasSemana: stats.ventasSemana,
-      ventasMes: stats.ventasMes,
-      conversionVisitas: stats.conversionVisitas,
-      artista: stats.artista,
-      logueado: stats.logueado,
-      email: stats.email,
-      url: stats.url,
-      dashboard: stats.dashboard,
-      stripeRegistro: stats.stripeRegistro,
-    });
+    try {
+      const stats = await dashboardStats(req);
+      res.render("artist/mi-rendimiento", stats);
+    } catch (err) {
+      console.error("GET-DASHBOARD-STATS", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al obtener tu rendimientos",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
 router.get("/dashboard/obras", isLoggedIn, isArtista, async (req, res) => {
-  const obras = await dashboardObras(req);
-
-  res.render("artist/mis-obras", {
-    obras: obras.obras,
-    nombre: obras.nombre[0],
-    artista: obras.artista,
-    logueado: obras.logu,
-    dashboard: obras.dashboard,
-  });
+  try {
+    const obras = await dashboardObras(req);
+    res.render("artist/mis-obras", obras);
+  } catch (err) {
+    console.error("GET-DASHBOARD-OBRAS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener tus obras",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get(
@@ -186,9 +240,22 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const gallery = await dashboardNoGallery(req);
-    req.flash("success", "La no se mostrará en tu galería");
-    res.redirect("/dashboard/obras");
+    try {
+      const gallery = await dashboardNoGallery(req);
+      req.flash("success", "La no se mostrará en tu galería");
+      res.redirect("/dashboard/obras");
+    } catch (err) {
+      console.error("GET-DASHBOARD-NO-GALLERY", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al quitar obra de tu galeria",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
@@ -197,9 +264,22 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const gallery = await dashboardYesGallery(req);
-    req.flash("success", "La obra será mostrada en tu galería");
-    res.redirect("/dashboard/obras");
+    try {
+      const gallery = await dashboardYesGallery(req);
+      req.flash("success", "La obra será mostrada en tu galería");
+      res.redirect("/dashboard/obras");
+    } catch (err) {
+      console.error("GET-DASHBOARD-YES-GALLERY", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al mostrar obra en tu galeria",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
@@ -208,9 +288,22 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const hide = await dashboardObrasHide(req);
-    req.flash("success", "La obra ha sido oculta");
-    res.redirect("/dashboard/obras");
+    try {
+      const hide = await dashboardObrasHide(req);
+      req.flash("success", "La obra ha sido oculta");
+      res.redirect("/dashboard/obras");
+    } catch (err) {
+      console.error("GET-DASHBOARD-HIDE-OBRA", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al ocultar obra",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
@@ -219,9 +312,22 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const show = await dashboardObrasShow(req);
-    req.flash("success", "La obra será mostrada");
-    res.redirect("/dashboard/obras");
+    try {
+      const show = await dashboardObrasShow(req);
+      req.flash("success", "La obra será mostrada");
+      res.redirect("/dashboard/obras");
+    } catch (err) {
+      console.error("GET-DASHBOARD-SHOW-OBRA", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al mostrar obra",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
@@ -230,9 +336,22 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const deleted = await dashboardObrasDelete(req);
-    req.flash("success", "La obra ha sido eliminada");
-    res.redirect("/dashboard/obras");
+    try {
+      const deleted = await dashboardObrasDelete(req);
+      req.flash("success", "La obra ha sido eliminada");
+      res.redirect("/dashboard/obras");
+    } catch (err) {
+      console.error("GET-DASHBOARD-DELETE-OBRA", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al eliminar obra",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
@@ -241,9 +360,22 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const deleted = await dashboardEventsDelete(req);
-    req.flash("success", "El evento ha sido eliminado");
-    res.redirect("/dashboard/eventos");
+    try {
+      const deleted = await dashboardEventsDelete(req);
+      req.flash("success", "El evento ha sido eliminado");
+      res.redirect("/dashboard/eventos");
+    } catch (err) {
+      console.error("GET-DASHBOARD-DELETE-EVENT", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al eliminar evento",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
@@ -256,28 +388,42 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const newEvent = await getNewEvent(req);
-    dashboard = true;
-
-    res.render("artist/dashboard-nuevo-evento", {
-      nombre: newEvent.nombre[0],
-      artista: newEvent.artista,
-      logueado: newEvent.logueado,
-      dashboard,
-    });
+    try {
+      const newEvent = await getNewEvent(req);
+      dashboard = true;
+      res.render("artist/dashboard-nuevo-evento", newEvent);
+    } catch (err) {
+      console.error("GET-DASHBOARD-CREATE-EVENT", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al crear nuevo evento",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
 router.get("/dashboard/nueva-obra", isLoggedIn, isArtista, async (req, res) => {
-  const newObra = await getNewObra(req);
-  dashboard = true;
-  res.render("artist/dashboard-nueva-obra", {
-    nombre: newObra.nombre[0],
-    colecciones: newObra.colecciones,
-    artista: newObra.artista,
-    logueado: newObra.logueado,
-    dashboard,
-  });
+  try {
+    const newObra = await getNewObra(req);
+    dashboard = true;
+    res.render("artist/dashboard-nueva-obra", newObra);
+  } catch (err) {
+    console.error("GET-DASHBOARD-CREATE-OBRA", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al crear nueva obra",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get(
@@ -285,15 +431,22 @@ router.get(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const newCollection = await getNewCollection(req);
-    dashboard = true;
-
-    res.render("artist/dashboard-nueva-coleccion", {
-      nombre: newCollection.nombre[0],
-      artista: newCollection.artista,
-      logueado: newCollection.logueado,
-      dashboard,
-    });
+    try {
+      const newCollection = await getNewCollection(req);
+      dashboard = true;
+      res.render("artist/dashboard-nueva-coleccion", newCollection);
+    } catch (err) {
+      console.error("GET-DASHBOARD-CREATE-COLLECTION", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al crear nueva colección",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
@@ -302,37 +455,60 @@ router.get(
 //
 
 router.get("/nuevo-evento", isLoggedIn, isArtista, async (req, res) => {
-  const newEvent = await getNewEvent(req);
-  dashboard = false;
-  res.render("artist/nuevo-evento", {
-    nombre: newEvent.nombre[0],
-    artista: newEvent.artista,
-    logueado: newEvent.logueado,
-    dashboard,
-  });
+  try {
+    const newEvent = await getNewEvent(req);
+    dashboard = false;
+    res.render("artist/nuevo-evento", newEvent);
+  } catch (err) {
+    console.error("GET-DASHBOARD-GET-NEW-EVENT", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener nuevo evento",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/nueva-obra", isLoggedIn, isArtista, async (req, res) => {
-  const newObra = await getNewObra(req);
-  dashboard = false;
-  res.render("artist/nueva-obra", {
-    nombre: newObra.nombre[0],
-    colecciones: newObra.colecciones,
-    artista: newObra.artista,
-    logueado: newObra.logueado,
-    dashboard,
-  });
+  try {
+    const newObra = await getNewObra(req);
+    dashboard = false;
+    res.render("artist/nueva-obra", newObra);
+  } catch (err) {
+    console.error("GET-DASHBOARD-GET-NEW-OBRA", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener nueva obra",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/nueva-coleccion", isLoggedIn, isArtista, async (req, res) => {
-  const newCollection = await getNewCollection(req);
-  dashboard = false;
-  res.render("artist/nueva-coleccion", {
-    nombre: newCollection.nombre[0],
-    artista: newCollection.artista,
-    logueado: newCollection.logueado,
-    dashboard,
-  });
+  try {
+    const newCollection = await getNewCollection(req);
+    dashboard = false;
+    res.render("artist/nueva-coleccion", newCollection);
+  } catch (err) {
+    console.error("GET-DASHBOARD-GET-NEW-COLLECTION", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener nueva colección",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 //
@@ -340,29 +516,68 @@ router.get("/nueva-coleccion", isLoggedIn, isArtista, async (req, res) => {
 //
 
 router.post("/nueva-obra", isLoggedIn, isArtista, async (req, res) => {
-  const saveObra = await saveNewObra(req);
-  if (dashboard) {
-    res.redirect("/dashboard");
-  } else {
-    res.redirect("/dashboard/obras");
+  try {
+    const saveObra = await saveNewObra(req);
+    if (dashboard) {
+      res.redirect("/dashboard");
+    } else {
+      res.redirect("/dashboard/obras");
+    }
+  } catch (err) {
+    console.error("GET-DASHBOARD-SAVE-NEW-OBRA", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al guardar nueva obra",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
   }
 });
 
 router.post("/nueva-coleccion", isLoggedIn, isArtista, async (req, res) => {
-  const newCollection = await saveNewCollection(req);
-  if (dashboard) {
-    res.redirect("/dashboard/nueva-obra");
-  } else {
-    res.redirect("nueva-obra");
+  try {
+    const newCollection = await saveNewCollection(req);
+    if (dashboard) {
+      res.redirect("/dashboard/nueva-obra");
+    } else {
+      res.redirect("nueva-obra");
+    }
+  } catch (err) {
+    console.error("GET-DASHBOARD-SAVE-NEW-COLLECTION", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al guardar nueva colección",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
   }
 });
 
 router.post("/nuevo-evento", isLoggedIn, isArtista, async (req, res) => {
-  const newEvent = await saveNewEvent(req);
-  if (dashboard) {
-    res.redirect("/dashboard");
-  } else {
-    res.redirect("/dashboard/eventos");
+  try {
+    const newEvent = await saveNewEvent(req);
+    if (dashboard) {
+      res.redirect("/dashboard");
+    } else {
+      res.redirect("/dashboard/eventos");
+    }
+  } catch (err) {
+    console.error("GET-DASHBOARD-SAVE-NEW-EVENT", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al guardar nuevo evento",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
   }
 });
 
@@ -371,16 +586,42 @@ router.post(
   isLoggedIn,
   isArtista,
   async (req, res) => {
-    const eventUpdated = await editEvent(req);
-    req.flash("success", "Evento actualizado");
-    res.redirect("/dashboard/eventos");
+    try {
+      const eventUpdated = await editEvent(req);
+      req.flash("success", "Evento actualizado");
+      res.redirect("/dashboard/eventos");
+    } catch (err) {
+      console.error("GET-DASHBOARD-EDIT-EVENT", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al editar evento",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
 router.post("/obra/editar/:id", isLoggedIn, isArtista, async (req, res) => {
-  const obraUpdated = await editObra(req);
-  const { id } = req.body;
-  res.redirect("/obra/" + id);
+  try {
+    const obraUpdated = await editObra(req);
+    const { id } = req.body;
+    res.redirect("/obra/" + id);
+  } catch (err) {
+    console.error("GET-DASHBOARD-EDIT-OBRA", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al editar obra",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 //
@@ -388,22 +629,40 @@ router.post("/obra/editar/:id", isLoggedIn, isArtista, async (req, res) => {
 //
 
 router.get("/artist-perfil", isLoggedIn, isArtista, async (req, res) => {
-  const profile = await artistProfile(req);
-  dashboard = false;
-  res.render("artist/perfil", {
-    nombre: profile.nombre[0],
-    user: profile.user[0],
-    obras: profile.obras,
-    ultima_obra: profile.ultima_obra,
-    artista: profile.artista,
-    logueado: profile.logueado,
-    dashboard,
-  });
+  try {
+    const profile = await artistProfile(req);
+    dashboard = false;
+    res.render("artist/perfil", profile);
+  } catch (err) {
+    console.error("GET-ARTIST-PROFILE", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener perfil",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.post("/editar-Artista", isLoggedIn, isArtista, async (req, res) => {
-  const edit = await editProfile(req)
-  res.redirect("/artist-perfil");
+  try {
+    const edit = await editProfile(req);
+    res.redirect("/artist-perfil");
+  } catch (err) {
+    console.error("GET-ARTIST-EDIT-PROFILE", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al editar perfil",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 module.exports = router;

@@ -11,7 +11,7 @@ var getClientCompleted = async (id) => {
   const client = await pool.query("SELECT * from usuarioCliente WHERE id =?", [
     id,
   ]);
-  return client;
+  return client[0];
 };
 
 var deleteClientShop = async (id) => {

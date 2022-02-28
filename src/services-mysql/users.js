@@ -18,7 +18,7 @@ var getUserName = async (id) => {
     "SELECT nombre, apellido FROM users WHERE id =?",
     id
   );
-  return name;
+  return name[0];
 };
 
 var saveUser = async (newUser) => {
@@ -61,9 +61,7 @@ var getUserStripe = async (id) => {
 
 var getUserType = async (id) => {
   //Update an user by id
-  const user = await pool.query("SELECT tipo FROM users WHERE id =?", [
-    id,
-  ]);
+  const user = await pool.query("SELECT tipo FROM users WHERE id =?", [id]);
   return user;
 };
 
@@ -76,5 +74,5 @@ module.exports = {
   getUserArtist,
   updateUserById,
   getUserStripe,
-  getUserType
+  getUserType,
 };

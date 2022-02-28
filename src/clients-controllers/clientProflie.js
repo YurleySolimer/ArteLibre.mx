@@ -9,12 +9,13 @@ var clientProfile = async (data) => {
       const clienteCompleto = await getClientCompleted(data.user.id);
       const cliente = true;
       const logueado = true;
+      console.log(nombre)
 
       return resolve({
-        nombre: nombre[0],
+        nombre,
         cliente,
         logueado,
-        clienteCompleto: clienteCompleto[0],
+        clienteCompleto,
       });
     } catch (err) {
       reject(err);

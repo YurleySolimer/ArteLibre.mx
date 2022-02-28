@@ -16,30 +16,36 @@ const transporter = nodemailer.createTransport({
   },
 });
 const changePass = async (data, email) => {
-    await deleteToken(email)
-    const { password } = data;
-    const passw = {
-      password: password,
-    };
-    passw.password = await helpers.encryptPassword(password);
-    const act = await updateUserByEmail(passw, email)
-  
-    var mailOptions = {
-      from: "Arte Libre  <norepply@artelibre.mx>",
-      to: email,
-      subject: "Arte Libre: Cambio de Contraseña",
-      text: "Su contraseña ha sido cambiada exitosamente",
-    };
-  
-    transporter.sendMail(mailOptions, function (error, info) {
-      console.log("senMail returned!");
-      if (error) {
-        console.log("ERROR!!!!!!", error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
-  
-}
+  return new Promise(async (resolve, reject) => {
+    try {
+      await deleteToken(email);
+      const { password } = data;
+      const passw = {
+        password: password,
+      };
+      passw.password = await helpers.encryptPassword(password);
+      const act = await updateUserByEmail(passw, email);
+
+      var mailOptions = {
+        from: "Arte Libre  <norepply@artelibre.mx>",
+        to: email,
+        subject: "Arte Libre: Cambio de Contraseña",
+        text: "Su contraseña ha sido cambiada exitosamente",
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        console.log("senMail returned!");
+        if (error) {
+          console.log("ERROR!!!!!!", error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+        return resolve(true);
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
 
 module.exports = changePass;

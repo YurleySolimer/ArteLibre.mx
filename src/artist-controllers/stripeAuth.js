@@ -25,11 +25,16 @@ var stripeAuth = async (data) => {
 };
 
 async function saveAccountId(id, req, res) {
-  const id_stripe = {
-    id_stripe: id,
-    estado: "Registrado",
-    id_user: req.user.id,
-  };
-  await saveArtistStripe(id_stripe)
+  try {
+    const id_stripe = {
+      id_stripe: id,
+      estado: "Registrado",
+      id_user: req.user.id,
+    };
+    await saveArtistStripe(id_stripe);
+    return true;
+  } catch (error) {
+    return error;
+  }
 }
 module.exports = stripeAuth;
