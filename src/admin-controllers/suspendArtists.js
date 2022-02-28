@@ -1,10 +1,15 @@
 const { updateArtist } = require("../services-mysql/artists");
 
 var suspendArtists = async (data) => {
-  const inactivo = {
-    inactivo: "Si",
-  };
-  await updateArtist(inactivo, data.params.id)
+  try {
+    const inactivo = {
+      inactivo: "Si",
+    };
+    await updateArtist(inactivo, data.params.id);
+    return true;
+  } catch (error) {
+    return error;
+  }
 };
 
 module.exports = suspendArtists;

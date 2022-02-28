@@ -30,7 +30,6 @@ Handlebars.registerHelper("fecha", function (date) {
   return `${dia} - ${mes} - ${año}`;
 });
 
-
 Handlebars.registerHelper("ifCond", function (v1, v2, options) {
   if (v1 === v2) {
     return options.fn(this);
@@ -39,15 +38,21 @@ Handlebars.registerHelper("ifCond", function (v1, v2, options) {
 });
 
 router.get("/admin/artistas", isLoggedIn, isAdmin, async (req, res) => {
-  var artists = await getArtists(req);
-
-  res.render("admin/artistas", {
-    nombre: artists.nombre[0],
-    admin: artists.admin,
-    logueado: artists.logueado,
-    dashboard: artists.dashboard,
-    artistasCompletos: artists.artistasCompletos,
-  });
+  try {
+    var artists = await getArtists(req);
+    res.render("admin/artistas", artists);
+  } catch (err) {
+    console.error("ADMIN-GET-ARTISTS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener artistas.",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.post(
@@ -55,8 +60,21 @@ router.post(
   isLoggedIn,
   isAdmin,
   async (req, res) => {
-    const artists = await featureArtists(req);
-    res.redirect("/admin/artistas");
+    try {
+      const artists = await featureArtists(req);
+      res.redirect("/admin/artistas");
+    } catch (err) {
+      console.error("ADMIN-ARTISTS-FEATURE", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al destacar artistas.",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
@@ -65,20 +83,40 @@ router.post(
   isLoggedIn,
   isAdmin,
   async (req, res) => {
-    const artists = await suspendArtists(req);
-    res.redirect("/admin/artistas");
+    try {
+      const artists = await suspendArtists(req);
+      res.redirect("/admin/artistas");
+    } catch (err) {
+      console.error("ADMIN-ARTISTS-SUSPEND", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al suspender artistas.",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
 router.get("/admin/obras", isLoggedIn, isAdmin, async (req, res) => {
-  const obras = await getObras(req);
-  res.render("admin/obras", {
-    nombre: obras.nombre[0],
-    admin: obras.admin,
-    logueado: obras.logueado,
-    dashboard: obras.dashboard,
-    obras: obras.obras,
-  });
+  try {
+    const obras = await getObras(req);
+    res.render("admin/obras", obras);
+  } catch (err) {
+    console.error("ADMIN-GET-OBRAS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener obras.",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get(
@@ -86,14 +124,40 @@ router.get(
   isLoggedIn,
   isAdmin,
   async (req, res) => {
-    const obras = await hideObras(req);
-    res.redirect("/admin/obras");
+    try {
+      const obras = await hideObras(req);
+      res.redirect("/admin/obras");
+    } catch (err) {
+      console.error("ADMIN-OBRAS-HIDE", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al ocultar obras.",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
 router.post("/admin/obras/destacar", isLoggedIn, isAdmin, async (req, res) => {
-  const obras = await featureObras(req);
-  res.redirect("/admin/obras");
+  try {
+    const obras = await featureObras(req);
+    res.redirect("/admin/obras");
+  } catch (err) {
+    console.error("ADMIN-OBRAS-FEATURE", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al destacar obras.",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.post(
@@ -101,20 +165,40 @@ router.post(
   isLoggedIn,
   isAdmin,
   async (req, res) => {
-    const obras = await recommendObras(req);
-    res.redirect("/admin/obras");
+    try {
+      const obras = await recommendObras(req);
+      res.redirect("/admin/obras");
+    } catch (err) {
+      console.error("ADMIN-OBRAS-RECOMMEND", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al recomendar obras.",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
 router.get("/admin/colecciones", isLoggedIn, isAdmin, async (req, res) => {
-  const collections = await getCollections(req);
-  res.render("admin/colecciones", {
-    nombre: collections.nombre[0],
-    admin: collections.admin,
-    logueado: collections.logueado,
-    dashboard: collections.dashboard,
-    colecciones: collections.colecciones,
-  });
+  try {
+    const collections = await getCollections(req);
+    res.render("admin/colecciones", collections);
+  } catch (err) {
+    console.error("ADMIN-GET-COLLECTIONS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener colecciones",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.post(
@@ -122,8 +206,21 @@ router.post(
   isLoggedIn,
   isAdmin,
   async (req, res) => {
-    const collections = await featureCollections(req);
-    res.redirect("/admin/colecciones");
+    try {
+      const collections = await featureCollections(req);
+      res.redirect("/admin/colecciones");
+    } catch (err) {
+      console.error("ADMIN-GET-COLLECTIONS-FEATURE", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al destacar colecciones",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
@@ -132,66 +229,91 @@ router.get(
   isLoggedIn,
   isAdmin,
   async (req, res) => {
-    const collections = await hideCollections(req);
-    res.redirect("/admin/colecciones");
+    try {
+      const collections = await hideCollections(req);
+      res.redirect("/admin/colecciones");
+    } catch (err) {
+      console.error("ADMIN-GET-COLLECTIONS-HIDE", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al ocultar colecciones",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
 router.get("/admin/dashboard", isLoggedIn, isAdmin, async (req, res) => {
-  const dashboard = await getDashboard(req);
-
-  res.render("admin/dashboard", {
-    nombre: dashboard.nombre[0],
-    admin: dashboard.admin,
-    transaccionesTotal: dashboard.transaccionesTotal,
-    ingresos: dashboard.ingresos,
-    eventos: dashboard.eventos,
-    proximosEventos: dashboard.proximosEventos,
-    artistasRelevantes: dashboard.artistasRelevantes,
-    proximasSubastas: dashboard.proximasSubastas,
-    ultimaObra: dashboard.ultimaObra[0],
-    obraVisitada: dashboard.obraVisitada[0],
-    ultimaColeccion: dashboard.ultimaColeccion[0],
-    galeria: dashboard.galeria[0],
-    logueado: dashboard.logueado,
-    dashboard: dashboard.dashboard,
-  });
+  try {
+    const dashboard = await getDashboard(req);
+    res.render("admin/dashboard", dashboard);
+  } catch (err) {
+    console.error("ADMIN-GET-DASHBOARD", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener el dashboard",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 router.get("/admin/tasas", isLoggedIn, isAdmin, async (req, res) => {
-  const rates = await getRates(req);
-  res.render("admin/tasas", {
-    nombre: rates.nombre[0],
-    admin: rates.admin,
-    logueado: rates.logueado,
-    dashboard: rates.dashboard,
-  });
+  try {
+    const rates = await getRates(req);
+    res.render("admin/tasas", rates);
+  } catch (err) {
+    console.error("ADMIN-GET-RATES", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener las tasas",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 router.get("/admin/rendimiento", isLoggedIn, isAdmin, async (req, res) => {
-  const performance = await getPerformance(req);
-
-  res.render("admin/rendimiento", {
-    nombre: performance.nombre[0],
-    admin: performance.admin,
-    precioPromedio: performance.precioPromedio,
-    promArtistasObra: performance.promArtistasObra,
-    promGanancia: performance.promGanancia,
-    logueado: performance.logueado,
-    dashboard: performance.dashboard,
-    clientesRegion: performance.clientesRegion,
-    artistasDestacados: performance.artistasDestacados,
-    compradoresTasa: performance.compradoresTasa,
-    clientesDestacados: performance.clientesDestacados,
-  });
+  try {
+    const performance = await getPerformance(req);
+    res.render("admin/rendimiento", performance);
+  } catch (err) {
+    console.error("ADMIN-GET-PERFORMANCE", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener el rendimiento",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 router.get("/admin/subastas", isLoggedIn, isAdmin, async (req, res) => {
-  const auctions = await getAuctions(req);
-  res.render("admin/subastas", {
-    nombre: auctions.nombre[0],
-    admin: auctions.admin,
-    logueado: auctions.logueado,
-    dashboard: auctions.dashboard,
-    obras: auctions.obras,
-  });
+  try {
+    const auctions = await getAuctions(req);
+    res.render("admin/subastas", auctions);
+  } catch (err) {
+    console.error("ADMIN-GET-AUCTIONS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener subastas",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.post(
@@ -199,40 +321,74 @@ router.post(
   isLoggedIn,
   isAdmin,
   async (req, res) => {
-    const auctions = await publicAuctions(req);
-    res.redirect("/admin/subastas");
+    try {
+      const auctions = await publicAuctions(req);
+      res.redirect("/admin/subastas");
+    } catch (err) {
+      console.error("ADMIN-PUBLIC-AUCTIONS", err);
+      return handleError(
+        {
+          status: 500,
+          message: "Error al publicar subastas",
+          errorDetail: err.message,
+        },
+        {},
+        res
+      );
+    }
   }
 );
 
 router.get("/admin/clientes", isLoggedIn, isAdmin, async (req, res) => {
-  const clients = await getClients(req);
-  res.render("admin/clientes", {
-    nombre: clients.nombre[0],
-    admin: clients.admin,
-    logueado: clients.logueado,
-    dashboard: clients.dashboard,
-    clientesCompletos: clients.clientesCompletos,
-  });
+  try {
+    const clients = await getClients(req);
+    res.render("admin/clientes", clients);
+  } catch (err) {
+    console.error("ADMIN-GET-CLIENTS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener clientes",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 router.get("/admin/eventos", isLoggedIn, isAdmin, async (req, res) => {
-  const events = await getEvents(req);
-
-  res.render("admin/eventos", {
-    nombre: events.nombre[0],
-    admin: events.admin,
-    logueado: events.logueado,
-    dashboard: events.dashboard,
-    eventos: events.eventos,
-  });
+  try {
+    const events = await getEvents(req);
+    res.render("admin/eventos", events);
+  } catch (err) {
+    console.error("ADMIN-GET-EVENTS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener eventos",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 router.get("/admin/ventas", isLoggedIn, isAdmin, async (req, res) => {
-  const sales = await getSales(req);
-  res.render("admin/ventas", {
-    nombre: sales.nombre[0],
-    admin: sales.admin,
-    logueado: sales.logueado,
-    dashboard: sales.dashboard,
-  });
+  try {
+    const sales = await getSales(req);
+    res.render("admin/ventas", sales);
+  } catch (err) {
+    console.error("ADMIN-GET-SALES", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener ventas",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 module.exports = router;
