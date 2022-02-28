@@ -1,17 +1,21 @@
 const { getUserType } = require("../services-mysql/users");
 
 var isArtist = async (data) => {
-  if (data.isAuthenticated()) {
-    var usuario = await getUserType(data.user.id)
-
-    if (usuario[0].tipo == "Artista") {
-      logueado = true;
-      return true;
+  try {
+    if (data.isAuthenticated()) {
+      var usuario = await getUserType(data.user.id)
+  
+      if (usuario[0].tipo == "Artista") {
+        logueado = true;
+        return true;
+      }
+      return false;
+    } else {
+      logueado = false;
+      return false;
     }
-    return false;
-  } else {
-    logueado = false;
-    return false;
+  } catch (error) {
+    return error
   }
 };
 

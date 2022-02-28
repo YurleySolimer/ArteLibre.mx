@@ -3,6 +3,8 @@ const Handlebars = require("handlebars");
 
 const router = express.Router();
 
+const handleError = require("../handlers/handleErrors");
+
 const getCollection = require("../arteLibre-controllers/getCollection");
 const getSignUp = require("../arteLibre-controllers/getSignUp");
 const getCollections = require("../arteLibre-controllers/getCollections");
@@ -27,215 +29,269 @@ Handlebars.registerHelper("fecha", function (date) {
 });
 
 router.get("/coleccion/:id", async (req, res) => {
-  const collection = await getCollection(req);
-
-  res.render("general/coleccion", {
-    colecciones: collection.colecciones[0],
-    obras: collection.obras,
-    myArray: collection.myArray,
-    artista: collection.artista,
-    cliente: collection.cliente,
-    admin: collection.admin,
-    logueado: collection.logueado,
-    nombre: collection.nombre[0],
-  });
+  try {
+    const collection = await getCollection(req);
+    res.render("general/coleccion", collection);
+  } catch (err) {
+    console.error("GET-COLECCION", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al la coleccion",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/registro", async (req, res) => {
-  const signUp = await getSignUp(req);
-
-  res.render("general/registro", {
-    artista: signUp.artista,
-    cliente: signUp.cliente,
-    admin: signUp.admin,
-    logueado: signUp.logueado,
-    nombre: signUp.nombre[0],
-  });
+  try {
+    const signUp = await getSignUp(req);
+    res.render("general/registro", signUp);
+  } catch (err) {
+    console.error("GET-SIGNUP", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener el registro",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/colecciones", async (req, res) => {
-  const collections = await getCollections(req);
-  res.render("general/colecciones", {
-    colecciones: collections.colecciones,
-    artista: collections.artista,
-    cliente: collections.cliente,
-    admin: collections.admin,
-    logueado: collections.logueado,
-    nombre: collections.nombre[0],
-  });
+  try {
+    const collections = await getCollections(req);
+    res.render("general/colecciones", collections);
+  } catch (err) {
+    console.error("GET-COLLECTIONS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener las colecciones",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/obra/:id", async (req, res) => {
-  const obra = await getObra(req);
-  const cliente = obra.cliente;
+  try {
+    const obra = await getObra(req);
+    const cliente = obra.cliente;
 
-  if (cliente == true) {
-    var userStripe = await getUserStripe(req);
-    var uStripe = false;
+    if (cliente == true) {
+      var userStripe = await getUserStripe(req);
+      var uStripe = false;
 
-    if (userStripe.userStripe.length > 0) {
-      var userID = userStripe.userStripe[0].id_stripe;
-      uStripe = true;
-      const sessionS = await stripeSession(req, userID);
+      if (userStripe.userStripe.length > 0) {
+        var userID = userStripe.userStripe[0].id_stripe;
+        uStripe = true;
+        const sessionS = await stripeSession(req, userID);
 
-      res.render("general/obra", {
-        obra: obra.obra[0],
-        fotos: obra.fotos,
-        myArray: obra.myArray,
-        artista: obra.artista,
-        cliente: obra.cliente,
-        admin: obra.admin,
-        logueado: obra.logueado,
-        nombre: obra.nombre[0],
-        session_id: sessionS.session_id,
-        uStripe,
-      });
+        res.render("general/obra", {
+          obra,
+          uStripe,
+        });
+      } else {
+        res.render("general/obra", {
+          obra,
+          session_id: sessionS.session_id,
+          uStripe,
+        });
+      }
     } else {
-      res.render("general/obra", {
-        obra: obra.obra[0],
-        fotos: obra.fotos,
-        myArray: obra.myArray,
-        artista: obra.artista,
-        cliente: obra.cliente,
-        admin: obra.admin,
-        logueado: obra.logueado,
-        nombre: obra.nombre[0],
-        session_id: sessionS.session_id,
-        uStripe,
-      });
+      res.render("general/obra",
+        obra,
+      );
     }
-  } else {
-    res.render("general/obra", {
-      obra: obra.obra[0],
-      fotos: obra.fotos,
-      myArray: obra.myArray,
-      artista: obra.artista,
-      cliente: obra.cliente,
-      admin: obra.admin,
-      logueado: obra.logueado,
-      nombre: obra.nombre[0],
-    });
+  } catch (err) {
+    console.error("GET-OBRA", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener la obra",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
   }
 });
 
 router.get("/obra/success/:id", async (req, res) => {
-  const obra = await getObraSuccess(req)
-  const id = req.params.id;
-  if (obra) { 
-
-    req.flash("success", "Felicidades, ha comprado la obra exitosamente");
-    res.redirect(`/obra/${id}`);
-  } else {
-    res.redirect(`/obra/${id}`);
+  try {
+    const obra = await getObraSuccess(req);
+    const id = req.params.id;
+    if (obra) {
+      req.flash("success", "Felicidades, ha comprado la obra exitosamente");
+      res.redirect(`/obra/${id}`);
+    } else {
+      res.redirect(`/obra/${id}`);
+    }
+  } catch (err) {
+    console.error("GET-OBRA", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al comprar la obra",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
   }
 });
 
 router.get("/artista/:id", async (req, res) => {
- const artist = await getArtist(req)
-  res.render("general/artista", {
-    user: artist.user[0],
-    colecciones: artist.colecciones,
-    eventos: artist.eventos,
-    obras: artist.obras,
-    ultima_obra: artist.ultima_obra,
-    artista: artist.artista,
-    cliente: artist.cliente,
-    admin: artist.admin,
-    logueado: artist.logueado,
-    nombre: artist.nombre[0],
-  });
+  try {
+    const artist = await getArtist(req);
+    res.render("general/artista", artist);
+  } catch (err) {
+    console.error("GET-ARTIST", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener artista",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/artista/:id/galeria", async (req, res) => {
-  const artist = await getArtistGallery(req)
-  res.render("artist/galeria", {
-    user: artist.user[0],
-    obras1: artist.obras1,
-    obras2: artist.obras2,
-    artista: artist.artista,
-    cliente: artist.cliente,
-    admin: artist.admin,
-    logueado: artist.logueado,
-    nombre: artist.nombre[0],
-  });
+  try {
+    const artist = await getArtistGallery(req);
+    res.render("artist/galeria", artist);
+  } catch (err) {
+    console.error("GET-ARTIST-GALLERY", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener la galería",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/artistas", async (req, res) => {
-  const artists = await getArtists(req)
-
-  res.render("general/artistas", {
-    artistas: artists.artistas,
-    artista: artists.artista,
-    cliente: artists.cliente,
-    logueado: artists.logueado,
-    admin: artists.admin,
-    nombre: artists.nombre[0],
-  });
+  try {
+    const artists = await getArtists(req);
+    res.render("general/artistas", artists);
+  } catch (err) {
+    console.error("GET-ARTISTS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener a los artistas",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/obras", async (req, res) => {
-  const obras = await getObras(req)
-  res.render("general/obras", {
-    obras: obras.obras,
-    artista: obras.artista,
-    cliente: obras.cliente,
-    logueado: obras.logueado,
-    admin: obras.admin,
-    nombre: obras.nombre[0],
-  });
+  try {
+    const obras = await getObras(req);
+    res.render("general/obras", obras);
+  } catch (err) {
+    console.error("GET-OBRAS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener las obras",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/subasta/:id", async (req, res) => {
-  const auction = await getAuction(req)
-
-  res.render("general/subasta", {
-    artista: auction.artista ,
-    cliente: auction.cliente,
-    myArray: auction.myArray,
-    logueado: auction.logueado,
-    admin: auction.logueado,
-    subasta: auction.subasta,
-    fotos: auction.fotos,
-    nombre: auction.nombre[0],
-  });
+  try {
+    const auction = await getAuction(req);
+    res.render("general/subasta", auction);
+  } catch (err) {
+    console.error("GET-AUCTION", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener la subasta",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/subastas", async (req, res) => {
-  const auctions = await getAuctions(req)
-
-  res.render("general/subastas", {
-    artista: auctions.artista,
-    cliente: auctions.cliente,
-    logueado: auctions.logueado,
-    admin: auctions.admin,
-    nombre: auctions.nombre[0],
-    obras: auctions.obras,
-  });
+  try {
+    const auctions = await getAuctions(req);
+    res.render("general/subastas", auctions);
+  } catch (err) {
+    console.error("GET-AUCTIONS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener las subastas",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/evento/:id", async (req, res) => {
-  const event = await getEvent(req)
-  res.render("general/evento", {
-    evento: event.evento[0],
-    fotos: event.fotos,
-    artista: event.artista,
-    cliente: event.cliente,
-    admin: event.admin,
-    logueado: event.logueado,
-    nombre: event.nombre[0],
-  });
+  try {
+    const event = await getEvent(req);
+    res.render("general/evento", event);
+  } catch (err) {
+    console.error("GET-EVENT", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener el evento",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 router.get("/eventos", async (req, res) => {
-  const events = await getEvents(req)
-  res.render("general/eventos", {
-    eventos: events.eventos,
-    artista: events.artista,
-    cliente: events.cliente,
-    admin: events.admin,
-    logueado: events.logueado,
-    nombre: events.nombre[0],
-  });
+  try {
+    const events = await getEvents(req);
+    res.render("general/eventos", events);
+  } catch (err) {
+    console.error("GET-EVENTS", err);
+    return handleError(
+      {
+        status: 500,
+        message: "Error al obtener los eventos",
+        errorDetail: err.message,
+      },
+      {},
+      res
+    );
+  }
 });
 
 module.exports = router;
