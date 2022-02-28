@@ -1,5 +1,6 @@
 # **ArteLibre**
 
+### This project has been built with Node Js, MySQL and Handdlebars.
 ### It is a Marketplace focused on buying and selling art online. 
 # 
 ### ![Screenshot](/imagenes/6.png)
